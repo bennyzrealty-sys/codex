@@ -1,0 +1,8 @@
+{
+  "level": "L0",
+  "status": "kit arriving 12 Aug 2026",
+  "ladder": {"L0":"current","L1":"pending","L2":"pending","L3":"pending","L4":"pending","L5":"pending"},
+  "entries": [
+    {"date":"2026-08-11","note":"Codex v1.2 assembled. iRasptek Pi 5 16GB kit ordered — delivery tomorrow. The node exists on paper; tomorrow it exists in copper."}
+  ]
+}
