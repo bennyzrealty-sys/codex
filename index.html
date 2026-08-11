@@ -158,6 +158,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
     <a href="#l13"><span class="n">LAYER 13</span><span class="t">The Swarm &amp; the Shield</span><span class="d">devices · recon · defence</span></a>
     <a href="#l14"><span class="n">LAYER 14</span><span class="t">The Forge</span><span class="d">training · LoRA · RAG</span></a>
     <a href="#l15"><span class="n">LAYER 15</span><span class="t">The Deployment &amp; Four Pillars</span><span class="d">edge · JA4 · proxies</span></a>
+    <a href="#deep"><span class="n">APPENDIX</span><span class="t">The Deep Field</span><span class="d">mechanism-level notes</span></a>
   </nav>
 </header>
 
@@ -535,6 +536,7 @@ You maintain operators-codex.html. Today is {date}.
   <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.2, dated 11 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
   <h3>Changelog</h3>
   <div class="gloss"><!-- CHANGELOG:START -->
+    <p><b>2026-08-11</b> — v1.4 · The Deep Field appendix (JA3/JA4, RASP/Frida, HTTP/2 Rapid Reset, proxy reputation, model internals) condensed into two-voice cards; <code>brain/</code> shipped — a runnable offline RAG (Ollama + ChromaDB) making Layer 14's memory real. · action for Joe: pull the two Ollama models on the Pi, then <code>python ingest.py</code>.</p>
     <p><b>2026-08-11</b> — v1.3 · four new layers grafted on: The Wire (config/keys/injection), The Swarm &amp; the Shield (devices/recon/defence), The Forge (training/LoRA/RAG), The Deployment &amp; Four Pillars (edge/JA4/proxies). Security topics written as defence; the abuse line drawn in the open. · action for Joe: build Pillars 3 &amp; 4, study Pillars 1 &amp; 2.</p>
     <p><b>2026-08-11</b> — v1.2 · Codex becomes a living site: node log wired, caretaker armed, publish kit assembled.</p>
   <!-- CHANGELOG:END --></div>
@@ -894,6 +896,42 @@ await b.close();</pre></div>
   </details>
 </section>
 
+<!-- ============ APPENDIX · THE DEEP FIELD ============ -->
+<section id="deep">
+  <div class="lnum">APPENDIX · DEEP FIELD</div>
+  <h2>The Deep Field</h2>
+  <p class="lede">Five mechanism-level notes sitting beneath Layers 12–15 — the packet, the memory, the math. Condensed here; the full byte-by-byte treatment lives in the Deep-Dive Supplement kept alongside this Codex. Written as comprehension and defence.</p>
+
+  <details class="card"><summary><b>The handshake fingerprint</b><span>JA3/JA4 — why spoofed headers fool nobody</span></summary>
+    <p class="plain">Before any encryption, your program sends a "hello" that lists which ciphers it supports, in which order, with which extras. That list is chosen by the code's crypto library, not by you — so it's a fingerprint. A real browser's hello looks one way (and sprinkles in random decoy values called GREASE); a plain Node, Python, or Go script's hello looks unmistakably different and never adds the decoys. The firewall reads the hello <em>first</em>, before a single header, so editing your User-Agent changes nothing a floor below it.</p>
+    <p class="tech">JA3 = MD5 over (TLS version, cipher list, extension list, curves, point-formats), order-sensitive. JA4 adds sorted-cipher hashing and normalises GREASE (RFC 8701) so a browser hashes stably. WAFs allow-list known browser fingerprints; runtime stacks (undici/OpenSSL, Go crypto/tls, urllib3) differ in cipher/extension ordering and emit no GREASE. Impersonation (uTLS, curl-impersonate) exists but is an arms race won by <em>cross-layer coherence</em> detection (TLS ⟷ HTTP/2 ⟷ TCP ⟷ behaviour), not a better hash. Lateral link: this is the floor beneath Layer 12's header spoofing.</p>
+  </details>
+
+  <details class="card"><summary><b>The glass box and the microscope</b><span>mobile sandboxing, Frida &amp; RASP</span></summary>
+    <p class="plain">A phone keeps every app in its own sealed glass box; a desktop is one shared room. Tools like Frida can reach into a running app and watch or change its functions — invaluable for studying your <em>own</em> app, and the reason serious apps ship self-defence (RASP) that scans their own memory for the tell-tale marks of that reaching-in. A request's cryptographic seal (the <code>sig</code>) shatters the instant you tamper — that's the whole point of it.</p>
+    <p class="tech">Android UID/SELinux/seccomp vs iOS entitlements + code-signing; Frida's Gum/Stalker hook via prologue trampolines. RASP detects it: scan <code>/proc/self/maps</code> for injected regions and agent signatures, the default port 27042, <code>TracerPid</code>/ptrace, region-count anomalies; Play Integrity / DeviceCheck attest hardware. The <code>sig</code> is typically HMAC over method+path+body+timestamp+nonce. Mechanism is defence knowledge; a bypass hooking a specific real app's pinning or <code>sig</code> routine is out of scope. Lateral link: the seam a webhook (Layer 12) must verify.</p>
+  </details>
+
+  <details class="card"><summary><b>The cancelled request</b><span>HTTP/2 Rapid Reset — CVE-2023-44487</span></summary>
+    <p class="plain">HTTP/2 lets many requests share one connection, capped by a "how many open at once" limit. The Rapid Reset trick opens a request and instantly cancels it: the server has already started the work, but a cancelled request never counts against the cap — so one connection can fire near-unlimited work and slip the leash. The fix is entirely on the server's side: count the cancellations, and hang up (send <code>GOAWAY</code>) on any connection that resets too much.</p>
+    <p class="tech">HEADERS then immediate <code>RST_STREAM</code> decouples request rate from <code>SETTINGS_MAX_CONCURRENT_STREAMS</code>, since cancelled streams free the slot before it's counted. Mitigation: track the reset-to-valid-request ratio and fast-reset count per connection, cap resets, inject <code>GOAWAY(ENHANCE_YOUR_CALM)</code>, and patch to fixed Go/nginx/Envoy. The full frame sequence is in the Supplement; a flood generator is not — the entire defence surface is server-side reset accounting. Lateral link: the DoS relative of Layer 11's leak register.</p>
+  </details>
+
+  <details class="card"><summary><b>The return address</b><span>proxy topologies &amp; IP reputation</span></summary>
+    <p class="plain">Every request carries a return address. Datacentre addresses shout "server" and get blocked cheaply. Home (residential) and phone (mobile) addresses look human — and phone networks share one address among thousands of real people, so blocking it would punish innocents. That asymmetry forces defenders to stop trusting the address at all and switch to <em>behaviour</em> and <em>device</em> signals. Understanding that is how you read the defence honestly — and the ethics with it.</p>
+    <p class="tech">DC / residential / mobile differ in ASN-org, CGNAT (RFC 6598, 100.64/10, shared public IPs), and TTL/TCP-timestamp tells. Reputation blends ASN type + usage + history; where sharing is highest the per-IP signal collapses, so weight transfers to device-fingerprint coherence (JA4), per-account velocity, and geo-velocity ("impossible travel"). Detection is the deliverable; a rotation / ban-evasion orchestrator is out of scope. Lateral link: fuses with the Layer 13 fingerprint and the JA4 above.</p>
+  </details>
+
+  <details class="card"><summary><b>The moat and the loophole</b><span>model internals, collapse &amp; LoRA</span></summary>
+    <p class="plain">Text models guess the next word-piece; image models start from static and remove noise until a picture appears. Training a giant needs tens of thousands of chips talking over ultra-fast cabling — that cabling (InfiniBand) is a physical moat. And copying a big model's output to train a small one, done over and over, blurs it into mush (model collapse). The loophole: don't train big — <em>fine-tune</em> small. LoRA bolts a few new dials onto an open model and trains only those, cheaply, on your own data.</p>
+    <p class="tech">softmax/temperature over logits; attention = softmax(QK<sup>T</sup>/√d<sub>k</sub>)·V; diffusion learns to predict/subtract noise (DDPM ε-objective, DiT). Training is communication-bound — NCCL all-reduce over InfiniBand/NVLink is the bottleneck, not FLOPs. Model collapse = variance contraction + tail truncation compounding over generations. LoRA: W′ = W + (α/r)·BA, rank r ≪ d, base frozen; QLoRA adds NF4. Pair LoRA (your <em>voice</em>) with RAG (your <em>facts</em>) for a private vertical model. Lateral link: this is Layer 14's forge, and what <code>brain/</code> now implements.</p>
+  </details>
+
+  <div class="warn"><b>The line, stated once.</b> Every note above explains how the mechanism — and the attack — actually works, because you cannot detect, patch, or reason about a defence without it. What's deliberately absent, under any framing: a CDN-tuned TLS-impersonation kit, an app-specific pinning/<code>sig</code> bypass, an HTTP/2 flood generator, a ban-evasion rotation orchestrator. The boundary is about what the artifact <em>does</em>, not the words around it — and the durable skill was always on the detection side.</div>
+
+  <div class="note">Companion code: <code>brain/</code> in this repo — a runnable, fully-offline RAG (Ollama + ChromaDB) that turns Layer 14's memory from a diagram into a thing you can run on the Pi. <code>python ingest.py</code>, then <code>python ask.py "…"</code>.</div>
+</section>
+
 <!-- ============ GLOSSARY ============ -->
 <section id="gloss">
   <div class="lnum">APPENDIX</div>
@@ -957,8 +995,8 @@ await b.close();</pre></div>
 </section>
 
 <footer>
-  THE OPERATOR'S CODEX · v1.3 · built 11 Aug 2026<br>
-  fifteen layers · two voices · one caretaker pending<br>
+  THE OPERATOR'S CODEX · v1.4 · built 11 Aug 2026<br>
+  fifteen layers · one deep-field appendix · a brain that runs<br>
   Sheffield ⇄ Kottayam · committed is saved, pushed is safe
 </footer>
 
