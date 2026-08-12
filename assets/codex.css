@@ -1,27 +1,172 @@
 /* ============================================================
-   THE OPERATOR'S CODEX — the agentic layer
-   Motion, depth, and five organs grafted onto the manual:
+   THE OPERATOR'S CODEX — the whole cloth
+   One stylesheet, five books:
 
-     the field   · a living neural background
-     the rail    · reading progress + layer position
-     the lens    · every image, truly fullscreen
-     the pulse   · the live update feed
-     the mark    · newly-updated, until read three times
-     the door    · double-click a word, the wall opens
+     §A  ground  · tokens, type, the reading column
+     §B  chrome  · header, atlas, path, cards, notes, figures
+     §C  organs  · field, rail, lens, pulse, mark, door, seeker
+     §D  wide    · the breakpoint system (768 / 1024 / 1280 / 1680)
+     §E  still   · prefers-reduced-motion answers everything
 
-   Every animation here answers to prefers-reduced-motion.
+   The caretaker (scripts/update_codex.py) rewrites card HTML by
+   regex, and Layer 04 is replaced wholesale between its markers —
+   so every layout rule for section interiors styles bare children
+   (section > *), never wrapper markup. Keep it that way.
    ============================================================ */
 
+/* ---------- §A · ground ----------------------------------- */
 :root{
-  --glowT:rgba(223,163,43,.55);
-  --glowL:rgba(87,179,156,.55);
-  --glowE:rgba(207,111,87,.55);
-  --glass:rgba(21,28,38,.72);
+  /* palette — mirrored in scripts/make_figures.py; change both or neither */
+  --ink:#0f141b; --panel:#151c26; --panel2:#1a2330;
+  --bone:#e7e2d4; --dim:#aab5c1;
+  --turmeric:#dfa32b; --teal:#57b39c; --ember:#cf6f57;
+  --line:rgba(231,226,212,.13);
+  /* soft accents */
+  --gold-soft:rgba(223,163,43,.5); --teal-soft:rgba(87,179,156,.5);
+  --ember-soft:rgba(207,111,87,.5); --ice:#9fb4d8;
+  --glowT:rgba(223,163,43,.55); --glowL:rgba(87,179,156,.55); --glowE:rgba(207,111,87,.55);
+  /* material */
+  --glass:rgba(21,28,38,.72); --glass-line:rgba(231,226,212,.16);
+  --lift1:0 10px 26px -16px rgba(0,0,0,.9);
+  --lift2:0 18px 46px -28px rgba(0,0,0,.95);
+  --lift3:0 50px 100px -50px #000;
+  --r1:10px; --r2:14px; --r3:18px;
+  /* type scale (body stays 19px — this is a reading site) */
+  --t-hero:clamp(2.6rem,7vw,4.6rem);
+  --t-h2:clamp(1.7rem,3.4vw,2.6rem);
+  --t-h3:clamp(1.08rem,1.5vw,1.22rem);
+  /* motion */
   --ease:cubic-bezier(.22,.85,.28,1);
   --easeIn:cubic-bezier(.65,.05,.36,1);
 }
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 90px}
+a{color:var(--teal);text-decoration:none}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.12;margin:0}
+code,.mono{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:.92em}
+code{background:var(--panel2);padding:.08em .35em;border-radius:4px;color:var(--teal)}
+:focus-visible{outline:2px solid var(--turmeric);outline-offset:2px}
 
-/* ---------- 0 · the field --------------------------------- */
+/* ---------- §B · chrome ------------------------------------ */
+
+/* header */
+header{padding:58px 0 30px;border-bottom:1px solid var(--line)}
+.kicker{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--turmeric);margin-bottom:14px}
+header h1{font-size:var(--t-hero);font-weight:900}
+header h1 em{font-style:italic;font-weight:400;color:var(--turmeric)}
+.sub{color:var(--dim);margin:16px 0 0;max-width:44ch}
+.stamp{font-family:'Spline Sans Mono',monospace;font-size:.72rem;color:var(--dim);
+  margin-top:22px;display:flex;gap:14px;flex-wrap:wrap}
+.stamp b{color:var(--bone);font-weight:500}
+
+/* voices legend */
+.legend{margin:26px 0 0;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.legend p{margin:8px 0;font-size:.98rem}
+.dotg,.dott{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px}
+.dotg{background:var(--turmeric)} .dott{background:var(--teal)}
+
+/* toc */
+nav{margin:34px 0 0}
+nav a{display:flex;gap:14px;align-items:baseline;padding:11px 4px;border-bottom:1px solid var(--line);color:var(--bone);
+  transition:padding-left .3s var(--ease),color .3s var(--ease)}
+nav a:hover{padding-left:12px;color:var(--turmeric)}
+nav a:hover .n{color:var(--bone)}
+nav .n{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-size:.75rem;min-width:62px}
+nav .t{font-family:'Fraunces',serif;font-size:1.06rem}
+nav .d{margin-left:auto;color:var(--dim);font-size:.78rem;text-align:right}
+
+/* layers */
+section{padding-top:64px}
+.lnum{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.24em;color:var(--turmeric)}
+section h2{font-size:var(--t-h2);font-weight:600;margin:8px 0 6px}
+.lede{color:var(--dim);margin:0 0 22px;max-width:52ch}
+section h3{font-size:var(--t-h3);color:var(--turmeric);margin:34px 0 10px;font-weight:600}
+
+/* concept cards */
+details.card{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:10px 0;overflow:hidden}
+details.card summary{list-style:none;cursor:pointer;padding:13px 15px;display:block}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary b{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;display:block}
+details.card summary span{color:var(--dim);font-size:.95rem;display:block;margin-top:2px}
+details.card summary::after{content:"+";color:var(--turmeric);font-family:'Spline Sans Mono',monospace}
+details.card[open] summary::after{content:"–"}
+details.card[open] summary{border-bottom:1px solid var(--line)}
+.plain,.tech{margin:0;padding:16px 16px 16px 18px;font-size:1rem}
+.plain{border-left:3px solid var(--turmeric)}
+.tech{border-left:3px solid var(--teal);border-top:1px dashed var(--line);color:#e3e8ec}
+.plain::before,.tech::before{display:block;font-family:'Spline Sans Mono',monospace;font-size:.7rem;letter-spacing:.2em;margin-bottom:7px}
+.plain::before{content:"PLAIN VOICE";color:var(--turmeric)}
+.tech::before{content:"TECHNICAL VOICE";color:var(--teal)}
+
+/* warnings + notes */
+.warn{border:1px solid rgba(207,111,87,.45);border-left:4px solid var(--ember);border-radius:10px;
+  background:rgba(207,111,87,.07);padding:14px 16px;margin:16px 0;font-size:1rem}
+.warn b{color:var(--ember)}
+.note{border:1px dashed var(--line);border-radius:10px;padding:14px 16px;margin:16px 0;font-size:1rem;color:#d6dce2}
+
+/* log decoder */
+.log{border:1px solid var(--line);border-radius:14px;background:#0a0e13;padding:6px 0;margin:14px 0}
+.logline{font-family:'Fraunces',Georgia,serif;font-size:1.08rem;margin:0;padding:14px 16px 4px;color:var(--bone)}
+.logline::before{content:"from your screen";display:block;font-family:'Spline Sans Mono',monospace;
+  font-size:.62rem;letter-spacing:.2em;color:#5b6672;margin-bottom:6px;text-transform:uppercase}
+.anno{margin:0 12px 10px;padding:10px 14px;border-left:3px solid var(--teal);background:var(--panel);
+  border-radius:0 8px 8px 0;font-size:1rem;color:#e3e8ec}
+.anno b{color:var(--turmeric);font-weight:600}
+
+/* pi ladder */
+.rung{display:flex;gap:14px;padding:14px 2px;border-bottom:1px solid var(--line)}
+.rung .lv{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-size:.78rem;min-width:34px;padding-top:3px}
+.rung h4{margin:0;font-family:'Fraunces',serif;font-weight:600;font-size:1.04rem}
+.rung p{margin:4px 0 0;font-size:1rem;color:#d6dce2}
+.rung code{font-size:.8em}
+
+/* blend tags */
+.tag{display:inline-block;font-family:'Spline Sans Mono',monospace;font-size:.66rem;letter-spacing:.14em;
+  padding:3px 9px;border-radius:99px;border:1px solid var(--line);margin:0 6px 6px 0}
+.tag.n{color:var(--turmeric);border-color:rgba(223,163,43,.5)}
+.tag.a{color:var(--teal);border-color:rgba(87,179,156,.5)}
+.tag.s{color:var(--ember);border-color:rgba(207,111,87,.5)}
+.blend{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:14px 16px;margin:10px 0}
+.blend h4{margin:0 0 4px;font-family:'Fraunces',serif;font-weight:600;font-size:1.04rem}
+.blend p{margin:5px 0 0;font-size:1rem;color:#e3e8ec}
+
+/* code blocks */
+pre{background:#0a0e13;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;
+  font-family:'Spline Sans Mono',monospace;font-size:.8rem;line-height:1.55;color:#cfd6dd}
+pre b{color:var(--turmeric);font-weight:500}
+
+/* figures */
+figure.fig{margin:14px 16px 18px;padding:0}
+figure.fig.wide{margin:18px 0 6px}
+figure.fig img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;background:#0a0e13}
+figure.fig figcaption{font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.12em;color:var(--dim);margin-top:8px;text-transform:uppercase}
+
+/* glossary */
+.gloss p{margin:0;padding:9px 2px;border-bottom:1px solid var(--line);font-size:1rem}
+.gloss b{font-family:'Spline Sans Mono',monospace;color:var(--teal);font-weight:500;font-size:.85rem}
+
+/* dock */
+.sizer{position:fixed;right:14px;bottom:14px;display:flex;gap:9px;z-index:9}
+.sizer button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--bone);font-family:'Fraunces',serif;font-size:1rem;cursor:pointer}
+.sizer button:active{background:var(--turmeric);color:var(--ink)}
+
+/* node log (Layer 07 — ids read by its inline script; do not rename) */
+.nodelog{border:1px solid rgba(223,163,43,.45);border-radius:14px;background:var(--panel);padding:16px;margin:0 0 22px}
+.nl-head{display:flex;justify-content:space-between;gap:10px;font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.16em;color:var(--turmeric);margin-bottom:12px}
+.nl-pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.nl-pill{font-family:'Spline Sans Mono',monospace;font-size:.74rem;padding:5px 11px;border-radius:99px;border:1px solid var(--line);color:var(--dim)}
+.nl-pill.done{border-color:var(--teal);color:var(--teal)}
+.nl-pill.current{background:var(--turmeric);border-color:var(--turmeric);color:var(--ink)}
+.nl-entry{font-size:.95rem;padding:9px 0;border-top:1px solid var(--line)}
+.nl-entry b{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-weight:500;font-size:.8rem;margin-right:9px}
+.nl-off{color:var(--dim);font-size:.95rem;margin:0}
+
+footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
+  font-family:'Spline Sans Mono',monospace;font-size:.72rem;color:var(--dim);line-height:2}
+
+/* ---------- §C · organs ------------------------------------ */
+
+/* the field — a living neural background */
 #field{
   position:fixed; inset:0; z-index:0; pointer-events:none;
   opacity:.55; transition:opacity 1.2s ease;
@@ -32,7 +177,7 @@ body::after{  /* vignette so text always wins over the field */
   background:radial-gradient(120% 80% at 50% 0%,rgba(15,20,27,0) 20%,rgba(15,20,27,.86) 78%);
 }
 
-/* ---------- 1 · the rail ---------------------------------- */
+/* the rail */
 #rail{
   position:fixed; top:0; left:0; height:2px; width:100%; z-index:40; pointer-events:none;
   background:linear-gradient(90deg,var(--turmeric),var(--teal) 55%,var(--ember));
@@ -45,13 +190,13 @@ body::after{  /* vignette so text always wins over the field */
   text-transform:uppercase; color:var(--dim);
   background:rgba(13,18,25,.95); border:1px solid var(--line); border-radius:99px;
   padding:5px 12px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  box-shadow:0 10px 26px -16px #000;
+  box-shadow:var(--lift1);
   opacity:0; transform:translateY(-6px); transition:opacity .4s var(--ease),transform .4s var(--ease);
   max-width:52vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 #here.on{opacity:1; transform:none}
 
-/* ---------- 2 · arrival motion ---------------------------- */
+/* arrival motion */
 .rise{opacity:0; transform:translateY(26px); filter:blur(3px);
   transition:opacity .85s var(--ease),transform .85s var(--ease),filter .85s var(--ease)}
 .rise.lit{opacity:1; transform:none; filter:none}
@@ -69,7 +214,7 @@ header h1::after{
 }
 @keyframes scan{0%,100%{transform:scaleX(.15);opacity:.15}50%{transform:scaleX(1);opacity:.5}}
 
-/* ---------- 3 · cards, elevated --------------------------- */
+/* cards, elevated */
 details.card{
   position:relative; transition:border-color .45s var(--ease),box-shadow .45s var(--ease),
     transform .45s var(--ease), background .45s var(--ease);
@@ -81,17 +226,17 @@ details.card::before{ /* the seam of light down the left edge */
 }
 details.card[open]{
   border-color:rgba(223,163,43,.34);
-  box-shadow:0 18px 46px -28px rgba(0,0,0,.95),0 0 0 1px rgba(223,163,43,.09) inset;
+  box-shadow:var(--lift2),0 0 0 1px rgba(223,163,43,.09) inset;
 }
 details.card[open]::before{opacity:.75}
-/* the original marker floats and drifts once a summary wraps to two lines;
-   pin it to the corner instead so every card reads the same */
 details.card summary{position:relative; padding-right:40px;
   transition:background .3s var(--ease)}
 details.card summary::after{
-  position:absolute; right:15px; top:11px; float:none; margin-top:0;
+  position:absolute; right:15px; top:11px;
   width:20px; height:20px; line-height:20px; text-align:center; font-size:1.05rem;
+  transition:transform .35s var(--ease);
 }
+details.card[open] summary::after{transform:rotate(180deg)}
 details.card summary:hover{background:rgba(223,163,43,.05)}
 details.card summary:focus-visible{outline:2px solid var(--turmeric); outline-offset:-2px}
 details.card[open] > .plain,
@@ -103,12 +248,9 @@ details.card[open] > .warn{animation:unfold .55s var(--ease) both}
 details.card[open] > .tech{animation-delay:.08s}
 details.card[open] > figure{animation-delay:.14s}
 @keyframes unfold{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-details.card summary::after{transition:transform .35s var(--ease)}
-details.card[open] summary::after{transform:rotate(180deg)}
 
-/* ---------- 4 · the mark (newly updated) ------------------ */
+/* the mark (newly updated) */
 details.card[data-updated]{border-color:rgba(87,179,156,.42)}
-details.card[data-updated] summary{padding-right:15px}
 .mark{
   display:inline-flex; align-items:center; gap:6px; vertical-align:middle;
   font-family:'Spline Sans Mono',monospace; font-size:.58rem; letter-spacing:.18em;
@@ -130,7 +272,7 @@ details.card[data-updated] summary{padding-right:15px}
 }
 .markline b{color:var(--teal); font-weight:500}
 
-/* ---------- 5 · the lens (fullscreen images) -------------- */
+/* the lens (fullscreen images) */
 figure.fig{position:relative}
 figure.fig img{cursor:zoom-in; transition:transform .5s var(--ease),border-color .5s var(--ease)}
 figure.fig img:hover{border-color:rgba(223,163,43,.4)}
@@ -202,7 +344,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 @keyframes fadeout{to{opacity:0}}
 
-/* ---------- 6 · the pulse (live updates) ------------------ */
+/* the pulse (live updates) */
 #live{padding-top:52px}
 .pulsehead{
   display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:0 0 6px;
@@ -301,7 +443,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 .vault b{color:var(--teal)}
 
-/* ---------- 7 · the door (double-click lexicon) ----------- */
+/* the door (double-click lexicon) */
 .dtip{
   position:fixed; z-index:60; pointer-events:none;
   font-family:'Spline Sans Mono',monospace; font-size:.58rem; letter-spacing:.16em;
@@ -355,7 +497,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 #door .panel{
   width:100%; max-width:640px; border:1px solid rgba(223,163,43,.28); border-radius:18px;
   background:linear-gradient(180deg,rgba(26,35,48,.97),rgba(15,20,27,.99));
-  box-shadow:0 50px 100px -50px #000,0 0 0 1px rgba(223,163,43,.07) inset; overflow:hidden;
+  box-shadow:var(--lift3),0 0 0 1px rgba(223,163,43,.07) inset; overflow:hidden;
 }
 #door .top{
   display:flex; align-items:flex-start; gap:12px; padding:18px 18px 12px;
@@ -403,7 +545,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 #door .near button:hover{border-color:var(--turmeric); color:var(--turmeric)}
 
-/* ---------- 8 · the seeker (⌘K / press /) ----------------- */
+/* the seeker (⌘K / press /) */
 #seek{position:fixed; inset:0; z-index:110; display:none}
 #seek.on{display:block}
 #seek .veil{position:absolute; inset:0; background:rgba(4,7,10,.8);
@@ -434,7 +576,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
   letter-spacing:.14em; color:var(--dim); text-transform:uppercase;
 }
 
-/* ---------- 9 · the dock ---------------------------------- */
+/* the dock, glassed */
 .sizer{
   bottom:calc(14px + env(safe-area-inset-bottom,0px));
   flex-direction:column-reverse; align-items:center;
@@ -445,7 +587,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 .sizer button:hover{transform:translateY(-2px)}
 
-/* ---------- 9b · the path (suggested reading order) -------- */
+/* the path (suggested reading order) */
 .path{
   margin:26px 0 0; border:1px solid rgba(87,179,156,.3); border-radius:14px;
   background:var(--panel); overflow:hidden;
@@ -498,23 +640,27 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 .pathnote button:hover{border-color:var(--ember); color:var(--ember)}
 
-/* ---------- 10 · odds and ends ---------------------------- */
+/* odds and ends */
 .newbadge{
   display:inline-block; font-family:'Spline Sans Mono',monospace; font-size:.56rem;
   letter-spacing:.16em; text-transform:uppercase; color:var(--ink); background:var(--ember);
   border-radius:99px; padding:2px 8px; margin-left:8px; vertical-align:middle;
 }
-nav a{transition:padding-left .3s var(--ease),color .3s var(--ease)}
-nav a:hover{padding-left:12px; color:var(--turmeric)}
-nav a:hover .n{color:var(--bone)}
-.wrap{max-width:760px}
+
+/* ---------- §D · wide (the breakpoint system) --------------- */
+/* base ≤720px is the single reading column above.
+   768  — atlas 2-up, header breathes
+   1024 — the content grid engages, atlas 3-up, feed widens
+   1280 — the minimap rail, atlas 4-up
+   1680 — capped, gutters grow                                   */
+
 @media (max-width:520px){
   #lens .side{width:34px;height:60px}
   #lens .stage{padding:8px 42px}
   #door .word h3{font-size:1.3rem}
 }
 
-/* ---------- 11 · the still setting ------------------------ */
+/* ---------- §E · the still setting -------------------------- */
 @media (prefers-reduced-motion:reduce){
   #field{display:none}
   .rise{opacity:1;transform:none;filter:none;transition:none}

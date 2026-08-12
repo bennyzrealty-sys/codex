@@ -10,6 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Lexend:wght@300;400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/codex.css">
 <style>
+/* Critical ground coat only — the full stylesheet is assets/codex.css.
+   Kept inline so a slow CSS fetch never flashes a white page. */
 :root{
   --ink:#0f141b; --panel:#151c26; --panel2:#1a2330;
   --bone:#e7e2d4; --dim:#aab5c1;
@@ -21,120 +23,6 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--ink);color:var(--bone);
   font-family:'Lexend','Spline Sans',system-ui,sans-serif;font-size:19px;line-height:1.8;letter-spacing:.012em;}
-.wrap{max-width:700px;margin:0 auto;padding:0 18px 90px}
-a{color:var(--teal);text-decoration:none}
-h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.12;margin:0}
-code,.mono{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:.92em}
-code{background:var(--panel2);padding:.08em .35em;border-radius:4px;color:var(--teal)}
-
-/* header */
-header{padding:58px 0 30px;border-bottom:1px solid var(--line)}
-.kicker{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--turmeric);margin-bottom:14px}
-header h1{font-size:clamp(2.5rem,9vw,3.6rem);font-weight:900}
-header h1 em{font-style:italic;font-weight:400;color:var(--turmeric)}
-.sub{color:var(--dim);margin:16px 0 0;max-width:44ch}
-.stamp{font-family:'Spline Sans Mono',monospace;font-size:.72rem;color:var(--dim);
-  margin-top:22px;display:flex;gap:14px;flex-wrap:wrap}
-.stamp b{color:var(--bone);font-weight:500}
-
-/* voices legend */
-.legend{margin:26px 0 0;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
-.legend p{margin:8px 0;font-size:.98rem}
-.dotg,.dott{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px}
-.dotg{background:var(--turmeric)} .dott{background:var(--teal)}
-
-/* toc */
-nav{margin:34px 0 0}
-nav a{display:flex;gap:14px;align-items:baseline;padding:11px 4px;border-bottom:1px solid var(--line);color:var(--bone)}
-nav .n{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-size:.75rem;min-width:62px}
-nav .t{font-family:'Fraunces',serif;font-size:1.06rem}
-nav .d{margin-left:auto;color:var(--dim);font-size:.78rem;text-align:right}
-
-/* layers */
-section{padding-top:64px}
-.lnum{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.24em;color:var(--turmeric)}
-section h2{font-size:clamp(1.7rem,6.4vw,2.3rem);font-weight:600;margin:8px 0 6px}
-.lede{color:var(--dim);margin:0 0 22px;max-width:52ch}
-section h3{font-size:1.12rem;color:var(--turmeric);margin:34px 0 10px;font-weight:600}
-
-/* concept cards */
-details.card{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:10px 0;overflow:hidden}
-details.card summary{list-style:none;cursor:pointer;padding:13px 15px;display:block}
-details.card summary::-webkit-details-marker{display:none}
-details.card summary b{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;display:block}
-details.card summary span{color:var(--dim);font-size:.95rem;display:block;margin-top:2px}
-details.card summary::after{content:"+";float:right;color:var(--turmeric);font-family:'Spline Sans Mono',monospace;margin-top:-24px}
-details.card[open] summary::after{content:"–"}
-details.card[open] summary{border-bottom:1px solid var(--line)}
-.plain,.tech{margin:0;padding:16px 16px 16px 18px;font-size:1rem}
-.plain{border-left:3px solid var(--turmeric)}
-.tech{border-left:3px solid var(--teal);border-top:1px dashed var(--line);color:#e3e8ec}
-.plain::before,.tech::before{display:block;font-family:'Spline Sans Mono',monospace;font-size:.7rem;letter-spacing:.2em;margin-bottom:7px}
-.plain::before{content:"PLAIN VOICE";color:var(--turmeric)}
-.tech::before{content:"TECHNICAL VOICE";color:var(--teal)}
-
-/* warnings + notes */
-.warn{border:1px solid rgba(207,111,87,.45);border-left:4px solid var(--ember);border-radius:10px;
-  background:rgba(207,111,87,.07);padding:14px 16px;margin:16px 0;font-size:1rem}
-.warn b{color:var(--ember)}
-.note{border:1px dashed var(--line);border-radius:10px;padding:14px 16px;margin:16px 0;font-size:1rem;color:#d6dce2}
-
-/* log decoder */
-.log{border:1px solid var(--line);border-radius:14px;background:#0a0e13;padding:6px 0;margin:14px 0}
-.logline{font-family:'Fraunces',Georgia,serif;font-size:1.08rem;margin:0;padding:14px 16px 4px;color:var(--bone)}
-.logline::before{content:"from your screen";display:block;font-family:'Spline Sans Mono',monospace;
-  font-size:.62rem;letter-spacing:.2em;color:#5b6672;margin-bottom:6px;text-transform:uppercase}
-.anno{margin:0 12px 10px;padding:10px 14px;border-left:3px solid var(--teal);background:var(--panel);
-  border-radius:0 8px 8px 0;font-size:1rem;color:#e3e8ec}
-.anno b{color:var(--turmeric);font-weight:600}
-
-/* pi ladder */
-.rung{display:flex;gap:14px;padding:14px 2px;border-bottom:1px solid var(--line)}
-.rung .lv{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-size:.78rem;min-width:34px;padding-top:3px}
-.rung h4{margin:0;font-family:'Fraunces',serif;font-weight:600;font-size:1.04rem}
-.rung p{margin:4px 0 0;font-size:1rem;color:#d6dce2}
-.rung code{font-size:.8em}
-
-/* blend tags */
-.tag{display:inline-block;font-family:'Spline Sans Mono',monospace;font-size:.66rem;letter-spacing:.14em;
-  padding:3px 9px;border-radius:99px;border:1px solid var(--line);margin:0 6px 6px 0}
-.tag.n{color:var(--turmeric);border-color:rgba(223,163,43,.5)}
-.tag.a{color:var(--teal);border-color:rgba(87,179,156,.5)}
-.tag.s{color:var(--ember);border-color:rgba(207,111,87,.5)}
-.blend{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:14px 16px;margin:10px 0}
-.blend h4{margin:0 0 4px;font-family:'Fraunces',serif;font-weight:600;font-size:1.04rem}
-.blend p{margin:5px 0 0;font-size:1rem;color:#e3e8ec}
-
-/* code blocks */
-pre{background:#0a0e13;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;
-  font-family:'Spline Sans Mono',monospace;font-size:.8rem;line-height:1.55;color:#cfd6dd}
-pre b{color:var(--turmeric);font-weight:500}
-
-/* figures */
-figure.fig{margin:14px 16px 18px;padding:0}
-figure.fig.wide{margin:18px 0 6px}
-figure.fig img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;background:#0a0e13}
-figure.fig figcaption{font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.12em;color:var(--dim);margin-top:8px;text-transform:uppercase}
-
-/* glossary */
-.gloss p{margin:0;padding:9px 2px;border-bottom:1px solid var(--line);font-size:1rem}
-.gloss b{font-family:'Spline Sans Mono',monospace;color:var(--teal);font-weight:500;font-size:.85rem}
-
-.sizer{position:fixed;right:14px;bottom:14px;display:flex;gap:9px;z-index:9}
-.sizer button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--bone);font-family:'Fraunces',serif;font-size:1rem;cursor:pointer}
-.sizer button:active{background:var(--turmeric);color:var(--ink)}
-.nodelog{border:1px solid rgba(223,163,43,.45);border-radius:14px;background:var(--panel);padding:16px;margin:0 0 22px}
-.nl-head{display:flex;justify-content:space-between;gap:10px;font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.16em;color:var(--turmeric);margin-bottom:12px}
-.nl-pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
-.nl-pill{font-family:'Spline Sans Mono',monospace;font-size:.74rem;padding:5px 11px;border-radius:99px;border:1px solid var(--line);color:var(--dim)}
-.nl-pill.done{border-color:var(--teal);color:var(--teal)}
-.nl-pill.current{background:var(--turmeric);border-color:var(--turmeric);color:var(--ink)}
-.nl-entry{font-size:.95rem;padding:9px 0;border-top:1px solid var(--line)}
-.nl-entry b{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-weight:500;font-size:.8rem;margin-right:9px}
-.nl-off{color:var(--dim);font-size:.95rem;margin:0}
-footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
-  font-family:'Spline Sans Mono',monospace;font-size:.72rem;color:var(--dim);line-height:2}
 </style>
 </head>
 <body><div class="wrap">
