@@ -2,14 +2,19 @@
    THE OPERATOR'S CODEX — the agentic layer
    No dependencies, no build step, no network beyond this origin.
 
-     field()  the living neural background
-     rail()   reading progress + where you are
-     reveal() sections arrive instead of appearing
-     lens()   every image, truly fullscreen
-     pulse()  the live update feed (updates.json)
-     marks()  newly-updated, until read three times
-     door()   double-click a word, the wall opens
-     seek()   press / or ⌘K to jump anywhere
+     field()    the living neural background, two depths, pointer-aware
+     rail()     reading progress + where you are
+     trail()    which layers you have genuinely sat in
+     reveal()   sections arrive instead of appearing
+     lens()     every image, truly fullscreen
+     pulse()    the live update feed (updates.json)
+     marks()    newly-updated, until read three times
+     atlas()    the bento constellation of layers up top
+     minimap()  every layer as a dot on a fixed rail
+     glossary() every glossary term is a door
+     door()     double-click a word — iris, warp, and a room
+                (metadata in assets/doors.json: world/why/kin/art)
+     seek()     press / or ⌘K to jump anywhere
    ============================================================ */
 (function () {
   'use strict';
@@ -36,20 +41,32 @@
     var c = document.createElement('canvas');
     c.id = 'field';
     document.body.insertBefore(c, document.body.firstChild);
-    var x = c.getContext('2d'), w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var nodes = [], signals = [], run = true;
+    var x = c.getContext('2d'), w = 0, h = 0;
+    var nodes = [], far = [], signals = [], run = true;
+    var px2 = -9999, py2 = -9999;      /* pointer, lerped */
+    var tx = -9999, ty = -9999;        /* pointer, raw    */
 
     function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 900 ? 1.5 : 2);
       w = c.clientWidth; h = c.clientHeight;
       c.width = w * dpr; c.height = h * dpr;
       x.setTransform(dpr, 0, 0, dpr, 0, 0);
       var want = Math.max(26, Math.min(72, Math.round((w * h) / 26000)));
-      nodes = [];
-      for (var i = 0; i < want; i++) {
+      nodes = []; far = [];
+      var i;
+      for (i = 0; i < want; i++) {
         nodes.push({
           x: Math.random() * w, y: Math.random() * h,
           vx: (Math.random() - .5) * .16, vy: (Math.random() - .5) * .16,
           r: Math.random() * 1.5 + .7, p: Math.random() * Math.PI * 2
+        });
+      }
+      /* the far layer — smaller, dimmer, slower, and it parallaxes */
+      for (i = 0; i < Math.min(30, want >> 1); i++) {
+        far.push({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - .5) * .06, vy: (Math.random() - .5) * .06,
+          r: Math.random() * .9 + .4, p: Math.random() * Math.PI * 2
         });
       }
     }
@@ -61,14 +78,38 @@
       signals.push({ a: a, b: b, t: 0, hue: Math.random() < .5 ? '223,163,43' : '87,179,156' });
     }
 
-    var LINK = 132;
+    var LINK = 132, PULL = 140;
     function frame() {
       if (!run) return;
       x.clearRect(0, 0, w, h);
       var i, j, n, m, dx, dy, d;
+
+      /* pointer eases in so the field feels liquid, not twitchy */
+      if (tx > -9000) { px2 += (tx - px2) * .08; py2 += (ty - py2) * .08; }
+
+      /* far layer first, shifted a touch by scroll */
+      var off = (window.pageYOffset || 0) * -0.03;
+      for (i = 0; i < far.length; i++) {
+        n = far[i];
+        n.x += n.vx; n.y += n.vy; n.p += .008;
+        if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
+        if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
+        var fa = .08 + Math.sin(n.p) * .05;
+        x.fillStyle = 'rgba(159,180,216,' + fa.toFixed(3) + ')';
+        x.beginPath(); x.arc(n.x, ((n.y + off) % (h + 40) + h + 40) % (h + 40) - 20, n.r, 0, 6.284); x.fill();
+      }
+
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         n.x += n.vx; n.y += n.vy; n.p += .012;
+        /* nodes near the pointer lean gently toward it */
+        if (px2 > -9000) {
+          dx = px2 - n.x; dy = py2 - n.y; d = dx * dx + dy * dy;
+          if (d < PULL * PULL && d > 1) {
+            var f = .012 * (1 - Math.sqrt(d) / PULL);
+            n.x += dx * f; n.y += dy * f;
+          }
+        }
         if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
         if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
       }
@@ -93,18 +134,22 @@
         var s = signals[i]; s.t += .012;
         if (s.t >= 1 || !nodes[s.a] || !nodes[s.b]) { signals.splice(i, 1); continue; }
         var A = nodes[s.a], B = nodes[s.b];
-        var px = A.x + (B.x - A.x) * s.t, py = A.y + (B.y - A.y) * s.t;
+        var sx = A.x + (B.x - A.x) * s.t, sy = A.y + (B.y - A.y) * s.t;
         var fade = Math.sin(s.t * Math.PI);
         x.strokeStyle = 'rgba(' + s.hue + ',' + (.10 * fade).toFixed(3) + ')';
         x.beginPath(); x.moveTo(A.x, A.y); x.lineTo(B.x, B.y); x.stroke();
         x.fillStyle = 'rgba(' + s.hue + ',' + (.75 * fade).toFixed(3) + ')';
-        x.beginPath(); x.arc(px, py, 2.1, 0, 6.284); x.fill();
+        x.beginPath(); x.arc(sx, sy, 2.1, 0, 6.284); x.fill();
       }
       requestAnimationFrame(frame);
     }
 
     size();
     window.addEventListener('resize', size, { passive: true });
+    window.addEventListener('pointermove', function (e) {
+      tx = e.clientX; ty = e.clientY;
+      if (px2 < -9000) { px2 = tx; py2 = ty; }
+    }, { passive: true });
     document.addEventListener('visibilitychange', function () {
       run = !document.hidden;
       if (run) requestAnimationFrame(frame);
@@ -512,6 +557,17 @@
 
     var chips = $('#filters');
     if (chips) {
+      /* each chip carries its live count */
+      var counts = { all: all.length };
+      all.forEach(function (e) {
+        var dd = (e.domain || 'it').toLowerCase();
+        counts[dd] = (counts[dd] || 0) + 1;
+      });
+      $$('button', chips).forEach(function (b) {
+        var dd = b.getAttribute('data-dom');
+        if (!$('i', b)) b.appendChild(document.createElement('i'));
+        $('i', b).textContent = counts[dd] || 0;
+      });
       chips.addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (!b) return;
         filter = b.getAttribute('data-dom');
@@ -532,7 +588,7 @@
           month = m;
           html += '<div class="yearline">' + esc(monthName(m)) + '</div>';
         }
-        html += card(e, i === 0);
+        html += card(e, i === 0, i === 0);
       });
       if (!slice.length) html = '<div class="vault">Nothing filed under this field yet. ' +
         'The next sweep is never more than two days away.</div>';
@@ -549,7 +605,7 @@
     /* `open` unfolds the newest item so the section is never a wall of
        closed titles; `fresh` is the pulsing dot, which belongs to anything
        from the last sweep whether or not it happens to be first. */
-    function card(e, open) {
+    function card(e, open, hero) {
       var dom = (e.domain || 'it').toLowerCase();
       var isNew = daysAgo(e.date) <= 2;
       var fresh = isNew;
@@ -572,7 +628,17 @@
               : esc(s.label || '');
           }).join('') + '</p>'
         : '';
-      return '<details class="drop' + (fresh ? ' fresh' : '') + '"' + (open ? ' open' : '') + '>' +
+      /* the sweep's fingerprints — which cards below it reached into */
+      var touch = (e.touches && e.touches.length)
+        ? '<p class="touch">this sweep edited ' + e.touches.length +
+          ' card' + (e.touches.length === 1 ? '' : 's') + ' in the layers — ' +
+          e.touches.map(function (t) {
+            var el = document.getElementById(t);
+            var bb = el ? $('summary b', el) : null;
+            return '<a href="#' + esc(t) + '">' + esc(bb ? bb.textContent.trim() : t) + ' ↓</a>';
+          }).join(' ') + '</p>'
+        : '';
+      return '<details class="drop' + (fresh ? ' fresh' : '') + (hero ? ' lead' : '') + '"' + (open ? ' open' : '') + '>' +
         '<summary>' +
           '<span class="dropmeta">' +
             '<span class="when">' + esc(e.date || '') + '</span>' +
@@ -587,7 +653,7 @@
           (e.plain ? '<p class="plain">' + esc(e.plain) + '</p>' : '') +
           (e.tech ? '<p class="tech">' + esc(e.tech) + '</p>' : '') +
           (e.lands ? '<p class="lands">' + esc(e.lands) + '</p>' : '') +
-          tools + srcs +
+          tools + touch + srcs +
         '</div>' +
       '</details>';
     }
@@ -613,6 +679,256 @@
   /* ==========================================================
      7 · THE DOOR — double-click a word, the wall opens
      ========================================================== */
+
+  /* ---- a procedural illustration, seeded by the word itself ----
+     Shared by the door (a room with no art still gets a picture)
+     and the atlas (a layer with no diagram still gets a tile). */
+  function glyph(term, W, H, label, world) {
+    W = W || 720; H = H || 300;
+    var seed = 0;
+    for (var i = 0; i < term.length; i++) seed = (seed * 31 + term.charCodeAt(i)) >>> 0;
+    function rnd() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+    var cx = W / 2, cy = H / 2;
+    var cols = ['#dfa32b', '#57b39c', '#cf6f57'];
+
+    var head = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" ' +
+      'aria-label="Abstract emblem for ' + esc(term) + '" preserveAspectRatio="xMidYMid slice">' +
+      '<rect width="' + W + '" height="' + H + '" fill="#0a0e13"/>';
+    var tail = (label !== false
+      ? '<text x="' + cx + '" y="' + (H - 18) + '" text-anchor="middle" fill="#aab5c1" ' +
+        'font-family="ui-monospace,monospace" font-size="12" letter-spacing="3">' +
+        esc(term.toUpperCase()) + '</text>'
+      : '') + '</svg>';
+    var g, j, a, r;
+
+    /* the shield family — concentric wards and spokes */
+    if (world === 'shield') {
+      g = head;
+      var R = Math.min(W, H) * .42, NR = 4, SP = 7 + Math.floor(rnd() * 4);
+      for (r = 1; r <= NR; r++) {
+        g += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (R * r / NR).toFixed(1) +
+             '" fill="none" stroke="#cf6f57" stroke-opacity="' + (.42 - r * .07).toFixed(2) + '"/>';
+      }
+      for (j = 0; j < SP; j++) {
+        a = (j / SP) * 6.283 + rnd() * .2;
+        g += '<line x1="' + (cx + Math.cos(a) * R * .22).toFixed(1) + '" y1="' + (cy + Math.sin(a) * R * .22).toFixed(1) +
+             '" x2="' + (cx + Math.cos(a) * R).toFixed(1) + '" y2="' + (cy + Math.sin(a) * R).toFixed(1) +
+             '" stroke="#e7e2d4" stroke-opacity=".12"/>';
+        var rr = R * (.4 + rnd() * .6);
+        g += '<circle cx="' + (cx + Math.cos(a) * rr).toFixed(1) + '" cy="' + (cy + Math.sin(a) * rr).toFixed(1) +
+             '" r="' + (2.2 + rnd() * 2.6).toFixed(1) + '" fill="' + cols[j % 3] + '" fill-opacity=".85"/>';
+      }
+      g += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (R * .16).toFixed(1) +
+           '" fill="none" stroke="#dfa32b" stroke-opacity=".7"/>' +
+           '<circle cx="' + cx + '" cy="' + cy + '" r="5" fill="#cf6f57"/>';
+      return g + tail;
+    }
+
+    /* the wire & silicon families — a jittered lattice */
+    if (world === 'wire' || world === 'silicon') {
+      g = head;
+      var hue = world === 'wire' ? '#9fb4d8' : '#dfa32b';
+      var GX = 9, GY = 4, gx = W / (GX + 1), gy = H / (GY + 1), grid = [];
+      for (var yy = 1; yy <= GY; yy++) for (var xx = 1; xx <= GX; xx++) {
+        grid.push({ x: xx * gx + (rnd() - .5) * gx * .5, y: yy * gy + (rnd() - .5) * gy * .5, on: rnd() > .35 });
+      }
+      g += '<g stroke="' + hue + '" stroke-opacity=".14">';
+      for (j = 0; j < grid.length; j++) {
+        if (j % GX !== GX - 1) g += '<line x1="' + grid[j].x.toFixed(1) + '" y1="' + grid[j].y.toFixed(1) +
+          '" x2="' + grid[j + 1].x.toFixed(1) + '" y2="' + grid[j + 1].y.toFixed(1) + '"/>';
+        if (j + GX < grid.length && rnd() > .4) g += '<line x1="' + grid[j].x.toFixed(1) + '" y1="' + grid[j].y.toFixed(1) +
+          '" x2="' + grid[j + GX].x.toFixed(1) + '" y2="' + grid[j + GX].y.toFixed(1) + '"/>';
+      }
+      g += '</g>';
+      grid.forEach(function (p, i2) {
+        if (!p.on) return;
+        g += '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + (1.8 + rnd() * 2.4).toFixed(1) +
+             '" fill="' + (rnd() > .75 ? cols[i2 % 3] : hue) + '" fill-opacity=".8"/>';
+      });
+      return g + tail;
+    }
+
+    /* the default — a seeded constellation */
+    var pts = [], rings = 3, k = 0;
+    var scale = Math.min(W / 720, 1);
+    for (var r = 1; r <= rings; r++) {
+      var n = 3 + r * 2 + Math.floor(rnd() * 3);
+      var rad = (34 + r * 42) * (H / 300);
+      var off = rnd() * 6.28;
+      for (var j = 0; j < n; j++) {
+        var a = off + (j / n) * 6.283 + (rnd() - .5) * .3;
+        pts.push({
+          x: cx + Math.cos(a) * rad * 1.85, y: cy + Math.sin(a) * rad * .82,
+          r: (2 + rnd() * 3.2) * Math.max(scale, .7), c: cols[(k++) % 3], d: (rnd() * 3).toFixed(2)
+        });
+      }
+    }
+    var s = head;
+    s += '<g stroke="#e7e2d4" stroke-opacity=".10" stroke-width="1">';
+    for (var p = 0; p < pts.length; p++) {
+      var q = pts[(p + 1 + Math.floor(rnd() * 3)) % pts.length];
+      s += '<line x1="' + pts[p].x.toFixed(1) + '" y1="' + pts[p].y.toFixed(1) +
+           '" x2="' + q.x.toFixed(1) + '" y2="' + q.y.toFixed(1) + '"/>';
+    }
+    s += '</g>';
+    s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (26 * (H / 300)).toFixed(1) +
+         '" fill="none" stroke="#dfa32b" stroke-opacity=".5"/>';
+    s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (7 * (H / 300)).toFixed(1) + '" fill="#dfa32b"/>';
+    pts.forEach(function (p) {
+      s += '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + p.r.toFixed(1) +
+           '" fill="' + p.c + '" fill-opacity=".8">' +
+           (STILL ? '' : '<animate attributeName="fill-opacity" values="0.8;0.25;0.8" dur="' +
+            (2.6 + parseFloat(p.d)).toFixed(1) + 's" repeatCount="indefinite"/>') +
+           '</circle>';
+    });
+    return s + tail;
+  }
+
+  /* ==========================================================
+     6b · THE ATLAS — the constellation of layers up top
+     ========================================================== */
+  function atlas() {
+    var host = $('#atlas'); if (!host) return;
+    var tiles = $$('.tile[data-layer]', host);
+
+    /* imageless layers get a seeded constellation tile */
+    $$('.glyphslot', host).forEach(function (slot) {
+      slot.innerHTML = glyph(slot.getAttribute('data-glyph') || 'codex', 480, 200, false);
+    });
+
+    /* card counts are computed from the live DOM, so a caretaker
+       sweep that adds cards can never leave a stale number here */
+    tiles.forEach(function (t) {
+      var id = t.getAttribute('data-layer');
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      var n = $$('details.card', sec).length;
+      if (!n) return;
+      var chip = document.createElement('span');
+      chip.className = 'tcount';
+      chip.textContent = n + (n === 1 ? ' card' : ' cards');
+      t.appendChild(chip);
+    });
+
+    /* seen state + the header ring — read-only reuse of the trail's keys */
+    var ring = $('#atlasring');
+    function paint() {
+      var done = 0;
+      tiles.forEach(function (t) {
+        var ok = store.get('codex.seen.' + t.getAttribute('data-layer')) === '1';
+        t.classList.toggle('seen', ok);
+        if (ok) done += 1;
+      });
+      if (ring) {
+        var R = 15, C = 2 * Math.PI * R, frac = tiles.length ? done / tiles.length : 0;
+        ring.innerHTML =
+          '<svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true">' +
+          '<circle cx="19" cy="19" r="' + R + '" fill="none" stroke="rgba(231,226,212,.14)" stroke-width="3"/>' +
+          '<circle cx="19" cy="19" r="' + R + '" fill="none" stroke="#57b39c" stroke-width="3" ' +
+          'stroke-linecap="round" stroke-dasharray="' + C.toFixed(1) + '" ' +
+          'stroke-dashoffset="' + (C * (1 - frac)).toFixed(1) + '" ' +
+          'transform="rotate(-90 19 19)"/></svg>' +
+          '<span>' + done + ' of ' + tiles.length + ' read</span>';
+      }
+    }
+    paint();
+    /* the trail writes its keys on a settle; a slow poll keeps the
+       tiles honest without wiring the two modules together */
+    setInterval(paint, 2500);
+
+    /* at a desk, the reading path stands open as a route stepper */
+    var path = $('#path');
+    if (path && window.matchMedia) {
+      var mq = window.matchMedia('(min-width:1024px)');
+      function fit() { if (mq.matches) path.setAttribute('open', ''); }
+      if (mq.addEventListener) mq.addEventListener('change', fit);
+      fit();
+    }
+  }
+
+  /* ==========================================================
+     6c · THE MINIMAP — every layer as a dot on a fixed rail
+     ========================================================== */
+  function minimap() {
+    var secs = $$('section[id]');
+    if (!secs.length) return;
+    var map = document.createElement('div');
+    map.id = 'map';
+    map.setAttribute('aria-label', 'Layer minimap');
+    map.innerHTML = secs.map(function (s) {
+      var n = $('.lnum', s), h = $('h2', s);
+      var t = ((n ? n.textContent.trim().replace(/\s*·.*$/, '') : '') + ' ' +
+               (h ? h.textContent.trim() : s.id)).trim();
+      return '<a href="#' + esc(s.id) + '" data-id="' + esc(s.id) + '" data-t="' + esc(t) + '"></a>';
+    }).join('');
+    document.body.appendChild(map);
+
+    map.addEventListener('click', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      e.preventDefault();
+      var el = document.getElementById(a.getAttribute('data-id'));
+      if (el) el.scrollIntoView({ behavior: STILL ? 'auto' : 'smooth', block: 'start' });
+    });
+
+    var dots = $$('a', map), tick = false;
+    function paint() {
+      tick = false;
+      var cur = null;
+      for (var i = 0; i < secs.length; i++) {
+        if (secs[i].getBoundingClientRect().top <= 120) cur = secs[i].id;
+      }
+      dots.forEach(function (d) {
+        var id = d.getAttribute('data-id');
+        d.classList.toggle('on', id === cur);
+        d.classList.toggle('seen', store.get('codex.seen.' + id) === '1');
+      });
+    }
+    window.addEventListener('scroll', function () {
+      if (!tick) { tick = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    setInterval(paint, 2500);
+    paint();
+  }
+
+  /* Inline code copies itself on a click — small, but it makes the
+     tech voices feel like a workbench instead of a wall of jargon. */
+  function copycode() {
+    if (!navigator.clipboard) return;
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('code');
+      if (!el || el.closest('pre,a,button,#door,#seek,#lens')) return;
+      var txt = el.textContent.trim();
+      if (!txt) return;
+      navigator.clipboard.writeText(txt).then(function () {
+        var tip = document.createElement('div');
+        tip.className = 'dtip';
+        tip.textContent = 'copied';
+        var r = el.getBoundingClientRect();
+        tip.style.position = 'absolute';
+        tip.style.left = (r.left + r.width / 2) + 'px';
+        tip.style.top = (r.top + window.pageYOffset - 4) + 'px';
+        document.body.appendChild(tip);
+        requestAnimationFrame(function () { tip.classList.add('on'); });
+        setTimeout(function () { tip.classList.remove('on'); }, 1000);
+        setTimeout(function () { tip.remove(); }, 1400);
+      }).catch(function () {});
+    });
+  }
+
+  /* When an open card jumps to full width the grid reflows under the
+     pointer; keep the card the reader just opened inside the viewport. */
+  function settleCards() {
+    document.addEventListener('toggle', function (e) {
+      var d = e.target;
+      if (!d || !d.matches || !d.matches('details.card') || !d.open) return;
+      requestAnimationFrame(function () {
+        var r = d.getBoundingClientRect();
+        if (r.top < 0 || r.top > window.innerHeight * .8) {
+          d.scrollIntoView({ behavior: STILL ? 'auto' : 'smooth', block: 'nearest' });
+        }
+      });
+    }, true);
+  }
 
   /* Hand-written entries carry both voices. Everything else is
      assembled at runtime from the glossary and the layers, so the
@@ -764,8 +1080,27 @@
       tech: 'Coordination patterns: supervisor/worker, pipeline, blackboard, debate. Cost and error both compound with agent count, so the durable designs keep fan-out shallow, make every step verifiable, and put a deterministic script — not a model — in charge of control flow.' }
   };
 
+  /* which world a layer belongs to, for doors with no authored home */
+  var SEC2WORLD = {
+    l1: 'silicon', l2: 'mind', l3: 'mind', l4: 'mind', l5: 'craft', l6: 'craft',
+    l7: 'silicon', l8: 'craft', l9: 'world', l10: 'world', l11: 'world',
+    l12: 'shield', l13: 'shield', l14: 'mind', l15: 'wire', l16: 'wire',
+    l17: 'craft', l18: 'craft', l19: 'shield', l20: 'world', l21: 'mind',
+    l22: 'mind', l23: 'world', l24: 'craft', l25: 'craft', l26: 'world',
+    deep: 'shield', gloss: 'craft', live: 'world'
+  };
+  var WORLDRGB = {
+    mind: '87,179,156', wire: '159,180,216', silicon: '223,163,43',
+    shield: '207,111,87', craft: '183,171,99', world: '231,226,212'
+  };
+  var WORLDNAME = {
+    mind: 'the world of minds', wire: 'the world of wires',
+    silicon: 'the world of silicon', shield: 'the world of shields',
+    craft: 'the world of the craft', world: 'the wider world'
+  };
+
   var door = (function () {
-    var box, room, index = null, keys = [];
+    var box, room, index = null, keys = [], dmeta = {}, walked = [];
 
     /* ---- build the searchable index from LEX + the page itself ---- */
     function build() {
@@ -841,58 +1176,15 @@
       });
     }
 
-    /* ---- a procedural illustration, so every door has a picture ---- */
-    function glyph(term) {
-      var seed = 0;
-      for (var i = 0; i < term.length; i++) seed = (seed * 31 + term.charCodeAt(i)) >>> 0;
-      function rnd() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
-      var W = 720, H = 300, cx = W / 2, cy = H / 2;
-      var cols = ['#dfa32b', '#57b39c', '#cf6f57'];
-      var pts = [], rings = 3, k = 0;
-      for (var r = 1; r <= rings; r++) {
-        var n = 3 + r * 2 + Math.floor(rnd() * 3);
-        var rad = 34 + r * 42;
-        var off = rnd() * 6.28;
-        for (var j = 0; j < n; j++) {
-          var a = off + (j / n) * 6.283 + (rnd() - .5) * .3;
-          pts.push({
-            x: cx + Math.cos(a) * rad * 1.85, y: cy + Math.sin(a) * rad * .82,
-            r: 2 + rnd() * 3.2, c: cols[(k++) % 3], d: (rnd() * 3).toFixed(2)
-          });
-        }
-      }
-      var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" ' +
-        'aria-label="Abstract constellation for ' + esc(term) + '">' +
-        '<rect width="' + W + '" height="' + H + '" fill="#0a0e13"/>';
-      s += '<g stroke="#e7e2d4" stroke-opacity=".10" stroke-width="1">';
-      for (var p = 0; p < pts.length; p++) {
-        var q = pts[(p + 1 + Math.floor(rnd() * 3)) % pts.length];
-        s += '<line x1="' + pts[p].x.toFixed(1) + '" y1="' + pts[p].y.toFixed(1) +
-             '" x2="' + q.x.toFixed(1) + '" y2="' + q.y.toFixed(1) + '"/>';
-      }
-      s += '</g>';
-      s += '<circle cx="' + cx + '" cy="' + cy + '" r="26" fill="none" stroke="#dfa32b" stroke-opacity=".5"/>';
-      s += '<circle cx="' + cx + '" cy="' + cy + '" r="7" fill="#dfa32b"/>';
-      pts.forEach(function (p) {
-        s += '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + p.r.toFixed(1) +
-             '" fill="' + p.c + '" fill-opacity=".8">' +
-             (STILL ? '' : '<animate attributeName="fill-opacity" values="0.8;0.25;0.8" dur="' +
-              (2.6 + parseFloat(p.d)).toFixed(1) + 's" repeatCount="indefinite"/>') +
-             '</circle>';
-      });
-      s += '<text x="' + cx + '" y="' + (H - 18) + '" text-anchor="middle" fill="#aab5c1" ' +
-           'font-family="ui-monospace,monospace" font-size="12" letter-spacing="3">' +
-           esc(term.toUpperCase()) + '</text>';
-      return s + '</svg>';
-    }
-
     function make() {
       box = document.createElement('div');
       box.id = 'door';
       box.setAttribute('role', 'dialog');
       box.setAttribute('aria-modal', 'true');
       box.innerHTML =
-        '<div class="veil"></div><div class="beam"></div>' +
+        '<div class="veil"></div>' +
+        '<canvas class="warp" aria-hidden="true"></canvas>' +
+        '<div class="beam"></div>' +
         '<div class="leaf l"></div><div class="leaf r"></div>' +
         '<div class="room"><div class="panel"></div></div>';
       document.body.appendChild(box);
@@ -900,7 +1192,7 @@
       $('.veil', box).addEventListener('click', shut);
       box.addEventListener('click', function (e) {
         if (e.target.closest('.shut')) shut();
-        var n = e.target.closest('.near button');
+        var n = e.target.closest('button[data-t]');
         if (n) open(n.getAttribute('data-t'));
         var j = e.target.closest('.jump a');
         if (j) {
@@ -918,7 +1210,75 @@
       });
     }
 
-    function open(raw) {
+    /* the starfield burst behind the opening door — one-shot, self-terminating */
+    function warp(ox, oy, rgb) {
+      if (STILL) return;
+      var c = $('.warp', box); if (!c) return;
+      var x = c.getContext('2d');
+      var w = c.width = window.innerWidth, h = c.height = window.innerHeight;
+      ox = ox == null ? w / 2 : ox; oy = oy == null ? h / 2 : oy;
+      var streaks = [], i;
+      for (i = 0; i < 240; i++) {
+        streaks.push({
+          a: Math.random() * 6.283, r: Math.random() * 30,
+          v: 4 + Math.random() * 16, l: 26 + Math.random() * 110
+        });
+      }
+      var t0 = null;
+      function fr(now) {
+        if (!t0) t0 = now;
+        var t = (now - t0) / 900;
+        if (t >= 1 || !box.classList.contains('on')) { x.clearRect(0, 0, w, h); return; }
+        x.clearRect(0, 0, w, h);
+        x.lineWidth = 1.4;
+        var fade = t < .2 ? t / .2 : 1 - (t - .2) / .8;
+        for (i = 0; i < streaks.length; i++) {
+          var s = streaks[i];
+          s.r += s.v * (1 + t * 4);
+          var ca = Math.cos(s.a), sa = Math.sin(s.a);
+          x.strokeStyle = 'rgba(' + rgb + ',' + (fade * .5).toFixed(3) + ')';
+          x.beginPath();
+          x.moveTo(ox + ca * s.r, oy + sa * s.r);
+          x.lineTo(ox + ca * (s.r + s.l * (0.4 + t)), oy + sa * (s.r + s.l * (0.4 + t)));
+          x.stroke();
+        }
+        requestAnimationFrame(fr);
+      }
+      requestAnimationFrame(fr);
+    }
+
+    /* fold assets/doors.json in when it arrives — metadata for known
+       doors, brand-new doors for keys the index has never seen */
+    function absorb(meta) {
+      if (!index) build();
+      var added = 0;
+      Object.keys(meta).forEach(function (k) {
+        if (k.charAt(0) === '_') return;
+        var nk = norm(k);
+        if (!nk) return;
+        dmeta[nk] = meta[k];
+        if (!index[nk]) {
+          index[nk] = { term: k, plain: '', fromMeta: true };
+          keys.push(nk);
+          added += 1;
+        }
+      });
+      if (added) keys.sort(function (a, b) { return b.length - a.length; });
+      return keys.length;
+    }
+
+    function metaFor(term, e) {
+      var m = dmeta[norm(term)];
+      if (!m && e) m = dmeta[norm(e.term)];
+      if (!m && e && e.aka) {
+        for (var i = 0; i < e.aka.length; i++) {
+          if (dmeta[norm(e.aka[i])]) { m = dmeta[norm(e.aka[i])]; break; }
+        }
+      }
+      return m || null;
+    }
+
+    function open(raw, origin) {
       if (!box) make();
       /* a phrase candidate can carry the punctuation that followed it
          ("tokens —"); the index ignores that, so the heading should too */
@@ -928,6 +1288,7 @@
         .replace(/\s+/g, ' ')
         .trim();
       var e = lookup(term);
+      var meta = metaFor(term, e);
       /* The heading is the word they actually double-clicked — being shown
          "mfa" after clicking "passkey" is disorienting. The entry's own name
          and its other spellings go in the line underneath. */
@@ -939,16 +1300,26 @@
         : [];
       var cards = e || term.length > 2 ? cardsFor(name) : [];
 
+      /* which world this door leads to */
+      var world = (meta && meta.world) || '';
+      if (!world && cards.length) {
+        var sec = cards[0].el.closest('section');
+        world = (sec && SEC2WORLD[sec.id]) || '';
+      }
+      if (!world) world = 'mind';
+
       var art = '';
-      if (e && e.art) {
-        art = '<figure><img src="' + esc(e.art) + '" alt="' + esc(name) + '" loading="lazy">' +
+      var artSrc = (meta && meta.art) || (e && e.art) || '';
+      if (artSrc) {
+        art = '<figure><img src="' + esc(artSrc) + '" alt="' + esc(name) + '" loading="lazy">' +
               '<figcaption>from the layers — tap to open it full screen</figcaption></figure>';
       } else if (cards.length && $('figure.fig img', cards[0].el)) {
         var im = $('figure.fig img', cards[0].el);
         art = '<figure><img src="' + esc(im.getAttribute('src')) + '" alt="' + esc(im.alt) + '" loading="lazy">' +
               '<figcaption>' + esc((($('figcaption', im.closest('figure')) || {}).textContent || '').trim()) + '</figcaption></figure>';
-      } else if (e) {
-        art = '<figure>' + glyph(name) + '<figcaption>a constellation drawn for this word alone</figcaption></figure>';
+      } else {
+        art = '<figure>' + glyph(name, 720, 420, true, world) +
+              '<figcaption>an emblem drawn for this word alone</figcaption></figure>';
       }
 
       var plain = e && e.plain ? e.plain : '';
@@ -968,8 +1339,21 @@
         }
       }
 
+      /* neighboring doors: authored kin first, fuzzy matches as the fallback */
+      var kin = [];
+      if (meta && meta.kin) {
+        kin = meta.kin.filter(function (k2) {
+          return norm(k2) !== norm(term) && !!lookup(k2);
+        });
+      }
+      if (!kin.length) {
+        kin = near(term).filter(function (k2) { return norm(k2) !== norm(term); }).slice(0, 5);
+      }
+      kin = kin.slice(0, 6);
+
+      var found = plain || tech || (meta && meta.why);
       var body;
-      if (!plain && !tech) {
+      if (!found) {
         var alts = near(term);
         body =
           '<div class="top"><div class="word"><span class="k">no entry — yet</span>' +
@@ -982,33 +1366,72 @@
                 return '<button data-t="' + esc(a) + '">' + esc(a) + '</button>';
               }).join('') + '</div>'
             : '') + '</div>';
+        box.className = '';
       } else {
+        /* the walked trail — the doors that led here */
+        var crumbs = walked.filter(function (w) { return norm(w) !== norm(term); }).slice(-3);
+        walked.push(term);
+        if (walked.length > 12) walked.shift();
+
         body =
-          '<div class="top"><div class="word"><span class="k">the door opens on</span>' +
+          '<div class="top"><div class="word">' +
+          '<span class="k">a door opens on · ' + esc(WORLDNAME[world] || world) + '</span>' +
           '<h3>' + esc(name) + '</h3>' +
           (also.length
             ? '<p class="aka">also filed as ' + esc(also.slice(0, 4).join(' · ')) + '</p>' : '') +
           '</div><button class="shut" aria-label="Close">✕</button></div>' +
-          art +
-          (plain ? '<p class="plain">' + esc(plain) + '</p>' : '') +
-          (tech ? '<p class="tech">' + esc(tech) + '</p>' : '') +
-          (cards.length
-            ? '<div class="jump">' + cards.map(function (c) {
-                return '<a href="#' + esc(c.id) + '" data-go="' + esc(c.id) + '">' +
-                       esc(c.layer || 'open') + ' · ' + esc(c.label) + '</a>';
-              }).join('') + '</div>'
-            : '');
+          '<div class="duo">' +
+            '<div class="artside">' + art + '</div>' +
+            '<div class="txtside">' +
+              (plain ? '<p class="plain">' + esc(plain) + '</p>' : '') +
+              (tech ? '<p class="tech">' + esc(tech) + '</p>' : '') +
+              (meta && meta.why
+                ? '<p class="why"><span>why it matters</span>' + esc(meta.why) + '</p>' : '') +
+              (cards.length
+                ? '<div class="jump"><span class="sec">where you met it</span>' + cards.map(function (c) {
+                    return '<a href="#' + esc(c.id) + '" data-go="' + esc(c.id) + '">' +
+                           esc(c.layer || 'open') + ' · ' + esc(c.label) + '</a>';
+                  }).join('') + '</div>'
+                : '') +
+              (kin.length
+                ? '<div class="kin"><span class="sec">neighboring doors</span>' + kin.map(function (k2) {
+                    return '<button data-t="' + esc(k2) + '">' + esc(k2) + ' →</button>';
+                  }).join('') + '</div>'
+                : '') +
+              (crumbs.length
+                ? '<div class="crumbs"><span class="sec">the way you came</span>' + crumbs.map(function (w) {
+                    return '<button data-t="' + esc(w) + '">← ' + esc(w) + '</button>';
+                  }).join('') + '</div>'
+                : '') +
+            '</div>' +
+          '</div>';
+        box.className = 'w-' + world;
       }
+
+      /* the iris opens where the word was double-clicked, and grows
+         just far enough to swallow the farthest corner of the screen */
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var ox2 = origin && origin.x != null ? origin.x : vw / 2;
+      var oy2 = origin && origin.y != null ? origin.y : vh * .45;
+      var irad = Math.sqrt(
+        Math.pow(Math.max(ox2, vw - ox2), 2) + Math.pow(Math.max(oy2, vh - oy2), 2)
+      ) * 1.05;
+      box.style.setProperty('--ox', ox2.toFixed(0) + 'px');
+      box.style.setProperty('--oy', oy2.toFixed(0) + 'px');
+      box.style.setProperty('--irad', irad.toFixed(0) + 'px');
 
       room.innerHTML = body;
       box.classList.add('on');
       document.documentElement.style.overflow = 'hidden';
-      /* replay the door swing on every open */
+      /* replay the whole arrival on every open */
       $$('.leaf', box).forEach(function (l) {
         l.style.animation = 'none'; void l.offsetWidth; l.style.animation = '';
       });
       var beam = $('.beam', box); beam.style.animation = 'none'; void beam.offsetWidth; beam.style.animation = '';
       var rm = $('.room', box); rm.style.animation = 'none'; void rm.offsetWidth; rm.style.animation = '';
+      rm.scrollTop = 0;
+      box.style.animation = 'none'; void box.offsetWidth; box.style.animation = '';
+      warp(origin && origin.x, origin && origin.y, WORLDRGB[world] || WORLDRGB.mind);
       var sh = $('.shut', box); if (sh) sh.focus();
     }
 
@@ -1021,7 +1444,7 @@
     }
 
     return {
-      open: open, shut: shut,
+      open: open, shut: shut, absorb: absorb,
       has: function (t) { return !!lookup(t); },
       count: function () { if (!index) build(); return keys.length; }
     };
@@ -1070,11 +1493,21 @@
       if (noGo(target)) return;
       var cands = contextWords();
       if (!cands) return;
+      /* the iris will open exactly where the word sits — read the
+         selection rect now, before anything clears the ranges */
+      var origin = null;
+      try {
+        var sel = window.getSelection();
+        if (sel && sel.rangeCount) {
+          var r = sel.getRangeAt(0).getBoundingClientRect();
+          if (r && (r.width || r.height)) origin = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        }
+      } catch (err) {}
       var bare = cands[cands.length - 1];
       for (var i = 0; i < cands.length - 1; i++) {
-        if (cands[i] && door.has(cands[i])) { door.open(cands[i]); return; }
+        if (cands[i] && door.has(cands[i])) { door.open(cands[i], origin); return; }
       }
-      door.open(bare);
+      door.open(bare, origin);
     }
 
     document.addEventListener('dblclick', function (e) { fire(e.target); });
@@ -1107,6 +1540,64 @@
         setTimeout(function () { tip.remove(); }, 8200);
       }
       store.set('codex.door.taught', '1');
+    }
+  }
+
+  /* ==========================================================
+     7b · THE GLOSSARY — the door's showroom
+     ========================================================== */
+  function glossary() {
+    var sec = $('#gloss'); if (!sec) return;
+    var ps = $$('.gloss p', sec);
+
+    ps.forEach(function (p) {
+      var b = $('b', p); if (!b) return;
+      var term = b.textContent.trim();
+      b.setAttribute('role', 'button');
+      b.setAttribute('tabindex', '0');
+      b.setAttribute('aria-label', 'Open the door on ' + term);
+      function go() {
+        var r = b.getBoundingClientRect();
+        door.open(term, { x: r.left + r.width / 2, y: r.top + r.height / 2 });
+      }
+      b.addEventListener('click', go);
+      b.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+      });
+    });
+
+    /* jump by first letter */
+    var alpha = $('#alpharow');
+    if (alpha) {
+      var first = {};
+      ps.forEach(function (p) {
+        var b = $('b', p); if (!b) return;
+        var L = b.textContent.trim().charAt(0).toUpperCase();
+        if (!/[A-Z0-9]/.test(L)) L = '#';
+        if (!first[L]) first[L] = p;
+      });
+      alpha.innerHTML = Object.keys(first).sort().map(function (L) {
+        return '<button data-l="' + esc(L) + '">' + esc(L) + '</button>';
+      }).join('');
+      alpha.addEventListener('click', function (e) {
+        var btn = e.target.closest('button'); if (!btn) return;
+        var p = first[btn.getAttribute('data-l')];
+        if (!p) return;
+        p.scrollIntoView({ behavior: STILL ? 'auto' : 'smooth', block: 'center' });
+        p.classList.add('flash');
+        setTimeout(function () { p.classList.remove('flash'); }, 1600);
+      });
+    }
+
+    /* sift-as-you-type */
+    var input = $('#glossfilter');
+    if (input) {
+      input.addEventListener('input', function () {
+        var q = input.value.toLowerCase().trim();
+        ps.forEach(function (p) {
+          p.style.display = !q || p.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+        });
+      });
     }
   }
 
@@ -1201,11 +1692,22 @@
      9 · boot
      ========================================================== */
   function boot() {
-    field(); rail(); trail(); reveal(); wireLens(); marks(); pulse(); wireDoor(); seek();
+    field(); rail(); trail(); reveal(); wireLens(); marks(); pulse();
+    atlas(); minimap(); settleCards(); copycode(); glossary(); wireDoor(); seek();
 
     /* the door count, printed where the header promises it */
     var dc = $('#doorcount');
     if (dc) dc.textContent = door.count();
+
+    /* fold in the door metadata — worlds, why-lines, kin — when it lands */
+    fetch('assets/doors.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d) return;
+        var total = door.absorb(d);
+        if (dc && total) dc.textContent = total;
+      })
+      .catch(function () {});
 
     /* deep links to cards open them */
     function openHash() {

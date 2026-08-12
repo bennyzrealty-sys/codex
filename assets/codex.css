@@ -1,27 +1,247 @@
 /* ============================================================
-   THE OPERATOR'S CODEX — the agentic layer
-   Motion, depth, and five organs grafted onto the manual:
+   THE OPERATOR'S CODEX — the whole cloth
+   One stylesheet, five books:
 
-     the field   · a living neural background
-     the rail    · reading progress + layer position
-     the lens    · every image, truly fullscreen
-     the pulse   · the live update feed
-     the mark    · newly-updated, until read three times
-     the door    · double-click a word, the wall opens
+     §A  ground  · tokens, type, the reading column
+     §B  chrome  · header, atlas, path, cards, notes, figures
+     §C  organs  · field, rail, lens, pulse, mark, door, seeker
+     §D  wide    · the breakpoint system (768 / 1024 / 1280 / 1680)
+     §E  still   · prefers-reduced-motion answers everything
 
-   Every animation here answers to prefers-reduced-motion.
+   The caretaker (scripts/update_codex.py) rewrites card HTML by
+   regex, and Layer 04 is replaced wholesale between its markers —
+   so every layout rule for section interiors styles bare children
+   (section > *), never wrapper markup. Keep it that way.
    ============================================================ */
 
+/* ---------- §A · ground ----------------------------------- */
 :root{
-  --glowT:rgba(223,163,43,.55);
-  --glowL:rgba(87,179,156,.55);
-  --glowE:rgba(207,111,87,.55);
-  --glass:rgba(21,28,38,.72);
+  /* palette — mirrored in scripts/make_figures.py; change both or neither */
+  --ink:#0f141b; --panel:#151c26; --panel2:#1a2330;
+  --bone:#e7e2d4; --dim:#aab5c1;
+  --turmeric:#dfa32b; --teal:#57b39c; --ember:#cf6f57;
+  --line:rgba(231,226,212,.13);
+  /* soft accents */
+  --gold-soft:rgba(223,163,43,.5); --teal-soft:rgba(87,179,156,.5);
+  --ember-soft:rgba(207,111,87,.5); --ice:#9fb4d8;
+  --glowT:rgba(223,163,43,.55); --glowL:rgba(87,179,156,.55); --glowE:rgba(207,111,87,.55);
+  /* material */
+  --glass:rgba(21,28,38,.72); --glass-line:rgba(231,226,212,.16);
+  --lift1:0 10px 26px -16px rgba(0,0,0,.9);
+  --lift2:0 18px 46px -28px rgba(0,0,0,.95);
+  --lift3:0 50px 100px -50px #000;
+  --r1:10px; --r2:14px; --r3:18px;
+  /* type scale (body stays 19px — this is a reading site) */
+  --t-hero:clamp(2.6rem,7vw,4.6rem);
+  --t-h2:clamp(1.7rem,3.4vw,2.6rem);
+  --t-h3:clamp(1.08rem,1.5vw,1.22rem);
+  /* motion */
   --ease:cubic-bezier(.22,.85,.28,1);
   --easeIn:cubic-bezier(.65,.05,.36,1);
 }
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 90px}
+a{color:var(--teal);text-decoration:none}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.12;margin:0}
+code,.mono{font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:.92em}
+code{background:var(--panel2);padding:.08em .35em;border-radius:4px;color:var(--teal)}
+:focus-visible{outline:2px solid var(--turmeric);outline-offset:2px}
 
-/* ---------- 0 · the field --------------------------------- */
+/* ---------- §B · chrome ------------------------------------ */
+
+/* header */
+header{padding:58px 0 30px;border-bottom:1px solid var(--line)}
+.kicker{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--turmeric);margin-bottom:14px}
+header h1{font-size:var(--t-hero);font-weight:900}
+header h1 em{font-style:italic;font-weight:400;color:var(--turmeric)}
+.sub{color:var(--dim);margin:16px 0 0;max-width:44ch}
+.stamp{font-family:'Spline Sans Mono',monospace;font-size:.72rem;color:var(--dim);
+  margin-top:22px;display:flex;gap:14px;flex-wrap:wrap}
+.stamp b{color:var(--bone);font-weight:500}
+
+/* voices legend */
+.legend{margin:26px 0 0;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.legend p{margin:8px 0;font-size:.98rem}
+.dotg,.dott{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px}
+.dotg{background:var(--turmeric)} .dott{background:var(--teal)}
+
+/* the hero — a cinematic opening over the field */
+.hero{min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding:56px 0 34px}
+.hero .kicker{animation:kick 1.6s var(--ease) .15s both}
+.hero h1,.hero .sub,.hero .stamp,.hero .gestures,.hero .begin{animation:heroin 1s var(--ease) both}
+.hero h1{animation-delay:.05s}
+.hero .sub{animation-delay:.2s}
+.hero .stamp{animation-delay:.35s}
+.hero .gestures{animation-delay:.5s}
+.hero .begin{animation-delay:.65s}
+@keyframes kick{from{opacity:0;letter-spacing:.5em;filter:blur(4px)}to{opacity:1}}
+@keyframes heroin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero .stamp{gap:8px}
+.hero .stamp span{border:1px solid var(--glass-line);background:var(--glass);border-radius:99px;
+  padding:6px 12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.gestures{display:grid;gap:10px;margin-top:32px}
+.gesture{border:1px solid var(--glass-line);background:var(--glass);border-radius:var(--r2);
+  padding:13px 15px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.gesture .gk{font-family:'Spline Sans Mono',monospace;font-size:.64rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--turmeric);display:block;margin-bottom:6px}
+.gesture p{margin:0;font-size:.88rem;color:var(--dim);line-height:1.6}
+.legend .study{color:var(--dim);font-size:.85rem;margin-top:10px}
+.begin{display:inline-flex;align-items:center;gap:12px;margin-top:34px;align-self:flex-start;
+  font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--turmeric);border:1px solid rgba(223,163,43,.4);border-radius:99px;padding:12px 22px;
+  background:rgba(223,163,43,.06);transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.begin b{font-weight:400;animation:dip 2.2s var(--ease) infinite}
+@keyframes dip{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+.begin:hover{background:var(--turmeric);color:var(--ink);transform:translateY(-2px)}
+
+/* the atlas — the constellation of layers */
+.atlas{margin:44px 0 0;scroll-margin-top:24px}
+.atlashead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 14px}
+.ah-t{font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem}
+.ah-d{color:var(--dim);font-size:.9rem;max-width:52ch;flex:1;min-width:220px}
+.ah-ring{margin-left:auto;display:flex;align-items:center;gap:9px;
+  font-family:'Spline Sans Mono',monospace;font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim)}
+.ah-ring svg{display:block}
+.stagekey{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
+.sk{font-family:'Spline Sans Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;border:1px solid var(--line);color:var(--sc,var(--dim))}
+/* the six stage hues — kept inside the diagram palette family */
+[data-stage="1"]{--sc:var(--turmeric)}
+[data-stage="2"]{--sc:var(--teal)}
+[data-stage="3"]{--sc:var(--ice)}
+[data-stage="4"]{--sc:var(--ember)}
+[data-stage="5"]{--sc:var(--bone)}
+[data-stage="6"]{--sc:#b7ab63}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;grid-auto-flow:dense}
+.tile{position:relative;display:flex;flex-direction:column;overflow:hidden;color:var(--bone);
+  border:1px solid var(--line);border-radius:var(--r2);background:var(--panel);
+  transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease)}
+.tile::before{ /* stage seam along the top edge */
+  content:"";position:absolute;inset:0 0 auto 0;height:2px;z-index:2;
+  background:linear-gradient(90deg,transparent,var(--sc,var(--turmeric)),transparent);opacity:.55}
+.tile:hover{transform:translateY(-3px);border-color:var(--sc,var(--turmeric));box-shadow:var(--lift2)}
+.tile.big{grid-column:span 2;grid-row:span 2}
+.tile.wide{grid-column:span 2}
+.tile.wide .thumbwrap{aspect-ratio:4.6/1}
+.tile .thumbwrap{display:block;aspect-ratio:2.4/1;overflow:hidden;position:relative;
+  border-bottom:1px solid var(--line);background:#0a0e13}
+.tile.big .thumbwrap{aspect-ratio:auto;flex:1;min-height:120px}
+.tile .thumbwrap::after{ /* legibility wash so tile titles always win */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,14,19,0) 55%,rgba(10,14,19,.55))}
+.tile .thumb{width:100%;height:100%;object-fit:cover;display:block;opacity:.8;
+  transform:scale(1.02);transition:transform .6s var(--ease),opacity .6s var(--ease)}
+.tile:hover .thumb{transform:scale(1.08);opacity:1}
+.tile .glyphslot svg{width:100%;height:100%;display:block}
+.tile .n{font-family:'Spline Sans Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  color:var(--sc,var(--turmeric));padding:10px 12px 0}
+.tile .t{font-family:'Fraunces',serif;font-size:1.02rem;font-weight:600;padding:2px 12px 0;line-height:1.25}
+.tile .d{color:var(--dim);font-size:.78rem;padding:4px 12px 12px;margin-top:auto}
+.tile .tcount{position:absolute;top:8px;right:8px;z-index:2;
+  font-family:'Spline Sans Mono',monospace;font-size:.56rem;letter-spacing:.12em;color:var(--bone);
+  background:rgba(10,14,19,.72);border:1px solid var(--line);border-radius:99px;padding:3px 8px}
+.tile.seen{border-color:rgba(87,179,156,.45)}
+.tile.seen .n::after{content:" ✓";color:var(--teal);letter-spacing:0}
+.thumbwrap.live,.thumbwrap.gloss{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:radial-gradient(80% 120% at 50% 0%,rgba(207,111,87,.14),#0a0e13 70%)}
+.thumbwrap.gloss{background:radial-gradient(80% 120% at 50% 0%,rgba(223,163,43,.14),#0a0e13 70%)}
+.livecast{font-family:'Spline Sans Mono',monospace;font-size:.6rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);text-align:center;padding:0 12px}
+.glossmark{font-size:1.8rem;color:var(--turmeric);line-height:1}
+
+/* layers */
+section{padding-top:64px}
+.lnum{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.24em;color:var(--turmeric)}
+section h2{font-size:var(--t-h2);font-weight:600;margin:8px 0 6px}
+.lede{color:var(--dim);margin:0 0 22px;max-width:52ch}
+section h3{font-size:var(--t-h3);color:var(--turmeric);margin:34px 0 10px;font-weight:600}
+
+/* concept cards */
+details.card{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:10px 0;overflow:hidden}
+details.card summary{list-style:none;cursor:pointer;padding:13px 15px;display:block}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary b{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;display:block}
+details.card summary span{color:var(--dim);font-size:.95rem;display:block;margin-top:2px}
+details.card summary::after{content:"+";color:var(--turmeric);font-family:'Spline Sans Mono',monospace}
+details.card[open] summary::after{content:"–"}
+details.card[open] summary{border-bottom:1px solid var(--line)}
+.plain,.tech{margin:0;padding:16px 16px 16px 18px;font-size:1rem}
+.plain{border-left:3px solid var(--turmeric)}
+.tech{border-left:3px solid var(--teal);border-top:1px dashed var(--line);color:#e3e8ec}
+.plain::before,.tech::before{display:block;font-family:'Spline Sans Mono',monospace;font-size:.7rem;letter-spacing:.2em;margin-bottom:7px}
+.plain::before{content:"PLAIN VOICE";color:var(--turmeric)}
+.tech::before{content:"TECHNICAL VOICE";color:var(--teal)}
+
+/* warnings + notes */
+.warn{border:1px solid rgba(207,111,87,.45);border-left:4px solid var(--ember);border-radius:10px;
+  background:rgba(207,111,87,.07);padding:14px 16px;margin:16px 0;font-size:1rem}
+.warn b{color:var(--ember)}
+.note{border:1px dashed var(--line);border-radius:10px;padding:14px 16px;margin:16px 0;font-size:1rem;color:#d6dce2}
+
+/* log decoder */
+.log{border:1px solid var(--line);border-radius:14px;background:#0a0e13;padding:6px 0;margin:14px 0}
+.logline{font-family:'Fraunces',Georgia,serif;font-size:1.08rem;margin:0;padding:14px 16px 4px;color:var(--bone)}
+.logline::before{content:"from your screen";display:block;font-family:'Spline Sans Mono',monospace;
+  font-size:.62rem;letter-spacing:.2em;color:#5b6672;margin-bottom:6px;text-transform:uppercase}
+.anno{margin:0 12px 10px;padding:10px 14px;border-left:3px solid var(--teal);background:var(--panel);
+  border-radius:0 8px 8px 0;font-size:1rem;color:#e3e8ec}
+.anno b{color:var(--turmeric);font-weight:600}
+
+/* pi ladder */
+.rung{display:flex;gap:14px;padding:14px 2px;border-bottom:1px solid var(--line)}
+.rung .lv{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-size:.78rem;min-width:34px;padding-top:3px}
+.rung h4{margin:0;font-family:'Fraunces',serif;font-weight:600;font-size:1.04rem}
+.rung p{margin:4px 0 0;font-size:1rem;color:#d6dce2}
+.rung code{font-size:.8em}
+
+/* blend tags */
+.tag{display:inline-block;font-family:'Spline Sans Mono',monospace;font-size:.66rem;letter-spacing:.14em;
+  padding:3px 9px;border-radius:99px;border:1px solid var(--line);margin:0 6px 6px 0}
+.tag.n{color:var(--turmeric);border-color:rgba(223,163,43,.5)}
+.tag.a{color:var(--teal);border-color:rgba(87,179,156,.5)}
+.tag.s{color:var(--ember);border-color:rgba(207,111,87,.5)}
+.blend{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:14px 16px;margin:10px 0}
+.blend h4{margin:0 0 4px;font-family:'Fraunces',serif;font-weight:600;font-size:1.04rem}
+.blend p{margin:5px 0 0;font-size:1rem;color:#e3e8ec}
+
+/* code blocks */
+pre{background:#0a0e13;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;
+  font-family:'Spline Sans Mono',monospace;font-size:.8rem;line-height:1.55;color:#cfd6dd}
+pre b{color:var(--turmeric);font-weight:500}
+
+/* figures */
+figure.fig{margin:14px 16px 18px;padding:0}
+figure.fig.wide{margin:18px 0 6px}
+figure.fig img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;background:#0a0e13}
+figure.fig figcaption{font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.12em;color:var(--dim);margin-top:8px;text-transform:uppercase}
+
+/* glossary */
+.gloss p{margin:0;padding:9px 2px;border-bottom:1px solid var(--line);font-size:1rem}
+.gloss b{font-family:'Spline Sans Mono',monospace;color:var(--teal);font-weight:500;font-size:.85rem}
+
+/* dock */
+.sizer{position:fixed;right:14px;bottom:14px;display:flex;gap:9px;z-index:9}
+.sizer button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--bone);font-family:'Fraunces',serif;font-size:1rem;cursor:pointer}
+.sizer button:active{background:var(--turmeric);color:var(--ink)}
+
+/* node log (Layer 07 — ids read by its inline script; do not rename) */
+.nodelog{border:1px solid rgba(223,163,43,.45);border-radius:14px;background:var(--panel);padding:16px;margin:0 0 22px}
+.nl-head{display:flex;justify-content:space-between;gap:10px;font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.16em;color:var(--turmeric);margin-bottom:12px}
+.nl-pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.nl-pill{font-family:'Spline Sans Mono',monospace;font-size:.74rem;padding:5px 11px;border-radius:99px;border:1px solid var(--line);color:var(--dim)}
+.nl-pill.done{border-color:var(--teal);color:var(--teal)}
+.nl-pill.current{background:var(--turmeric);border-color:var(--turmeric);color:var(--ink)}
+.nl-entry{font-size:.95rem;padding:9px 0;border-top:1px solid var(--line)}
+.nl-entry b{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-weight:500;font-size:.8rem;margin-right:9px}
+.nl-off{color:var(--dim);font-size:.95rem;margin:0}
+
+footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
+  font-family:'Spline Sans Mono',monospace;font-size:.72rem;color:var(--dim);line-height:2}
+
+/* ---------- §C · organs ------------------------------------ */
+
+/* the field — a living neural background */
 #field{
   position:fixed; inset:0; z-index:0; pointer-events:none;
   opacity:.55; transition:opacity 1.2s ease;
@@ -32,7 +252,7 @@ body::after{  /* vignette so text always wins over the field */
   background:radial-gradient(120% 80% at 50% 0%,rgba(15,20,27,0) 20%,rgba(15,20,27,.86) 78%);
 }
 
-/* ---------- 1 · the rail ---------------------------------- */
+/* the rail */
 #rail{
   position:fixed; top:0; left:0; height:2px; width:100%; z-index:40; pointer-events:none;
   background:linear-gradient(90deg,var(--turmeric),var(--teal) 55%,var(--ember));
@@ -45,13 +265,13 @@ body::after{  /* vignette so text always wins over the field */
   text-transform:uppercase; color:var(--dim);
   background:rgba(13,18,25,.95); border:1px solid var(--line); border-radius:99px;
   padding:5px 12px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  box-shadow:0 10px 26px -16px #000;
+  box-shadow:var(--lift1);
   opacity:0; transform:translateY(-6px); transition:opacity .4s var(--ease),transform .4s var(--ease);
   max-width:52vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
 #here.on{opacity:1; transform:none}
 
-/* ---------- 2 · arrival motion ---------------------------- */
+/* arrival motion */
 .rise{opacity:0; transform:translateY(26px); filter:blur(3px);
   transition:opacity .85s var(--ease),transform .85s var(--ease),filter .85s var(--ease)}
 .rise.lit{opacity:1; transform:none; filter:none}
@@ -69,7 +289,7 @@ header h1::after{
 }
 @keyframes scan{0%,100%{transform:scaleX(.15);opacity:.15}50%{transform:scaleX(1);opacity:.5}}
 
-/* ---------- 3 · cards, elevated --------------------------- */
+/* cards, elevated */
 details.card{
   position:relative; transition:border-color .45s var(--ease),box-shadow .45s var(--ease),
     transform .45s var(--ease), background .45s var(--ease);
@@ -81,17 +301,17 @@ details.card::before{ /* the seam of light down the left edge */
 }
 details.card[open]{
   border-color:rgba(223,163,43,.34);
-  box-shadow:0 18px 46px -28px rgba(0,0,0,.95),0 0 0 1px rgba(223,163,43,.09) inset;
+  box-shadow:var(--lift2),0 0 0 1px rgba(223,163,43,.09) inset;
 }
 details.card[open]::before{opacity:.75}
-/* the original marker floats and drifts once a summary wraps to two lines;
-   pin it to the corner instead so every card reads the same */
 details.card summary{position:relative; padding-right:40px;
   transition:background .3s var(--ease)}
 details.card summary::after{
-  position:absolute; right:15px; top:11px; float:none; margin-top:0;
+  position:absolute; right:15px; top:11px;
   width:20px; height:20px; line-height:20px; text-align:center; font-size:1.05rem;
+  transition:transform .35s var(--ease);
 }
+details.card[open] summary::after{transform:rotate(180deg)}
 details.card summary:hover{background:rgba(223,163,43,.05)}
 details.card summary:focus-visible{outline:2px solid var(--turmeric); outline-offset:-2px}
 details.card[open] > .plain,
@@ -103,12 +323,9 @@ details.card[open] > .warn{animation:unfold .55s var(--ease) both}
 details.card[open] > .tech{animation-delay:.08s}
 details.card[open] > figure{animation-delay:.14s}
 @keyframes unfold{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-details.card summary::after{transition:transform .35s var(--ease)}
-details.card[open] summary::after{transform:rotate(180deg)}
 
-/* ---------- 4 · the mark (newly updated) ------------------ */
+/* the mark (newly updated) */
 details.card[data-updated]{border-color:rgba(87,179,156,.42)}
-details.card[data-updated] summary{padding-right:15px}
 .mark{
   display:inline-flex; align-items:center; gap:6px; vertical-align:middle;
   font-family:'Spline Sans Mono',monospace; font-size:.58rem; letter-spacing:.18em;
@@ -130,7 +347,7 @@ details.card[data-updated] summary{padding-right:15px}
 }
 .markline b{color:var(--teal); font-weight:500}
 
-/* ---------- 5 · the lens (fullscreen images) -------------- */
+/* the lens (fullscreen images) */
 figure.fig{position:relative}
 figure.fig img{cursor:zoom-in; transition:transform .5s var(--ease),border-color .5s var(--ease)}
 figure.fig img:hover{border-color:rgba(223,163,43,.4)}
@@ -202,7 +419,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 @keyframes fadeout{to{opacity:0}}
 
-/* ---------- 6 · the pulse (live updates) ------------------ */
+/* the pulse (live updates) */
 #live{padding-top:52px}
 .pulsehead{
   display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:0 0 6px;
@@ -300,8 +517,52 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
   font-size:.92rem; color:var(--dim);
 }
 .vault b{color:var(--teal)}
+.filters button i{
+  font-style:normal; margin-left:7px; opacity:.65; font-size:.9em;
+}
+.touch{
+  margin:0; padding:12px 16px; border-top:1px dashed var(--line);
+  font-family:'Spline Sans Mono',monospace; font-size:.66rem; letter-spacing:.08em;
+  color:var(--dim); line-height:2.1;
+}
+.touch a{
+  border:1px solid rgba(87,179,156,.42); border-radius:99px; padding:3px 9px;
+  margin-right:5px; color:var(--teal); white-space:nowrap;
+  transition:all .28s var(--ease);
+}
+.touch a:hover{background:var(--teal); color:var(--ink)}
 
-/* ---------- 7 · the door (double-click lexicon) ----------- */
+/* the glossary as the door's showroom */
+.glossbanner{
+  border:1px solid rgba(223,163,43,.35); border-radius:12px; padding:13px 15px;
+  margin:0 0 14px; font-size:.95rem; color:var(--dim);
+  background:rgba(223,163,43,.05);
+}
+.glossbanner b{color:var(--turmeric)}
+.glosstools{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:0 0 10px}
+#glossfilter{
+  flex:1; min-width:200px; border:1px solid var(--line); border-radius:99px;
+  background:var(--panel); color:var(--bone); outline:0;
+  font-family:'Lexend',system-ui,sans-serif; font-size:.95rem; padding:10px 18px;
+  transition:border-color .3s var(--ease);
+}
+#glossfilter:focus{border-color:rgba(223,163,43,.5)}
+#glossfilter::placeholder{color:var(--dim)}
+.alpharow{display:flex; gap:3px; flex-wrap:wrap}
+.alpharow button{
+  min-width:30px; height:30px; padding:0 6px; border-radius:8px; cursor:pointer;
+  border:1px solid var(--line); background:transparent; color:var(--dim);
+  font-family:'Spline Sans Mono',monospace; font-size:.68rem;
+  transition:all .25s var(--ease);
+}
+.alpharow button:hover{border-color:var(--turmeric); color:var(--turmeric)}
+.gloss b{cursor:pointer; border-bottom:1px dashed rgba(87,179,156,.45);
+  transition:color .25s var(--ease),border-color .25s var(--ease)}
+.gloss b:hover,.gloss b:focus-visible{color:var(--turmeric); border-color:var(--turmeric)}
+.gloss p.flash{animation:glossflash 1.5s var(--ease) both}
+@keyframes glossflash{0%,55%{background:rgba(223,163,43,.14)}100%{background:transparent}}
+
+/* the door (double-click lexicon) */
 .dtip{
   position:fixed; z-index:60; pointer-events:none;
   font-family:'Spline Sans Mono',monospace; font-size:.58rem; letter-spacing:.16em;
@@ -312,18 +573,33 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 .dtip.on{opacity:1; transform:translate(-50%,-10px)}
 
 #door{position:fixed; inset:0; z-index:130; display:none; perspective:1500px}
-#door.on{display:block}
+#door.on{display:block;
+  /* the iris — the page opens at the very word that was struck */
+  animation:iris .7s var(--easeIn) both;
+}
+@keyframes iris{
+  from{clip-path:circle(0px at var(--ox,50%) var(--oy,45%))}
+  to{clip-path:circle(var(--irad,160vmax) at var(--ox,50%) var(--oy,45%))}
+}
 #door .veil{
-  position:absolute; inset:0; background:rgba(4,7,10,.86);
+  position:absolute; inset:0; background:rgba(4,7,10,.88);
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   animation:lensIn .45s var(--ease) both;
 }
+#door .warp{position:absolute; inset:0; pointer-events:none; z-index:1}
 #door .beam{
   position:absolute; left:50%; top:50%; width:min(560px,86vw); height:min(560px,86vw);
   transform:translate(-50%,-50%); border-radius:50%; pointer-events:none;
-  background:radial-gradient(circle,rgba(223,163,43,.30),rgba(87,179,156,.14) 42%,transparent 68%);
+  background:radial-gradient(circle,rgba(var(--wrgb,223,163,43),.30),rgba(87,179,156,.10) 42%,transparent 68%);
   animation:bloom 1.5s var(--ease) both;
 }
+/* the six worlds a door can open into */
+#door.w-mind{--wrgb:87,179,156}
+#door.w-wire{--wrgb:159,180,216}
+#door.w-silicon{--wrgb:223,163,43}
+#door.w-shield{--wrgb:207,111,87}
+#door.w-craft{--wrgb:183,171,99}
+#door.w-world{--wrgb:231,226,212}
 @keyframes bloom{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}
   45%{opacity:1}100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}}
 #door .leaf{
@@ -353,10 +629,42 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 @keyframes step{from{opacity:0;transform:translateZ(-180px) scale(.9)}to{opacity:1;transform:none}}
 #door .panel{
-  width:100%; max-width:640px; border:1px solid rgba(223,163,43,.28); border-radius:18px;
+  width:100%; max-width:660px; border:1px solid rgba(var(--wrgb,223,163,43),.32); border-radius:18px;
   background:linear-gradient(180deg,rgba(26,35,48,.97),rgba(15,20,27,.99));
-  box-shadow:0 50px 100px -50px #000,0 0 0 1px rgba(223,163,43,.07) inset; overflow:hidden;
+  box-shadow:var(--lift3),0 0 0 1px rgba(var(--wrgb,223,163,43),.08) inset; overflow:hidden;
 }
+#door .duo{display:block}
+#door .artside{
+  background:radial-gradient(120% 100% at 50% 0%,rgba(var(--wrgb,223,163,43),.14),transparent 62%);
+}
+#door .sec{
+  display:block; width:100%; font-family:'Spline Sans Mono',monospace; font-size:.6rem;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin:0 0 9px;
+}
+#door .why{
+  margin:0; padding:14px 18px; border-top:1px dashed var(--line);
+  border-left:3px solid var(--ember); font-size:1rem; color:#e9e3da;
+}
+#door .why span{
+  display:block; font-family:'Spline Sans Mono',monospace; font-size:.6rem;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--ember); margin-bottom:7px;
+}
+#door .kin,#door .crumbs{
+  padding:14px 18px; border-top:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap;
+}
+#door .kin button,#door .crumbs button{
+  font-family:'Spline Sans Mono',monospace; font-size:.66rem; letter-spacing:.1em;
+  padding:8px 13px; border-radius:99px; cursor:pointer;
+  border:1px solid rgba(var(--wrgb,223,163,43),.42); background:transparent; color:var(--bone);
+  transition:all .28s var(--ease);
+}
+#door .kin button:hover{background:rgba(var(--wrgb,223,163,43),.9); color:var(--ink);
+  transform:translateY(-1px)}
+#door .kin button:nth-child(odd){transform:translateY(2px)}
+#door .kin button:nth-child(odd):hover{transform:translateY(0)}
+#door .crumbs{border-top:1px dashed var(--line); padding-top:11px; padding-bottom:11px}
+#door .crumbs button{border-color:var(--line); color:var(--dim); font-size:.6rem; padding:6px 11px}
+#door .crumbs button:hover{color:var(--bone); border-color:var(--dim)}
 #door .top{
   display:flex; align-items:flex-start; gap:12px; padding:18px 18px 12px;
   border-bottom:1px solid var(--line);
@@ -403,7 +711,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 #door .near button:hover{border-color:var(--turmeric); color:var(--turmeric)}
 
-/* ---------- 8 · the seeker (⌘K / press /) ----------------- */
+/* the seeker (⌘K / press /) */
 #seek{position:fixed; inset:0; z-index:110; display:none}
 #seek.on{display:block}
 #seek .veil{position:absolute; inset:0; background:rgba(4,7,10,.8);
@@ -434,7 +742,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
   letter-spacing:.14em; color:var(--dim); text-transform:uppercase;
 }
 
-/* ---------- 9 · the dock ---------------------------------- */
+/* the dock, glassed */
 .sizer{
   bottom:calc(14px + env(safe-area-inset-bottom,0px));
   flex-direction:column-reverse; align-items:center;
@@ -445,7 +753,7 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 .sizer button:hover{transform:translateY(-2px)}
 
-/* ---------- 9b · the path (suggested reading order) -------- */
+/* the path (suggested reading order) */
 .path{
   margin:26px 0 0; border:1px solid rgba(87,179,156,.3); border-radius:14px;
   background:var(--panel); overflow:hidden;
@@ -498,23 +806,181 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 .pathnote button:hover{border-color:var(--ember); color:var(--ember)}
 
-/* ---------- 10 · odds and ends ---------------------------- */
+/* micro-interactions */
+details.card summary b{
+  display:inline-block;
+  background:linear-gradient(90deg,var(--turmeric),var(--teal)) no-repeat 0 100%/0% 1px;
+  transition:background-size .5s var(--ease);
+}
+details.card summary:hover b,details.card summary:focus-visible b{background-size:100% 1px}
+:not(pre) > code{cursor:copy;transition:background .3s var(--ease),color .3s var(--ease)}
+:not(pre) > code:hover{background:rgba(87,179,156,.24)}
+
+/* scroll-driven grace notes, only where the browser can do them
+   natively and only when motion is welcome */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    section:not(#live):not(#deep):not(#gloss)::after{
+      animation:ghostdrift linear both;
+      animation-timeline:view();
+      animation-range:entry 0% exit 100%;
+    }
+    .hero{
+      animation:herofade linear both;
+      animation-timeline:view();
+      animation-range:exit 0% exit 90%;
+    }
+  }
+}
+@keyframes ghostdrift{from{transform:translateY(70px)}to{transform:translateY(-90px)}}
+@keyframes herofade{to{opacity:.1;transform:translateY(-40px)}}
+
+/* odds and ends */
 .newbadge{
   display:inline-block; font-family:'Spline Sans Mono',monospace; font-size:.56rem;
   letter-spacing:.16em; text-transform:uppercase; color:var(--ink); background:var(--ember);
   border-radius:99px; padding:2px 8px; margin-left:8px; vertical-align:middle;
 }
-nav a{transition:padding-left .3s var(--ease),color .3s var(--ease)}
-nav a:hover{padding-left:12px; color:var(--turmeric)}
-nav a:hover .n{color:var(--bone)}
-.wrap{max-width:760px}
+
+/* ---------- §D · wide (the breakpoint system) --------------- */
+/* base ≤720px is the single reading column above.
+   768  — atlas 2-up, header breathes
+   1024 — the content grid engages, atlas 3-up, feed widens
+   1280 — the minimap rail, atlas 4-up
+   1680 — capped, gutters grow                                   */
+
 @media (max-width:520px){
   #lens .side{width:34px;height:60px}
   #lens .stage{padding:8px 42px}
   #door .word h3{font-size:1.3rem}
 }
 
-/* ---------- 11 · the still setting ------------------------ */
+@media (min-width:768px){
+  .wrap{max-width:860px}
+  .gestures{grid-template-columns:repeat(3,1fr)}
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .hero{padding-top:64px}
+}
+
+@media (min-width:1024px){
+  .wrap{max-width:1120px}
+
+  /* the content grid — cards flow two abreast between full-width
+     spine elements (h2, ledes, wide figures, notes). Styled on bare
+     children only: Layer 04's interior is rewritten wholesale by the
+     caretaker, and this way it inherits the layout untouched. */
+  section{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;align-items:start}
+  section > *{grid-column:1/-1;min-width:0}
+  section > details.card{grid-column:auto}
+  section > details.card[open]{grid-column:1/-1}
+
+  /* inside an open card, the two voices sit shoulder to shoulder
+     where the browser exposes the details content box; elsewhere the
+     card simply reads top-to-bottom at a capped measure */
+  @supports selector(::details-content){
+    details.card[open]::details-content{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+    /* the voices take row one, side by side; everything else (figure,
+       pre, notes, the updated-line) flows full-width beneath them in
+       source order — explicit rows keep auto-placement honest */
+    details.card[open] > .plain{grid-column:1;grid-row:1}
+    details.card[open] > .tech{grid-column:2;grid-row:1;border-top:0;border-left:1px dashed var(--line)}
+    details.card[open] > .markline,
+    details.card[open] > figure,
+    details.card[open] > pre,
+    details.card[open] > .note,
+    details.card[open] > .warn{grid-column:1/-1}
+    details.card[open] > pre{margin:14px 16px}
+  }
+
+  /* the ghost numeral — an oversized layer number sunk behind each h2 */
+  section{position:relative;counter-increment:layer}
+  #live,#deep,#gloss{counter-increment:none}
+  section:not(#live):not(#deep):not(#gloss)::after{
+    content:counter(layer,decimal-leading-zero);
+    position:absolute;top:26px;right:-6px;z-index:-1;pointer-events:none;
+    font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:10rem;line-height:1;
+    color:var(--bone);opacity:.045;letter-spacing:-.04em;
+  }
+  section{padding-top:96px}
+  #live{padding-top:72px}
+  .lede{max-width:60ch}
+
+  /* the path, standing open as a route board */
+  .pathbody{display:grid;grid-template-columns:repeat(3,1fr);gap:0 26px}
+  .stage{border-bottom:0;border-top:1px solid var(--line)}
+  .pathnote{grid-column:1/-1}
+
+  /* the feed at full breadth — hero drop, then two abreast */
+  .filters{
+    position:sticky; top:10px; z-index:5; width:fit-content;
+    background:var(--glass); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    border:1px solid var(--glass-line); border-radius:99px; padding:7px;
+  }
+  .feed{
+    display:grid; grid-template-columns:1fr 1fr; gap:0 18px;
+    padding-left:0; align-items:start;
+  }
+  .feed::before{display:none}
+  .drop::before{display:none}
+  .feed .yearline,.feed .drop.lead,.feed .feedmore,.feed .vault{grid-column:1/-1}
+  .drop.lead[open] .dropbody{display:grid; grid-template-columns:1.05fr 1fr; align-items:start}
+  .drop.lead[open] .dropbody > figure{grid-column:1; grid-row:1 / span 4; margin-right:0}
+  .drop.lead[open] .dropbody > .plain,
+  .drop.lead[open] .dropbody > .tech,
+  .drop.lead[open] .dropbody > .lands,
+  .drop.lead[open] .dropbody > .kit{grid-column:2}
+  .drop.lead[open] .dropbody > .tech{border-top:1px dashed var(--line)}
+  .drop.lead[open] .dropbody > .touch,
+  .drop.lead[open] .dropbody > .srcs{grid-column:1/-1}
+
+  /* the glossary breathes into two columns */
+  .gloss{column-count:2; column-gap:32px}
+  .gloss p{break-inside:avoid}
+
+  /* the door at full breadth — art to the left, the word to the right */
+  #door .panel{max-width:1080px}
+  #door .duo{display:grid;grid-template-columns:1.05fr 1fr;align-items:stretch}
+  #door .artside{border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+  #door .artside figure{padding:20px 20px 12px}
+  #door .txtside .plain{border-left:0}
+  #door .txtside .tech{border-left:0}
+  #door .room{padding-top:calc(6vh + env(safe-area-inset-top,0px))}
+}
+
+@media (min-width:1280px){
+  .tiles{grid-template-columns:repeat(4,1fr)}
+  #here{display:none} /* the minimap takes over the "you are here" duty */
+  #map{display:flex}
+}
+
+@media (min-width:1680px){
+  .wrap{max-width:1280px}
+}
+
+/* the minimap — a fixed rail of every layer (shown ≥1280px) */
+#map{
+  position:fixed;left:12px;top:50%;transform:translateY(-50%);z-index:39;
+  display:none;flex-direction:column;gap:5px;
+}
+#map a{
+  position:relative;width:9px;height:9px;border-radius:50%;
+  border:1px solid rgba(231,226,212,.35);background:transparent;display:block;
+  transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease);
+}
+#map a:hover{border-color:var(--turmeric);transform:scale(1.3)}
+#map a.seen{background:rgba(87,179,156,.65);border-color:rgba(87,179,156,.65)}
+#map a.on{background:var(--turmeric);border-color:var(--turmeric);transform:scale(1.35);
+  box-shadow:0 0 10px rgba(223,163,43,.6)}
+#map a::after{
+  content:attr(data-t);position:absolute;left:18px;top:50%;transform:translateY(-50%);
+  white-space:nowrap;font-family:'Spline Sans Mono',monospace;font-size:.6rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--bone);
+  background:rgba(13,18,25,.95);border:1px solid var(--line);border-radius:99px;
+  padding:4px 10px;opacity:0;pointer-events:none;transition:opacity .25s var(--ease);
+}
+#map a:hover::after,#map a.on:hover::after{opacity:1}
+
+/* ---------- §E · the still setting -------------------------- */
 @media (prefers-reduced-motion:reduce){
   #field{display:none}
   .rise{opacity:1;transform:none;filter:none;transition:none}
@@ -525,6 +991,12 @@ nav a:hover .n{color:var(--bone)}
   #lens.on,#lens img,#door .veil,#door .room,#door .beam,#seek .veil,#seek .box,
   details.card[open] > *{animation:none !important}
   #door .leaf{display:none}
+  #door.on{animation:none;clip-path:none}
+  #door .warp{display:none}
   #lens .hint{animation:none}
+  .hero .kicker,.hero h1,.hero .sub,.hero .stamp,.hero .gestures,.hero .begin,.begin b{animation:none}
+  .tile,.tile .thumb,.begin{transition:none}
+  .tile:hover{transform:none}
+  .tile:hover .thumb{transform:none}
   *{scroll-behavior:auto !important}
 }
