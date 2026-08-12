@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="440" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">THREE PLACES TO RUN A SCRIPT — PICK BY HOW LONG IT MUST LIVE</text>
+
+  <!-- serverless -->
+  <rect x="30" y="70" width="220" height="270" rx="12" fill="#151c26" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="50" y="100" fill="#e7e2d4" font-size="16" font-weight="600">Serverless</text>
+  <text x="50" y="120" fill="#aab5c1" font-size="12">Vercel/Lambda functions</text>
+  <text x="50" y="152" fill="#aab5c1" font-size="12">wakes per request,</text>
+  <text x="50" y="168" fill="#aab5c1" font-size="12">bills per millisecond</text>
+  <!-- timer bar -->
+  <rect x="50" y="190" width="150" height="16" rx="4" fill="#1a2330" stroke="#aab5c1" stroke-opacity=".3"/>
+  <rect x="50" y="190" width="110" height="16" rx="4" fill="#cf6f57" fill-opacity=".8"/>
+  <line x1="160" y1="180" x2="160" y2="216" stroke="#cf6f57" stroke-width="3"/>
+  <text x="50" y="234" fill="#cf6f57" font-size="13" font-weight="600">⏱ killed at ~10s</text>
+  <text x="50" y="256" fill="#aab5c1" font-size="12">your shift-watcher died</text>
+  <text x="50" y="272" fill="#aab5c1" font-size="12">exactly here — mid-login</text>
+  <text x="50" y="316" fill="#e7e2d4" font-size="12">for: quick API calls, pages</text>
+
+  <!-- edge -->
+  <rect x="270" y="70" width="220" height="270" rx="12" fill="#151c26" stroke="#aab5c1" stroke-opacity=".45"/>
+  <text x="290" y="100" fill="#e7e2d4" font-size="16" font-weight="600">Edge</text>
+  <text x="290" y="120" fill="#aab5c1" font-size="12">tiny scripts in every city</text>
+  <g fill="#aab5c1"><circle cx="310" cy="170" r="5"/><circle cx="350" cy="150" r="5"/><circle cx="395" cy="176" r="5"/><circle cx="435" cy="154" r="5"/><circle cx="370" cy="200" r="5"/><circle cx="420" cy="205" r="5"/></g>
+  <path d="M300 220 Q380 120 460 220" stroke="#aab5c1" stroke-opacity=".3" fill="none"/>
+  <text x="290" y="256" fill="#aab5c1" font-size="12">millisecond latency,</text>
+  <text x="290" y="272" fill="#aab5c1" font-size="12">even tighter limits</text>
+  <text x="290" y="316" fill="#e7e2d4" font-size="12">for: redirects, auth checks</text>
+
+  <!-- persistent -->
+  <rect x="510" y="70" width="220" height="270" rx="12" fill="#151c26" stroke="#57b39c" stroke-width="2"/>
+  <text x="530" y="100" fill="#e7e2d4" font-size="16" font-weight="600">Persistent</text>
+  <text x="530" y="120" fill="#57b39c" font-size="12">your Pi · a VPS · Docker</text>
+  <rect x="530" y="150" width="180" height="16" rx="4" fill="#57b39c" fill-opacity=".8"/>
+  <text x="530" y="188" fill="#57b39c" font-size="13" font-weight="600">always on — no timeout</text>
+  <text x="530" y="216" fill="#aab5c1" font-size="12">long browser sessions,</text>
+  <text x="530" y="232" fill="#aab5c1" font-size="12">watchers, cron, queues,</text>
+  <text x="530" y="248" fill="#aab5c1" font-size="12">local models, memory</text>
+  <text x="530" y="316" fill="#e7e2d4" font-size="12">for: everything that lives</text>
+
+  <rect x="30" y="368" width="700" height="48" rx="10" fill="#151c26" stroke="#dfa32b" stroke-opacity=".5"/>
+  <text x="48" y="390" fill="#e7e2d4" font-size="14">The 10-second wall isn't a bug to fight — it's a sign the job belongs on the <tspan fill="#57b39c" font-weight="600">always-on machine</tspan>.</text>
+  <text x="48" y="408" fill="#aab5c1" font-size="12">That's the Pi's whole reason to exist: the cheapest 24/7 availability money can buy.</text>
+</svg>

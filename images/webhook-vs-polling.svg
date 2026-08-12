@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="400" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">BE TOLD, DON'T KEEP ASKING</text>
+
+  <!-- polling -->
+  <text x="30" y="80" fill="#cf6f57" font-size="15" font-weight="600">polling — you keep knocking</text>
+  <rect x="30" y="96" width="130" height="56" rx="10" fill="#151c26" stroke="#aab5c1" stroke-opacity=".5"/>
+  <text x="95" y="120" fill="#e7e2d4" font-size="14" text-anchor="middle">your script</text>
+  <text x="95" y="140" fill="#aab5c1" font-size="11" text-anchor="middle">on a timer ⏱</text>
+  <rect x="600" y="96" width="130" height="56" rx="10" fill="#151c26" stroke="#aab5c1" stroke-opacity=".5"/>
+  <text x="665" y="120" fill="#e7e2d4" font-size="14" text-anchor="middle">the service</text>
+  <text x="665" y="140" fill="#aab5c1" font-size="11" text-anchor="middle">GitHub · rota portal</text>
+  <g stroke="#aab5c1" stroke-opacity=".55" stroke-width="1.5" fill="none">
+    <path d="M160 106 H596" marker-end="url(#d)"/>
+    <path d="M160 120 H596" marker-end="url(#d)"/>
+    <path d="M160 134 H596" marker-end="url(#d)"/>
+  </g>
+  <g fill="#aab5c1" font-size="11" font-family="ui-monospace,monospace">
+    <text x="300" y="102">"anything yet?" — no.</text>
+    <text x="300" y="130">"anything yet?" — no.  ×1440 a day</text>
+  </g>
+  <path d="M160 148 H596" stroke="#57b39c" stroke-width="2" marker-end="url(#t)"/>
+  <text x="300" y="164" fill="#57b39c" font-size="11" font-family="ui-monospace,monospace">"anything yet?" — finally, yes (late)</text>
+  <text x="30" y="196" fill="#aab5c1" font-size="12">wasteful, rate-limited, and still minutes behind reality</text>
+
+  <!-- webhook -->
+  <text x="30" y="248" fill="#57b39c" font-size="15" font-weight="600">webhook — the doorbell rings once</text>
+  <rect x="600" y="264" width="130" height="56" rx="10" fill="#151c26" stroke="#aab5c1" stroke-opacity=".5"/>
+  <text x="665" y="288" fill="#e7e2d4" font-size="14" text-anchor="middle">the service</text>
+  <text x="665" y="308" fill="#aab5c1" font-size="11" text-anchor="middle">something happened!</text>
+  <rect x="30" y="264" width="130" height="56" rx="10" fill="#151c26" stroke="#57b39c"/>
+  <text x="95" y="288" fill="#e7e2d4" font-size="14" text-anchor="middle">your URL</text>
+  <text x="95" y="308" fill="#57b39c" font-size="11" text-anchor="middle">🔔 the doorbell</text>
+  <path d="M596 292 H164" stroke="#57b39c" stroke-width="3" marker-end="url(#t)"/>
+  <text x="250" y="282" fill="#57b39c" font-size="12" font-family="ui-monospace,monospace">one POST, the instant it happens</text>
+
+  <text x="30" y="360" fill="#e7e2d4" font-size="14">How your session knew "PR #93 merged" in seconds — GitHub rang the bell; nobody was knocking.</text>
+  <text x="30" y="382" fill="#aab5c1" font-size="12">Poll only when there's no bell to ring — and pace yourself politely (backoff on 429).</text>
+
+  <defs>
+    <marker id="d" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#aab5c1"/></marker>
+    <marker id="t" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#57b39c"/></marker>
+  </defs>
+</svg>

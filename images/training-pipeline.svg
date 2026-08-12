@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="400" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">HOW A MODEL IS MADE — SCHOOL, APPRENTICESHIP, MANNERS</text>
+
+  <!-- stage 1 -->
+  <rect x="30" y="70" width="220" height="190" rx="12" fill="#151c26" stroke="#dfa32b" stroke-opacity=".5"/>
+  <text x="48" y="98" fill="#dfa32b" font-size="12" font-family="ui-monospace,monospace" letter-spacing="2">1 · PRETRAINING</text>
+  <text x="48" y="124" fill="#e7e2d4" font-size="16" font-weight="600">school</text>
+  <path d="M60 208 L110 150 L150 190 L185 140 L232 208 Z" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".5"/>
+  <text x="146" y="200" fill="#aab5c1" font-size="11" text-anchor="middle">a mountain of text</text>
+  <text x="48" y="232" fill="#aab5c1" font-size="12">trillions of tokens · months</text>
+  <text x="48" y="248" fill="#aab5c1" font-size="12">thousands of GPUs</text>
+
+  <!-- stage 2 -->
+  <path d="M250 165 H278" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="282" y="70" width="210" height="190" rx="12" fill="#151c26" stroke="#57b39c" stroke-opacity=".5"/>
+  <text x="300" y="98" fill="#57b39c" font-size="12" font-family="ui-monospace,monospace" letter-spacing="2">2 · FINE-TUNING</text>
+  <text x="300" y="124" fill="#e7e2d4" font-size="16" font-weight="600">apprenticeship</text>
+  <g fill="#1a2330" stroke="#57b39c" stroke-opacity=".5">
+    <rect x="300" y="140" width="174" height="24" rx="5"/>
+    <rect x="300" y="170" width="174" height="24" rx="5"/>
+  </g>
+  <text x="308" y="157" fill="#aab5c1" font-size="12">Q: good question…</text>
+  <text x="308" y="187" fill="#aab5c1" font-size="12">A: model answer to copy</text>
+  <text x="300" y="232" fill="#aab5c1" font-size="12">curated examples (SFT)</text>
+  <text x="300" y="248" fill="#aab5c1" font-size="12">of how to behave</text>
+
+  <!-- stage 3 -->
+  <path d="M492 165 H520" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="524" y="70" width="206" height="190" rx="12" fill="#151c26" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="542" y="98" fill="#cf6f57" font-size="12" font-family="ui-monospace,monospace" letter-spacing="2">3 · PREFERENCES</text>
+  <text x="542" y="124" fill="#e7e2d4" font-size="16" font-weight="600">manners</text>
+  <text x="542" y="166" fill="#e7e2d4" font-size="26">👍&#160;&#160;👎</text>
+  <text x="542" y="200" fill="#aab5c1" font-size="12">humans rate answers;</text>
+  <text x="542" y="216" fill="#aab5c1" font-size="12">it learns what people want</text>
+  <text x="542" y="248" fill="#aab5c1" font-size="12">RLHF / RLAIF / DPO</text>
+
+  <rect x="30" y="288" width="700" height="52" rx="10" fill="#151c26" stroke="#dfa32b" stroke-dasharray="6 5" stroke-opacity=".5"/>
+  <text x="48" y="312" fill="#dfa32b" font-size="13" font-weight="600">+ since 2024 · reasoning training</text>
+  <text x="48" y="330" fill="#aab5c1" font-size="12">RL on problems with checkable answers — teaches long "thinking" chains before replying</text>
+
+  <text x="30" y="376" fill="#e7e2d4" font-size="14">You never train a frontier model — <tspan fill="#dfa32b">you rent one that already graduated.</tspan></text>
+
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#aab5c1"/></marker></defs>
+</svg>

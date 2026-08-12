@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="400" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">TOOL USE — THE MODEL NEVER TOUCHES THE WORLD ITSELF</text>
+
+  <!-- model -->
+  <rect x="30" y="90" width="180" height="200" rx="12" fill="#151c26" stroke="#dfa32b" stroke-opacity=".6"/>
+  <text x="120" y="120" fill="#e7e2d4" font-size="16" text-anchor="middle" font-weight="600">the model</text>
+  <text x="120" y="142" fill="#aab5c1" font-size="11" text-anchor="middle">only reads and writes text</text>
+  <rect x="50" y="160" width="140" height="70" rx="8" fill="#0a0e13" stroke="#dfa32b" stroke-opacity=".4"/>
+  <text x="60" y="180" fill="#dfa32b" font-size="10" font-family="ui-monospace,monospace">writes a request:</text>
+  <text x="60" y="198" fill="#57b39c" font-size="10" font-family="ui-monospace,monospace">{"tool":"get_balance",</text>
+  <text x="60" y="214" fill="#57b39c" font-size="10" font-family="ui-monospace,monospace"> "account":"seedance"}</text>
+
+  <!-- harness -->
+  <rect x="290" y="90" width="180" height="200" rx="12" fill="#151c26" stroke="#57b39c" stroke-opacity=".7"/>
+  <text x="380" y="120" fill="#e7e2d4" font-size="16" text-anchor="middle" font-weight="600">the harness</text>
+  <text x="380" y="142" fill="#aab5c1" font-size="11" text-anchor="middle">checks permissions,</text>
+  <text x="380" y="158" fill="#aab5c1" font-size="11" text-anchor="middle">actually runs the action</text>
+  <text x="380" y="196" fill="#57b39c" font-size="12" text-anchor="middle" font-family="ui-monospace,monospace">allowed? ✓</text>
+  <text x="380" y="216" fill="#57b39c" font-size="12" text-anchor="middle" font-family="ui-monospace,monospace">execute ▶</text>
+
+  <!-- world -->
+  <rect x="550" y="90" width="180" height="200" rx="12" fill="#151c26" stroke="#aab5c1" stroke-opacity=".5"/>
+  <text x="640" y="120" fill="#e7e2d4" font-size="16" text-anchor="middle" font-weight="600">the world</text>
+  <text x="640" y="142" fill="#aab5c1" font-size="11" text-anchor="middle">APIs · files · shell · web</text>
+  <rect x="570" y="160" width="140" height="70" rx="8" fill="#0a0e13" stroke="#aab5c1" stroke-opacity=".3"/>
+  <text x="580" y="182" fill="#aab5c1" font-size="10" font-family="ui-monospace,monospace">result:</text>
+  <text x="580" y="200" fill="#e7e2d4" font-size="11" font-family="ui-monospace,monospace">balance = 44.21</text>
+  <text x="580" y="218" fill="#e7e2d4" font-size="11" font-family="ui-monospace,monospace">credits</text>
+
+  <!-- arrows -->
+  <path d="M210 150 H285" stroke="#dfa32b" stroke-width="2.5" marker-end="url(#g)"/>
+  <text x="218" y="140" fill="#dfa32b" font-size="11">tool call (JSON)</text>
+  <path d="M470 150 H545" stroke="#57b39c" stroke-width="2.5" marker-end="url(#t)"/>
+  <text x="482" y="140" fill="#57b39c" font-size="11">real action</text>
+  <path d="M545 240 H470" stroke="#aab5c1" stroke-width="2.5" marker-end="url(#d)"/>
+  <path d="M285 240 H210" stroke="#aab5c1" stroke-width="2.5" marker-end="url(#d)"/>
+  <text x="250" y="262" fill="#aab5c1" font-size="11">result handed back as text → model reads it, decides next step</text>
+
+  <text x="30" y="330" fill="#e7e2d4" font-size="14">Everything an agent "does" is this contract, repeated.</text>
+  <text x="30" y="354" fill="#aab5c1" font-size="12">Failure modes: wrong arguments · misread results · treating tool output as instructions (→ prompt injection)</text>
+
+  <defs>
+    <marker id="g" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#dfa32b"/></marker>
+    <marker id="t" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#57b39c"/></marker>
+    <marker id="d" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#aab5c1"/></marker>
+  </defs>
+</svg>

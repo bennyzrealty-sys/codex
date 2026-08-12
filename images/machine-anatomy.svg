@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="480" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">LAYER 01 · THE FOUR PARTS OF EVERY MACHINE</text>
+
+  <!-- CPU -->
+  <rect x="30" y="62" width="340" height="160" rx="12" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="50" y="92" fill="#e7e2d4" font-size="18" font-weight="600">CPU — the workers</text>
+  <g stroke="#dfa32b" stroke-opacity=".7" fill="#1a2330">
+    <rect x="50" y="108" width="60" height="60" rx="8"/>
+    <rect x="122" y="108" width="60" height="60" rx="8"/>
+    <rect x="194" y="108" width="60" height="60" rx="8"/>
+    <rect x="266" y="108" width="60" height="60" rx="8"/>
+  </g>
+  <g fill="#dfa32b" font-size="12" font-family="ui-monospace,monospace" text-anchor="middle">
+    <text x="80" y="143">core</text><text x="152" y="143">core</text>
+    <text x="224" y="143">core</text><text x="296" y="143">core</text>
+  </g>
+  <text x="50" y="198" fill="#aab5c1" font-size="12">Pi 5: 4 workers × 2.4 GHz — one step at a time</text>
+
+  <!-- RAM -->
+  <rect x="390" y="62" width="340" height="160" rx="12" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="410" y="92" fill="#e7e2d4" font-size="18" font-weight="600">RAM 16 GB — the desk</text>
+  <g fill="#1a2330" stroke="#57b39c" stroke-opacity=".6">
+    <rect x="410" y="106" width="120" height="26" rx="5"/>
+    <rect x="410" y="138" width="180" height="26" rx="5"/>
+    <rect x="600" y="106" width="110" height="58" rx="5"/>
+  </g>
+  <text x="418" y="124" fill="#aab5c1" font-size="12">open app</text>
+  <text x="418" y="156" fill="#aab5c1" font-size="12">the running model</text>
+  <text x="612" y="140" fill="#aab5c1" font-size="12">your work</text>
+  <text x="410" y="198" fill="#cf6f57" font-size="12">volatile — wiped when power drops</text>
+
+  <!-- GPU -->
+  <rect x="30" y="252" width="340" height="160" rx="12" fill="#151c26" stroke="#57b39c" stroke-opacity=".35"/>
+  <text x="50" y="282" fill="#e7e2d4" font-size="18" font-weight="600">GPU / NPU — the crowd</text>
+  <g fill="#57b39c" fill-opacity=".55">
+    <g id="gpurow">
+      <rect x="50" y="296" width="14" height="14" rx="2"/><rect x="68" y="296" width="14" height="14" rx="2"/><rect x="86" y="296" width="14" height="14" rx="2"/><rect x="104" y="296" width="14" height="14" rx="2"/><rect x="122" y="296" width="14" height="14" rx="2"/><rect x="140" y="296" width="14" height="14" rx="2"/><rect x="158" y="296" width="14" height="14" rx="2"/><rect x="176" y="296" width="14" height="14" rx="2"/><rect x="194" y="296" width="14" height="14" rx="2"/><rect x="212" y="296" width="14" height="14" rx="2"/><rect x="230" y="296" width="14" height="14" rx="2"/><rect x="248" y="296" width="14" height="14" rx="2"/>
+    </g>
+    <use href="#gpurow" y="18"/>
+    <use href="#gpurow" y="36"/>
+    <use href="#gpurow" y="54"/>
+  </g>
+  <text x="50" y="388" fill="#aab5c1" font-size="13">thousands of tiny workers, same sum at once —</text>
+  <text x="50" y="404" fill="#cf6f57" font-size="13">no useful GPU on the Pi = no big local brain</text>
+
+  <!-- Storage -->
+  <rect x="390" y="252" width="340" height="160" rx="12" fill="#151c26" stroke="#aab5c1" stroke-opacity=".4"/>
+  <text x="410" y="282" fill="#e7e2d4" font-size="18" font-weight="600">Storage 256 GB — the cupboard</text>
+  <g fill="#1a2330" stroke="#aab5c1" stroke-opacity=".5">
+    <rect x="410" y="298" width="300" height="22" rx="4"/>
+    <rect x="410" y="326" width="300" height="22" rx="4"/>
+    <rect x="410" y="354" width="300" height="22" rx="4"/>
+  </g>
+  <text x="418" y="313" fill="#aab5c1" font-size="12">the OS · your files · model weights on disk</text>
+  <text x="410" y="398" fill="#aab5c1" font-size="13">permanent but slower — SSD, not SD, for 24/7 duty</text>
+
+  <!-- arrows -->
+  <g stroke="#dfa32b" stroke-width="2" fill="none">
+    <path d="M370 142 H390" marker-end="url(#arr)"/>
+    <path d="M390 152 H370" marker-end="url(#arr)"/>
+  </g>
+  <g stroke="#aab5c1" stroke-width="2" fill="none" stroke-dasharray="5 4">
+    <path d="M555 222 V252" marker-end="url(#arr2)"/>
+    <path d="M575 252 V222" marker-end="url(#arr2)"/>
+  </g>
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#dfa32b"/></marker>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#aab5c1"/></marker>
+  </defs>
+
+  <text x="30" y="448" fill="#e7e2d4" font-size="14">RAM decides <tspan fill="#dfa32b" font-style="italic">what</tspan> can run · storage decides <tspan fill="#dfa32b" font-style="italic">how safely</tspan> it loads and persists</text>
+</svg>

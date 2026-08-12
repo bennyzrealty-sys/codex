@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">ONE TOKEN AT A TIME — THE ONLY GAME IT PLAYS</text>
+
+  <!-- context -->
+  <rect x="30" y="80" width="200" height="120" rx="12" fill="#151c26" stroke="#dfa32b" stroke-opacity=".5"/>
+  <text x="50" y="108" fill="#dfa32b" font-size="12" font-family="ui-monospace,monospace" letter-spacing="2">CONTEXT SO FAR</text>
+  <text x="50" y="140" fill="#e7e2d4" font-size="17" font-family="ui-monospace,monospace">The Pi never</text>
+  <rect x="50" y="152" width="52" height="26" rx="5" fill="#1a2330" stroke="#57b39c" stroke-dasharray="4 3"/>
+  <text x="76" y="170" fill="#57b39c" font-size="15" text-anchor="middle" font-family="ui-monospace,monospace">___</text>
+
+  <!-- transformer -->
+  <path d="M230 140 H280" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="284" y="76" width="180" height="130" rx="12" fill="#151c26" stroke="#57b39c" stroke-opacity=".6"/>
+  <text x="304" y="104" fill="#e7e2d4" font-size="16" font-weight="600">transformer</text>
+  <g stroke="#57b39c" stroke-opacity=".5"><line x1="304" y1="118" x2="444" y2="118"/><line x1="304" y1="136" x2="444" y2="136"/><line x1="304" y1="154" x2="444" y2="154"/></g>
+  <text x="304" y="180" fill="#aab5c1" font-size="12">attention: every token</text>
+  <text x="304" y="196" fill="#aab5c1" font-size="12">weighs every other token</text>
+
+  <!-- probabilities -->
+  <path d="M464 140 H514" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="518" y="66" width="212" height="180" rx="12" fill="#151c26" stroke="#dfa32b" stroke-opacity=".4"/>
+  <text x="536" y="92" fill="#dfa32b" font-size="12" font-family="ui-monospace,monospace" letter-spacing="2">NEXT-TOKEN ODDS</text>
+  <g font-size="14" font-family="ui-monospace,monospace">
+    <rect x="536" y="104" width="124" height="20" rx="4" fill="#57b39c" fill-opacity=".85"/><text x="540" y="119" fill="#0d1219">sleeps 62%</text>
+    <rect x="536" y="132" width="46" height="20" rx="4" fill="#57b39c" fill-opacity=".45"/><text x="590" y="147" fill="#aab5c1">stops 14%</text>
+    <rect x="536" y="160" width="36" height="20" rx="4" fill="#57b39c" fill-opacity=".35"/><text x="580" y="175" fill="#aab5c1">waits 11%</text>
+    <rect x="536" y="188" width="12" height="20" rx="4" fill="#cf6f57" fill-opacity=".6"/><text x="556" y="203" fill="#aab5c1">dies&#160;&#160; 2%</text>
+  </g>
+  <text x="536" y="234" fill="#aab5c1" font-size="12">temperature decides how</text>
+
+  <!-- loop back -->
+  <path d="M624 246 C624 330, 140 330, 140 204" stroke="#dfa32b" stroke-width="2" fill="none" stroke-dasharray="6 5" marker-end="url(#b)"/>
+  <text x="250" y="346" fill="#dfa32b" font-size="14">pick one · append it · run the whole thing again — until a stop token</text>
+
+  <text x="30" y="396" fill="#e7e2d4" font-size="14">No plan, no database of truth — just this loop, repeated brilliantly. <tspan fill="#aab5c1" font-style="italic">(That's also why it can hallucinate.)</tspan></text>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#aab5c1"/></marker>
+    <marker id="b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#dfa32b"/></marker>
+  </defs>
+</svg>

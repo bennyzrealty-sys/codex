@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="360" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">WHAT THE MODEL ACTUALLY READS</text>
+
+  <text x="30" y="88" fill="#e7e2d4" font-size="20" font-family="Georgia,serif" font-style="italic">"Meera watches the ward at night"</text>
+  <path d="M380 100 V128" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <text x="396" y="120" fill="#aab5c1" font-size="12" font-family="ui-monospace,monospace">tokenizer</text>
+
+  <!-- token chips -->
+  <g stroke="#dfa32b" stroke-opacity=".7" fill="#151c26">
+    <rect x="30"  y="140" width="52"  height="40" rx="8"/>
+    <rect x="90"  y="140" width="56"  height="40" rx="8"/>
+    <rect x="154" y="140" width="110" height="40" rx="8"/>
+    <rect x="272" y="140" width="62"  height="40" rx="8"/>
+    <rect x="342" y="140" width="80"  height="40" rx="8"/>
+    <rect x="430" y="140" width="52"  height="40" rx="8"/>
+    <rect x="490" y="140" width="82"  height="40" rx="8"/>
+  </g>
+  <g fill="#e7e2d4" font-size="16" text-anchor="middle" font-family="ui-monospace,monospace">
+    <text x="56"  y="166">Me</text>
+    <text x="118" y="166">era</text>
+    <text x="209" y="166">·watches</text>
+    <text x="303" y="166">·the</text>
+    <text x="382" y="166">·ward</text>
+    <text x="456" y="166">·at</text>
+    <text x="531" y="166">·night</text>
+  </g>
+  <g fill="#57b39c" font-size="12" text-anchor="middle" font-family="ui-monospace,monospace">
+    <text x="56"  y="202">2823</text>
+    <text x="118" y="202">761</text>
+    <text x="209" y="202">12207</text>
+    <text x="303" y="202">279</text>
+    <text x="382" y="202">21585</text>
+    <text x="456" y="202">520</text>
+    <text x="531" y="202">3814</text>
+  </g>
+  <text x="600" y="166" fill="#aab5c1" font-size="13">7 tokens,</text>
+  <text x="600" y="184" fill="#aab5c1" font-size="13">not 6 words</text>
+
+  <g fill="#e7e2d4" font-size="14">
+    <text x="30" y="252">· ~4 characters ≈ 1 token in English — Malayalam script costs <tspan fill="#cf6f57">more tokens per word</tspan></text>
+    <text x="30" y="280">· cost is charged <tspan fill="#dfa32b">per million tokens</tspan>, in and out separately</text>
+    <text x="30" y="308">· speed is <tspan fill="#dfa32b">tokens/second</tspan> · the context window is measured in tokens too</text>
+  </g>
+  <text x="30" y="340" fill="#aab5c1" font-size="13" font-style="italic">Tokens are the currency of this whole world.</text>
+
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#aab5c1"/></marker></defs>
+</svg>
