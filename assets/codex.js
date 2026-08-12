@@ -552,6 +552,17 @@
 
     var chips = $('#filters');
     if (chips) {
+      /* each chip carries its live count */
+      var counts = { all: all.length };
+      all.forEach(function (e) {
+        var dd = (e.domain || 'it').toLowerCase();
+        counts[dd] = (counts[dd] || 0) + 1;
+      });
+      $$('button', chips).forEach(function (b) {
+        var dd = b.getAttribute('data-dom');
+        if (!$('i', b)) b.appendChild(document.createElement('i'));
+        $('i', b).textContent = counts[dd] || 0;
+      });
       chips.addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (!b) return;
         filter = b.getAttribute('data-dom');
@@ -572,7 +583,7 @@
           month = m;
           html += '<div class="yearline">' + esc(monthName(m)) + '</div>';
         }
-        html += card(e, i === 0);
+        html += card(e, i === 0, i === 0);
       });
       if (!slice.length) html = '<div class="vault">Nothing filed under this field yet. ' +
         'The next sweep is never more than two days away.</div>';
@@ -589,7 +600,7 @@
     /* `open` unfolds the newest item so the section is never a wall of
        closed titles; `fresh` is the pulsing dot, which belongs to anything
        from the last sweep whether or not it happens to be first. */
-    function card(e, open) {
+    function card(e, open, hero) {
       var dom = (e.domain || 'it').toLowerCase();
       var isNew = daysAgo(e.date) <= 2;
       var fresh = isNew;
@@ -612,7 +623,17 @@
               : esc(s.label || '');
           }).join('') + '</p>'
         : '';
-      return '<details class="drop' + (fresh ? ' fresh' : '') + '"' + (open ? ' open' : '') + '>' +
+      /* the sweep's fingerprints — which cards below it reached into */
+      var touch = (e.touches && e.touches.length)
+        ? '<p class="touch">this sweep edited ' + e.touches.length +
+          ' card' + (e.touches.length === 1 ? '' : 's') + ' in the layers — ' +
+          e.touches.map(function (t) {
+            var el = document.getElementById(t);
+            var bb = el ? $('summary b', el) : null;
+            return '<a href="#' + esc(t) + '">' + esc(bb ? bb.textContent.trim() : t) + ' ↓</a>';
+          }).join(' ') + '</p>'
+        : '';
+      return '<details class="drop' + (fresh ? ' fresh' : '') + (hero ? ' lead' : '') + '"' + (open ? ' open' : '') + '>' +
         '<summary>' +
           '<span class="dropmeta">' +
             '<span class="when">' + esc(e.date || '') + '</span>' +
@@ -627,7 +648,7 @@
           (e.plain ? '<p class="plain">' + esc(e.plain) + '</p>' : '') +
           (e.tech ? '<p class="tech">' + esc(e.tech) + '</p>' : '') +
           (e.lands ? '<p class="lands">' + esc(e.lands) + '</p>' : '') +
-          tools + srcs +
+          tools + touch + srcs +
         '</div>' +
       '</details>';
     }
@@ -1518,6 +1539,64 @@
   }
 
   /* ==========================================================
+     7b · THE GLOSSARY — the door's showroom
+     ========================================================== */
+  function glossary() {
+    var sec = $('#gloss'); if (!sec) return;
+    var ps = $$('.gloss p', sec);
+
+    ps.forEach(function (p) {
+      var b = $('b', p); if (!b) return;
+      var term = b.textContent.trim();
+      b.setAttribute('role', 'button');
+      b.setAttribute('tabindex', '0');
+      b.setAttribute('aria-label', 'Open the door on ' + term);
+      function go() {
+        var r = b.getBoundingClientRect();
+        door.open(term, { x: r.left + r.width / 2, y: r.top + r.height / 2 });
+      }
+      b.addEventListener('click', go);
+      b.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+      });
+    });
+
+    /* jump by first letter */
+    var alpha = $('#alpharow');
+    if (alpha) {
+      var first = {};
+      ps.forEach(function (p) {
+        var b = $('b', p); if (!b) return;
+        var L = b.textContent.trim().charAt(0).toUpperCase();
+        if (!/[A-Z0-9]/.test(L)) L = '#';
+        if (!first[L]) first[L] = p;
+      });
+      alpha.innerHTML = Object.keys(first).sort().map(function (L) {
+        return '<button data-l="' + esc(L) + '">' + esc(L) + '</button>';
+      }).join('');
+      alpha.addEventListener('click', function (e) {
+        var btn = e.target.closest('button'); if (!btn) return;
+        var p = first[btn.getAttribute('data-l')];
+        if (!p) return;
+        p.scrollIntoView({ behavior: STILL ? 'auto' : 'smooth', block: 'center' });
+        p.classList.add('flash');
+        setTimeout(function () { p.classList.remove('flash'); }, 1600);
+      });
+    }
+
+    /* sift-as-you-type */
+    var input = $('#glossfilter');
+    if (input) {
+      input.addEventListener('input', function () {
+        var q = input.value.toLowerCase().trim();
+        ps.forEach(function (p) {
+          p.style.display = !q || p.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+        });
+      });
+    }
+  }
+
+  /* ==========================================================
      8 · THE SEEKER — press / or ⌘K
      ========================================================== */
   function seek() {
@@ -1609,7 +1688,7 @@
      ========================================================== */
   function boot() {
     field(); rail(); trail(); reveal(); wireLens(); marks(); pulse();
-    atlas(); minimap(); settleCards(); copycode(); wireDoor(); seek();
+    atlas(); minimap(); settleCards(); copycode(); glossary(); wireDoor(); seek();
 
     /* the door count, printed where the header promises it */
     var dc = $('#doorcount');
