@@ -529,18 +529,33 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 .dtip.on{opacity:1; transform:translate(-50%,-10px)}
 
 #door{position:fixed; inset:0; z-index:130; display:none; perspective:1500px}
-#door.on{display:block}
+#door.on{display:block;
+  /* the iris — the page opens at the very word that was struck */
+  animation:iris .7s var(--easeIn) both;
+}
+@keyframes iris{
+  from{clip-path:circle(0px at var(--ox,50%) var(--oy,45%))}
+  to{clip-path:circle(var(--irad,160vmax) at var(--ox,50%) var(--oy,45%))}
+}
 #door .veil{
-  position:absolute; inset:0; background:rgba(4,7,10,.86);
+  position:absolute; inset:0; background:rgba(4,7,10,.88);
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   animation:lensIn .45s var(--ease) both;
 }
+#door .warp{position:absolute; inset:0; pointer-events:none; z-index:1}
 #door .beam{
   position:absolute; left:50%; top:50%; width:min(560px,86vw); height:min(560px,86vw);
   transform:translate(-50%,-50%); border-radius:50%; pointer-events:none;
-  background:radial-gradient(circle,rgba(223,163,43,.30),rgba(87,179,156,.14) 42%,transparent 68%);
+  background:radial-gradient(circle,rgba(var(--wrgb,223,163,43),.30),rgba(87,179,156,.10) 42%,transparent 68%);
   animation:bloom 1.5s var(--ease) both;
 }
+/* the six worlds a door can open into */
+#door.w-mind{--wrgb:87,179,156}
+#door.w-wire{--wrgb:159,180,216}
+#door.w-silicon{--wrgb:223,163,43}
+#door.w-shield{--wrgb:207,111,87}
+#door.w-craft{--wrgb:183,171,99}
+#door.w-world{--wrgb:231,226,212}
 @keyframes bloom{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}
   45%{opacity:1}100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}}
 #door .leaf{
@@ -570,10 +585,42 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 @keyframes step{from{opacity:0;transform:translateZ(-180px) scale(.9)}to{opacity:1;transform:none}}
 #door .panel{
-  width:100%; max-width:640px; border:1px solid rgba(223,163,43,.28); border-radius:18px;
+  width:100%; max-width:660px; border:1px solid rgba(var(--wrgb,223,163,43),.32); border-radius:18px;
   background:linear-gradient(180deg,rgba(26,35,48,.97),rgba(15,20,27,.99));
-  box-shadow:var(--lift3),0 0 0 1px rgba(223,163,43,.07) inset; overflow:hidden;
+  box-shadow:var(--lift3),0 0 0 1px rgba(var(--wrgb,223,163,43),.08) inset; overflow:hidden;
 }
+#door .duo{display:block}
+#door .artside{
+  background:radial-gradient(120% 100% at 50% 0%,rgba(var(--wrgb,223,163,43),.14),transparent 62%);
+}
+#door .sec{
+  display:block; width:100%; font-family:'Spline Sans Mono',monospace; font-size:.6rem;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin:0 0 9px;
+}
+#door .why{
+  margin:0; padding:14px 18px; border-top:1px dashed var(--line);
+  border-left:3px solid var(--ember); font-size:1rem; color:#e9e3da;
+}
+#door .why span{
+  display:block; font-family:'Spline Sans Mono',monospace; font-size:.6rem;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--ember); margin-bottom:7px;
+}
+#door .kin,#door .crumbs{
+  padding:14px 18px; border-top:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap;
+}
+#door .kin button,#door .crumbs button{
+  font-family:'Spline Sans Mono',monospace; font-size:.66rem; letter-spacing:.1em;
+  padding:8px 13px; border-radius:99px; cursor:pointer;
+  border:1px solid rgba(var(--wrgb,223,163,43),.42); background:transparent; color:var(--bone);
+  transition:all .28s var(--ease);
+}
+#door .kin button:hover{background:rgba(var(--wrgb,223,163,43),.9); color:var(--ink);
+  transform:translateY(-1px)}
+#door .kin button:nth-child(odd){transform:translateY(2px)}
+#door .kin button:nth-child(odd):hover{transform:translateY(0)}
+#door .crumbs{border-top:1px dashed var(--line); padding-top:11px; padding-bottom:11px}
+#door .crumbs button{border-color:var(--line); color:var(--dim); font-size:.6rem; padding:6px 11px}
+#door .crumbs button:hover{color:var(--bone); border-color:var(--dim)}
 #door .top{
   display:flex; align-items:flex-start; gap:12px; padding:18px 18px 12px;
   border-bottom:1px solid var(--line);
@@ -789,6 +836,15 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
   .pathbody{display:grid;grid-template-columns:repeat(3,1fr);gap:0 26px}
   .stage{border-bottom:0;border-top:1px solid var(--line)}
   .pathnote{grid-column:1/-1}
+
+  /* the door at full breadth — art to the left, the word to the right */
+  #door .panel{max-width:1080px}
+  #door .duo{display:grid;grid-template-columns:1.05fr 1fr;align-items:stretch}
+  #door .artside{border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+  #door .artside figure{padding:20px 20px 12px}
+  #door .txtside .plain{border-left:0}
+  #door .txtside .tech{border-left:0}
+  #door .room{padding-top:calc(6vh + env(safe-area-inset-top,0px))}
 }
 
 @media (min-width:1280px){
@@ -835,6 +891,8 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
   #lens.on,#lens img,#door .veil,#door .room,#door .beam,#seek .veil,#seek .box,
   details.card[open] > *{animation:none !important}
   #door .leaf{display:none}
+  #door.on{animation:none;clip-path:none}
+  #door .warp{display:none}
   #lens .hint{animation:none}
   .hero .kicker,.hero h1,.hero .sub,.hero .stamp,.hero .gestures,.hero .begin,.begin b{animation:none}
   .tile,.tile .thumb,.begin{transition:none}

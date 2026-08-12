@@ -617,13 +617,72 @@
   /* ---- a procedural illustration, seeded by the word itself ----
      Shared by the door (a room with no art still gets a picture)
      and the atlas (a layer with no diagram still gets a tile). */
-  function glyph(term, W, H, label) {
+  function glyph(term, W, H, label, world) {
     W = W || 720; H = H || 300;
     var seed = 0;
     for (var i = 0; i < term.length; i++) seed = (seed * 31 + term.charCodeAt(i)) >>> 0;
     function rnd() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
     var cx = W / 2, cy = H / 2;
     var cols = ['#dfa32b', '#57b39c', '#cf6f57'];
+
+    var head = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" ' +
+      'aria-label="Abstract emblem for ' + esc(term) + '" preserveAspectRatio="xMidYMid slice">' +
+      '<rect width="' + W + '" height="' + H + '" fill="#0a0e13"/>';
+    var tail = (label !== false
+      ? '<text x="' + cx + '" y="' + (H - 18) + '" text-anchor="middle" fill="#aab5c1" ' +
+        'font-family="ui-monospace,monospace" font-size="12" letter-spacing="3">' +
+        esc(term.toUpperCase()) + '</text>'
+      : '') + '</svg>';
+    var g, j, a, r;
+
+    /* the shield family — concentric wards and spokes */
+    if (world === 'shield') {
+      g = head;
+      var R = Math.min(W, H) * .42, NR = 4, SP = 7 + Math.floor(rnd() * 4);
+      for (r = 1; r <= NR; r++) {
+        g += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (R * r / NR).toFixed(1) +
+             '" fill="none" stroke="#cf6f57" stroke-opacity="' + (.42 - r * .07).toFixed(2) + '"/>';
+      }
+      for (j = 0; j < SP; j++) {
+        a = (j / SP) * 6.283 + rnd() * .2;
+        g += '<line x1="' + (cx + Math.cos(a) * R * .22).toFixed(1) + '" y1="' + (cy + Math.sin(a) * R * .22).toFixed(1) +
+             '" x2="' + (cx + Math.cos(a) * R).toFixed(1) + '" y2="' + (cy + Math.sin(a) * R).toFixed(1) +
+             '" stroke="#e7e2d4" stroke-opacity=".12"/>';
+        var rr = R * (.4 + rnd() * .6);
+        g += '<circle cx="' + (cx + Math.cos(a) * rr).toFixed(1) + '" cy="' + (cy + Math.sin(a) * rr).toFixed(1) +
+             '" r="' + (2.2 + rnd() * 2.6).toFixed(1) + '" fill="' + cols[j % 3] + '" fill-opacity=".85"/>';
+      }
+      g += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (R * .16).toFixed(1) +
+           '" fill="none" stroke="#dfa32b" stroke-opacity=".7"/>' +
+           '<circle cx="' + cx + '" cy="' + cy + '" r="5" fill="#cf6f57"/>';
+      return g + tail;
+    }
+
+    /* the wire & silicon families — a jittered lattice */
+    if (world === 'wire' || world === 'silicon') {
+      g = head;
+      var hue = world === 'wire' ? '#9fb4d8' : '#dfa32b';
+      var GX = 9, GY = 4, gx = W / (GX + 1), gy = H / (GY + 1), grid = [];
+      for (var yy = 1; yy <= GY; yy++) for (var xx = 1; xx <= GX; xx++) {
+        grid.push({ x: xx * gx + (rnd() - .5) * gx * .5, y: yy * gy + (rnd() - .5) * gy * .5, on: rnd() > .35 });
+      }
+      g += '<g stroke="' + hue + '" stroke-opacity=".14">';
+      for (j = 0; j < grid.length; j++) {
+        if (j % GX !== GX - 1) g += '<line x1="' + grid[j].x.toFixed(1) + '" y1="' + grid[j].y.toFixed(1) +
+          '" x2="' + grid[j + 1].x.toFixed(1) + '" y2="' + grid[j + 1].y.toFixed(1) + '"/>';
+        if (j + GX < grid.length && rnd() > .4) g += '<line x1="' + grid[j].x.toFixed(1) + '" y1="' + grid[j].y.toFixed(1) +
+          '" x2="' + grid[j + GX].x.toFixed(1) + '" y2="' + grid[j + GX].y.toFixed(1) + '"/>';
+      }
+      g += '</g>';
+      grid.forEach(function (p, i2) {
+        if (!p.on) return;
+        g += '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + (1.8 + rnd() * 2.4).toFixed(1) +
+             '" fill="' + (rnd() > .75 ? cols[i2 % 3] : hue) + '" fill-opacity=".8"/>';
+      });
+      return g + tail;
+    }
+
+    /* the default — a seeded constellation */
     var pts = [], rings = 3, k = 0;
     var scale = Math.min(W / 720, 1);
     for (var r = 1; r <= rings; r++) {
@@ -638,9 +697,7 @@
         });
       }
     }
-    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" ' +
-      'aria-label="Abstract constellation for ' + esc(term) + '" preserveAspectRatio="xMidYMid slice">' +
-      '<rect width="' + W + '" height="' + H + '" fill="#0a0e13"/>';
+    var s = head;
     s += '<g stroke="#e7e2d4" stroke-opacity=".10" stroke-width="1">';
     for (var p = 0; p < pts.length; p++) {
       var q = pts[(p + 1 + Math.floor(rnd() * 3)) % pts.length];
@@ -658,12 +715,7 @@
             (2.6 + parseFloat(p.d)).toFixed(1) + 's" repeatCount="indefinite"/>') +
            '</circle>';
     });
-    if (label !== false) {
-      s += '<text x="' + cx + '" y="' + (H - 18) + '" text-anchor="middle" fill="#aab5c1" ' +
-           'font-family="ui-monospace,monospace" font-size="12" letter-spacing="3">' +
-           esc(term.toUpperCase()) + '</text>';
-    }
-    return s + '</svg>';
+    return s + tail;
   }
 
   /* ==========================================================
@@ -937,8 +989,27 @@
       tech: 'Coordination patterns: supervisor/worker, pipeline, blackboard, debate. Cost and error both compound with agent count, so the durable designs keep fan-out shallow, make every step verifiable, and put a deterministic script — not a model — in charge of control flow.' }
   };
 
+  /* which world a layer belongs to, for doors with no authored home */
+  var SEC2WORLD = {
+    l1: 'silicon', l2: 'mind', l3: 'mind', l4: 'mind', l5: 'craft', l6: 'craft',
+    l7: 'silicon', l8: 'craft', l9: 'world', l10: 'world', l11: 'world',
+    l12: 'shield', l13: 'shield', l14: 'mind', l15: 'wire', l16: 'wire',
+    l17: 'craft', l18: 'craft', l19: 'shield', l20: 'world', l21: 'mind',
+    l22: 'mind', l23: 'world', l24: 'craft', l25: 'craft', l26: 'world',
+    deep: 'shield', gloss: 'craft', live: 'world'
+  };
+  var WORLDRGB = {
+    mind: '87,179,156', wire: '159,180,216', silicon: '223,163,43',
+    shield: '207,111,87', craft: '183,171,99', world: '231,226,212'
+  };
+  var WORLDNAME = {
+    mind: 'the world of minds', wire: 'the world of wires',
+    silicon: 'the world of silicon', shield: 'the world of shields',
+    craft: 'the world of the craft', world: 'the wider world'
+  };
+
   var door = (function () {
-    var box, room, index = null, keys = [];
+    var box, room, index = null, keys = [], dmeta = {}, walked = [];
 
     /* ---- build the searchable index from LEX + the page itself ---- */
     function build() {
@@ -1020,7 +1091,9 @@
       box.setAttribute('role', 'dialog');
       box.setAttribute('aria-modal', 'true');
       box.innerHTML =
-        '<div class="veil"></div><div class="beam"></div>' +
+        '<div class="veil"></div>' +
+        '<canvas class="warp" aria-hidden="true"></canvas>' +
+        '<div class="beam"></div>' +
         '<div class="leaf l"></div><div class="leaf r"></div>' +
         '<div class="room"><div class="panel"></div></div>';
       document.body.appendChild(box);
@@ -1028,7 +1101,7 @@
       $('.veil', box).addEventListener('click', shut);
       box.addEventListener('click', function (e) {
         if (e.target.closest('.shut')) shut();
-        var n = e.target.closest('.near button');
+        var n = e.target.closest('button[data-t]');
         if (n) open(n.getAttribute('data-t'));
         var j = e.target.closest('.jump a');
         if (j) {
@@ -1046,7 +1119,75 @@
       });
     }
 
-    function open(raw) {
+    /* the starfield burst behind the opening door — one-shot, self-terminating */
+    function warp(ox, oy, rgb) {
+      if (STILL) return;
+      var c = $('.warp', box); if (!c) return;
+      var x = c.getContext('2d');
+      var w = c.width = window.innerWidth, h = c.height = window.innerHeight;
+      ox = ox == null ? w / 2 : ox; oy = oy == null ? h / 2 : oy;
+      var streaks = [], i;
+      for (i = 0; i < 240; i++) {
+        streaks.push({
+          a: Math.random() * 6.283, r: Math.random() * 30,
+          v: 4 + Math.random() * 16, l: 26 + Math.random() * 110
+        });
+      }
+      var t0 = null;
+      function fr(now) {
+        if (!t0) t0 = now;
+        var t = (now - t0) / 900;
+        if (t >= 1 || !box.classList.contains('on')) { x.clearRect(0, 0, w, h); return; }
+        x.clearRect(0, 0, w, h);
+        x.lineWidth = 1.4;
+        var fade = t < .2 ? t / .2 : 1 - (t - .2) / .8;
+        for (i = 0; i < streaks.length; i++) {
+          var s = streaks[i];
+          s.r += s.v * (1 + t * 4);
+          var ca = Math.cos(s.a), sa = Math.sin(s.a);
+          x.strokeStyle = 'rgba(' + rgb + ',' + (fade * .5).toFixed(3) + ')';
+          x.beginPath();
+          x.moveTo(ox + ca * s.r, oy + sa * s.r);
+          x.lineTo(ox + ca * (s.r + s.l * (0.4 + t)), oy + sa * (s.r + s.l * (0.4 + t)));
+          x.stroke();
+        }
+        requestAnimationFrame(fr);
+      }
+      requestAnimationFrame(fr);
+    }
+
+    /* fold assets/doors.json in when it arrives — metadata for known
+       doors, brand-new doors for keys the index has never seen */
+    function absorb(meta) {
+      if (!index) build();
+      var added = 0;
+      Object.keys(meta).forEach(function (k) {
+        if (k.charAt(0) === '_') return;
+        var nk = norm(k);
+        if (!nk) return;
+        dmeta[nk] = meta[k];
+        if (!index[nk]) {
+          index[nk] = { term: k, plain: '', fromMeta: true };
+          keys.push(nk);
+          added += 1;
+        }
+      });
+      if (added) keys.sort(function (a, b) { return b.length - a.length; });
+      return keys.length;
+    }
+
+    function metaFor(term, e) {
+      var m = dmeta[norm(term)];
+      if (!m && e) m = dmeta[norm(e.term)];
+      if (!m && e && e.aka) {
+        for (var i = 0; i < e.aka.length; i++) {
+          if (dmeta[norm(e.aka[i])]) { m = dmeta[norm(e.aka[i])]; break; }
+        }
+      }
+      return m || null;
+    }
+
+    function open(raw, origin) {
       if (!box) make();
       /* a phrase candidate can carry the punctuation that followed it
          ("tokens —"); the index ignores that, so the heading should too */
@@ -1056,6 +1197,7 @@
         .replace(/\s+/g, ' ')
         .trim();
       var e = lookup(term);
+      var meta = metaFor(term, e);
       /* The heading is the word they actually double-clicked — being shown
          "mfa" after clicking "passkey" is disorienting. The entry's own name
          and its other spellings go in the line underneath. */
@@ -1067,16 +1209,26 @@
         : [];
       var cards = e || term.length > 2 ? cardsFor(name) : [];
 
+      /* which world this door leads to */
+      var world = (meta && meta.world) || '';
+      if (!world && cards.length) {
+        var sec = cards[0].el.closest('section');
+        world = (sec && SEC2WORLD[sec.id]) || '';
+      }
+      if (!world) world = 'mind';
+
       var art = '';
-      if (e && e.art) {
-        art = '<figure><img src="' + esc(e.art) + '" alt="' + esc(name) + '" loading="lazy">' +
+      var artSrc = (meta && meta.art) || (e && e.art) || '';
+      if (artSrc) {
+        art = '<figure><img src="' + esc(artSrc) + '" alt="' + esc(name) + '" loading="lazy">' +
               '<figcaption>from the layers — tap to open it full screen</figcaption></figure>';
       } else if (cards.length && $('figure.fig img', cards[0].el)) {
         var im = $('figure.fig img', cards[0].el);
         art = '<figure><img src="' + esc(im.getAttribute('src')) + '" alt="' + esc(im.alt) + '" loading="lazy">' +
               '<figcaption>' + esc((($('figcaption', im.closest('figure')) || {}).textContent || '').trim()) + '</figcaption></figure>';
-      } else if (e) {
-        art = '<figure>' + glyph(name) + '<figcaption>a constellation drawn for this word alone</figcaption></figure>';
+      } else {
+        art = '<figure>' + glyph(name, 720, 420, true, world) +
+              '<figcaption>an emblem drawn for this word alone</figcaption></figure>';
       }
 
       var plain = e && e.plain ? e.plain : '';
@@ -1096,8 +1248,21 @@
         }
       }
 
+      /* neighboring doors: authored kin first, fuzzy matches as the fallback */
+      var kin = [];
+      if (meta && meta.kin) {
+        kin = meta.kin.filter(function (k2) {
+          return norm(k2) !== norm(term) && !!lookup(k2);
+        });
+      }
+      if (!kin.length) {
+        kin = near(term).filter(function (k2) { return norm(k2) !== norm(term); }).slice(0, 5);
+      }
+      kin = kin.slice(0, 6);
+
+      var found = plain || tech || (meta && meta.why);
       var body;
-      if (!plain && !tech) {
+      if (!found) {
         var alts = near(term);
         body =
           '<div class="top"><div class="word"><span class="k">no entry — yet</span>' +
@@ -1110,33 +1275,72 @@
                 return '<button data-t="' + esc(a) + '">' + esc(a) + '</button>';
               }).join('') + '</div>'
             : '') + '</div>';
+        box.className = '';
       } else {
+        /* the walked trail — the doors that led here */
+        var crumbs = walked.filter(function (w) { return norm(w) !== norm(term); }).slice(-3);
+        walked.push(term);
+        if (walked.length > 12) walked.shift();
+
         body =
-          '<div class="top"><div class="word"><span class="k">the door opens on</span>' +
+          '<div class="top"><div class="word">' +
+          '<span class="k">a door opens on · ' + esc(WORLDNAME[world] || world) + '</span>' +
           '<h3>' + esc(name) + '</h3>' +
           (also.length
             ? '<p class="aka">also filed as ' + esc(also.slice(0, 4).join(' · ')) + '</p>' : '') +
           '</div><button class="shut" aria-label="Close">✕</button></div>' +
-          art +
-          (plain ? '<p class="plain">' + esc(plain) + '</p>' : '') +
-          (tech ? '<p class="tech">' + esc(tech) + '</p>' : '') +
-          (cards.length
-            ? '<div class="jump">' + cards.map(function (c) {
-                return '<a href="#' + esc(c.id) + '" data-go="' + esc(c.id) + '">' +
-                       esc(c.layer || 'open') + ' · ' + esc(c.label) + '</a>';
-              }).join('') + '</div>'
-            : '');
+          '<div class="duo">' +
+            '<div class="artside">' + art + '</div>' +
+            '<div class="txtside">' +
+              (plain ? '<p class="plain">' + esc(plain) + '</p>' : '') +
+              (tech ? '<p class="tech">' + esc(tech) + '</p>' : '') +
+              (meta && meta.why
+                ? '<p class="why"><span>why it matters</span>' + esc(meta.why) + '</p>' : '') +
+              (cards.length
+                ? '<div class="jump"><span class="sec">where you met it</span>' + cards.map(function (c) {
+                    return '<a href="#' + esc(c.id) + '" data-go="' + esc(c.id) + '">' +
+                           esc(c.layer || 'open') + ' · ' + esc(c.label) + '</a>';
+                  }).join('') + '</div>'
+                : '') +
+              (kin.length
+                ? '<div class="kin"><span class="sec">neighboring doors</span>' + kin.map(function (k2) {
+                    return '<button data-t="' + esc(k2) + '">' + esc(k2) + ' →</button>';
+                  }).join('') + '</div>'
+                : '') +
+              (crumbs.length
+                ? '<div class="crumbs"><span class="sec">the way you came</span>' + crumbs.map(function (w) {
+                    return '<button data-t="' + esc(w) + '">← ' + esc(w) + '</button>';
+                  }).join('') + '</div>'
+                : '') +
+            '</div>' +
+          '</div>';
+        box.className = 'w-' + world;
       }
+
+      /* the iris opens where the word was double-clicked, and grows
+         just far enough to swallow the farthest corner of the screen */
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var ox2 = origin && origin.x != null ? origin.x : vw / 2;
+      var oy2 = origin && origin.y != null ? origin.y : vh * .45;
+      var irad = Math.sqrt(
+        Math.pow(Math.max(ox2, vw - ox2), 2) + Math.pow(Math.max(oy2, vh - oy2), 2)
+      ) * 1.05;
+      box.style.setProperty('--ox', ox2.toFixed(0) + 'px');
+      box.style.setProperty('--oy', oy2.toFixed(0) + 'px');
+      box.style.setProperty('--irad', irad.toFixed(0) + 'px');
 
       room.innerHTML = body;
       box.classList.add('on');
       document.documentElement.style.overflow = 'hidden';
-      /* replay the door swing on every open */
+      /* replay the whole arrival on every open */
       $$('.leaf', box).forEach(function (l) {
         l.style.animation = 'none'; void l.offsetWidth; l.style.animation = '';
       });
       var beam = $('.beam', box); beam.style.animation = 'none'; void beam.offsetWidth; beam.style.animation = '';
       var rm = $('.room', box); rm.style.animation = 'none'; void rm.offsetWidth; rm.style.animation = '';
+      rm.scrollTop = 0;
+      box.style.animation = 'none'; void box.offsetWidth; box.style.animation = '';
+      warp(origin && origin.x, origin && origin.y, WORLDRGB[world] || WORLDRGB.mind);
       var sh = $('.shut', box); if (sh) sh.focus();
     }
 
@@ -1149,7 +1353,7 @@
     }
 
     return {
-      open: open, shut: shut,
+      open: open, shut: shut, absorb: absorb,
       has: function (t) { return !!lookup(t); },
       count: function () { if (!index) build(); return keys.length; }
     };
@@ -1198,11 +1402,21 @@
       if (noGo(target)) return;
       var cands = contextWords();
       if (!cands) return;
+      /* the iris will open exactly where the word sits — read the
+         selection rect now, before anything clears the ranges */
+      var origin = null;
+      try {
+        var sel = window.getSelection();
+        if (sel && sel.rangeCount) {
+          var r = sel.getRangeAt(0).getBoundingClientRect();
+          if (r && (r.width || r.height)) origin = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        }
+      } catch (err) {}
       var bare = cands[cands.length - 1];
       for (var i = 0; i < cands.length - 1; i++) {
-        if (cands[i] && door.has(cands[i])) { door.open(cands[i]); return; }
+        if (cands[i] && door.has(cands[i])) { door.open(cands[i], origin); return; }
       }
-      door.open(bare);
+      door.open(bare, origin);
     }
 
     document.addEventListener('dblclick', function (e) { fire(e.target); });
@@ -1335,6 +1549,16 @@
     /* the door count, printed where the header promises it */
     var dc = $('#doorcount');
     if (dc) dc.textContent = door.count();
+
+    /* fold in the door metadata — worlds, why-lines, kin — when it lands */
+    fetch('assets/doors.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d) return;
+        var total = door.absorb(d);
+        if (dc && total) dc.textContent = total;
+      })
+      .catch(function () {});
 
     /* deep links to cards open them */
     function openHash() {
