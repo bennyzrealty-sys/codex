@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="200" fill="#0d1219"/>
+  <circle cx="712.0" cy="100.0" r="2" fill="#b79ad8" fill-opacity="0.25"/>
+  <circle cx="694.4" cy="128.7" r="3" fill="#b79ad8" fill-opacity="0.38"/>
+  <line x1="712.0" y1="100.0" x2="694.4" y2="128.7" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="648.4" cy="151.3" r="4" fill="#b79ad8" fill-opacity="0.51"/>
+  <line x1="694.4" y1="128.7" x2="648.4" y2="151.3" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="591.6" cy="163.0" r="5" fill="#b79ad8" fill-opacity="0.64"/>
+  <line x1="648.4" y1="151.3" x2="591.6" y2="163.0" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="545.6" cy="161.4" r="2" fill="#b79ad8" fill-opacity="0.77"/>
+  <line x1="591.6" y1="163.0" x2="545.6" y2="161.4" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="528.0" cy="146.8" r="3" fill="#b79ad8" fill-opacity="0.25"/>
+  <line x1="545.6" y1="161.4" x2="528.0" y2="146.8" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="545.6" cy="122.3" r="4" fill="#b79ad8" fill-opacity="0.38"/>
+  <line x1="528.0" y1="146.8" x2="545.6" y2="122.3" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="591.6" cy="93.0" r="5" fill="#b79ad8" fill-opacity="0.51"/>
+  <line x1="545.6" y1="122.3" x2="591.6" y2="93.0" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="648.4" cy="65.3" r="2" fill="#b79ad8" fill-opacity="0.64"/>
+  <line x1="591.6" y1="93.0" x2="648.4" y2="65.3" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="694.4" cy="44.9" r="3" fill="#b79ad8" fill-opacity="0.77"/>
+  <line x1="648.4" y1="65.3" x2="694.4" y2="44.9" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="712.0" cy="36.1" r="4" fill="#b79ad8" fill-opacity="0.25"/>
+  <line x1="694.4" y1="44.9" x2="712.0" y2="36.1" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="694.4" cy="41.0" r="5" fill="#b79ad8" fill-opacity="0.38"/>
+  <line x1="712.0" y1="36.1" x2="694.4" y2="41.0" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="648.4" cy="58.3" r="2" fill="#b79ad8" fill-opacity="0.51"/>
+  <line x1="694.4" y1="41.0" x2="648.4" y2="58.3" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="591.6" cy="84.4" r="3" fill="#b79ad8" fill-opacity="0.64"/>
+  <line x1="648.4" y1="58.3" x2="591.6" y2="84.4" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="545.6" cy="113.9" r="4" fill="#b79ad8" fill-opacity="0.77"/>
+  <line x1="591.6" y1="84.4" x2="545.6" y2="113.9" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="528.0" cy="140.4" r="5" fill="#b79ad8" fill-opacity="0.25"/>
+  <line x1="545.6" y1="113.9" x2="528.0" y2="140.4" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="545.6" cy="158.3" r="2" fill="#b79ad8" fill-opacity="0.38"/>
+  <line x1="528.0" y1="140.4" x2="545.6" y2="158.3" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="591.5" cy="163.9" r="3" fill="#b79ad8" fill-opacity="0.51"/>
+  <line x1="545.6" y1="158.3" x2="591.5" y2="163.9" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="648.4" cy="156.0" r="4" fill="#b79ad8" fill-opacity="0.64"/>
+  <line x1="591.5" y1="163.9" x2="648.4" y2="156.0" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="694.4" cy="136.2" r="5" fill="#b79ad8" fill-opacity="0.77"/>
+  <line x1="648.4" y1="156.0" x2="694.4" y2="136.2" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="712.0" cy="108.7" r="2" fill="#b79ad8" fill-opacity="0.25"/>
+  <line x1="694.4" y1="136.2" x2="712.0" y2="108.7" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="694.5" cy="79.4" r="3" fill="#b79ad8" fill-opacity="0.38"/>
+  <line x1="712.0" y1="108.7" x2="694.5" y2="79.4" stroke="#b79ad8" stroke-opacity=".16"/>
+  <circle cx="648.5" cy="54.5" r="4" fill="#b79ad8" fill-opacity="0.51"/>
+  <line x1="694.5" y1="79.4" x2="648.5" y2="54.5" stroke="#b79ad8" stroke-opacity=".16"/>
+  <rect x="0" y="0" width="6" height="200" fill="#b79ad8"/>
+  <text x="38" y="62" fill="#b79ad8" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">MARKET &amp; MONEY</text>
+  <text x="38" y="106" fill="#e7e2d4" font-size="30" font-weight="600" font-family="Fraunces,Georgia,serif">Markets</text>
+  <text x="38" y="140" fill="#aab5c1" fill-opacity="1" font-size="14" text-anchor="start" font-weight="400">who is paying, what it costs, and where the money moved</text>
+  <text x="38" y="172" fill="#aab5c1" fill-opacity=".7" font-size="11" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">the operator's codex · live feed · refreshed every two days</text>
+</svg>

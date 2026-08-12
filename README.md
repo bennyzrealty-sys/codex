@@ -1,9 +1,10 @@
 # The Operator's Codex — publish kit
 
 One folder = one living site: the guide (`index.html`), the live feed
-(`updates.json`), the interactive layer (`assets/`), the node log
-(`node-log.json`), the caretaker (`.github/workflows/refresh.yml` +
-`scripts/update_codex.py`), and the Pi reporter (`pi/log-progress.sh`).
+(`updates.json`), the interactive layer (`assets/`), the offline copy
+(`sw.js` + `manifest.json`), the node log (`node-log.json`), the caretaker
+(`.github/workflows/refresh.yml` + `scripts/update_codex.py`), and the Pi
+reporter (`pi/log-progress.sh`).
 
 Your link: **https://bennyzrealty-sys.github.io/codex/**
 (Prefer your own domain? Import the repo into Vercel instead and point
@@ -16,9 +17,12 @@ Your link: **https://bennyzrealty-sys.github.io/codex/**
   the path panel in the header is the order to *read* them, in six stages. It
   ticks each stop once you have genuinely spent time in it (kept on-device only,
   with a reset button).
-- **The Latest** — a live feed across IT, AI, hardware and cyber security,
-  swept **every 2 days**, each item in both voices with an illustration,
-  where it lands on your setup, and the tools to reach for.
+- **The Latest** — a live feed across IT, AI, hardware, cyber security and
+  **markets**, swept **every 2 days**, each item in both voices with an
+  illustration, where it lands on your setup, and the tools to reach for.
+  The three newest items are lifted into the header, and every feed card
+  closes with a link into the layer that teaches the ground it stands on —
+  the news is the hook, the curriculum is the thing.
 - **The Atlas** — the page opens as a full-height hero, then the 26 layers
   as a bento grid of stage-tinted tiles: diagram thumbnails, live card
   counts, and read-state ticks fed by the same on-device progress the path
@@ -71,8 +75,51 @@ feed entries, rewrite Layer 04, mark any affected cards, and redeploy.
 
 ## Put it on your phone
 
-Open the link in Chrome → ⋮ → **Add to Home screen**. You get an app icon;
-every open loads the live, freshly-swept page.
+Open the link in Chrome → ⋮ → **Install app**. You get an app icon, a
+standalone window with no address bar, and — because `sw.js` caches the
+shell, the typefaces and every diagram — **the whole Codex readable with no
+signal**. The feed is fetched network-first, so it is current whenever there
+is signal and legible when there is not.
+
+Nothing about you leaves the device; `privacy.html` says so in full, and the
+typefaces are served from `assets/fonts/` rather than Google's CDN precisely
+so that stays true.
+
+### Adding a fifth thing to the feed
+
+The feed's domains live in exactly one place — `DOMAINS` in
+`scripts/update_codex.py`. Adding one means four small edits, and
+`check_structure.py` fails if you forget any of them:
+
+1. add it to `DOMAINS` and to the search brief in `build_prompt`;
+2. add a `<button data-dom="…">` chip in `#live` (the renderer counts chips
+   from the DOM, so no JS change is needed);
+3. add `images/update-<domain>.svg` — `valid_entry` falls back to it, so
+   without the file the first entry renders a broken image
+   (`make_figures.py` draws it: one line in `FIGURES`);
+4. add the domain tint (`.dom.<domain>`) in `assets/codex.css`, and the
+   layer it funnels into (`TAUGHT_IN`) in `assets/codex.js`.
+
+### Getting it into the Play Store
+
+The blocker is not the app, it is the URL. A Trusted Web Activity verifies
+against `https://<origin>/.well-known/assetlinks.json` at the **origin root**,
+and `bennyzrealty-sys.github.io/codex/` is a project path — the root belongs
+to a different repository. Either move to a custom domain (recommended) or
+serve the asset links from a `bennyzrealty-sys.github.io` repo. The file and
+the full explanation are in `.well-known/`; `.nojekyll` is what makes GitHub
+Pages serve that directory at all.
+
+Once the domain is settled:
+
+    npx @bubblewrap/cli init --manifest https://<origin>/manifest.json
+    npx @bubblewrap/cli build
+
+Bubblewrap prints the SHA-256 signing fingerprint that goes into
+`assetlinks.json`. A Play developer account is $25 once, and personal
+accounts carry a closed-testing requirement (roughly 12 testers for 14
+continuous days) before production — start that clock early, it is calendar
+time, not work.
 
 ## Maintenance tools
 

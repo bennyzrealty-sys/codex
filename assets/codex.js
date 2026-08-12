@@ -9,6 +9,8 @@
      reveal()   sections arrive instead of appearing
      lens()     every image, truly fullscreen
      pulse()    the live update feed (updates.json)
+     latest()   the three newest items, up in the header
+     offline()  registers sw.js so the whole Codex reads without signal
      marks()    newly-updated, until read three times
      atlas()    the bento constellation of layers up top
      minimap()  every layer as a dot on a fixed rail
@@ -610,15 +612,49 @@
      ========================================================== */
   var PAGE = 10;
   function pulse() {
-    var host = $('#feed'); if (!host) return;
-    fetch('updates.json?t=' + Date.now())
+    var host = $('#feed');
+    var strip = $('#lateststrip');
+    if (!host && !strip) return;
+    /* one fetch feeds both the header strip and the section below it.
+       The service worker answers this network-first and falls back to
+       its cache, so the feed is fresh online and still readable off it. */
+    fetch('updates.json', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (d) { render(host, d); })
+      .then(function (d) {
+        if (host) render(host, d);
+        if (strip) latest(strip, d);
+      })
       .catch(function () {
-        host.innerHTML = '<div class="vault">The feed file could not be read from here. ' +
+        if (host) host.innerHTML = '<div class="vault">The feed file could not be read from here. ' +
           'Open the Codex at its published link and the last two years of updates load ' +
           'instantly — nothing in it is ever deleted.</div>';
+        if (strip) strip.innerHTML = '<span class="latestwait">the feed could not be read from here</span>';
       });
+  }
+
+  /* the three newest items, up in the header — the hook. Whoever came
+     for the news sees it before anything else, and every route out of
+     this strip leads into the feed and from there into the layers. */
+  function latest(strip, d) {
+    var top = (d.entries || []).slice().sort(function (a, b) {
+      return (b.date || '').localeCompare(a.date || '') ||
+             (b.id || '').localeCompare(a.id || '');
+    }).slice(0, 3);
+    if (!top.length) {
+      strip.innerHTML = '<span class="latestwait">the first sweep has not landed yet</span>';
+      return;
+    }
+    strip.innerHTML = top.map(function (e) {
+      var dom = (e.domain || 'it').toLowerCase();
+      return '<a class="lat" href="#live">' +
+        '<span class="latmeta">' +
+          '<span class="dom ' + esc(dom) + '">' + esc(domName(dom)) + '</span>' +
+          '<span class="when">' + esc(e.date || '') + '</span>' +
+          (daysAgo(e.date) <= 2 ? '<span class="dom new">new</span>' : '') +
+        '</span>' +
+        '<span class="lattitle">' + esc(e.title || '') + '</span>' +
+      '</a>';
+    }).join('');
   }
 
   function render(host, d) {
@@ -735,7 +771,7 @@
           (e.plain ? '<p class="plain">' + esc(e.plain) + '</p>' : '') +
           (e.tech ? '<p class="tech">' + esc(e.tech) + '</p>' : '') +
           (e.lands ? '<p class="lands">' + esc(e.lands) + '</p>' : '') +
-          tools + touch + srcs +
+          tools + touch + srcs + teachLink(dom) +
         '</div>' +
       '</details>';
     }
@@ -744,7 +780,37 @@
 
   function domName(d) {
     return { ai: 'artificial intelligence', it: 'information technology',
-             hardware: 'hardware & silicon', cyber: 'cyber security' }[d] || d;
+             hardware: 'hardware & silicon', cyber: 'cyber security',
+             market: 'market & money' }[d] || d;
+  }
+
+  /* Which layer teaches the ground a feed item stands on. The funnel:
+     someone arrives for the news, and every card offers the one layer
+     that makes the next item of that kind readable without help.
+     Per-domain rather than per-entry on purpose — the caretaker would
+     have to be taught to emit per-entry targets, and this needs no
+     change to the sweep at all. */
+  var TAUGHT_IN = {
+    ai:       ['l2',  'The Model'],
+    it:       ['l5',  "The Builder's World"],
+    hardware: ['l1',  'The Machine'],
+    cyber:    ['l12', 'The Wire'],
+    market:   ['l4',  'The Frontier']
+  };
+
+  function teachLink(dom) {
+    var t = TAUGHT_IN[dom]; if (!t) return '';
+    /* prefer the heading actually on the page, so a renamed layer
+       never leaves a stale label behind in the feed */
+    var el = document.getElementById(t[0]);
+    var h2 = el ? $('h2', el) : null;
+    var num = el ? $('.lnum', el) : null;
+    /* Layer 12's heading carries a subtitle after an em-dash; the Atlas
+       names it by the half in front, and so does this. */
+    var name = (h2 ? h2.textContent : t[1]).trim().split(' — ')[0].trim();
+    var lead = num ? num.textContent.trim().toLowerCase().replace('layer ', '') + ' · ' : '';
+    return '<p class="teach"><a href="#' + t[0] + '">' +
+      'the layer this stands on — ' + esc(lead + name) + ' ↓</a></p>';
   }
   function monthName(m) {
     var p = m.split('-'); if (p.length < 2) return m;
@@ -1799,6 +1865,27 @@
     }
     window.addEventListener('hashchange', openHash);
     openHash();
+
+    offline();
+  }
+
+  /* ==========================================================
+     10 · OFFLINE — the Codex as something you carry
+
+     Twenty-six layers of study material are worth more on a phone in
+     a tunnel than on a desk with fibre. sw.js caches the shell and the
+     figures on install and answers them cache-first; updates.json is
+     network-first, so the feed is current whenever there is signal and
+     legible when there is not. Registration is deliberately late and
+     entirely optional — a browser without service workers loses the
+     offline copy and nothing else.
+     ========================================================== */
+  function offline() {
+    if (!('serviceWorker' in navigator)) return;
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') return;
+    var go = function () { navigator.serviceWorker.register('sw.js').catch(function () {}); };
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go);
   }
 
   if (document.readyState === 'loading') {

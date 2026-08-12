@@ -27,7 +27,7 @@ FEED = "updates.json"
 MODEL = os.environ.get("CODEX_MODEL", "claude-sonnet-5")
 MAX_ENTRIES = 6          # per sweep
 MAX_CARD_EDITS = 6       # per sweep
-DOMAINS = ("ai", "it", "hardware", "cyber")
+DOMAINS = ("ai", "it", "hardware", "cyber", "market")
 
 TODAY = datetime.date.today()
 today = TODAY.isoformat()
@@ -78,7 +78,7 @@ def build_prompt(l4, cards, images):
 field manual for a solo operator in Sheffield running a Raspberry Pi 5 node, building
 narrow AI agents, and moving toward NHS digital work.
 
-Web-search for what genuinely changed in the last ~3 days across four fields:
+Web-search for what genuinely changed in the last ~3 days across five fields:
   ai        — model releases (especially small/open-weight, Ollama-runnable), agent
               tooling, Anthropic/Claude and MCP releases, notable capability shifts
   it        — infrastructure, hosting, protocols, developer platforms, regulation
@@ -87,13 +87,17 @@ Web-search for what genuinely changed in the last ~3 days across four fields:
               anything that changes what a small board or a datacentre can do
   cyber     — actively-exploited vulnerabilities (CISA KEV), supply-chain incidents,
               notable breaches, defensive tooling, cryptography changes
+  market    — the money under all four: funding rounds and valuations, chip / cloud /
+              AI vendor earnings and guidance, API and GPU pricing moves, consolidation
+              and acquisitions, layoffs and hiring shifts, and regulation with a cost
+              consequence. Prefer a number and a date over a narrative.
 
 Return ONLY a JSON object — no markdown fences, no prose around it — with these keys:
 
 "entries": array of 2 to %(max_entries)d NEW feed items, each:
    {"id": "YYYY-MM-DD-short-slug",
     "date": "YYYY-MM-DD",              // the date of the development, not today
-    "domain": "ai" | "it" | "hardware" | "cyber",
+    "domain": "ai" | "it" | "hardware" | "cyber" | "market",
     "title": "a claim, not a topic — max ~70 chars",
     "oneline": "one clause of extra context",
     "plain":  "PLAIN VOICE: clear to a smart 13-year-old. No jargon unexplained. 60-110 words.",
@@ -129,6 +133,8 @@ Rules that are not negotiable:
  - Plain voice never contains an unexplained acronym.
  - "lands" must say something an operator would act on, not a summary of the news.
  - Prefer 3-4 different domains over four items about the same story.
+ - A market item still owes the reader "lands": what it changes about the price,
+   the availability or the timing of something the operator actually uses.
 
 ALLOWED IMAGE PATHS (use only these):
 %(images)s

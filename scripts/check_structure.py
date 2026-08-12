@@ -12,6 +12,7 @@ survive — ids are stable forever because localStorage counters key on them.
 Exits non-zero on the first broken invariant.
 """
 
+import json
 import re
 import subprocess
 import sys
@@ -123,6 +124,7 @@ def main():
         ('id="nl-ladder"', "#nl-ladder"), ('id="nl-entries"', "#nl-entries"),
         ('id="path"', "#path"), ('id="pathcount"', "#pathcount"),
         ('id="pathreset"', "#pathreset"), ('id="feed"', "#feed"),
+        ('id="lateststrip"', "#lateststrip"),
         ('id="filters"', "#filters"), ('id="pulsemeta"', "#pulsemeta"),
         ('id="updtally"', "#updtally"), ('id="doorcount"', "#doorcount"),
         ('class="sizer"', ".sizer"), ('id="gloss"', "#gloss"),
@@ -131,6 +133,35 @@ def main():
     check('theme-color #0f141b', 'content="#0f141b"' in html)
     manifest = (ROOT / "manifest.json").read_text(encoding="utf-8")
     check("manifest colors intact", manifest.count("#0f141b") >= 2)
+
+    print("feed domains (update_codex.DOMAINS ⇄ the filter chips ⇄ the art)")
+    chips = set(re.findall(r'<button data-dom="([a-z]+)"', html))
+    missing_chip = sorted(set(update_codex.DOMAINS) - chips)
+    check("every caretaker domain has a filter chip", not missing_chip,
+          "no chip for: %s" % ", ".join(missing_chip))
+    # valid_entry() falls back to images/update-<domain>.svg, so a domain
+    # without that file renders a broken image the first time it is used
+    no_art = [d for d in update_codex.DOMAINS
+              if not (ROOT / "images" / ("update-%s.svg" % d)).exists()]
+    check("every caretaker domain has fallback art", not no_art,
+          "no images/update-<d>.svg for: %s" % ", ".join(no_art))
+
+    print("installable app (manifest / service worker / asset links)")
+    man = json.loads(manifest)
+    icons = man.get("icons", [])
+    png = {(i.get("sizes"), i.get("purpose")) for i in icons
+           if i.get("type") == "image/png"}
+    check("manifest declares 192 and 512 raster icons",
+          ("192x192", "any") in png and ("512x512", "any") in png)
+    check("manifest declares a 512 maskable icon", ("512x512", "maskable") in png)
+    for i in icons:
+        check("icon file exists: %s" % i.get("src"), (ROOT / i.get("src", "")).exists())
+    check("service worker present", (ROOT / "sw.js").exists())
+    check("service worker is registered by the page", "sw.js" in
+          (ROOT / "assets" / "codex.js").read_text(encoding="utf-8"))
+    check("privacy policy present (Play requires a URL)", (ROOT / "privacy.html").exists())
+    check(".nojekyll present (or /.well-known/ is never served)",
+          (ROOT / ".nojekyll").exists())
 
     print()
     if FAILED:
