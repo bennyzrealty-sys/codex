@@ -2,14 +2,19 @@
    THE OPERATOR'S CODEX — the agentic layer
    No dependencies, no build step, no network beyond this origin.
 
-     field()  the living neural background
-     rail()   reading progress + where you are
-     reveal() sections arrive instead of appearing
-     lens()   every image, truly fullscreen
-     pulse()  the live update feed (updates.json)
-     marks()  newly-updated, until read three times
-     door()   double-click a word, the wall opens
-     seek()   press / or ⌘K to jump anywhere
+     field()    the living neural background, two depths, pointer-aware
+     rail()     reading progress + where you are
+     trail()    which layers you have genuinely sat in
+     reveal()   sections arrive instead of appearing
+     lens()     every image, truly fullscreen
+     pulse()    the live update feed (updates.json)
+     marks()    newly-updated, until read three times
+     atlas()    the bento constellation of layers up top
+     minimap()  every layer as a dot on a fixed rail
+     glossary() every glossary term is a door
+     door()     double-click a word — iris, warp, and a room
+                (metadata in assets/doors.json: world/why/kin/art)
+     seek()     press / or ⌘K to jump anywhere
    ============================================================ */
 (function () {
   'use strict';

@@ -19,15 +19,31 @@ Your link: **https://bennyzrealty-sys.github.io/codex/**
 - **The Latest** — a live feed across IT, AI, hardware and cyber security,
   swept **every 2 days**, each item in both voices with an illustration,
   where it lands on your setup, and the tools to reach for.
-- **Double-click any word** and a door opens on it: both voices, an
-  illustration, and the way back into the layer it came from.
+- **The Atlas** — the page opens as a full-height hero, then the 26 layers
+  as a bento grid of stage-tinted tiles: diagram thumbnails, live card
+  counts, and read-state ticks fed by the same on-device progress the path
+  uses. At desk widths cards flow two abreast inside every layer, an opened
+  card spreads its two voices side by side, and a fixed minimap of every
+  layer rides the left edge.
+- **Double-click any word** and a door opens *at the word*: an iris wipe, a
+  starfield tinted by the term's world (minds / wires / silicon / shields /
+  craft / the wider world), then a room with both voices, an illustration,
+  an authored "why it matters" line, the way back into the layers — and
+  neighboring doors, so you can walk from term to term. The metadata lives
+  in `assets/doors.json` (world, why, kin, art per term; hand-edited, never
+  touched by the caretaker).
 - **Tap any diagram** for true full screen — pinch, pan, swipe, or `f` for
   the browser's own fullscreen.
 - **Newly updated** marks on any card the caretaker touched, which stay
   until you have opened that card three times.
+- **The glossary is the door's showroom** — every term is clickable, with a
+  sift-as-you-type filter and an A–Z jump row.
 - Press `/` (or `⌘K`) to jump anywhere by name.
 
 All motion is disabled automatically under `prefers-reduced-motion`.
+
+Structural invariants the caretaker depends on are enforced by
+`scripts/check_structure.py` — run it after any hand edit to `index.html`.
 
 ## The 2-day cycle
 
