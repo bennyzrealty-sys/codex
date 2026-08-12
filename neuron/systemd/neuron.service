@@ -1,0 +1,14 @@
+[Unit]
+Description=neuron — one body of the household mesh
+After=network-online.target mosquitto.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/codex/neuron
+ExecStart=%h/codex/neuron/.venv/bin/python -m nrn.daemon --config neuron.toml
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

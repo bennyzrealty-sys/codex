@@ -1,0 +1,16 @@
+# One file per body. Copy to neuron.toml and edit.
+
+name = "pi"                 # this body's name on the mesh — unique per device
+broker = "localhost"        # the Pi runs mosquitto; other bodies point here
+port = 1883
+memory = "memory.db"
+
+# rule = reflexes only (start here) | ollama = local model | claude = the API
+mind = "rule"
+
+# [mind_options]            # for mind = "ollama":
+# model = "llama3.2:3b"
+# host = "http://localhost:11434"
+
+[conductor]                 # the repo organism (organs/conductor.py)
+repos = ["bennyzrealty-sys/codex"]
