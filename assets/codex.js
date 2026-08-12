@@ -2,6 +2,7 @@
    THE OPERATOR'S CODEX — the agentic layer
    No dependencies, no build step, no network beyond this origin.
 
+     atmos()    the six stages as light — the ground drifts as you descend
      field()    the living neural background, two depths, pointer-aware
      rail()     reading progress + where you are
      trail()    which layers you have genuinely sat in
@@ -32,6 +33,85 @@
     get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   };
+
+  /* ==========================================================
+     0 · THE ATMOSPHERE — the six stages, as light
+
+     The reading path is six stages and each already owns a hue the
+     Atlas tiles wear. Here that palette becomes the ground itself:
+     as you descend the page the light drifts from the turmeric of
+     the ground floor, through teal, ice, ember and bone, to the
+     brass of the build. It moves a fraction of a shade per screen,
+     so you never catch it changing — you just notice, three layers
+     later, that the room is a different colour.
+
+     Everything is derived from one scroll fraction, so it costs a
+     handful of custom-property writes per frame and nothing else.
+     STAGE is shared with the field below, which tints its mesh to
+     match, and with the rail, so the whole page moves together.
+     ========================================================== */
+  var STAGE = { rgb: [223, 163, 43] };
+
+  function atmos() {
+    var HUES = [
+      [223, 163, 43],   /* 1 · the ground   — turmeric */
+      [87, 179, 156],   /* 2 · the mind     — teal     */
+      [159, 180, 216],  /* 3 · the workshop — ice      */
+      [207, 111, 87],   /* 4 · the shield   — ember    */
+      [231, 226, 212],  /* 5 · the world    — bone     */
+      [183, 171, 99]    /* 6 · the build    — brass    */
+    ];
+    var INK = [15, 20, 27];
+    var root = document.documentElement;
+    var sky = document.createElement('div');
+    sky.id = 'atmos';
+    document.body.insertBefore(sky, document.body.firstChild);
+
+    function mix(a, b, f) {
+      return [
+        Math.round(a[0] + (b[0] - a[0]) * f),
+        Math.round(a[1] + (b[1] - a[1]) * f),
+        Math.round(a[2] + (b[2] - a[2]) * f)
+      ];
+    }
+    function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+
+    var tick = false, last = -1;
+    function paint() {
+      tick = false;
+      var top = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.max(0, Math.min(1, top / max)) : 0;
+      if (Math.abs(p - last) < 0.0008) return;   /* below one shade — skip the write */
+      last = p;
+
+      var t = p * (HUES.length - 1);
+      var i = Math.min(HUES.length - 2, Math.floor(t));
+      var f = t - i;
+      var here = mix(HUES[i], HUES[i + 1], f);
+      var next = HUES[Math.min(HUES.length - 1, i + 2)] || HUES[HUES.length - 1];
+
+      STAGE.rgb = here;
+      /* two blooms and a ground tinted a few percent toward the stage */
+      var ground = mix(INK, here, .045);
+      root.style.setProperty('--atmo-a', rgba(here, .085));
+      root.style.setProperty('--atmo-b', rgba(next, .05));
+      root.style.setProperty('--atmo-ink', 'rgb(' + ground.join(',') + ')');
+      /* the vignette is the same ground, so it veils without greying */
+      root.style.setProperty('--atmo-veil0', rgba(ground, 0));
+      root.style.setProperty('--atmo-veil', rgba(ground, .82));
+      root.style.setProperty('--stage-line', rgba(here, .42));
+      root.style.setProperty('--stage-glow', rgba(here, .5));
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!tick) { tick = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    window.addEventListener('resize', function () { last = -1; paint(); }, { passive: true });
+    /* cards opening and the feed landing both change the page height */
+    document.addEventListener('toggle', function () { last = -1; paint(); }, true);
+    paint();
+  }
 
   /* ==========================================================
      1 · THE FIELD — a background that behaves like a mesh
@@ -75,7 +155,8 @@
       if (!nodes.length || signals.length > 5) return;
       var a = (Math.random() * nodes.length) | 0, b = (Math.random() * nodes.length) | 0;
       if (a === b) return;
-      signals.push({ a: a, b: b, t: 0, hue: Math.random() < .5 ? '223,163,43' : '87,179,156' });
+      /* half the sparks carry the stage's own light, half the teal */
+      signals.push({ a: a, b: b, t: 0, hue: Math.random() < .5 ? STAGE.rgb.join(',') : '87,179,156' });
     }
 
     var LINK = 132, PULL = 140;
@@ -124,10 +205,11 @@
           }
         }
       }
+      var hue = STAGE.rgb[0] + ',' + STAGE.rgb[1] + ',' + STAGE.rgb[2];
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         var a = .18 + Math.sin(n.p) * .12;
-        x.fillStyle = 'rgba(223,163,43,' + a.toFixed(3) + ')';
+        x.fillStyle = 'rgba(' + hue + ',' + a.toFixed(3) + ')';
         x.beginPath(); x.arc(n.x, n.y, n.r, 0, 6.284); x.fill();
       }
       for (i = signals.length - 1; i >= 0; i--) {
@@ -1692,7 +1774,7 @@
      9 · boot
      ========================================================== */
   function boot() {
-    field(); rail(); trail(); reveal(); wireLens(); marks(); pulse();
+    atmos(); field(); rail(); trail(); reveal(); wireLens(); marks(); pulse();
     atlas(); minimap(); settleCards(); copycode(); glossary(); wireDoor(); seek();
 
     /* the door count, printed where the header promises it */
