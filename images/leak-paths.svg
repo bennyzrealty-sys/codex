@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">FIVE WAYS A SECRET LEAVES THE BUILDING</text>
+  <text x="30" y="76" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">the route out</text>
+  <text x="430" y="76" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">the control that closes it</text>
+  <rect x="30" y="92" width="350" height="44" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="44" y="112" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">staff paste it into an unapproved chatbot</text>
+  <text x="44" y="128" fill="#57b39c" fill-opacity="1" font-size="10.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">biggest by volume</text>
+  <line x1="382" y1="114" x2="424" y2="114" stroke="#57b39c" stroke-opacity=".8" stroke-width="1.4"/>
+  <polygon points="424,114 417.608,116.854 417.608,111.146" fill="#57b39c" fill-opacity=".8"/>
+  <rect x="430" y="92" width="300" height="44" rx="9" fill="#151c26" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="444" y="112" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">an approved tool that is actually good</text>
+  <rect x="30" y="146" width="350" height="44" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="44" y="166" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">a webpage hides instructions your agent obeys</text>
+  <text x="44" y="182" fill="#dfa32b" fill-opacity="1" font-size="10.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">indirect injection</text>
+  <line x1="382" y1="168" x2="424" y2="168" stroke="#dfa32b" stroke-opacity=".8" stroke-width="1.4"/>
+  <polygon points="424,168 417.608,170.854 417.608,165.146" fill="#dfa32b" fill-opacity=".8"/>
+  <rect x="430" y="146" width="300" height="44" rx="9" fill="#151c26" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="444" y="166" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">egress allowlist · least-privilege tools</text>
+  <rect x="30" y="200" width="350" height="44" rx="9" fill="#151c26" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="44" y="220" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">the model repeats a fragment of its training</text>
+  <text x="44" y="236" fill="#9fb4d8" fill-opacity="1" font-size="10.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">extraction</text>
+  <line x1="382" y1="222" x2="424" y2="222" stroke="#9fb4d8" stroke-opacity=".8" stroke-width="1.4"/>
+  <polygon points="424,222 417.608,224.854 417.608,219.146" fill="#9fb4d8" fill-opacity=".8"/>
+  <rect x="430" y="200" width="300" height="44" rx="9" fill="#151c26" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="444" y="220" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">never train on what you cannot publish</text>
+  <rect x="30" y="254" width="350" height="44" rx="9" fill="#151c26" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="44" y="274" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">patient interrogation lifts the system prompt</text>
+  <text x="44" y="290" fill="#cf6f57" fill-opacity="1" font-size="10.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">prompt &amp; key disclosure</text>
+  <line x1="382" y1="276" x2="424" y2="276" stroke="#cf6f57" stroke-opacity=".8" stroke-width="1.4"/>
+  <polygon points="424,276 417.608,278.854 417.608,273.146" fill="#cf6f57" fill-opacity=".8"/>
+  <rect x="430" y="254" width="300" height="44" rx="9" fill="#151c26" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="444" y="274" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">keys never live in the prompt</text>
+  <rect x="30" y="308" width="350" height="44" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="44" y="328" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">a key is committed to a repo</text>
+  <text x="44" y="344" fill="#57b39c" fill-opacity="1" font-size="10.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">history remembers forever</text>
+  <line x1="382" y1="330" x2="424" y2="330" stroke="#57b39c" stroke-opacity=".8" stroke-width="1.4"/>
+  <polygon points="424,330 417.608,332.854 417.608,327.146" fill="#57b39c" fill-opacity=".8"/>
+  <rect x="430" y="308" width="300" height="44" rx="9" fill="#151c26" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="444" y="328" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">secret scanning · short-lived scoped</text>
+  <text x="444" y="343" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">tokens</text>
+  <rect x="30" y="366" width="700" height="40" rx="9" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="48" y="392" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">Notice the pattern: every leak is words tricking a word-machine, or humans being human.</text>
+</svg>
