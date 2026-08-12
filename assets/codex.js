@@ -794,8 +794,8 @@
     ai:       ['l2',  'The Model'],
     it:       ['l5',  "The Builder's World"],
     hardware: ['l1',  'The Machine'],
-    cyber:    ['l19', 'The Ground Floor'],
-    market:   ['l23', 'The Economics & the Physics']
+    cyber:    ['l12', 'The Wire'],
+    market:   ['l4',  'The Frontier']
   };
 
   function teachLink(dom) {
@@ -805,7 +805,9 @@
     var el = document.getElementById(t[0]);
     var h2 = el ? $('h2', el) : null;
     var num = el ? $('.lnum', el) : null;
-    var name = (h2 ? h2.textContent : t[1]).trim();
+    /* Layer 12's heading carries a subtitle after an em-dash; the Atlas
+       names it by the half in front, and so does this. */
+    var name = (h2 ? h2.textContent : t[1]).trim().split(' — ')[0].trim();
     var lead = num ? num.textContent.trim().toLowerCase().replace('layer ', '') + ' · ' : '';
     return '<p class="teach"><a href="#' + t[0] + '">' +
       'the layer this stands on — ' + esc(lead + name) + ' ↓</a></p>';
