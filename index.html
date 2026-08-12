@@ -142,7 +142,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
   <div class="kicker">Field manual · two voices · eleven layers</div>
   <h1>The Operator's <em>Codex</em></h1>
   <p class="sub">Everything Joe runs — the machine, the models, the agents, the pipes — explained from zero to the frontier. Every idea speaks twice: once plainly, once in the language of the trade.</p>
-  <div class="stamp"><span>v1.8 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>refresh cycle: <b>every 2 days</b> (Layer 08)</span><span>now with <b>21 field diagrams</b></span></div>
+  <div class="stamp"><span>v1.8 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>refresh cycle: <b>every 2 days</b> (Layer 08)</span><span>now with <b>21 field diagrams + 6 photographs</b></span></div>
   <div class="legend">
     <p><span class="dotg"></span><b>Plain voice</b> — how you'd say it across the kitchen table, or to a five-year-old.</p>
     <p><span class="dott"></span><b>Technical voice</b> — the exact jargon the industry uses, so you can read docs, job specs, and error logs without flinching.</p>
@@ -195,6 +195,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
     <p class="plain">A GPU is a chip with thousands of very simple workers who all do the same little sum at once. It was invented to colour game pixels — AI turned out to be the same shape of job. No useful GPU on the Pi is the single reason it can't be a big AI brain.</p>
     <p class="tech">GPUs excel at parallel matrix multiplication (GEMM) — the core op of transformer inference and training; memory bandwidth is usually the real bottleneck for LLM token generation. NPUs (e.g. the Raspberry Pi AI HAT+ with Hailo-8, 26 TOPS) accelerate <em>vision</em> networks (INT8 CNNs) brilliantly but do <b>not</b> meaningfully accelerate LLMs — a common misconception worth £70. Datacentre AI runs on H100/B200-class GPUs with HBM.</p>
     <figure class="fig"><img src="images/cpu-vs-gpu.svg" alt="CPU: four strong workers vs GPU: thousands of tiny workers doing the same sum at once" loading="lazy"><figcaption>Fig 1.2 · two shapes of work</figcaption></figure>
+    <figure class="fig"><img src="images/h100-photo.png" alt="Photograph of four NVIDIA H100 accelerator cards, NVLink connectors visible along their tops" loading="lazy"><figcaption>The real thing — four H100s, ~£25,000 each; the NVLink strips on top are how they gang together · photo: 极客湾Geekerwan · CC BY 3.0 · Wikimedia Commons</figcaption></figure>
   </details>
 
   <details class="card"><summary><b>Why SD cards die</b><span>and why servers need SSDs</span></summary>
@@ -205,6 +206,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
   <details class="card"><summary><b>Watts &amp; the economics of always-on</b><span>why the Pi wins as infrastructure</span></summary>
     <p class="plain">Your Pi draws about as much power as a nightlight. Running it every hour of the year costs roughly £10–15. That's the whole trick: a machine cheap enough to never turn off becomes a different <em>kind</em> of machine — a presence, not a tool.</p>
     <p class="tech">~3W idle, ~8–12W loaded with active cooling; ≈45–90 kWh/yr ≈ £11–22 at UK rates. Compare: a GPU workstation idles at 80–150W. Availability (uptime) is the metric that matters for watchers, schedulers, and webhooks — and per-watt, a Pi is among the cheapest 24/7 availability money can buy.</p>
+    <figure class="fig"><img src="images/datacenter-photo.jpg" alt="Photograph of a datacentre aisle: racks of servers glowing blue in the dark" loading="lazy"><figcaption>The other end of the spectrum — a datacentre aisle burning megawatts so "the cloud" can exist · photo: BalticServers.com · CC BY-SA 3.0 · Wikimedia Commons</figcaption></figure>
   </details>
 </section>
 
@@ -459,6 +461,8 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
   <div class="lnum">LAYER 07</div>
   <h2>The Sovereign Node</h2>
   <p class="lede">Your Pi 5 · 16GB arrives 12 August. Here is what it becomes — the evolution ladder, then the synthesis bench (what to graft onto the board to multiply it), then the unbuilt: ideas that exist in no repo yet.</p>
+
+  <figure class="fig wide"><img src="images/pi5-photo.jpg" alt="Photograph of a Raspberry Pi 5 board with the official active cooler fitted" loading="lazy"><figcaption>The node itself — Pi 5 with the active cooler, exactly your kit · photo: SimonWaldherr · CC BY 4.0 · Wikimedia Commons</figcaption></figure>
   <div class="nodelog" id="nodelog">
     <div class="nl-head"><span>NODE LOG · LIVE</span><span id="nl-level">connecting…</span></div>
     <div class="nl-pills" id="nl-ladder"></div>
@@ -599,6 +603,7 @@ You maintain operators-codex.html. Today is {date}.
     <p class="plain">Think of a tower. Floor 1: one Dutch company, ASML, builds the only machines that can print the finest chips. Floor 2: mostly one Taiwanese company, TSMC, uses them to fabricate the chips. Floor 3: NVIDIA designs the AI chips everyone fights over. Floor 4: a handful of clouds (Amazon, Microsoft, Google) rent that metal out. Floor 5: the labs train models on it. Your API call rides the whole tower — and the bottom floors have almost no competitors. That is why chips became geopolitics.</p>
     <p class="tech">Supply chain: EUV lithography (ASML monopoly) → leading-edge fabrication (TSMC dominant; Samsung/Intel chasing) → accelerator design (NVIDIA + CUDA software moat; AMD, Google TPUs, custom silicon like AWS Trainium as pressure) → hyperscale + neocloud compute (AWS/Azure/GCP, CoreWeave) → frontier labs. Each narrow floor is a chokepoint: export controls, an earthquake, or one fab outage propagates upward to model prices and availability.</p>
     <figure class="fig"><img src="images/tower-of-dependence.svg" alt="Five stacked floors: chips, power and datacentres, clouds, model labs, and you at the top" loading="lazy"><figcaption>Fig 9.1 · every answer rides the whole tower</figcaption></figure>
+    <figure class="fig"><img src="images/euv-photo.jpg" alt="Photograph of an early extreme-ultraviolet lithography tool in a cleanroom, engineer in a bunny suit beside it" loading="lazy"><figcaption>Floor 1 in the flesh — an EUV lithography tool, the machine family only ASML can build · photo: Lawrence Livermore National Laboratory · public domain</figcaption></figure>
   </details>
 
   <details class="card"><summary><b>The labs &amp; their characters</b><span>who is who, in one line each</span></summary>
@@ -609,6 +614,7 @@ You maintain operators-codex.html. Today is {date}.
   <details class="card"><summary><b>Restrictions &amp; their strange effects</b><span>the cage shaped the animal</span></summary>
     <p class="plain">America restricted advanced chips to China to slow its AI. The lateral result: forced to do more with less, Chinese labs pivoted to ruthless efficiency and open publishing — producing cheap, capable models the whole world (including you) now benefits from. Meanwhile Europe wrote the first big AI law, courts are settling whether training on copyrighted books must be paid for, and datacentres are running into the oldest limit of all: electricity. Every restriction bends the river; none of them stop it.</p>
     <p class="tech">Export controls (waves of US rules, repeatedly revised) constrained compute but accelerated algorithmic-efficiency research and open-weights strategy — a textbook second-order effect. EU AI Act: phased, risk-tiered obligations through 2025–27; UK runs a lighter, regulator-led approach (plus NHS-specific clinical-safety standards DCB0129/0160 — the exact territory of your pivot). Copyright: landmark settlements and ongoing suits are pushing the industry toward licensed-data markets. Energy and grid interconnection queues are now cited alongside GPUs as the binding constraint. Specifics here rot fast — caretaker territory.</p>
+    <figure class="fig"><img src="images/wafer-photo.jpg" alt="Photograph of a silicon wafer, a grid of hundreds of identical chips printed on one mirror disc" loading="lazy"><figcaption>The object the geopolitics is about — one silicon wafer, hundreds of chips printed as a grid · photo: Bill Smith · CC BY 2.0 · Wikimedia Commons</figcaption></figure>
   </details>
 
   <details class="card"><summary><b>What the map means for a solo operator</b><span>reading the board from your seat</span></summary>
@@ -829,6 +835,7 @@ def verify(secret: bytes, body: bytes, sig: str, ts: str, skew=300) -&gt; bool:
   <details class="card"><summary><b>Compute, InfiniBand &amp; why distillation collapses</b><span>the physics that keeps frontier training rare</span></summary>
     <p class="plain">Why can't anyone just train a giant model? Because it isn't one computer — it's tens of thousands of GPUs that must talk to each other constantly, at blistering speed, or they sit idle burning money. The special ultra-fast cabling that links them is <b>InfiniBand</b>, and it's a real physical bottleneck: the speed of light and the cost of copper are the moat. And the tempting shortcut — training a small model on a big model's outputs (<b>knowledge distillation</b>) — has a trap: do it carelessly at scale and each generation copies the last's blur, like photocopying a photocopy, until the model forgets the rare cases and drifts to mush. That's <b>model collapse</b>.</p>
     <p class="tech">Frontier training is communication-bound: gradient sync across thousands of accelerators needs high-bandwidth, low-latency interconnect (InfiniBand / NVLink); utilisation dies without it, which is why datacentre topology <em>is</em> the moat (Layer 09's chokepoints). Distillation is legitimate and powerful with the teacher's true distribution, but recursively training on model-generated data narrows variance and amputates the tails → <b>model collapse</b> (degenerate, forgetful outputs). Keep real, diverse human data in the loop. Lateral link: this is the training-side mirror of Layer 11's continual-learning gap.</p>
+    <figure class="fig"><img src="images/summit-photo.jpg" alt="Photograph of the Summit supercomputer at Oak Ridge: a long aisle of black IBM cabinets under yellow cable trays" loading="lazy"><figcaption>What "not one computer" looks like — Summit at Oak Ridge: thousands of GPUs, and the cabling above them is the real moat · photo: Oak Ridge National Laboratory · CC BY 2.0 · Wikimedia Commons</figcaption></figure>
   </details>
 
   <h3>The loophole</h3>
