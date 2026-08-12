@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — The Operator's Codex</title>
+<meta name="theme-color" content="#0f141b">
+<meta name="description" content="The Operator's Codex has no accounts, no server and no tracking. Everything it remembers is kept on your own device.">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/codex.css">
+<style>
+  body{margin:0;background:#0f141b;color:#e7e2d4;
+    font-family:'Lexend','Spline Sans',system-ui,sans-serif;font-size:19px;line-height:1.8}
+  /* codex.css paints a fixed vignette at z-index 0 behind .wrap; this
+     page has no .wrap, so it lifts itself above it the same way */
+  .paper{max-width:680px;margin:0 auto;padding:58px 18px 90px;position:relative;z-index:1}
+  .paper h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin:0 0 6px}
+  .paper h2{font-size:1.25rem;margin:38px 0 8px;color:#e7e2d4}
+  .paper p{color:#d5d0c4}
+  .paper li{color:#d5d0c4;margin:6px 0}
+  .paper .kicker{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.22em;
+    text-transform:uppercase;color:#dfa32b;margin-bottom:14px}
+  .paper .short{border:1px solid rgba(231,226,212,.13);border-radius:14px;background:#151c26;
+    padding:16px 18px;margin:26px 0}
+  .paper .short b{color:#57b39c}
+  .paper .back{display:inline-block;margin-top:40px;font-family:'Spline Sans Mono',monospace;
+    font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:#dfa32b}
+  .paper code{background:#1a2330;padding:.08em .35em;border-radius:4px;color:#57b39c;
+    font-family:'Spline Sans Mono',ui-monospace,monospace;font-size:.9em}
+  .paper .when{color:#aab5c1;font-size:.85rem;font-family:'Spline Sans Mono',monospace}
+</style>
+</head>
+<body>
+<div class="paper">
+
+  <div class="kicker">The Operator's Codex</div>
+  <h1>Privacy</h1>
+  <p class="when">Last updated 12 August 2026</p>
+
+  <div class="short">
+    <p style="margin:0"><b>The whole of it:</b> the Codex has no accounts, no server of its own,
+    and no analytics or advertising of any kind. It never asks you for anything, so there is
+    nothing about you for it to hold. What it remembers about your reading is written on your
+    own device and never sent anywhere.</p>
+  </div>
+
+  <h2>What is stored, and where</h2>
+  <p>The Codex keeps a small amount of state in your browser's <code>localStorage</code>, on this
+  device only. Nothing in it identifies you, and none of it leaves the device:</p>
+  <ul>
+    <li><code>codex.seen.*</code> — which layers you have genuinely sat in, so the atlas tiles and
+    the reading path can tick.</li>
+    <li><code>codex.read.*</code> — how many times you have opened a card that a sweep marked as
+    newly updated, so the mark can fade after three readings.</li>
+    <li><code>codex.door.taught</code> — whether you have already been shown the double-click
+    gesture, so you are only shown it once.</li>
+  </ul>
+  <p>Clearing it is entirely in your hands: the button marked <em>clear my progress</em> at the foot
+  of the reading path erases the ticks, and clearing this site's data in your browser settings
+  removes everything above along with the offline copy.</p>
+
+  <h2>The offline copy</h2>
+  <p>If your browser supports it, the Codex installs a service worker (<code>sw.js</code>) that
+  keeps a copy of the pages, the stylesheet, the script, the typefaces, the diagrams and the live
+  feed in your browser's cache, so the whole thing can be read with no signal. That cache lives on
+  your device. It is written by your browser, read by your browser, and deleted whenever you clear
+  this site's data.</p>
+
+  <h2>Who else your device talks to</h2>
+  <p>Loading the Codex fetches files from one origin: the one you are reading it on. The typefaces
+  are served from that same origin rather than from Google Fonts, precisely so that no third party
+  is told what you are reading or from where.</p>
+  <p>There are two exceptions, and both are things you choose:</p>
+  <ul>
+    <li>Every feed entry cites its sources as ordinary links. Following one takes you to that
+    publisher's site, which has its own privacy policy and is beyond the Codex's reach.</li>
+    <li>The site is hosted on a static host (GitHub Pages at the time of writing), which — like
+    every web server — sees the request your browser makes for the files, including your IP
+    address. That is the host's ordinary server logging, not something the Codex collects, reads,
+    or has any access to.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>The Codex is written to be understood by a beginner of any age. It collects nothing from
+  anyone, so it collects nothing from children either.</p>
+
+  <h2>Changes</h2>
+  <p>If this ever stops being true — if accounts, sync, or any measurement are added — this page
+  will be rewritten before the change ships, and the date at the top will say when.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this page, or about anything the Codex does on your device, can be raised as
+  an issue on the repository the site is built from.</p>
+
+  <a class="back" href="index.html">← back to the Codex</a>
+</div>
+</body>
+</html>

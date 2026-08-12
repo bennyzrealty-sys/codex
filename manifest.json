@@ -1,9 +1,26 @@
 {
+  "id": "./index.html",
   "name": "The Operator's Codex",
   "short_name": "Codex",
+  "description": "Twenty-six layers from zero to the frontier — the machine, the models, the agents, the pipes, the money — each idea said plainly and then precisely, with a live feed of what changed swept every two days.",
+  "lang": "en-GB",
+  "dir": "ltr",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "categories": ["education", "news", "books"],
   "background_color": "#0f141b",
   "theme_color": "#0f141b",
-  "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+  "icons": [
+    {"src": "images/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "images/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "images/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ],
+  "shortcuts": [
+    {"name": "The latest", "short_name": "Latest", "description": "What changed in the last two days", "url": "./index.html#live"},
+    {"name": "Start from zero", "short_name": "Start", "description": "The suggested reading path through the twenty-six layers", "url": "./index.html#path"}
+  ]
 }

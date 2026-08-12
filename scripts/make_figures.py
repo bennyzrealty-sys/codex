@@ -16,6 +16,7 @@ INK, PANEL, PANEL2 = "#0d1219", "#151c26", "#1a2330"
 BONE, DIM = "#e7e2d4", "#aab5c1"
 GOLD, TEAL, EMBER = "#dfa32b", "#57b39c", "#cf6f57"
 BLUE = "#9fb4d8"
+HEATHER = "#b79ad8"          # the fifth feed domain — market & money
 MONO = "ui-monospace,monospace"
 
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "images")
@@ -1109,6 +1110,7 @@ FIGURES = {
     "update-it.svg": lambda: banner("information technology", "IT", "the plumbing everything else stands on", BLUE, 22),
     "update-hardware.svg": lambda: banner("hardware & silicon", "Hardware", "chips, boards, memory and the machines that print them", GOLD, 24),
     "update-cyber.svg": lambda: banner("cyber security", "Cyber", "what is being broken, and what stops it", EMBER, 20),
+    "update-market.svg": lambda: banner("market & money", "Markets", "who is paying, what it costs, and where the money moved", HEATHER, 23),
 }
 
 
