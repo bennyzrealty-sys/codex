@@ -14,3 +14,10 @@ mind = "rule"
 
 [conductor]                 # the repo organism (organs/conductor.py)
 repos = ["bennyzrealty-sys/codex"]
+
+[dreamer]                   # the house that dreams (organs/dreamer.py, cron 02:00)
+mind = "rule"               # rule = triage-only notebook | ollama = real replay
+retention_days = 30
+brief_path = "morning-brief.md"
+# [dreamer.mind_options]
+# model = "llama3.2:3b"

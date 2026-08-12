@@ -136,7 +136,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
   <div class="kicker">Field manual · two voices · eleven layers</div>
   <h1>The Operator's <em>Codex</em></h1>
   <p class="sub">Everything Joe runs — the machine, the models, the agents, the pipes — explained from zero to the frontier. Every idea speaks twice: once plainly, once in the language of the trade.</p>
-  <div class="stamp"><span>v1.6 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>refresh cycle: <b>every 2 days</b> (Layer 08)</span></div>
+  <div class="stamp"><span>v1.7 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>refresh cycle: <b>every 2 days</b> (Layer 08)</span></div>
   <div class="legend">
     <p><span class="dotg"></span><b>Plain voice</b> — how you'd say it across the kitchen table, or to a five-year-old.</p>
     <p><span class="dott"></span><b>Technical voice</b> — the exact jargon the industry uses, so you can read docs, job specs, and error logs without flinching.</p>
@@ -488,7 +488,8 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
     <p><b>Status: skeleton shipped.</b> The conductor rides the neuron mesh as its first organ — <code>neuron/organs/conductor.py</code>: collect → think → emit/PR, dry-run by default, etiquette enforced in code.</p></div>
 
   <div class="blend"><span class="tag s">UNBUILT 03</span><h4>The house that dreams</h4>
-    <p>Real brains don't learn while awake — they consolidate at night, replaying the day. Give the node the same trick: at 2 a.m. it replays everything it sensed and logged since sunrise — events, transcripts, sensor traces — and runs slow, free, local inference over the batch: what was anomalous, what repeated, what almost happened, what should be remembered forever versus forgotten. It writes the survivors into long-term memory and leaves a five-line dream journal for breakfast. Dreaming is just offline replay plus compression — and a 10-watt box with nothing to do at night is the perfect dreamer.</p></div>
+    <p>Real brains don't learn while awake — they consolidate at night, replaying the day. Give the node the same trick: at 2 a.m. it replays everything it sensed and logged since sunrise — events, transcripts, sensor traces — and runs slow, free, local inference over the batch: what was anomalous, what repeated, what almost happened, what should be remembered forever versus forgotten. It writes the survivors into long-term memory and leaves a five-line dream journal for breakfast. Dreaming is just offline replay plus compression — and a 10-watt box with nothing to do at night is the perfect dreamer.</p>
+    <p><b>Status: blueprint shipped.</b> <code>neuron/organs/dreamer.py</code> + <code>neuron/DREAMING.md</code> — four phases (triage → replay → consolidate &amp; forget → brief), riding the mesh's memory and minds; what it consolidates tonight is what every waking mind recalls tomorrow. Telegram delivery optional; degrades honestly to a pocket notebook with no model at all.</p></div>
 
   <div class="blend"><span class="tag n">UNBUILT 04</span><h4>The seed vault — a civilisation backup on 10 watts</h4>
     <p>If the internet vanished tomorrow, the node could still hold: all of Wikipedia (Kiwix, offline), street-level maps of Kerala and Yorkshire, a capable small model, Whisper for speech, and the family archive — queryable, in the dark, from a solar panel and a LoRa radio. A box that answers questions when nothing else on the street can. Nobody builds this because everyone assumes the network; the whole idea is refusing that assumption.</p></div>
@@ -553,9 +554,10 @@ You maintain operators-codex.html. Today is {date}.
 </pre>
   </details>
 
-  <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.6, dated 12 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
+  <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.7, dated 12 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
   <h3>Changelog</h3>
   <div class="gloss"><!-- CHANGELOG:START -->
+    <p><b>2026-08-12</b> — v1.7 · UNBUILT 03 becomes buildable: the house that dreams shipped as the mesh's third organ — <code>neuron/organs/dreamer.py</code> (nightly cron: deterministic triage → model replay in chunks → consolidation into shared memory + 30-day forgetting → five-line morning brief on the bus and Telegram) with full architecture in <code>neuron/DREAMING.md</code>. Smoke-tested including the no-model degrade path. · action for Joe: add the 02:00 cron line after L0; upgrade <code>[dreamer] mind</code> to ollama at L4.</p>
     <p><b>2026-08-12</b> — v1.6 · UNBUILT 01 and 02 become buildable: <code>neuron/</code> shipped — the household mesh (Thought protocol, MQTT synapse, rule/Ollama/Claude minds, Hebbian route-weights, per-body SQLite memory, Pi install kit) with the repo-organism conductor as its first organ. Smoke-tested; two-body quickstart in the README. · action for Joe: run <code>neuron/install.sh</code> on the Pi at rung L0, then <code>say ping</code> from the laptop.</p>
     <p><b>2026-08-12</b> — v1.5 · Layer 07 rebuilt facing forward: the Blend (a recap of shipped projects) replaced by the synthesis bench — six hardware grafts that multiply the Pi 5 (NVMe spine, Hailo retina, new senses, distributed inference, brainstem+cortex pairing, eGPU) — and the Unbuilt: five blueprints that exist in no repo yet (the neuron mesh, the repo organism, the house that dreams, the seed vault, the hundred-year machine). · action for Joe: pick one graft and one unbuilt; start both this week.</p>
     <p><b>2026-08-11</b> — v1.4 · The Deep Field appendix (JA3/JA4, RASP/Frida, HTTP/2 Rapid Reset, proxy reputation, model internals) condensed into two-voice cards; <code>brain/</code> shipped — a runnable offline RAG (Ollama + ChromaDB) making Layer 14's memory real. · action for Joe: pull the two Ollama models on the Pi, then <code>python ingest.py</code>.</p>
@@ -1017,7 +1019,7 @@ await b.close();</pre></div>
 </section>
 
 <footer>
-  THE OPERATOR'S CODEX · v1.6 · built 12 Aug 2026<br>
+  THE OPERATOR'S CODEX · v1.7 · built 12 Aug 2026<br>
   fifteen layers · one deep-field appendix · a brain that runs<br>
   Sheffield ⇄ Kottayam · committed is saved, pushed is safe
 </footer>

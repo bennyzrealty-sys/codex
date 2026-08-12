@@ -95,6 +95,16 @@ organs in jars; the conductor is the bloodstream between them.
 Etiquette is enforced in code: proposals are drafts, never merges; one PR
 per idea; silence when there is nothing to say. `--dry-run` is the default.
 
+### The dreamer (the house that dreams)
+
+`organs/dreamer.py`, cron at 02:00 — the mesh's sleep cycle. It replays the
+day's thoughts from this body's memory, consolidates the durable parts into
+the `memories` table (which `recall()` serves to every waking mind — so a
+dream tonight changes what the mesh knows tomorrow), prunes stale raw
+traffic, and emits a five-line morning brief on the bus. Full architecture
+in `DREAMING.md`. This is also who writes `Memory.remember()` in anger —
+the consolidation path §4 promised.
+
 ### The sensor
 
 `organs/sensor.py` — the trivial organ that proves the pattern: reads Pi

@@ -29,6 +29,7 @@ neuron/
 │   └── cli.py            inject a thought by hand, watch replies
 ├── organs/
 │   ├── conductor.py      the repo organism — cross-repo cross-pollination
+│   ├── dreamer.py        the house that dreams — nightly replay → memory + brief
 │   └── sensor.py         example body: Pi temperature/disk → observations
 ├── systemd/neuron.service
 ├── neuron.toml.example
@@ -69,7 +70,8 @@ whole idea in miniature: a thought left one skull and came back improved.
 | N1 | `mind = "ollama"` on the Pi | The mesh can genuinely think, offline, free |
 | N2 | `organs/sensor.py` on a timer | The mesh has senses; observations flow unprompted |
 | N3 | `organs/conductor.py` nightly | Your repos join the organism (see ARCHITECTURE.md) |
-| N4 | Weights steering routing | The mesh has learned who is good at what |
+| N4 | `organs/dreamer.py` at 02:00 | The house dreams: replay → memory + morning brief (see DREAMING.md) |
+| N5 | Weights steering routing | The mesh has learned who is good at what |
 
 ## Leaving home
 
