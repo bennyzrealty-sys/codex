@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="460" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">THE PI 5 IS NOT AN APPLIANCE — IT IS A SOCKET</text>
+  <rect x="276" y="176" width="208" height="118" rx="9" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="380" y="212" fill="#dfa32b" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="600">Raspberry Pi 5 · 16GB</text>
+  <text x="380" y="236" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="middle" font-weight="400">the exposed PCIe lane</text>
+  <text x="380" y="258" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">first Pi to offer its spine</text>
+  <text x="380" y="274" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">to strangers</text>
+  <rect x="30" y="78" width="230" height="76" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="44" y="106" fill="#57b39c" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="600">G1 · NVMe spine</text>
+  <text x="44" y="126" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">M.2 HAT+ — storage stops being the</text>
+  <text x="44" y="140" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">bottleneck</text>
+  <line x1="260" y1="116" x2="274" y2="200" stroke="#57b39c" stroke-opacity=".55" stroke-width="1.3"/>
+  <polygon points="274,200 270.134,194.165 275.765,193.226" fill="#57b39c" fill-opacity=".55"/>
+  <rect x="500" y="78" width="230" height="76" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="514" y="106" fill="#57b39c" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="600">G2 · silicon retina</text>
+  <text x="514" y="126" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">Hailo 26 TOPS — camera brains, NOT</text>
+  <text x="514" y="140" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">chat models</text>
+  <line x1="498" y1="116" x2="486" y2="200" stroke="#57b39c" stroke-opacity=".55" stroke-width="1.3"/>
+  <polygon points="486,200 484.078,193.269 489.73,194.076" fill="#57b39c" fill-opacity=".55"/>
+  <rect x="30" y="180" width="230" height="76" rx="9" fill="#151c26" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="44" y="208" fill="#9fb4d8" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="600">G3 · new senses</text>
+  <text x="44" y="228" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">mic · SDR · LoRa · mmWave · air</text>
+  <text x="44" y="242" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">quality</text>
+  <line x1="260" y1="218" x2="274" y2="200" stroke="#9fb4d8" stroke-opacity=".55" stroke-width="1.3"/>
+  <polygon points="274,200 272.329,206.798 267.823,203.293" fill="#9fb4d8" fill-opacity=".55"/>
+  <rect x="500" y="180" width="230" height="76" rx="9" fill="#151c26" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="514" y="208" fill="#9fb4d8" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="600">G4 · borrowed brain</text>
+  <text x="514" y="228" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">llama.cpp RPC — the house pools</text>
+  <text x="514" y="242" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">its RAM</text>
+  <line x1="498" y1="218" x2="486" y2="200" stroke="#9fb4d8" stroke-opacity=".55" stroke-width="1.3"/>
+  <polygon points="486,200 491.92,203.735 487.17,206.901" fill="#9fb4d8" fill-opacity=".55"/>
+  <rect x="30" y="300" width="230" height="76" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="44" y="328" fill="#dfa32b" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="600">G5 · brainstem + cortex</text>
+  <text x="44" y="348" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">Wake-on-LAN a mini PC only for</text>
+  <text x="44" y="362" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">hard thoughts</text>
+  <line x1="260" y1="338" x2="274" y2="216" stroke="#dfa32b" stroke-opacity=".55" stroke-width="1.3"/>
+  <polygon points="274,216 276.107,222.675 270.436,222.025" fill="#dfa32b" fill-opacity=".55"/>
+  <rect x="500" y="300" width="230" height="76" rx="9" fill="#151c26" stroke="#cf6f57" stroke-opacity=".7" stroke-dasharray="5 4"/>
+  <text x="514" y="328" fill="#cf6f57" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="600">G6 · the forbidden graft</text>
+  <text x="514" y="348" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">eGPU over Oculink — warranty-void,</text>
+  <text x="514" y="362" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">patched kernels</text>
+  <line x1="498" y1="338" x2="486" y2="216" stroke="#cf6f57" stroke-opacity=".55" stroke-width="1.3"/>
+  <polygon points="486,216 489.466,222.082 483.785,222.64" fill="#cf6f57" fill-opacity=".55"/>
+  <rect x="30" y="396" width="700" height="48" rx="9" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="48" y="420" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">survival organs first: a UPS HAT so a power cut is a journal entry instead of amnesia,</text>
+  <text x="48" y="438" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">and the RTC battery (pennies) so the node keeps true time offline. Boring grafts matter first.</text>
+</svg>

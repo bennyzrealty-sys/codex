@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">THE 72-HOUR CLOCK — IT STARTS WHEN YOU BECOME AWARE</text>
+  <line x1="60" y1="150" x2="700" y2="150" stroke="#aab5c1" stroke-opacity=".35" stroke-width="1.2"/>
+  <circle cx="110" cy="150" r="9" fill="#1a2330" stroke="#cf6f57"/>
+  <text x="110" y="122" fill="#cf6f57" fill-opacity="1" font-size="11.5" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">hour 0</text>
+  <text x="110" y="184" fill="#e7e2d4" fill-opacity="1" font-size="12.5" text-anchor="middle" font-weight="400">you become aware</text>
+  <text x="110" y="210" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">a log, a report, a</text>
+  <text x="110" y="224" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">stranger's email</text>
+  <circle cx="290" cy="150" r="9" fill="#1a2330" stroke="#dfa32b"/>
+  <text x="290" y="122" fill="#dfa32b" fill-opacity="1" font-size="11.5" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">hours 1–24</text>
+  <text x="290" y="184" fill="#e7e2d4" fill-opacity="1" font-size="12.5" text-anchor="middle" font-weight="400">assess</text>
+  <text x="290" y="210" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">whose data · what risk</text>
+  <text x="290" y="224" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">to them</text>
+  <circle cx="470" cy="150" r="9" fill="#1a2330" stroke="#57b39c"/>
+  <text x="470" y="122" fill="#57b39c" fill-opacity="1" font-size="11.5" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">by hour 72</text>
+  <text x="470" y="184" fill="#e7e2d4" fill-opacity="1" font-size="12.5" text-anchor="middle" font-weight="400">tell the regulator</text>
+  <text x="470" y="210" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">even if the picture is</text>
+  <text x="470" y="224" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">incomplete</text>
+  <circle cx="650" cy="150" r="9" fill="#1a2330" stroke="#9fb4d8"/>
+  <text x="650" y="122" fill="#9fb4d8" fill-opacity="1" font-size="11.5" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">without delay</text>
+  <text x="650" y="184" fill="#e7e2d4" fill-opacity="1" font-size="12.5" text-anchor="middle" font-weight="400">tell the people</text>
+  <text x="650" y="210" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">if the risk to them is</text>
+  <text x="650" y="224" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">high</text>
+  <rect x="30" y="254" width="340" height="92" rx="9" fill="#151c26" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="48" y="280" fill="#cf6f57" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">why the clock is brutal</text>
+  <text x="48" y="304" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">It runs from awareness, not from</text>
+  <text x="48" y="322" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">understanding. A partial report on time</text>
+  <text x="48" y="340" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">beats a complete one on day five.</text>
+  <rect x="390" y="254" width="340" height="92" rx="9" fill="#1a2330" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="408" y="280" fill="#57b39c" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">what makes it survivable</text>
+  <text x="408" y="304" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">an audit trail written before the day</text>
+  <text x="408" y="322" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">you need it: what happened, in what</text>
+  <text x="408" y="340" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">order, and who or what did it.</text>
+  <text x="30" y="380" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">If you can answer that in minutes you have a problem. If you cannot, you have a crisis —</text>
+  <text x="30" y="400" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">because now you must assume the worst about everything you cannot account for.</text>
+</svg>

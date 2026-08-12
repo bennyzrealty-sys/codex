@@ -614,6 +614,434 @@ def cloud_shapes():
     return s + tail()
 
 
+def adoption_gap():
+    s = head("everyone adopted — almost nobody shipped")
+    s += text(30, 78, "organisations that say they use AI agents", DIM, 12)
+    s += box(30, 88, 553, 48, stroke=TEAL, fill=PANEL2)
+    s += text(48, 118, "79% — adopted", TEAL, 16, weight="600")
+    s += line(583, 88, 583, 136, DIM, 1, "4 4", op=".35")
+
+    s += text(30, 172, "organisations running agents in production, doing real work", DIM, 12)
+    s += box(30, 182, 77, 48, stroke=GOLD, fill=PANEL2)
+    s += text(40, 212, "11%", GOLD, 15, weight="600")
+    s += line(107, 206, 570, 206, EMBER, 1, "5 5", op=".5")
+    s += text(580, 200, "the gap", EMBER, 13, weight="600")
+    s += text(580, 218, "is plumbing", DIM, 12)
+
+    s += text(30, 268, "what stops the other 68% — cited blockers, largest first", BONE, 12)
+    for i, (t, c) in enumerate([("integration with existing systems  ~46%", EMBER),
+                                ("permissions, auth & data access", GOLD),
+                                ("no evals, so nobody can prove it works", BLUE),
+                                ("model capability", TEAL)]):
+        s += chip(30 + (i % 2) * 366, 282 + (i // 2) * 34, t, c, 350)
+
+    s += box(30, 352, 700, 52, stroke=GOLD, fill=PANEL2)
+    s += text(48, 376, "None of the blockers are intelligence. They are auth, permissions, evals, rollback —", BONE, 12)
+    s += text(48, 394, "which is why a solo operator with working plumbing is ahead of most enterprises.", DIM, 12)
+    return s + tail()
+
+
+def commit_vs_push():
+    s = head("committed is saved · pushed is safe")
+    s += ('  <rect x="30" y="76" width="392" height="188" rx="10" fill="%s" stroke="%s" '
+          'stroke-opacity=".7" stroke-dasharray="6 5"/>\n' % (PANEL, EMBER))
+    s += text(48, 100, "the session's workshop — disposable", EMBER, 13, weight="600")
+    s += box(48, 118, 150, 56, "your edits", "in the working tree", stroke=DIM)
+    s += arrow(198, 146, 246, 146, GOLD)
+    s += text(222, 138, "commit", GOLD, 10, mid=True, mono=True)
+    s += box(246, 118, 156, 56, "8aa47a0", "saved — but only here", stroke=GOLD)
+    s += text(48, 202, "close the session and this whole box is shredded:", BONE, 12)
+    s += text(48, 222, "the commit that never left never existed.", EMBER, 12, weight="600")
+    s += text(48, 246, "\"one thing goes with the container: 8aa47a0 is unpushed\"", DIM, 11, mono=True)
+
+    s += arrow(422, 146, 486, 146, TEAL, 2)
+    s += text(454, 136, "git push", TEAL, 11, mid=True, mono=True)
+    s += text(454, 172, "~10 s", DIM, 11, mid=True, mono=True)
+    s += box(486, 76, 244, 188, stroke=TEAL, fill=PANEL2)
+    s += text(504, 104, "GitHub · origin/main", TEAL, 13, weight="600")
+    s += text(504, 132, "durable", BONE, 12)
+    s += text(504, 152, "shared with your other agents", DIM, 12)
+    s += text(504, 172, "survives every container", DIM, 12)
+    s += text(504, 206, "branches are free —", BONE, 12)
+    s += text(504, 224, "park a backup/ branch", DIM, 12)
+    s += text(504, 242, "before any history surgery", DIM, 12)
+
+    s += box(30, 286, 700, 58, stroke=GOLD, fill=PANEL2)
+    s += text(48, 310, "the reflex worth building", GOLD, 13, weight="600")
+    s += text(48, 332, "Say \"push\" before you say anything else. Ten seconds beats an afternoon of work.", BONE, 12)
+    s += text(30, 378, "the same shape underneath: ephemeral compute · shared state · stale notes · default-deny egress · metered everything", DIM, 11, mono=True)
+    return s + tail()
+
+
+def caretaker_loop():
+    s = head("the caretaker — one sweep, every two days")
+    steps = [
+        ("wake", "0 6 */2 * *", GOLD),
+        ("search", "the watchlist", BLUE),
+        ("write", "feed · layer 04", TEAL),
+        ("commit", "one dated entry", TEAL),
+        ("redeploy", "same link, fresh", GOLD),
+    ]
+    x = 30
+    for i, (a, b, c) in enumerate(steps):
+        s += box(x, 92, 122, 62, a, b, stroke=c)
+        if i < 4:
+            s += arrow(x + 122, 123, x + 140, 123, c)
+        x += 140
+    s += line(691, 154, 691, 186, GOLD, 1.2, "4 4", op=".5")
+    s += line(691, 186, 91, 186, GOLD, 1.2, "4 4", op=".5")
+    s += arrow(91, 186, 91, 156, GOLD, 1.2)
+    s += text(392, 204, "and the page under your home-screen link is newer than when you looked", DIM, 11, mid=True, mono=True)
+
+    s += box(30, 226, 340, 122, stroke=TEAL, fill=PANEL2)
+    s += text(48, 252, "what one sweep may change", TEAL, 13, weight="600")
+    s += text(48, 276, "append to the live feed (never edit, never delete)", BONE, 11.5)
+    s += text(48, 296, "replace the Frontier layer between its markers", BONE, 11.5)
+    s += text(48, 316, "append one dated changelog entry", BONE, 11.5)
+    s += text(48, 336, "mark a touched card newly updated", BONE, 11.5)
+
+    s += box(390, 226, 340, 122, stroke=EMBER, fill=PANEL2)
+    s += text(408, 252, "what it may never do", EMBER, 13, weight="600")
+    s += text(408, 276, "delete a feed entry or remove a layer", BONE, 11.5)
+    s += text(408, 296, "touch any layer outside the markers", BONE, 11.5)
+    s += text(408, 316, "invent a fact — unverified is written as such", BONE, 11.5)
+    s += text(408, 336, "half-finish: any error at all writes nothing", BONE, 11.5)
+
+    s += text(30, 382, "a bad run can only ever be a no-op — which is why the loop is allowed to run unattended", GOLD, 12)
+    return s + tail()
+
+
+def graveyard_test():
+    s = head("the graveyard test — apply it to your own idea")
+    s += text(392, 74, "does the next model release make this stronger, or redundant?", BONE, 14, mid=True, weight="600")
+    s += box(30, 96, 340, 220, stroke=EMBER)
+    s += text(48, 124, "redundant — absorbed by the next release", EMBER, 12.5, weight="600")
+    dead = ["\"prompt engineer\" as a job title", "thin wrappers around someone else's model",
+            "AI-text detectors (never worked, still sold)", "fine-tune a model per company",
+            "the vector-database gold rush", "\"bigger models are all you need\"",
+            "chatbots as the product"]
+    for i, d in enumerate(dead):
+        s += text(48, 152 + i * 22, "·  " + d, DIM, 11.5)
+
+    s += box(390, 96, 340, 220, stroke=TEAL)
+    s += text(408, 124, "stronger — compounds with every release", TEAL, 12.5, weight="600")
+    alive = ["data only you have", "evals only you wrote", "distribution — the people who trust you",
+             "the domain workflow you actually know", "judgement about what to automate",
+             "reliability: auth, rollback, audit trail", "a node you own outright"]
+    for i, a in enumerate(alive):
+        s += text(408, 152 + i * 22, "·  " + a, BONE, 11.5)
+
+    s += box(30, 332, 700, 68, stroke=GOLD, fill=PANEL2)
+    s += text(48, 358, "early is not the same as wrong", GOLD, 13, weight="600")
+    s += text(48, 380, "2023's autonomous-agent toys looped in circles. The idea was right; the reliability wasn't.", BONE, 12)
+    return s + tail()
+
+
+def paradigm_pivots():
+    s = head("how the thinking turned — and where you came in")
+    y = 150
+    s += line(50, y, 720, y, DIM, 1.2, op=".35")
+    stops = [
+        ("hand-written rules", "experts wrote every rule", "pre-2012", DIM),
+        ("learn from examples", "the deep-learning turn", "2012", BLUE),
+        ("one giant model, steered", "pretrain, then align", "2018–23", TEAL),
+        ("make it think longer", "reasoning at answer-time", "2024–25", GOLD),
+        ("wire it into real systems", "the integration era", "2025–26", EMBER),
+    ]
+    for i, (name, sub, when, c) in enumerate(stops):
+        x = 74 + i * 154
+        s += '  <circle cx="%g" cy="%g" r="9" fill="%s" stroke="%s"/>\n' % (x, y, PANEL2, c)
+        s += text(x, y - 30, when, c, 11.5, mid=True, mono=True)
+        s += wrap(x, y + 34, name, 17, BONE, 12, 15, mid=True)
+        s += wrap(x, y + 74, sub, 20, DIM, 11, 14, mid=True)
+    s += text(686, y - 52, "you are here", EMBER, 12, mid=True, weight="600")
+    s += line(686, y - 44, 686, y - 40, EMBER, 1.2, op=".6")
+
+    s += box(30, 250, 700, 72, stroke=GOLD, fill=PANEL2)
+    s += text(48, 274, "the craft pivoted with it", GOLD, 13, weight="600")
+    s += text(48, 296, "clever prompts → curated context   ·   impressive demos → boring evals", DIM, 11.5)
+    s += text(48, 314, "\"which model is smartest\" → \"who can wire one into a real system safely\"", BONE, 11.5)
+
+    s += box(30, 330, 700, 70, stroke=TEAL)
+    s += text(48, 356, "the frontier question changed shape", TEAL, 13, weight="600")
+    s += text(48, 378, "from \"can it?\" to \"can it be trusted, audited and afforded — repeatedly?\"", BONE, 12)
+    return s + tail()
+
+
+def leak_paths():
+    s = head("five ways a secret leaves the building")
+    rows = [
+        ("staff paste it into an unapproved chatbot", "biggest by volume", "an approved tool that is actually good", TEAL),
+        ("a webpage hides instructions your agent obeys", "indirect injection", "egress allowlist · least-privilege tools", GOLD),
+        ("the model repeats a fragment of its training", "extraction", "never train on what you cannot publish", BLUE),
+        ("patient interrogation lifts the system prompt", "prompt & key disclosure", "keys never live in the prompt", EMBER),
+        ("a key is committed to a repo", "history remembers forever", "secret scanning · short-lived scoped tokens", TEAL),
+    ]
+    s += text(30, 76, "the route out", DIM, 11.5, mono=True)
+    s += text(430, 76, "the control that closes it", DIM, 11.5, mono=True)
+    for i, (route, kind, fix, c) in enumerate(rows):
+        y = 92 + i * 54
+        s += box(30, y, 350, 44, stroke=c)
+        s += text(44, y + 20, route, BONE, 11.5)
+        s += text(44, y + 36, kind, c, 10.5, mono=True)
+        s += arrow(382, y + 22, 424, y + 22, c, 1.4)
+        s += box(430, y, 300, 44, stroke=DIM)
+        s += wrap(444, y + 20, fix, 42, DIM, 11.5, 15)
+
+    s += box(30, 366, 700, 40, stroke=GOLD, fill=PANEL2)
+    s += text(48, 392, "Notice the pattern: every leak is words tricking a word-machine, or humans being human.", BONE, 12)
+    return s + tail()
+
+
+def neural_estate():
+    s = head("your repos as one organism — the vocabulary, mapped")
+    nodes = [(96, 108, "bennyz"), (222, 92, "shift-watcher"), (96, 200, "thiri"), (232, 196, "second-brain")]
+    for x, y, name in nodes:
+        s += '  <circle cx="%g" cy="%g" r="26" fill="%s" stroke="%s" stroke-opacity=".8"/>\n' % (x, y, PANEL2, TEAL)
+        s += text(x, y + 46, name, DIM, 10.5, mid=True, mono=True)
+    for x, y, _ in nodes:
+        s += line(x, y, 178, 288, TEAL, 1, "3 4", op=".45")
+    s += box(108, 268, 140, 46, "the Pi", "always on", stroke=GOLD)
+    s += text(178, 340, "brainstem · reflexes", GOLD, 10.5, mid=True, mono=True)
+    s += text(178, 362, "£366 · ~10 watts", DIM, 10.5, mid=True, mono=True)
+
+    pairs = [("neuron", "a repo", TEAL), ("firing", "an event it emits", TEAL),
+             ("axon", "webhook / repository_dispatch", BLUE),
+             ("brainstem", "the Pi — always on, runs the reflexes", GOLD),
+             ("connectome", "the shared vector store, where traces live", BLUE),
+             ("sleep", "the nightly job that consolidates the day", EMBER)]
+    s += text(360, 78, "the metaphor, and the engineering underneath it", DIM, 11.5, mono=True)
+    for i, (a, b, c) in enumerate(pairs):
+        y = 106 + i * 30
+        s += text(360, y, a, c, 12.5, weight="600")
+        s += text(452, y, b, BONE, 11.5)
+    s += text(360, 300, "engineering name: event-driven architecture", DIM, 11.5, mono=True)
+    s += text(360, 320, "with choreography — standard practice.", DIM, 11.5, mono=True)
+
+    s += box(30, 356, 700, 48, stroke=GOLD, fill=PANEL2)
+    s += text(48, 380, "v0.1 is one synapse: shift-watcher fires → second-brain logs it → Telegram tells you.", BONE, 12)
+    s += text(48, 398, "Build one synapse before dreaming the whole brain. That is also how brains did it.", DIM, 12)
+    return s + tail()
+
+
+def node_ladder():
+    W2, H2 = 760, 460
+    s = head("the ladder — the box never changes, its responsibility does", W2, H2)
+    rungs = [
+        ("L0", "first light", "reachable, safe, yours", DIM),
+        ("L1", "the proving week", "one unattended job for 7 days", BLUE),
+        ("L2", "the orchestrator", "it directs rented intelligence", TEAL),
+        ("L3", "Meera's body", "one memory every project reads", TEAL),
+        ("L4", "the local mind", "private inference, free per use", GOLD),
+        ("L5", "the conglomerate", "operations dept of 3 businesses", EMBER),
+    ]
+    base, step_w, rise = 394, 118, 38
+    for i, (lv, name, sub, c) in enumerate(rungs):
+        x = 30 + i * step_w
+        h = 44 + i * rise
+        y = base - h
+        s += box(x, y, 108, h, stroke=c, fill=PANEL2 if i else PANEL)
+        s += text(x + 54, base - 16, lv, c, 15, mid=True, weight="600", mono=True)
+        # the label sits above its own rung, so short rungs never overflow
+        s += wrap(x + 54, y - 56, name, 17, BONE, 11.5, 14, mid=True)
+        s += wrap(x + 54, y - 30, sub, 18, DIM, 10.5, 13, mid=True)
+    s += line(30, base + 4, 730, base + 4, DIM, 1, op=".3")
+    s += text(30, base + 30, "watts at every rung: about ten", GOLD, 12)
+    s += text(392, base + 30, "what changes is trust, not hardware", BONE, 12, mid=True)
+    s += text(730, base + 30, "headcount: zero", EMBER, 12, anchor="end")
+    s += text(30, 76, "each rung is only allowed to start once the one below it has run boringly for a week", DIM, 11.5, mono=True)
+    return s + tail()
+
+
+def pi_grafts():
+    W2, H2 = 760, 460
+    s = head("the pi 5 is not an appliance — it is a socket", W2, H2)
+    s += box(276, 176, 208, 118, stroke=GOLD, fill=PANEL2)
+    s += text(380, 212, "Raspberry Pi 5 · 16GB", GOLD, 13, mid=True, weight="600")
+    s += text(380, 236, "the exposed PCIe lane", BONE, 12, mid=True)
+    s += text(380, 258, "first Pi to offer its spine", DIM, 11, mid=True)
+    s += text(380, 274, "to strangers", DIM, 11, mid=True)
+
+    grafts = [
+        (30, 78, "G1 · NVMe spine", "M.2 HAT+ — storage stops being the bottleneck", TEAL, 1),
+        (500, 78, "G2 · silicon retina", "Hailo 26 TOPS — camera brains, NOT chat models", TEAL, 1),
+        (30, 180, "G3 · new senses", "mic · SDR · LoRa · mmWave · air quality", BLUE, 1),
+        (500, 180, "G4 · borrowed brain", "llama.cpp RPC — the house pools its RAM", BLUE, 1),
+        (30, 300, "G5 · brainstem + cortex", "Wake-on-LAN a mini PC only for hard thoughts", GOLD, 1),
+        (500, 300, "G6 · the forbidden graft", "eGPU over Oculink — warranty-void, patched kernels", EMBER, 0),
+    ]
+    for x, y, name, what, c, solid in grafts:
+        if solid:
+            s += box(x, y, 230, 76, stroke=c)
+        else:
+            s += ('  <rect x="%g" y="%g" width="230" height="76" rx="9" fill="%s" stroke="%s" '
+                  'stroke-opacity=".7" stroke-dasharray="5 4"/>\n' % (x, y, PANEL, c))
+        s += text(x + 14, y + 28, name, c, 12.5, weight="600")
+        s += wrap(x + 14, y + 48, what, 34, DIM, 11, 14)
+        if x < 276:
+            s += arrow(260, y + 38, 274, 216 if y > 200 else 200, c, 1.3, op=".55")
+        else:
+            s += arrow(498, y + 38, 486, 216 if y > 200 else 200, c, 1.3, op=".55")
+
+    s += box(30, 396, 700, 48, stroke=GOLD, fill=PANEL2)
+    s += text(48, 420, "survival organs first: a UPS HAT so a power cut is a journal entry instead of amnesia,", BONE, 12)
+    s += text(48, 438, "and the RTC battery (pennies) so the node keeps true time offline. Boring grafts matter first.", DIM, 12)
+    return s + tail()
+
+
+def coherence_stack():
+    s = head("why editing a header fools nobody — the floors beneath the text")
+    floors = [
+        ("what you edited", "User-Agent: Mozilla/5.0 …", "one line of text, free to change", EMBER),
+        ("HTTP/2 frames", "header order · settings · window sizes", "chosen by your library, not by you", GOLD),
+        ("the TLS hello", "cipher list · extensions · curves · GREASE", "sent in the clear, before any header", TEAL),
+        ("TCP / IP", "TTL · timestamps · the return address", "the network's own accent", BLUE),
+    ]
+    y = 72
+    for i, (name, detail, note, c) in enumerate(floors):
+        h = 74 if i == 2 else 56
+
+        s += box(30, y, 700, h, stroke=c, fill=PANEL2 if i == 2 else PANEL)
+        s += text(48, y + 24, name, c, 12.5, weight="600")
+        s += text(190, y + 24, detail, BONE, 11.5, mono=True)
+        s += text(190, y + 43, note, DIM, 11)
+        if i == 0:
+            s += text(714, y + 24, "the only floor you can edit  ✎", EMBER, 11, anchor="end")
+        if i == 2:
+            s += text(190, y + 63, "the firewall reads this floor first — before a single header exists",
+                      TEAL, 11.5, weight="600")
+        y += h + 8
+
+    s += box(30, 348, 700, 56, stroke=GOLD, fill=PANEL2)
+    s += text(48, 372, "detection wins on coherence, not on a better hash", GOLD, 13, weight="600")
+    s += text(48, 394, "A browser's four floors agree with each other. A script wearing a browser's hat does not.", BONE, 12)
+    return s + tail()
+
+
+def four_pillars():
+    s = head("the four floors beneath the map — two to study, two to build")
+    cols = [
+        ("Pillar 1", "the network floor", "JA3/JA4 — the handshake\ntell, one floor below\nthe headers you edit", "study", TEAL),
+        ("Pillar 2", "the IP layer", "datacentre vs residential\nvs mobile — and why\nreputation collapses", "study", BLUE),
+        ("Pillar 3", "searchable memory", "a vector store on the\nSSD: facts you own,\nretrieved by meaning", "build", GOLD),
+        ("Pillar 4", "the right always-on", "not serverless, not a\nlaptop — a box with no\ntimeout, no cold start", "build", EMBER),
+    ]
+    x = 30
+    for tag, name, body, mode, c in cols:
+        s += box(x, 76, 166, 196, stroke=c)
+        s += text(x + 14, 104, tag, c, 11.5, mono=True)
+        s += wrap(x + 14, 130, name, 18, BONE, 13, 17)
+        for i, ln in enumerate(body.split("\n")):
+            s += text(x + 14, 178 + i * 17, ln, DIM, 11)
+        s += chip(x + 14, 234, mode, c, 74)
+        x += 178
+
+    s += box(30, 292, 700, 52, stroke=GOLD, fill=PANEL2)
+    s += text(48, 316, "Pillars 1 and 2 you study so you can read a defence honestly — and so you never mistake", BONE, 12)
+    s += text(48, 334, "a spoofed header for anonymity. Pillars 3 and 4 you build; both are already in your hands.", DIM, 12)
+    s += box(30, 356, 700, 46, stroke=TEAL)
+    s += text(48, 384, "the 10-second wall is why: serverless dies mid-job, the edge forgets, the Pi just keeps going.", BONE, 12)
+    return s + tail()
+
+
+def secret_ladder():
+    s = head("where a key lives — worst to best")
+    rungs = [
+        ("hardcoded in the code", "in git history forever · travels with every clone and fork", EMBER),
+        ("a .env file on the box", "out of the repo — but readable by anything that gets on the box", GOLD),
+        ("platform env vars / secret manager", "injected at start · never committed · rotatable in one place", TEAL),
+        ("short-lived scoped token, minted per job", "expires before it can be traded · scoped to one task", TEAL),
+    ]
+    for i, (name, why, c) in enumerate(rungs):
+        y = 280 - i * 62
+        s += box(30, y, 470, 52, stroke=c, fill=PANEL2 if i == 3 else PANEL)
+        s += text(46, y + 22, name, c, 12.5, weight="600")
+        s += text(46, y + 40, why, DIM, 11)
+        s += text(512, y + 32, ("worst" if i == 0 else "better" if i == 1 else "good" if i == 2 else "best"),
+                  c, 11.5, mono=True)
+    s += arrow(586, 288, 586, 84, TEAL, 1.4, op=".6")
+    s += text(600, 190, "each rung shortens", BONE, 11.5)
+    s += text(600, 208, "the blast radius of", DIM, 11.5)
+    s += text(600, 226, "one leaked string", DIM, 11.5)
+
+    s += box(30, 342, 700, 60, stroke=GOLD, fill=PANEL2)
+    s += text(48, 366, "the kettle and the plug socket", GOLD, 13, weight="600")
+    s += text(48, 388, "The same kettle works in Sheffield and Kottayam — only the socket changes. Rotate on the day someone leaves.", BONE, 11.5)
+    return s + tail()
+
+
+def idor():
+    s = head("the bug behind most \"hacks\" — signed in, never checked")
+    s += text(30, 76, "your own request", TEAL, 12.5, weight="600")
+    s += box(30, 92, 300, 52, stroke=TEAL)
+    s += text(46, 116, "GET /api/orders/1041", BONE, 12.5, mono=True)
+    s += text(46, 134, "Authorization: your token", DIM, 11, mono=True)
+    s += arrow(330, 118, 372, 118, TEAL)
+    s += box(372, 84, 178, 68, stroke=DIM, fill=PANEL2)
+    s += text(461, 108, "signed in?  yes", TEAL, 12, mid=True, mono=True)
+    s += text(461, 130, "is it yours?  not asked", EMBER, 12, mid=True, mono=True)
+    s += arrow(550, 118, 592, 118, TEAL)
+    s += text(600, 122, "your order", BONE, 12)
+
+    s += text(30, 194, "the same request with one digit changed", EMBER, 12.5, weight="600")
+    s += box(30, 210, 300, 52, stroke=EMBER)
+    s += text(46, 234, "GET /api/orders/1042", BONE, 12.5, mono=True)
+    s += text(46, 252, "Authorization: your token", DIM, 11, mono=True)
+    s += arrow(330, 236, 372, 236, EMBER)
+    s += box(372, 202, 178, 68, stroke=DIM, fill=PANEL2)
+    s += text(461, 226, "signed in?  yes", TEAL, 12, mid=True, mono=True)
+    s += text(461, 248, "is it yours?  still not", EMBER, 12, mid=True, mono=True)
+    s += arrow(550, 236, 592, 236, EMBER)
+    s += text(600, 232, "somebody", EMBER, 12)
+    s += text(600, 250, "else's order", EMBER, 12)
+
+    s += box(30, 292, 340, 108, stroke=BLUE)
+    s += text(48, 318, "two different questions", BLUE, 13, weight="600")
+    s += text(48, 342, "authentication — who are you?", BONE, 11.5)
+    s += text(48, 362, "authorisation — what may you touch?", BONE, 11.5)
+    s += text(48, 384, "most systems ask the first and assume the second", DIM, 11)
+
+    s += box(390, 292, 340, 108, stroke=TEAL, fill=PANEL2)
+    s += text(408, 318, "the fix is usually one clause", TEAL, 13, weight="600")
+    s += text(408, 342, "…WHERE id = 1042 AND owner = caller", BONE, 11.5, mono=True)
+    s += text(408, 366, "scope every read and write by the caller —", DIM, 11.5)
+    s += text(408, 386, "and log the ones that come back empty.", DIM, 11.5)
+    return s + tail()
+
+
+def breach_clock():
+    s = head("the 72-hour clock — it starts when you become aware")
+    s += line(60, 150, 700, 150, DIM, 1.2, op=".35")
+    stops = [
+        ("hour 0", "you become aware", "a log, a report, a stranger's email", EMBER),
+        ("hours 1–24", "assess", "whose data · what risk to them", GOLD),
+        ("by hour 72", "tell the regulator", "even if the picture is incomplete", TEAL),
+        ("without delay", "tell the people", "if the risk to them is high", BLUE),
+    ]
+    for i, (when, what, detail, c) in enumerate(stops):
+        x = 110 + i * 180
+        s += '  <circle cx="%g" cy="%g" r="9" fill="%s" stroke="%s"/>\n' % (x, 150, PANEL2, c)
+        s += text(x, 122, when, c, 11.5, mid=True, mono=True)
+        s += wrap(x, 184, what, 18, BONE, 12.5, 15, mid=True)
+        s += wrap(x, 210, detail, 22, DIM, 11, 14, mid=True)
+
+    s += box(30, 254, 340, 92, stroke=EMBER)
+    s += text(48, 280, "why the clock is brutal", EMBER, 13, weight="600")
+    s += text(48, 304, "It runs from awareness, not from", BONE, 11.5)
+    s += text(48, 322, "understanding. A partial report on time", BONE, 11.5)
+    s += text(48, 340, "beats a complete one on day five.", DIM, 11.5)
+
+    s += box(390, 254, 340, 92, stroke=TEAL, fill=PANEL2)
+    s += text(408, 280, "what makes it survivable", TEAL, 13, weight="600")
+    s += text(408, 304, "an audit trail written before the day", BONE, 11.5)
+    s += text(408, 322, "you need it: what happened, in what", BONE, 11.5)
+    s += text(408, 340, "order, and who or what did it.", DIM, 11.5)
+
+    s += text(30, 380, "If you can answer that in minutes you have a problem. If you cannot, you have a crisis —", BONE, 12)
+    s += text(30, 400, "because now you must assume the worst about everything you cannot account for.", DIM, 12)
+    return s + tail()
+
+
 # ---------- feed banners --------------------------------------------------
 def banner(kind, title, sub, col, motif):
     w, h = 760, 200
@@ -663,6 +1091,20 @@ FIGURES = {
     "test-shape.svg": test_shape,
     "confusion.svg": confusion,
     "cloud-shapes.svg": cloud_shapes,
+    "adoption-gap.svg": adoption_gap,
+    "commit-vs-push.svg": commit_vs_push,
+    "caretaker-loop.svg": caretaker_loop,
+    "graveyard-test.svg": graveyard_test,
+    "paradigm-pivots.svg": paradigm_pivots,
+    "leak-paths.svg": leak_paths,
+    "neural-estate.svg": neural_estate,
+    "node-ladder.svg": node_ladder,
+    "pi-grafts.svg": pi_grafts,
+    "coherence-stack.svg": coherence_stack,
+    "four-pillars.svg": four_pillars,
+    "secret-ladder.svg": secret_ladder,
+    "idor.svg": idor,
+    "breach-clock.svg": breach_clock,
     "update-ai.svg": lambda: banner("artificial intelligence", "AI", "models, agents, and the tools around them", TEAL, 26),
     "update-it.svg": lambda: banner("information technology", "IT", "the plumbing everything else stands on", BLUE, 22),
     "update-hardware.svg": lambda: banner("hardware & silicon", "Hardware", "chips, boards, memory and the machines that print them", GOLD, 24),

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">EVERYONE ADOPTED — ALMOST NOBODY SHIPPED</text>
+  <text x="30" y="78" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">organisations that say they use AI agents</text>
+  <rect x="30" y="88" width="553" height="48" rx="9" fill="#1a2330" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="48" y="118" fill="#57b39c" fill-opacity="1" font-size="16" text-anchor="start" font-weight="600">79% — adopted</text>
+  <line x1="583" y1="88" x2="583" y2="136" stroke="#aab5c1" stroke-opacity=".35" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="30" y="172" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">organisations running agents in production, doing real work</text>
+  <rect x="30" y="182" width="77" height="48" rx="9" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="40" y="212" fill="#dfa32b" fill-opacity="1" font-size="15" text-anchor="start" font-weight="600">11%</text>
+  <line x1="107" y1="206" x2="570" y2="206" stroke="#cf6f57" stroke-opacity=".5" stroke-width="1" stroke-dasharray="5 5"/>
+  <text x="580" y="200" fill="#cf6f57" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">the gap</text>
+  <text x="580" y="218" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">is plumbing</text>
+  <text x="30" y="268" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">what stops the other 68% — cited blockers, largest first</text>
+  <rect x="30" y="282" width="350" height="24" rx="12" fill="none" stroke="#cf6f57" stroke-opacity=".6"/>
+  <text x="205" y="298" fill="#cf6f57" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">integration with existing systems  ~46%</text>
+  <rect x="396" y="282" width="350" height="24" rx="12" fill="none" stroke="#dfa32b" stroke-opacity=".6"/>
+  <text x="571" y="298" fill="#dfa32b" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">permissions, auth &amp; data access</text>
+  <rect x="30" y="316" width="350" height="24" rx="12" fill="none" stroke="#9fb4d8" stroke-opacity=".6"/>
+  <text x="205" y="332" fill="#9fb4d8" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">no evals, so nobody can prove it works</text>
+  <rect x="396" y="316" width="350" height="24" rx="12" fill="none" stroke="#57b39c" stroke-opacity=".6"/>
+  <text x="571" y="332" fill="#57b39c" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">model capability</text>
+  <rect x="30" y="352" width="700" height="52" rx="9" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="48" y="376" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">None of the blockers are intelligence. They are auth, permissions, evals, rollback —</text>
+  <text x="48" y="394" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">which is why a solo operator with working plumbing is ahead of most enterprises.</text>
+</svg>

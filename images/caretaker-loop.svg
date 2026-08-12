@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">THE CARETAKER — ONE SWEEP, EVERY TWO DAYS</text>
+  <rect x="30" y="92" width="122" height="62" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="91" y="120" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">wake</text>
+  <text x="91" y="138" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">0 6 */2 * *</text>
+  <line x1="152" y1="123" x2="170" y2="123" stroke="#dfa32b" stroke-opacity=".8" stroke-width="1.6"/>
+  <polygon points="170,123 163.608,125.854 163.608,120.146" fill="#dfa32b" fill-opacity=".8"/>
+  <rect x="170" y="92" width="122" height="62" rx="9" fill="#151c26" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="231" y="120" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">search</text>
+  <text x="231" y="138" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">the watchlist</text>
+  <line x1="292" y1="123" x2="310" y2="123" stroke="#9fb4d8" stroke-opacity=".8" stroke-width="1.6"/>
+  <polygon points="310,123 303.608,125.854 303.608,120.146" fill="#9fb4d8" fill-opacity=".8"/>
+  <rect x="310" y="92" width="122" height="62" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="371" y="120" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">write</text>
+  <text x="371" y="138" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">feed · layer 04</text>
+  <line x1="432" y1="123" x2="450" y2="123" stroke="#57b39c" stroke-opacity=".8" stroke-width="1.6"/>
+  <polygon points="450,123 443.608,125.854 443.608,120.146" fill="#57b39c" fill-opacity=".8"/>
+  <rect x="450" y="92" width="122" height="62" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="511" y="120" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">commit</text>
+  <text x="511" y="138" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">one dated entry</text>
+  <line x1="572" y1="123" x2="590" y2="123" stroke="#57b39c" stroke-opacity=".8" stroke-width="1.6"/>
+  <polygon points="590,123 583.608,125.854 583.608,120.146" fill="#57b39c" fill-opacity=".8"/>
+  <rect x="590" y="92" width="122" height="62" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="651" y="120" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">redeploy</text>
+  <text x="651" y="138" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">same link, fresh</text>
+  <line x1="691" y1="154" x2="691" y2="186" stroke="#dfa32b" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <line x1="691" y1="186" x2="91" y2="186" stroke="#dfa32b" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <line x1="91" y1="186" x2="91" y2="156" stroke="#dfa32b" stroke-opacity=".8" stroke-width="1.2"/>
+  <polygon points="91,156 93.8543,162.392 88.1457,162.392" fill="#dfa32b" fill-opacity=".8"/>
+  <text x="392" y="204" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">and the page under your home-screen link is newer than when you looked</text>
+  <rect x="30" y="226" width="340" height="122" rx="9" fill="#1a2330" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="48" y="252" fill="#57b39c" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">what one sweep may change</text>
+  <text x="48" y="276" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">append to the live feed (never edit, never delete)</text>
+  <text x="48" y="296" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">replace the Frontier layer between its markers</text>
+  <text x="48" y="316" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">append one dated changelog entry</text>
+  <text x="48" y="336" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">mark a touched card newly updated</text>
+  <rect x="390" y="226" width="340" height="122" rx="9" fill="#1a2330" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="408" y="252" fill="#cf6f57" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">what it may never do</text>
+  <text x="408" y="276" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">delete a feed entry or remove a layer</text>
+  <text x="408" y="296" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">touch any layer outside the markers</text>
+  <text x="408" y="316" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">invent a fact — unverified is written as such</text>
+  <text x="408" y="336" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">half-finish: any error at all writes nothing</text>
+  <text x="30" y="382" fill="#dfa32b" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">a bad run can only ever be a no-op — which is why the loop is allowed to run unattended</text>
+</svg>

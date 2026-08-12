@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">THE BUG BEHIND MOST "HACKS" — SIGNED IN, NEVER CHECKED</text>
+  <text x="30" y="76" fill="#57b39c" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="600">your own request</text>
+  <rect x="30" y="92" width="300" height="52" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="46" y="116" fill="#e7e2d4" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">GET /api/orders/1041</text>
+  <text x="46" y="134" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">Authorization: your token</text>
+  <line x1="330" y1="118" x2="372" y2="118" stroke="#57b39c" stroke-opacity=".8" stroke-width="1.6"/>
+  <polygon points="372,118 365.608,120.854 365.608,115.146" fill="#57b39c" fill-opacity=".8"/>
+  <rect x="372" y="84" width="178" height="68" rx="9" fill="#1a2330" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="461" y="108" fill="#57b39c" fill-opacity="1" font-size="12" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">signed in?  yes</text>
+  <text x="461" y="130" fill="#cf6f57" fill-opacity="1" font-size="12" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">is it yours?  not asked</text>
+  <line x1="550" y1="118" x2="592" y2="118" stroke="#57b39c" stroke-opacity=".8" stroke-width="1.6"/>
+  <polygon points="592,118 585.608,120.854 585.608,115.146" fill="#57b39c" fill-opacity=".8"/>
+  <text x="600" y="122" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">your order</text>
+  <text x="30" y="194" fill="#cf6f57" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="600">the same request with one digit changed</text>
+  <rect x="30" y="210" width="300" height="52" rx="9" fill="#151c26" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="46" y="234" fill="#e7e2d4" fill-opacity="1" font-size="12.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">GET /api/orders/1042</text>
+  <text x="46" y="252" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">Authorization: your token</text>
+  <line x1="330" y1="236" x2="372" y2="236" stroke="#cf6f57" stroke-opacity=".8" stroke-width="1.6"/>
+  <polygon points="372,236 365.608,238.854 365.608,233.146" fill="#cf6f57" fill-opacity=".8"/>
+  <rect x="372" y="202" width="178" height="68" rx="9" fill="#1a2330" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="461" y="226" fill="#57b39c" fill-opacity="1" font-size="12" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">signed in?  yes</text>
+  <text x="461" y="248" fill="#cf6f57" fill-opacity="1" font-size="12" text-anchor="middle" font-weight="400" font-family="ui-monospace,monospace">is it yours?  still not</text>
+  <line x1="550" y1="236" x2="592" y2="236" stroke="#cf6f57" stroke-opacity=".8" stroke-width="1.6"/>
+  <polygon points="592,236 585.608,238.854 585.608,233.146" fill="#cf6f57" fill-opacity=".8"/>
+  <text x="600" y="232" fill="#cf6f57" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">somebody</text>
+  <text x="600" y="250" fill="#cf6f57" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">else's order</text>
+  <rect x="30" y="292" width="340" height="108" rx="9" fill="#151c26" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="48" y="318" fill="#9fb4d8" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">two different questions</text>
+  <text x="48" y="342" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">authentication — who are you?</text>
+  <text x="48" y="362" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">authorisation — what may you touch?</text>
+  <text x="48" y="384" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="start" font-weight="400">most systems ask the first and assume the second</text>
+  <rect x="390" y="292" width="340" height="108" rx="9" fill="#1a2330" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="408" y="318" fill="#57b39c" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">the fix is usually one clause</text>
+  <text x="408" y="342" fill="#e7e2d4" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">…WHERE id = 1042 AND owner = caller</text>
+  <text x="408" y="366" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">scope every read and write by the caller —</text>
+  <text x="408" y="386" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="start" font-weight="400">and log the ones that come back empty.</text>
+</svg>
