@@ -728,6 +728,65 @@
     }
   }
 
+  /* ==========================================================
+     6c · THE MINIMAP — every layer as a dot on a fixed rail
+     ========================================================== */
+  function minimap() {
+    var secs = $$('section[id]');
+    if (!secs.length) return;
+    var map = document.createElement('div');
+    map.id = 'map';
+    map.setAttribute('aria-label', 'Layer minimap');
+    map.innerHTML = secs.map(function (s) {
+      var n = $('.lnum', s), h = $('h2', s);
+      var t = ((n ? n.textContent.trim().replace(/\s*·.*$/, '') : '') + ' ' +
+               (h ? h.textContent.trim() : s.id)).trim();
+      return '<a href="#' + esc(s.id) + '" data-id="' + esc(s.id) + '" data-t="' + esc(t) + '"></a>';
+    }).join('');
+    document.body.appendChild(map);
+
+    map.addEventListener('click', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      e.preventDefault();
+      var el = document.getElementById(a.getAttribute('data-id'));
+      if (el) el.scrollIntoView({ behavior: STILL ? 'auto' : 'smooth', block: 'start' });
+    });
+
+    var dots = $$('a', map), tick = false;
+    function paint() {
+      tick = false;
+      var cur = null;
+      for (var i = 0; i < secs.length; i++) {
+        if (secs[i].getBoundingClientRect().top <= 120) cur = secs[i].id;
+      }
+      dots.forEach(function (d) {
+        var id = d.getAttribute('data-id');
+        d.classList.toggle('on', id === cur);
+        d.classList.toggle('seen', store.get('codex.seen.' + id) === '1');
+      });
+    }
+    window.addEventListener('scroll', function () {
+      if (!tick) { tick = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    setInterval(paint, 2500);
+    paint();
+  }
+
+  /* When an open card jumps to full width the grid reflows under the
+     pointer; keep the card the reader just opened inside the viewport. */
+  function settleCards() {
+    document.addEventListener('toggle', function (e) {
+      var d = e.target;
+      if (!d || !d.matches || !d.matches('details.card') || !d.open) return;
+      requestAnimationFrame(function () {
+        var r = d.getBoundingClientRect();
+        if (r.top < 0 || r.top > window.innerHeight * .8) {
+          d.scrollIntoView({ behavior: STILL ? 'auto' : 'smooth', block: 'nearest' });
+        }
+      });
+    }, true);
+  }
+
   /* Hand-written entries carry both voices. Everything else is
      assembled at runtime from the glossary and the layers, so the
      door never goes stale when the caretaker rewrites a card. */
@@ -1270,7 +1329,8 @@
      9 · boot
      ========================================================== */
   function boot() {
-    field(); rail(); trail(); reveal(); wireLens(); marks(); pulse(); atlas(); wireDoor(); seek();
+    field(); rail(); trail(); reveal(); wireLens(); marks(); pulse();
+    atlas(); minimap(); settleCards(); wireDoor(); seek();
 
     /* the door count, printed where the header promises it */
     var dc = $('#doorcount');
