@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">3-2-1-1-0 — THE ONLY BACKUP RULE THAT SURVIVES CONTACT</text>
+  <circle cx="60" cy="88" r="21" fill="none" stroke="#dfa32b" stroke-opacity=".75"/>
+  <text x="60" y="95" fill="#dfa32b" fill-opacity="1" font-size="18" text-anchor="middle" font-weight="600">3</text>
+  <text x="100" y="95" fill="#e7e2d4" fill-opacity="1" font-size="14" text-anchor="start" font-weight="400">copies of anything you would grieve</text>
+  <circle cx="60" cy="146" r="21" fill="none" stroke="#57b39c" stroke-opacity=".75"/>
+  <text x="60" y="153" fill="#57b39c" fill-opacity="1" font-size="18" text-anchor="middle" font-weight="600">2</text>
+  <text x="100" y="153" fill="#e7e2d4" fill-opacity="1" font-size="14" text-anchor="start" font-weight="400">different kinds of media</text>
+  <circle cx="60" cy="204" r="21" fill="none" stroke="#9fb4d8" stroke-opacity=".75"/>
+  <text x="60" y="211" fill="#9fb4d8" fill-opacity="1" font-size="18" text-anchor="middle" font-weight="600">1</text>
+  <text x="100" y="211" fill="#e7e2d4" fill-opacity="1" font-size="14" text-anchor="start" font-weight="400">copy off-site</text>
+  <circle cx="60" cy="262" r="21" fill="none" stroke="#cf6f57" stroke-opacity=".75"/>
+  <text x="60" y="269" fill="#cf6f57" fill-opacity="1" font-size="18" text-anchor="middle" font-weight="600">1</text>
+  <text x="100" y="269" fill="#e7e2d4" fill-opacity="1" font-size="14" text-anchor="start" font-weight="400">copy offline or immutable</text>
+  <circle cx="60" cy="320" r="21" fill="none" stroke="#e7e2d4" stroke-opacity=".75"/>
+  <text x="60" y="327" fill="#e7e2d4" fill-opacity="1" font-size="18" text-anchor="middle" font-weight="600">0</text>
+  <text x="100" y="327" fill="#e7e2d4" fill-opacity="1" font-size="14" text-anchor="start" font-weight="400">errors on a restore you actually tested</text>
+  <line x1="60" y1="108" x2="60" y2="314" stroke="#aab5c1" stroke-opacity=".3" stroke-width="1" stroke-dasharray="3 6"/>
+  <rect x="430" y="76" width="300" height="176" rx="9" fill="#1a2330" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="450" y="104" fill="#cf6f57" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">why the last two exist</text>
+  <text x="450" y="130" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">modern ransomware finds the</text>
+  <text x="450" y="148" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">backups first and encrypts them</text>
+  <text x="450" y="166" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">too — a synced copy is not a</text>
+  <text x="450" y="184" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">backup, it is a second victim.</text>
+  <text x="450" y="214" fill="#cf6f57" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">an untested backup is a rumour.</text>
+  <text x="450" y="232" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">restore one thing, monthly.</text>
+  <rect x="30" y="336" width="700" height="60" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="48" y="362" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">on the node: nightly pg_dump → SSD, weekly encrypted copy off-site,</text>
+  <text x="48" y="381" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">monthly restore-into-a-container drill. Ten minutes buys the whole rule.</text>
+</svg>

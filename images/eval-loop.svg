@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">THE LOOP THAT TURNS OPINION INTO EVIDENCE</text>
+  <rect x="284" y="64" width="216" height="64" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="392" y="93" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">write the case</text>
+  <text x="392" y="111" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">input + what good looks like</text>
+  <rect x="520" y="184" width="216" height="64" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="628" y="213" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">run it</text>
+  <text x="628" y="231" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">same input, every version</text>
+  <rect x="284" y="304" width="216" height="64" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="392" y="333" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">score it</text>
+  <text x="392" y="351" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">rule, rubric, or human</text>
+  <rect x="48" y="184" width="216" height="64" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="156" y="213" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">change one thing</text>
+  <text x="156" y="231" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">prompt, model, retrieval</text>
+  <line x1="500" y1="118" x2="570" y2="186" stroke="#57b39c" stroke-opacity=".6" stroke-width="1.6"/>
+  <polygon points="570,186 563.427,183.594 567.404,179.499" fill="#57b39c" fill-opacity=".6"/>
+  <line x1="614" y1="262" x2="520" y2="322" stroke="#57b39c" stroke-opacity=".6" stroke-width="1.6"/>
+  <polygon points="520,322 523.852,316.155 526.923,320.967" fill="#57b39c" fill-opacity=".6"/>
+  <line x1="284" y1="336" x2="214" y2="268" stroke="#dfa32b" stroke-opacity=".6" stroke-width="1.6"/>
+  <polygon points="214,268 220.573,270.406 216.596,274.501" fill="#dfa32b" fill-opacity=".6"/>
+  <line x1="170" y1="174" x2="268" y2="116" stroke="#dfa32b" stroke-opacity=".6" stroke-width="1.6"/>
+  <polygon points="268,116 263.953,121.712 261.046,116.799" fill="#dfa32b" fill-opacity=".6"/>
+  <text x="392" y="210" fill="#e7e2d4" fill-opacity="1" font-size="15" text-anchor="middle" font-weight="600">no vibes</text>
+  <text x="392" y="232" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="middle" font-weight="400">survive this loop</text>
+  <rect x="30" y="376" width="700" height="30" rx="8" fill="#1a2330" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="48" y="396" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">twenty cases beat a thousand opinions — and they run in CI while you sleep.</text>
+</svg>
