@@ -36,20 +36,32 @@
     var c = document.createElement('canvas');
     c.id = 'field';
     document.body.insertBefore(c, document.body.firstChild);
-    var x = c.getContext('2d'), w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var nodes = [], signals = [], run = true;
+    var x = c.getContext('2d'), w = 0, h = 0;
+    var nodes = [], far = [], signals = [], run = true;
+    var px2 = -9999, py2 = -9999;      /* pointer, lerped */
+    var tx = -9999, ty = -9999;        /* pointer, raw    */
 
     function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 900 ? 1.5 : 2);
       w = c.clientWidth; h = c.clientHeight;
       c.width = w * dpr; c.height = h * dpr;
       x.setTransform(dpr, 0, 0, dpr, 0, 0);
       var want = Math.max(26, Math.min(72, Math.round((w * h) / 26000)));
-      nodes = [];
-      for (var i = 0; i < want; i++) {
+      nodes = []; far = [];
+      var i;
+      for (i = 0; i < want; i++) {
         nodes.push({
           x: Math.random() * w, y: Math.random() * h,
           vx: (Math.random() - .5) * .16, vy: (Math.random() - .5) * .16,
           r: Math.random() * 1.5 + .7, p: Math.random() * Math.PI * 2
+        });
+      }
+      /* the far layer — smaller, dimmer, slower, and it parallaxes */
+      for (i = 0; i < Math.min(30, want >> 1); i++) {
+        far.push({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - .5) * .06, vy: (Math.random() - .5) * .06,
+          r: Math.random() * .9 + .4, p: Math.random() * Math.PI * 2
         });
       }
     }
@@ -61,14 +73,38 @@
       signals.push({ a: a, b: b, t: 0, hue: Math.random() < .5 ? '223,163,43' : '87,179,156' });
     }
 
-    var LINK = 132;
+    var LINK = 132, PULL = 140;
     function frame() {
       if (!run) return;
       x.clearRect(0, 0, w, h);
       var i, j, n, m, dx, dy, d;
+
+      /* pointer eases in so the field feels liquid, not twitchy */
+      if (tx > -9000) { px2 += (tx - px2) * .08; py2 += (ty - py2) * .08; }
+
+      /* far layer first, shifted a touch by scroll */
+      var off = (window.pageYOffset || 0) * -0.03;
+      for (i = 0; i < far.length; i++) {
+        n = far[i];
+        n.x += n.vx; n.y += n.vy; n.p += .008;
+        if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
+        if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
+        var fa = .08 + Math.sin(n.p) * .05;
+        x.fillStyle = 'rgba(159,180,216,' + fa.toFixed(3) + ')';
+        x.beginPath(); x.arc(n.x, ((n.y + off) % (h + 40) + h + 40) % (h + 40) - 20, n.r, 0, 6.284); x.fill();
+      }
+
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         n.x += n.vx; n.y += n.vy; n.p += .012;
+        /* nodes near the pointer lean gently toward it */
+        if (px2 > -9000) {
+          dx = px2 - n.x; dy = py2 - n.y; d = dx * dx + dy * dy;
+          if (d < PULL * PULL && d > 1) {
+            var f = .012 * (1 - Math.sqrt(d) / PULL);
+            n.x += dx * f; n.y += dy * f;
+          }
+        }
         if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
         if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
       }
@@ -93,18 +129,22 @@
         var s = signals[i]; s.t += .012;
         if (s.t >= 1 || !nodes[s.a] || !nodes[s.b]) { signals.splice(i, 1); continue; }
         var A = nodes[s.a], B = nodes[s.b];
-        var px = A.x + (B.x - A.x) * s.t, py = A.y + (B.y - A.y) * s.t;
+        var sx = A.x + (B.x - A.x) * s.t, sy = A.y + (B.y - A.y) * s.t;
         var fade = Math.sin(s.t * Math.PI);
         x.strokeStyle = 'rgba(' + s.hue + ',' + (.10 * fade).toFixed(3) + ')';
         x.beginPath(); x.moveTo(A.x, A.y); x.lineTo(B.x, B.y); x.stroke();
         x.fillStyle = 'rgba(' + s.hue + ',' + (.75 * fade).toFixed(3) + ')';
-        x.beginPath(); x.arc(px, py, 2.1, 0, 6.284); x.fill();
+        x.beginPath(); x.arc(sx, sy, 2.1, 0, 6.284); x.fill();
       }
       requestAnimationFrame(frame);
     }
 
     size();
     window.addEventListener('resize', size, { passive: true });
+    window.addEventListener('pointermove', function (e) {
+      tx = e.clientX; ty = e.clientY;
+      if (px2 < -9000) { px2 = tx; py2 = ty; }
+    }, { passive: true });
     document.addEventListener('visibilitychange', function () {
       run = !document.hidden;
       if (run) requestAnimationFrame(frame);
@@ -822,6 +862,31 @@
     }, { passive: true });
     setInterval(paint, 2500);
     paint();
+  }
+
+  /* Inline code copies itself on a click — small, but it makes the
+     tech voices feel like a workbench instead of a wall of jargon. */
+  function copycode() {
+    if (!navigator.clipboard) return;
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('code');
+      if (!el || el.closest('pre,a,button,#door,#seek,#lens')) return;
+      var txt = el.textContent.trim();
+      if (!txt) return;
+      navigator.clipboard.writeText(txt).then(function () {
+        var tip = document.createElement('div');
+        tip.className = 'dtip';
+        tip.textContent = 'copied';
+        var r = el.getBoundingClientRect();
+        tip.style.position = 'absolute';
+        tip.style.left = (r.left + r.width / 2) + 'px';
+        tip.style.top = (r.top + window.pageYOffset - 4) + 'px';
+        document.body.appendChild(tip);
+        requestAnimationFrame(function () { tip.classList.add('on'); });
+        setTimeout(function () { tip.classList.remove('on'); }, 1000);
+        setTimeout(function () { tip.remove(); }, 1400);
+      }).catch(function () {});
+    });
   }
 
   /* When an open card jumps to full width the grid reflows under the
@@ -1544,7 +1609,7 @@
      ========================================================== */
   function boot() {
     field(); rail(); trail(); reveal(); wireLens(); marks(); pulse();
-    atlas(); minimap(); settleCards(); wireDoor(); seek();
+    atlas(); minimap(); settleCards(); copycode(); wireDoor(); seek();
 
     /* the door count, printed where the header promises it */
     var dc = $('#doorcount');

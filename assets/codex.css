@@ -762,6 +762,35 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
 }
 .pathnote button:hover{border-color:var(--ember); color:var(--ember)}
 
+/* micro-interactions */
+details.card summary b{
+  display:inline-block;
+  background:linear-gradient(90deg,var(--turmeric),var(--teal)) no-repeat 0 100%/0% 1px;
+  transition:background-size .5s var(--ease);
+}
+details.card summary:hover b,details.card summary:focus-visible b{background-size:100% 1px}
+:not(pre) > code{cursor:copy;transition:background .3s var(--ease),color .3s var(--ease)}
+:not(pre) > code:hover{background:rgba(87,179,156,.24)}
+
+/* scroll-driven grace notes, only where the browser can do them
+   natively and only when motion is welcome */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    section:not(#live):not(#deep):not(#gloss)::after{
+      animation:ghostdrift linear both;
+      animation-timeline:view();
+      animation-range:entry 0% exit 100%;
+    }
+    .hero{
+      animation:herofade linear both;
+      animation-timeline:view();
+      animation-range:exit 0% exit 90%;
+    }
+  }
+}
+@keyframes ghostdrift{from{transform:translateY(70px)}to{transform:translateY(-90px)}}
+@keyframes herofade{to{opacity:.1;transform:translateY(-40px)}}
+
 /* odds and ends */
 .newbadge{
   display:inline-block; font-family:'Spline Sans Mono',monospace; font-size:.56rem;
