@@ -140,10 +140,10 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
 <body><div class="wrap">
 
 <header>
-  <div class="kicker">Field manual · two voices · twenty-three layers · live</div>
+  <div class="kicker">Field manual · two voices · twenty-six layers · live</div>
   <h1>The Operator's <em>Codex</em></h1>
   <p class="sub">Everything Joe runs — the machine, the models, the agents, the pipes — explained from zero to the frontier. Every idea speaks twice: once plainly, once in the language of the trade.</p>
-  <div class="stamp"><span>v2.1 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>live feed: <b>every 2 days</b></span><span><b>23 layers</b> · 36 field diagrams · 6 photographs</span><span><b id="doorcount">…</b> doors behind the words</span></div>
+  <div class="stamp"><span>v2.2 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>live feed: <b>every 2 days</b></span><span><b>26 layers</b> · 40 field diagrams · 6 photographs</span><span><b id="doorcount">…</b> doors behind the words</span></div>
   <div class="legend">
     <p><span class="dotg"></span><b>Plain voice</b> — how you'd say it across the kitchen table, or to a five-year-old.</p>
     <p><span class="dott"></span><b>Technical voice</b> — the exact jargon the industry uses, so you can read docs, job specs, and error logs without flinching.</p>
@@ -175,6 +175,9 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
     <a href="#l21"><span class="n">LAYER 21</span><span class="t">The Craft</span><span class="d">context · schemas · evals</span></a>
     <a href="#l22"><span class="n">LAYER 22</span><span class="t">The Senses</span><span class="d">vision · speech · robots</span></a>
     <a href="#l23"><span class="n">LAYER 23</span><span class="t">The Economics &amp; the Physics</span><span class="d">cost · energy · silicon</span></a>
+    <a href="#l24"><span class="n">LAYER 24</span><span class="t">The Surface</span><span class="d">HTML · CSS · JS · access</span></a>
+    <a href="#l25"><span class="n">LAYER 25</span><span class="t">The Proof</span><span class="d">tests · types · statistics</span></a>
+    <a href="#l26"><span class="n">LAYER 26</span><span class="t">The Rented Estate</span><span class="d">IaaS · IAM · the bill</span></a>
     <a href="#deep"><span class="n">APPENDIX</span><span class="t">The Deep Field</span><span class="d">mechanism-level notes</span></a>
   </nav>
 
@@ -203,10 +206,13 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
       </div>
       <div class="stage">
         <span class="sn">STAGE 3</span><b>The workshop</b>
-        <p>The builder's tools and vocabulary, your own screenshots decoded, and the three places code can run.</p>
+        <p>Build it, see it, prove it, ship it, host it — the builder's vocabulary, the surface a page is made of, how you know it is right, and where it runs.</p>
         <a class="plink" href="#l5" data-layer="l5">05 · The Builder's World</a>
         <a class="plink" href="#l6" data-layer="l6">06 · The Decoder</a>
+        <a class="plink" href="#l24" data-layer="l24">24 · The Surface</a>
+        <a class="plink" href="#l25" data-layer="l25">25 · The Proof</a>
         <a class="plink" href="#l15" data-layer="l15">15 · The Deployment</a>
+        <a class="plink" href="#l26" data-layer="l26">26 · The Rented Estate</a>
       </div>
       <div class="stage">
         <span class="sn">STAGE 4</span><b>The shield</b>
@@ -717,19 +723,22 @@ You maintain operators-codex.html. Today is {date}.
 </pre>
   </details>
 
-  <details class="card"><summary><b>The update protocol</b><span>what one sweep is allowed to change</span></summary>
+  <details class="card" id="l8-update-protocol" data-card="l8-update-protocol">
+    <summary><b>The update protocol</b><span>what one sweep is allowed to change</span></summary>
     <p class="plain">Every two days the caretaker wakes and does exactly three things. It writes new entries at the top of the live feed. It refreshes the Frontier layer. And where a finding genuinely changes something already taught below, it edits that card and marks it <b>newly updated</b> — a mark that will not go away until you have opened that card three separate times. Nothing in the feed is ever edited or deleted afterwards; the record is the point.</p>
     <p class="tech">Cadence: <code>0 6 */2 * *</code> (06:00 UTC, every second day) plus a manual dispatch button. The job may append to <code>updates.json</code>, replace the region between the Layer-04 markers, append to the changelog, and set <code>data-updated</code>/<code>data-updnote</code> on cards addressed by their stable <code>data-card</code> id. It may not delete feed entries, remove layers, or touch anything else — and any error at all means it writes nothing, so a bad run can only ever be a no-op. Read counts live in the browser under <code>codex.read.&lt;card&gt;.&lt;date&gt;</code>, so a fresh update resets the counter to zero.</p>
   </details>
 
-  <details class="card"><summary><b>The coverage audit</b><span>what was missing, and how the gaps get found</span></summary>
-    <p class="plain">A guide assembled around one person's questions inherits that person's blind spots. So the whole thing was read against the question "what would a competent operator be expected to already know?" — and eight foundations turned out to be missing entirely: how networks actually work, how Linux actually works, how data is stored and not lost, the ordinary security floor beneath the advanced material, the law, the craft of getting reliable work from a model, the senses beyond text, and what any of it costs. Those are Layers 16 to 23.</p>
-    <p class="tech">Gaps were found three ways: by dependency (Layer 07's ladder assumes systemd, SSH and permissions that were never taught), by breadth against a standard curriculum (networking, OS, databases, security fundamentals, governance), and by asymmetry (Layers 12–15 taught advanced defence while the CIA triad, patching order and backups were absent). Known remaining thin spots, stated honestly so they can be filled next: hands-on web fundamentals, testing and code quality practice, cloud provider specifics beyond edge/serverless, and formal statistics for eval design.</p>
+  <details class="card" id="l8-coverage-audit" data-card="l8-coverage-audit">
+    <summary><b>The coverage audit</b><span>what was missing, and how the gaps get found</span></summary>
+    <p class="plain">A guide assembled around one person's questions inherits that person's blind spots. So the whole thing was read against the question "what would a competent operator be expected to already know?" — and eight foundations turned out to be missing entirely: how networks actually work, how Linux actually works, how data is stored and not lost, the ordinary security floor beneath the advanced material, the law, the craft of getting reliable work from a model, the senses beyond text, and what any of it costs. Those are Layers 16 to 23. A second pass named four more thin spots and then filled them too: the web surface itself, how you prove code is right, the statistics that stop a measurement flattering you, and the shape of the cloud — Layers 24 to 26.</p>
+    <p class="tech">Gaps were found three ways: by dependency (Layer 07's ladder assumes systemd, SSH and permissions that were never taught), by breadth against a standard curriculum (networking, OS, databases, security fundamentals, governance), and by asymmetry (Layers 12–15 taught advanced defence while the CIA triad, patching order and backups were absent). Round two closed the four spots this card previously listed as open. What remains genuinely thin, stated honestly rather than quietly dropped: hands-on practice is still described rather than drilled — there are no exercises, no worked repository, and no spaced-repetition of the terminology. That is a different kind of artifact from a manual, and it is the obvious next thing to build.</p>
   </details>
 
   <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.7, dated 12 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
   <h3>Changelog</h3>
   <div class="gloss"><!-- CHANGELOG:START -->
+    <p><b>2026-08-12</b> — v2.2 · The audit closes itself. The four thin spots the coverage-audit card had listed as open are now filled: <b>Layer 24 · The Surface</b> (HTML, CSS, the render path, events, frameworks, accessibility), <b>Layer 25 · The Proof</b> (what to test, CI gates, types, review, precision/recall and the base-rate trap, sample size, Goodhart), and <b>Layer 26 · The Rented Estate</b> (IaaS/PaaS/SaaS, regions and residency, IAM as the perimeter, managed services, the three bills nobody predicts, owning vs renting). Four new field diagrams. The audit card now names what is still genuinely missing — drills and exercises, which is a different artifact from a manual. · action for Joe: Layer 25's base-rate card, then Layer 26's bill card. Both are twenty minutes and both save money.</p>
     <p><b>2026-08-12</b> — v2.1 · <b>The suggested path</b> added to the header: the layer numbers are the order these were written, the path is the order to read them — six stages, 26 stops, ticking themselves as you go (on-device, resettable). Figures now carry their intrinsic size, which stops the page reflowing under a lazy image and fixes deep links landing in the wrong layer. · action for Joe: open the path and start at Stage 1.</p>
     <p><b>2026-08-12</b> — v2.0 · The Codex becomes a place rather than a page. <b>The Latest</b> lands on the front: a live feed across IT, AI, hardware and cyber security, swept every 2 days, both voices, with illustrations, where-it-lands and tools — append-only, newest first, nothing ever deleted (<code>updates.json</code>). <b>Eight new layers</b> from a coverage audit: the Wire Beneath (16), the Operating System (17), the Store (18), the Ground Floor of security (19), the Law &amp; the Leash (20), the Craft (21), the Senses (22), the Economics &amp; the Physics (23) — 68 new cards and 15 new field diagrams. <b>Every image opens full screen</b> with pinch-zoom, pan and swipe. <b>Double-click any word</b> and the wall opens on it. Cards the caretaker touches are marked <b>newly updated</b> until read three times. · action for Joe: read Layer 19 tonight — it is one evening of work and it is free.</p>
     <p><b>2026-08-12</b> — v1.7 · UNBUILT 03 becomes buildable: the house that dreams shipped as the mesh's third organ — <code>neuron/organs/dreamer.py</code> (nightly cron: deterministic triage → model replay in chunks → consolidation into shared memory + 30-day forgetting → five-line morning brief on the bus and Telegram) with full architecture in <code>neuron/DREAMING.md</code>. Smoke-tested including the no-model degrade path. · action for Joe: add the 02:00 cron line after L0; upgrade <code>[dreamer] mind</code> to ollama at L4.</p>
@@ -1621,6 +1630,151 @@ await b.close();</pre></div>
   </details>
 </section>
 
+<!-- ============ LAYER 24 ============ -->
+<section id="l24">
+  <div class="lnum">LAYER 24</div>
+  <h2>The Surface</h2>
+  <p class="lede">Layer 13 taught that the page is a tree and Layer 15 taught where its code runs. Neither taught the surface itself — the three languages every website is made of, and what the browser does with them. You are reading a page built entirely out of this layer.</p>
+
+  <details class="card" id="l24-three-languages-three-jobs" data-card="l24-three-languages-three-jobs">
+    <summary><b>Three languages, three jobs</b><span>structure, appearance, behaviour</span></summary>
+    <p class="plain">HTML says what things <em>are</em> — this is a heading, this is a paragraph, this is an image. CSS says what they <em>look like</em>. JavaScript says what <em>happens</em> when someone does something. Keeping those three jobs separate is most of what "well-built" means, and mixing them is most of what "unmaintainable" means.</p>
+    <p class="tech">HTML is a markup language producing a document tree; CSS is a declarative cascade of rules matched by selector specificity; JavaScript is the imperative layer that mutates both at runtime. A page with no JavaScript should still be readable — that is not nostalgia, it is the property that makes a page fast, indexable, screen-readable, and unlikely to break.</p>
+  </details>
+
+  <details class="card" id="l24-semantic-html" data-card="l24-semantic-html">
+    <summary><b>Semantic HTML</b><span>the tag is a promise about meaning</span></summary>
+    <p class="plain">You could build an entire page out of anonymous boxes and make it look right. It would be unreadable to a screen reader, unhelpful to a search engine, and impossible for a keyboard user to navigate. Choosing the tag that actually describes the thing — a button for a button, a heading for a heading — is free, and it is the difference between a page and a picture of a page.</p>
+    <p class="tech">Landmarks (<code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>footer</code>) and a single logical heading order give assistive technology a document outline. Native controls carry focus behaviour, keyboard handling and roles for free; a <code>div</code> with a click handler carries none of them and needs <code>role</code>, <code>tabindex</code> and key handling bolted back on. Every native element you reach for is accessibility you do not have to write.</p>
+  </details>
+
+  <details class="card" id="l24-cascade-box" data-card="l24-cascade-box">
+    <summary><b>The cascade &amp; the box</b><span>why CSS seems to ignore you</span></summary>
+    <p class="plain">Two rules that explain most CSS confusion. First, when several rules apply, the most <em>specific</em> one wins — not the last one you wrote. Second, everything on a page is a rectangle with content, padding, border and margin, and the surprising part is that margins between stacked boxes collapse into one instead of adding up.</p>
+    <p class="tech">Specificity is counted (inline, id, class/attribute/pseudo-class, element) and only ties break by source order; <code>!important</code> wins and is a debt. <code>box-sizing:border-box</code> makes width mean what you meant. Flexbox lays out one dimension, grid lays out two — most layout fights are the wrong one chosen. Custom properties (<code>--name</code>) cascade and can be swapped at runtime, which is how theming works without duplicated stylesheets.</p>
+  </details>
+
+  <details class="card" id="l24-from-html-pixels" data-card="l24-from-html-pixels">
+    <summary><b>From HTML to pixels</b><span>the render path, and the two steps that cost</span></summary>
+    <p class="plain">The browser parses your markup into a tree, works out the styles, calculates where everything sits, colours it in, and stacks the layers. Moving or resizing something forces it to redo the position calculation for everything after it. Changing only colour or transparency skips straight to the colouring-in — which is exactly why smooth animations only ever move two properties.</p>
+    <p class="tech">Parse → DOM, CSS → CSSOM, then layout (reflow) → paint → composite. Animate <code>transform</code> and <code>opacity</code> only; they are composited on the GPU and skip layout and paint. CSS blocks rendering and a classic <code>&lt;script&gt;</code> blocks parsing, hence <code>defer</code>/<code>async</code>. Images without <code>width</code>/<code>height</code> reserve no space and shift the page when they load — a real bug, not a nicety.</p>
+    <figure class="fig"><img alt="The browser render path: parse, style, layout, paint, composite, with the costs of each" loading="lazy" src="images/render-path.svg" width="760" height="420"><figcaption>Fig 24.1 · what happens between your markup and the screen</figcaption></figure>
+  </details>
+
+  <details class="card" id="l24-events-dom-state" data-card="l24-events-dom-state">
+    <summary><b>Events, the DOM &amp; state</b><span>how a page becomes interactive</span></summary>
+    <p class="plain">JavaScript watches for things happening — a click, a key, a scroll — and changes the tree in response. The trap is that the truth ends up in two places: what your code believes, and what the page is actually showing. Almost every fiddly interface bug is those two disagreeing.</p>
+    <p class="tech">Events bubble from target to root, which is why one listener on a container can serve a thousand children (delegation) and survive re-rendering. Keep one source of truth and derive the DOM from it rather than reading state back out of the markup. Everything runs on a single thread with a task queue — a long synchronous loop freezes the whole page, including scrolling.</p>
+  </details>
+
+  <details class="card" id="l24-frameworks-they-buy-they-cost" data-card="l24-frameworks-they-buy-they-cost">
+    <summary><b>Frameworks — what they buy and what they cost</b><span>and when plain HTML wins</span></summary>
+    <p class="plain">React, Vue and the rest exist to solve one problem: keeping a complicated screen in sync with complicated data. If you have that problem they are worth every penny. If you do not — a document, a form, a page of content — they add a build step, a dependency tree, and a download, in exchange for solving a problem you did not have.</p>
+    <p class="tech">Component frameworks trade a build pipeline and runtime for declarative UI and state-driven re-rendering; the cost is bundle size, hydration, and a supply-chain surface (Layer 19). Server-rendered HTML plus a little JavaScript is faster to first paint and far cheaper to maintain for content. This Codex is one HTML file, one stylesheet and one script — deliberately, because it must still work in ten years.</p>
+  </details>
+
+  <details class="card" id="l24-accessibility" data-card="l24-accessibility">
+    <summary><b>Accessibility</b><span>the constraint that improves everything else</span></summary>
+    <p class="plain">Can it be used with a keyboard alone? Can it be read aloud? Does it survive being zoomed to twice the size, or being viewed by someone who cannot tell red from green? Building for those cases produces a page that is better for everyone — clearer, faster, and more robust — which is why it belongs in the design, not in a remediation ticket at the end.</p>
+    <p class="tech">Baseline: semantic landmarks, one logical heading order, visible focus indicators, labels tied to inputs, alt text that says what the image <em>means</em>, contrast at 4.5:1 for body text, and respect for <code>prefers-reduced-motion</code>. WCAG 2.2 AA is the usual target and a legal requirement for UK public-sector services — which makes it non-optional on the NHS route. Test by unplugging the mouse; it takes two minutes and finds most of it.</p>
+  </details>
+</section>
+
+<!-- ============ LAYER 25 ============ -->
+<section id="l25">
+  <div class="lnum">LAYER 25</div>
+  <h2>The Proof</h2>
+  <p class="lede">Layer 21 taught evals for things that do not answer the same way twice. This is the older discipline underneath it — how you know deterministic code is right, and the handful of statistics that stop a measurement from flattering you.</p>
+
+  <details class="card" id="l25-test-much" data-card="l25-test-much">
+    <summary><b>What to test, and how much</b><span>three kinds, and the one that always pays</span></summary>
+    <p class="plain">A unit test checks one function with nothing else attached — instant and cheap, so write many. An integration test checks two real parts actually talking, which is where most bugs genuinely live. An end-to-end test drives a whole user journey — slow and brittle, so keep a few for the paths that must never break. And the test that is always worth writing: one that reproduces the bug you just fixed.</p>
+    <p class="tech">Cost and confidence both rise as you go up; the classic pyramid is a budget, not a law. Test behaviour through public interfaces, not implementation, or every refactor breaks the suite and you stop trusting it. Coverage percentage measures lines executed, not assertions made — it is a smoke alarm, not a grade. A flaky test is worse than no test, because it teaches the team to ignore red.</p>
+    <figure class="fig"><img alt="Three kinds of test — end-to-end, integration, unit — with their cost and what each catches" loading="lazy" src="images/test-shape.svg" width="760" height="420"><figcaption>Fig 25.1 · a budget, not a law</figcaption></figure>
+  </details>
+
+  <details class="card" id="l25-gates" data-card="l25-gates">
+    <summary><b>The gates</b><span>what should run before anything merges</span></summary>
+    <p class="plain">The point of automation is that the boring checks happen without anyone remembering. Formatting, obvious mistakes, the test suite, and a scan of your dependencies — all of it on every change, before it reaches the main branch. It converts arguments about style into a machine's opinion, which nobody takes personally.</p>
+    <p class="tech">A useful gate: formatter in check mode, linter, type check, tests, dependency and secret scan. Keep it under a few minutes or people route around it. Branch protection is what makes the gate real rather than advisory. Fix flakiness the day it appears — a suite people re-run until it passes is a suite that has stopped testing anything.</p>
+  </details>
+
+  <details class="card" id="l25-types-errors-you-never-see" data-card="l25-types-errors-you-never-see">
+    <summary><b>Types &amp; the errors you never see</b><span>the cheapest bug-finder there is</span></summary>
+    <p class="plain">Saying what shape your data is supposed to be lets a tool catch a whole family of mistakes before the code ever runs — the misspelled field, the thing that might be missing, the number you treated as text. It is not about ceremony; it is about moving failures from a user's screen to your editor.</p>
+    <p class="tech">Static typing (TypeScript, Python type hints with mypy/pyright) eliminates a large class of defects at zero runtime cost. Types are documentation the compiler enforces. At every boundary you do not control — an API response, a file, a model's output — validate at runtime as well (Zod, Pydantic), because a type annotation is a promise about your code, not about the world.</p>
+  </details>
+
+  <details class="card" id="l25-reading-your-own-diff" data-card="l25-reading-your-own-diff">
+    <summary><b>Reading your own diff</b><span>review, even alone</span></summary>
+    <p class="plain">Before asking anyone else to look — or before merging your own work — read the whole change as though someone else wrote it. Most of what a reviewer would catch, you catch yourself in that pass: the debug line left in, the case not handled, the thing that does not belong in this change at all.</p>
+    <p class="tech">Small, single-purpose changes get reviewed properly; large ones get approved. Review for correctness, boundaries, error paths, and whether the test would actually fail if the code were wrong. Working solo, the diff <em>is</em> the review, and the commit message is where you record why — the code says what it does, and only the message can say why it was worth doing.</p>
+  </details>
+
+  <details class="card" id="l25-precision-recall-base-rate" data-card="l25-precision-recall-base-rate">
+    <summary><b>Precision, recall &amp; the base rate</b><span>why 99% accurate can be useless</span></summary>
+    <p class="plain">Any detector — a test, a filter, an alert, a classifier — sits in four boxes: caught it, cried wolf, missed it, correctly quiet. Precision asks how much of what you flagged was real. Recall asks how much of what was real you caught. You cannot maximise both, and which matters depends entirely on what each mistake costs. And if the thing you are looking for is rare, a very accurate test still produces mostly false alarms.</p>
+    <p class="tech">Precision = TP/(TP+FP); recall = TP/(TP+FN); F1 is their harmonic mean. The threshold trades them. At 0.1% prevalence, a test with 99% sensitivity and 99% specificity yields a positive predictive value under 10% — the base-rate fallacy, and the reason alerting systems drown teams. Report precision and recall separately with the prevalence stated; accuracy on an imbalanced set tells you almost nothing.</p>
+    <figure class="fig"><img alt="The confusion matrix: true and false positives and negatives, with precision, recall and the base rate trap" loading="lazy" src="images/confusion.svg" width="760" height="420"><figcaption>Fig 25.2 · four boxes, two ratios, one trap</figcaption></figure>
+  </details>
+
+  <details class="card" id="l25-many-is-enough" data-card="l25-many-is-enough">
+    <summary><b>How many is enough</b><span>sample size, variance &amp; not fooling yourself</span></summary>
+    <p class="plain">Twenty cases will tell you whether something is broken. They will not tell you whether 71% is better than 68%. Small differences on small samples are mostly noise, and the temptation is always to declare victory on the first favourable number. Run it more than once, and be suspicious of any improvement you cannot reproduce.</p>
+    <p class="tech">Sampling error on a proportion is roughly ±1/√n — 50 cases is about ±14 points, 400 is about ±5. Report an interval, not a point. For non-deterministic systems, run each case several times and separate run-to-run variance from the change you made. Beware peeking (stopping when it looks good), multiple comparisons (test enough variants and one will win by chance), and contamination (your eval set leaking into the thing you are evaluating).</p>
+  </details>
+
+  <details class="card" id="l25-measuring-thing-not-shadow" data-card="l25-measuring-thing-not-shadow">
+    <summary><b>Measuring the thing, not its shadow</b><span>every metric becomes a target</span></summary>
+    <p class="plain">The moment a number decides anything, people and models start optimising for the number rather than the thing it stood for. Response time improves and the answers get worse. Coverage hits ninety percent and the tests assert nothing. Ask regularly whether the measurement still points at what you actually wanted.</p>
+    <p class="tech">Goodhart's law, in practice. Defences: pair every efficiency metric with a quality guardrail that must not regress; keep a small held-out set the system has never been tuned against; and re-read failures by hand periodically, because aggregate scores hide exactly the failure modes that matter. For agents, watch outcome and cost together — either alone is trivially gameable.</p>
+  </details>
+</section>
+
+<!-- ============ LAYER 26 ============ -->
+<section id="l26">
+  <div class="lnum">LAYER 26</div>
+  <h2>The Rented Estate</h2>
+  <p class="lede">Layer 15 taught edge and serverless; Layer 05 taught Vercel. Neither taught the shape of the cloud itself — what you are actually renting, who is responsible when it breaks, and the specific ways the bill surprises people.</p>
+
+  <details class="card" id="l26-three-depths-rented-computer" data-card="l26-three-depths-rented-computer">
+    <summary><b>Three depths of rented computer</b><span>and who is left holding the risk</span></summary>
+    <p class="plain">You can rent a bare machine and do everything yourself, rent a place to put code and let them handle the machine, or rent finished software and only bring your data. The deeper the rental, the less you maintain — and the constant is that your data, who can reach it, and how you configured it stay your responsibility at every level.</p>
+    <p class="tech">IaaS (VMs, disks, networks), PaaS (managed runtime and platform), SaaS (the whole application). The shared responsibility model moves the line but never removes your half: identity, access control, data classification and configuration are always yours. The overwhelming majority of cloud incidents are misconfiguration — a public bucket, an over-broad role, a management port open to the world.</p>
+    <figure class="fig"><img alt="IaaS, PaaS and SaaS compared with who patches what, and the three surprising bills" loading="lazy" src="images/cloud-shapes.svg" width="760" height="420"><figcaption>Fig 26.1 · the line moves; the liability does not</figcaption></figure>
+  </details>
+
+  <details class="card" id="l26-regions-availability-zones" data-card="l26-regions-availability-zones">
+    <summary><b>Regions &amp; availability zones</b><span>where your data physically is</span></summary>
+    <p class="plain">A region is a part of the world; a zone is a separate building within it, with its own power and cooling. Spreading across zones survives one building's bad day. Spreading across regions survives a worse one — and costs more, in money and complexity, than most projects need. Which region you pick also decides which country's law your data is sitting under.</p>
+    <p class="tech">Multi-AZ protects against a single-facility failure and is usually a checkbox on managed services; multi-region protects against regional outage and forces you to confront replication lag and split-brain. Latency between regions is a physical floor (Layer 16). Region choice is simultaneously a performance, a cost and a data-residency decision — and the last one is the one auditors ask about (Layer 20).</p>
+  </details>
+
+  <details class="card" id="l26-identity-is-perimeter" data-card="l26-identity-is-perimeter">
+    <summary><b>Identity is the perimeter</b><span>IAM, roles &amp; the credential that should not exist</span></summary>
+    <p class="plain">In a rented estate there is no wall to stand behind — every service is reachable from everywhere, and the only thing separating your data from the internet is who is allowed to ask. That makes permissions the whole of security, and the most dangerous object in any cloud account is a long-lived key with broad powers, sitting in a file somewhere.</p>
+    <p class="tech">Prefer short-lived, workload-attached identity (instance roles, OIDC federation from CI) over static access keys; grant per-resource, per-action permissions and deny by default. Never use the root/owner credential for work, and put MFA on it. Audit for unused permissions periodically — entitlements accumulate and nobody ever removes one. This is Layer 19's least privilege, in the one place it is most often skipped.</p>
+  </details>
+
+  <details class="card" id="l26-managed-services" data-card="l26-managed-services">
+    <summary><b>Managed services</b><span>renting the operations, not just the machine</span></summary>
+    <p class="plain">A managed database costs several times what the same machine would, and what you are buying is not the hardware — it is backups that actually happen, patches applied without you, failover at three in the morning, and someone else's pager. For a one-person operation that trade is usually correct, right up until the bill outgrows the time it saves.</p>
+    <p class="tech">Managed offerings absorb patching, backup, replication and failover; you give up version control, some extensions, and portability. Check the exit before entering: can you take a plain dump out? Proprietary interfaces are the real lock-in, not the data. The honest comparison is total cost of ownership including your hours — and on the node, the same reasoning runs in reverse, because your hours are the thing being spent.</p>
+  </details>
+
+  <details class="card" id="l26-bill" data-card="l26-bill">
+    <summary><b>The bill</b><span>the three charges nobody predicts</span></summary>
+    <p class="plain">Data leaving the provider is charged by the gigabyte, and it is expensive. Anything you started and forgot bills quietly forever. And logging is charged by volume, so the debugging you turned on in a crisis keeps costing after the crisis ends. Almost every horror story is one of those three, discovered a month later.</p>
+    <p class="tech">Egress fees make cross-provider architectures and large data pulls expensive by design — it is a retention mechanism, not an accident. Set a billing alarm before the first deploy, tag every resource with an owner, and put a hard budget on anything an agent can trigger. Understand the pricing dimension of each service you use: per-request, per-GB-month, per-hour and per-token behave completely differently under growth.</p>
+  </details>
+
+  <details class="card" id="l26-owning-versus-renting" data-card="l26-owning-versus-renting">
+    <summary><b>Owning versus renting</b><span>drawing your own line</span></summary>
+    <p class="plain">The cloud is unbeatable for things that are bursty, public, or must not lose data. Owned hardware is unbeatable for things that run constantly, hold state, and cost nothing per hour once bought. You do not have to choose a side — you have to draw the line deliberately, and know why each piece sits where it does.</p>
+    <p class="tech">Rent: bursty and public-facing compute, object storage with durability guarantees, anything needing global reach or on-call operations you cannot provide. Own: 24/7 watchers, schedulers, local inference, private data, and anything whose marginal cost per run should be electricity. The hybrid a solo operator actually wants is a rented front door and edge, with the node as the always-on brain behind it — and every dependency chosen so it can be moved.</p>
+  </details>
+</section>
+
 <!-- ============ APPENDIX · THE DEEP FIELD ============ -->
 <section id="deep">
   <div class="lnum">APPENDIX · DEEP FIELD</div>
@@ -1765,12 +1919,26 @@ await b.close();</pre></div>
     <p><b>WireGuard</b> — a small modern VPN; identity by key, not by address.</p>
     <p><b>world model</b> — a model that has learned how things behave, so it can plan.</p>
     <p><b>zero trust</b> — being inside the building proves nothing; prove it every request.</p>
+    <p><b>accessibility</b> — usable by keyboard, screen reader and zoom; it improves everything else.</p>
+    <p><b>base rate</b> — how rare the thing is; ignore it and a 99% test still cries wolf.</p>
+    <p><b>cascade</b> — CSS conflict resolution: the most specific rule wins, not the last.</p>
+    <p><b>egress fee</b> — the per-gigabyte charge for data leaving a cloud; lock-in by pricing.</p>
+    <p><b>flaky test</b> — one that fails at random; worse than no test, because it teaches you to ignore red.</p>
+    <p><b>IAM</b> — who may do what in a rented estate; in the cloud it <em>is</em> the perimeter.</p>
+    <p><b>IaaS/PaaS/SaaS</b> — three depths of rented computer; the liability line moves, your data does not.</p>
+    <p><b>precision</b> — of what you flagged, how much was real.</p>
+    <p><b>recall</b> — of what was real, how much you caught.</p>
+    <p><b>reflow</b> — the browser recalculating layout; the expensive step animations must avoid.</p>
+    <p><b>region</b> — which part of the world your data physically sits in, and whose law it is under.</p>
+    <p><b>semantic HTML</b> — using the tag that describes the thing; free accessibility.</p>
+    <p><b>shared responsibility</b> — the provider secures the platform; configuration and data stay yours.</p>
+    <p><b>static typing</b> — declaring the shape of data so a tool catches the mistake before it runs.</p>
   </div>
 </section>
 
 <footer>
-  THE OPERATOR'S CODEX · v2.1 · built 12 Aug 2026<br>
-  twenty-three layers · a live feed swept every two days · one deep-field appendix<br>
+  THE OPERATOR'S CODEX · v2.2 · built 12 Aug 2026<br>
+  twenty-six layers · a live feed swept every two days · one deep-field appendix<br>
   double-click any word · tap any figure · press / to jump<br>
   Sheffield ⇄ Kottayam · committed is saved, pushed is safe
 </footer>

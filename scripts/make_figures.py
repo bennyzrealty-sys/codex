@@ -510,6 +510,110 @@ def cost_shape():
     return s + tail()
 
 
+def render_path():
+    s = head("html to pixels — the six steps behind every page")
+    steps = [
+        ("parse", "HTML → DOM tree", GOLD),
+        ("style", "CSS → CSSOM", BLUE),
+        ("layout", "where everything sits", TEAL),
+        ("paint", "what colour each pixel is", TEAL),
+        ("composite", "stack the layers", GOLD),
+    ]
+    x = 30
+    for i, (a, b, c) in enumerate(steps):
+        s += box(x, 78, 124, 62, a, "", stroke=c)
+        s += wrap(x + 62, 152, b, 18, DIM, 11, 14, mid=True)
+        if i < 4:
+            s += arrow(x + 124, 109, x + 138, 109, c, op=".7")
+        x += 138
+    s += box(30, 200, 700, 74, stroke=EMBER, fill=PANEL2)
+    s += text(48, 226, "the two that cost you", EMBER, 13, weight="600")
+    s += text(48, 250, "Changing size or position redoes layout for everything after it (reflow).", BONE, 12)
+    s += text(48, 268, "Changing only colour or opacity skips to paint — which is why animations", DIM, 12)
+    s += text(48, 286, "should move transform and opacity, and nothing else.", DIM, 12)
+    s += box(30, 306, 700, 76, stroke=TEAL)
+    s += text(48, 332, "the blocking rule", TEAL, 13, weight="600")
+    s += text(48, 356, "CSS blocks rendering; a plain <script> blocks parsing. Hence defer, async,", BONE, 12)
+    s += text(48, 374, "and putting width/height on images so nothing jumps when they arrive.", DIM, 12)
+    return s + tail()
+
+
+def test_shape():
+    s = head("what to test, how much, and what each kind catches")
+    tiers = [
+        ("end-to-end", "a real user path, start to finish", "few · slow · brittle", 240, EMBER, 78),
+        ("integration", "two real parts actually talking", "some · medium", 420, GOLD, 148),
+        ("unit", "one function, no world attached", "many · instant · cheap", 620, TEAL, 218),
+    ]
+    for name, what, cost, w, col, y in tiers:
+        x = 392 - w / 2
+        s += box(x, y, w, 58, stroke=col, fill=PANEL2)
+        s += text(392, y + 25, name, col, 14, mid=True, weight="600")
+        s += text(392, y + 44, what + "   ·   " + cost, DIM, 11.5, mid=True)
+    s += box(30, 296, 700, 46, stroke=BLUE)
+    s += text(48, 316, "the fourth kind nobody names: a test that reproduces the bug you just fixed.", BONE, 12)
+    s += text(48, 334, "It is the only test guaranteed to be worth writing.", DIM, 12)
+    s += box(30, 354, 700, 46, stroke=TEAL, fill=PANEL2)
+    s += text(48, 374, "for agents, the pyramid inverts: the model is not deterministic, so the unit", BONE, 12)
+    s += text(48, 392, "layer is thin and the eval set (Layer 21) does the heavy lifting.", DIM, 12)
+    return s + tail()
+
+
+def confusion():
+    s = head("the four boxes every detector lives in")
+    cells = [
+        ("true positive", "caught it", 250, 88, TEAL),
+        ("false positive", "cried wolf", 460, 88, GOLD),
+        ("false negative", "missed it", 250, 168, EMBER),
+        ("true negative", "correctly quiet", 460, 168, DIM),
+    ]
+    for name, sub, x, y, col in cells:
+        s += box(x, y, 200, 72, stroke=col, fill=PANEL2)
+        s += text(x + 100, y + 32, name, col, 13, mid=True, weight="600")
+        s += text(x + 100, y + 52, sub, DIM, 11.5, mid=True)
+    s += text(350, 76, "actually true", DIM, 11, mono=True, mid=True)
+    s += text(560, 76, "actually false", DIM, 11, mono=True, mid=True)
+    s += text(240, 128, "flagged", DIM, 11, mono=True, anchor="end")
+    s += text(240, 208, "not flagged", DIM, 11, mono=True, anchor="end")
+    s += text(30, 106, "precision", TEAL, 13, weight="600")
+    s += wrap(30, 126, "of what you flagged, how much was real", 22, DIM, 11, 15)
+    s += text(30, 176, "recall", EMBER, 13, weight="600")
+    s += wrap(30, 196, "of what was real, how much you caught", 22, DIM, 11, 15)
+    s += box(30, 264, 700, 62, stroke=GOLD, fill=PANEL2)
+    s += text(48, 290, "you cannot have both — where you set the threshold trades one for the other,", BONE, 12)
+    s += text(48, 308, "and which one matters depends entirely on the cost of each mistake.", DIM, 12)
+    s += box(30, 340, 700, 60, stroke=EMBER)
+    s += text(48, 366, "the base rate trap: at 1-in-1,000 prevalence, a 99%-accurate test flags", BONE, 12)
+    s += text(48, 384, "ten false alarms for every real find. Accuracy alone is close to meaningless.", DIM, 12)
+    return s + tail()
+
+
+def cloud_shapes():
+    s = head("three depths of rented computer — and who is left holding it")
+    cols = [
+        ("IaaS", "a bare machine", "you patch the OS,\nthe runtime, the app", GOLD),
+        ("PaaS", "a place to put code", "they patch below,\nyou own the app", TEAL),
+        ("SaaS", "finished software", "you own the config\nand the data only", BLUE),
+    ]
+    x = 30
+    for name, what, who, col in cols:
+        s += box(x, 78, 216, 150, stroke=col)
+        s += text(x + 108, 110, name, col, 17, mid=True, weight="600")
+        s += text(x + 108, 136, what, BONE, 12.5, mid=True)
+        s += line(x + 30, 152, x + 186, 152, col, op=".3")
+        for i, ln in enumerate(who.split("\n")):
+            s += text(x + 108, 176 + i * 17, ln, DIM, 11.5, mid=True)
+        x += 236
+    s += text(30, 256, "the shared responsibility line moves — the liability does not", GOLD, 13, weight="600")
+    s += box(30, 272, 700, 56, stroke=EMBER, fill=PANEL2)
+    s += text(48, 296, "Whatever the provider secures, your data, your access control and your", BONE, 12)
+    s += text(48, 314, "misconfiguration remain yours. Almost every cloud breach is that last one.", DIM, 12)
+    s += box(30, 342, 700, 58, stroke=TEAL)
+    s += text(48, 366, "the three bills that surprise people", TEAL, 13, weight="600")
+    s += text(48, 388, "egress per gigabyte · an idle thing nobody turned off · logs charged by volume", BONE, 12)
+    return s + tail()
+
+
 # ---------- feed banners --------------------------------------------------
 def banner(kind, title, sub, col, motif):
     w, h = 760, 200
@@ -555,6 +659,10 @@ FIGURES = {
     "modalities.svg": modalities,
     "chip-chokepoint.svg": chip_chokepoint,
     "cost-shape.svg": cost_shape,
+    "render-path.svg": render_path,
+    "test-shape.svg": test_shape,
+    "confusion.svg": confusion,
+    "cloud-shapes.svg": cloud_shapes,
     "update-ai.svg": lambda: banner("artificial intelligence", "AI", "models, agents, and the tools around them", TEAL, 26),
     "update-it.svg": lambda: banner("information technology", "IT", "the plumbing everything else stands on", BLUE, 22),
     "update-hardware.svg": lambda: banner("hardware & silicon", "Hardware", "chips, boards, memory and the machines that print them", GOLD, 24),

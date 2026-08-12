@@ -11,7 +11,7 @@ Your link: **https://bennyzrealty-sys.github.io/codex/**
 
 ## What the page does
 
-- **23 layers**, every idea in two voices — plain, then technical.
+- **26 layers**, every idea in two voices — plain, then technical.
 - **The suggested path** — the layer numbers are the order they were *written*;
   the path panel in the header is the order to *read* them, in six stages. It
   ticks each stop once you have genuinely spent time in it (kept on-device only,

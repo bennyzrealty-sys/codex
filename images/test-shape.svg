@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">WHAT TO TEST, HOW MUCH, AND WHAT EACH KIND CATCHES</text>
+  <rect x="272" y="78" width="240" height="58" rx="9" fill="#1a2330" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="392" y="103" fill="#cf6f57" fill-opacity="1" font-size="14" text-anchor="middle" font-weight="600">end-to-end</text>
+  <text x="392" y="122" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="middle" font-weight="400">a real user path, start to finish   ·   few · slow · brittle</text>
+  <rect x="182" y="148" width="420" height="58" rx="9" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="392" y="173" fill="#dfa32b" fill-opacity="1" font-size="14" text-anchor="middle" font-weight="600">integration</text>
+  <text x="392" y="192" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="middle" font-weight="400">two real parts actually talking   ·   some · medium</text>
+  <rect x="82" y="218" width="620" height="58" rx="9" fill="#1a2330" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="392" y="243" fill="#57b39c" fill-opacity="1" font-size="14" text-anchor="middle" font-weight="600">unit</text>
+  <text x="392" y="262" fill="#aab5c1" fill-opacity="1" font-size="11.5" text-anchor="middle" font-weight="400">one function, no world attached   ·   many · instant · cheap</text>
+  <rect x="30" y="296" width="700" height="46" rx="9" fill="#151c26" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="48" y="316" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">the fourth kind nobody names: a test that reproduces the bug you just fixed.</text>
+  <text x="48" y="334" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">It is the only test guaranteed to be worth writing.</text>
+  <rect x="30" y="354" width="700" height="46" rx="9" fill="#1a2330" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="48" y="374" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">for agents, the pyramid inverts: the model is not deterministic, so the unit</text>
+  <text x="48" y="392" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">layer is thin and the eval set (Layer 21) does the heavy lifting.</text>
+</svg>

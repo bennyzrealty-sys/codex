@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">HTML TO PIXELS — THE SIX STEPS BEHIND EVERY PAGE</text>
+  <rect x="30" y="78" width="124" height="62" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="92" y="114" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">parse</text>
+  <text x="92" y="152" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">HTML → DOM tree</text>
+  <line x1="154" y1="109" x2="168" y2="109" stroke="#dfa32b" stroke-opacity=".7" stroke-width="1.6"/>
+  <polygon points="168,109 161.608,111.854 161.608,106.146" fill="#dfa32b" fill-opacity=".7"/>
+  <rect x="168" y="78" width="124" height="62" rx="9" fill="#151c26" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="230" y="114" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">style</text>
+  <text x="230" y="152" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">CSS → CSSOM</text>
+  <line x1="292" y1="109" x2="306" y2="109" stroke="#9fb4d8" stroke-opacity=".7" stroke-width="1.6"/>
+  <polygon points="306,109 299.608,111.854 299.608,106.146" fill="#9fb4d8" fill-opacity=".7"/>
+  <rect x="306" y="78" width="124" height="62" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="368" y="114" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">layout</text>
+  <text x="368" y="152" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">where everything</text>
+  <text x="368" y="166" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">sits</text>
+  <line x1="430" y1="109" x2="444" y2="109" stroke="#57b39c" stroke-opacity=".7" stroke-width="1.6"/>
+  <polygon points="444,109 437.608,111.854 437.608,106.146" fill="#57b39c" fill-opacity=".7"/>
+  <rect x="444" y="78" width="124" height="62" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="506" y="114" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">paint</text>
+  <text x="506" y="152" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">what colour each</text>
+  <text x="506" y="166" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">pixel is</text>
+  <line x1="568" y1="109" x2="582" y2="109" stroke="#57b39c" stroke-opacity=".7" stroke-width="1.6"/>
+  <polygon points="582,109 575.608,111.854 575.608,106.146" fill="#57b39c" fill-opacity=".7"/>
+  <rect x="582" y="78" width="124" height="62" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="644" y="114" fill="#e7e2d4" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="500">composite</text>
+  <text x="644" y="152" fill="#aab5c1" fill-opacity="1" font-size="11" text-anchor="middle" font-weight="400">stack the layers</text>
+  <rect x="30" y="200" width="700" height="74" rx="9" fill="#1a2330" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="48" y="226" fill="#cf6f57" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">the two that cost you</text>
+  <text x="48" y="250" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">Changing size or position redoes layout for everything after it (reflow).</text>
+  <text x="48" y="268" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">Changing only colour or opacity skips to paint — which is why animations</text>
+  <text x="48" y="286" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">should move transform and opacity, and nothing else.</text>
+  <rect x="30" y="306" width="700" height="76" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="48" y="332" fill="#57b39c" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">the blocking rule</text>
+  <text x="48" y="356" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">CSS blocks rendering; a plain &lt;script&gt; blocks parsing. Hence defer, async,</text>
+  <text x="48" y="374" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">and putting width/height on images so nothing jumps when they arrive.</text>
+</svg>
