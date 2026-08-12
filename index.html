@@ -136,7 +136,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
   <div class="kicker">Field manual · two voices · eleven layers</div>
   <h1>The Operator's <em>Codex</em></h1>
   <p class="sub">Everything Joe runs — the machine, the models, the agents, the pipes — explained from zero to the frontier. Every idea speaks twice: once plainly, once in the language of the trade.</p>
-  <div class="stamp"><span>v1.2 · <b>11 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>refresh cycle: <b>every 2 days</b> (Layer 08)</span></div>
+  <div class="stamp"><span>v1.5 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>refresh cycle: <b>every 2 days</b> (Layer 08)</span></div>
   <div class="legend">
     <p><span class="dotg"></span><b>Plain voice</b> — how you'd say it across the kitchen table, or to a five-year-old.</p>
     <p><span class="dott"></span><b>Technical voice</b> — the exact jargon the industry uses, so you can read docs, job specs, and error logs without flinching.</p>
@@ -149,7 +149,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
     <a href="#l4"><span class="n">LAYER 04</span><span class="t">The Frontier</span><span class="d">Aug 2026 snapshot</span></a>
     <a href="#l5"><span class="n">LAYER 05</span><span class="t">The Builder's World</span><span class="d">Git · Vercel · APIs · egress</span></a>
     <a href="#l6"><span class="n">LAYER 06</span><span class="t">The Decoder</span><span class="d">your screenshots, annotated</span></a>
-    <a href="#l7"><span class="n">LAYER 07</span><span class="t">The Sovereign Node</span><span class="d">Pi 5 evolution &amp; the Blend</span></a>
+    <a href="#l7"><span class="n">LAYER 07</span><span class="t">The Sovereign Node</span><span class="d">Pi 5 evolution, grafts &amp; the unbuilt</span></a>
     <a href="#l8"><span class="n">LAYER 08</span><span class="t">The Living Guide</span><span class="d">how this updates itself</span></a>
     <a href="#l9"><span class="n">LAYER 09</span><span class="t">The Map &amp; the Chokepoints</span><span class="d">companies · restrictions</span></a>
     <a href="#l10"><span class="n">LAYER 10</span><span class="t">The Graveyard &amp; the Pivots</span><span class="d">dead ends · shifts</span></a>
@@ -436,7 +436,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
 <section id="l7">
   <div class="lnum">LAYER 07</div>
   <h2>The Sovereign Node</h2>
-  <p class="lede">Your Pi 5 · 16GB arrives 12 August. Here is what it becomes — the evolution ladder, then the Blend: the combination that genuinely has no duplicate.</p>
+  <p class="lede">Your Pi 5 · 16GB arrives 12 August. Here is what it becomes — the evolution ladder, then the synthesis bench (what to graft onto the board to multiply it), then the unbuilt: ideas that exist in no repo yet.</p>
   <div class="nodelog" id="nodelog">
     <div class="nl-head"><span>NODE LOG · LIVE</span><span id="nl-level">connecting…</span></div>
     <div class="nl-pills" id="nl-ladder"></div>
@@ -458,23 +458,41 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
 
   <h3>The evolution ladder</h3>
   <div class="rung"><div class="lv">L0</div><div><h4>First light — week one</h4><p>Boot headless. Install <b>Tailscale</b> (phone → Pi from anywhere), <b>Docker</b>, <b>gh CLI</b>, <b>git</b>. Move the OS to a USB SSD; demote the SD card to installer. Set unattended security updates. From this day the node is reachable, safe, and yours.</p></div></div>
-  <div class="rung"><div class="lv">L1</div><div><h4>The watcher host</h4><p>Migrate <b>nhsp-shift-watcher</b> as the proving ground: cron + Playwright + Telegram on a home IP with no rental bill. One agent running reliably for a week proves the whole pattern. Add the bin-reminder jobs next.</p></div></div>
+  <div class="rung"><div class="lv">L1</div><div><h4>The proving week</h4><p>Give the node one small live workload — any cron + Playwright + Telegram job you already have lying around — purely as a reliability test, not a strategy. One agent running unattended for a week proves the pattern; what it watches is irrelevant. The point of L1 is trust in the box, nothing more.</p></div></div>
   <div class="rung"><div class="lv">L2</div><div><h4>The orchestrator</h4><p>The node starts <em>directing</em> intelligence: scheduled scripts call the Claude API and cross-repo <b>gh</b> for the operations cloud sessions can't do. Rented genius, resident conductor. Add n8n if you want visual wiring.</p></div></div>
   <div class="rung"><div class="lv">L3</div><div><h4>Meera's body</h4><p>SQLite + a vector store on the SSD becomes the shared memory substrate — one persistent brain-shelf that every project reads and writes, instead of memory scattered across repos and chats.</p></div></div>
   <div class="rung"><div class="lv">L4</div><div><h4>The local mind</h4><p>Ollama + a 3–4B model for private volume chores: tagging listings, classifying documents, drafting labels. Whisper batches overnight for Thiri transcripts. Free per-use, nothing sensitive leaves the house.</p></div></div>
   <div class="rung"><div class="lv">L5</div><div><h4>The conglomerate node</h4><p>All of it at once, instrumented: uptime checks, cost meters, an eval sheet per agent, weekly self-report. At L5 the box is no longer a project — it is the operations department of three businesses, headcount zero.</p></div></div>
 
-  <h3>The Blend — nuance · amalgam · synergy</h3>
-  <p class="lede" style="margin-top:-6px">"Nobody has ever built" is usually a lie people tell themselves. Here it has a precise, honest meaning: every <em>part</em> below is common; the <em>configuration</em> is not. Moats live in configurations.</p>
+  <h3>The synthesis bench — grafting new organs onto the board</h3>
+  <p class="lede" style="margin-top:-6px">16GB of RAM is the least interesting number on this board. The interesting one is the exposed PCIe lane — the first Pi ever to offer its spine to strangers. Nothing below is a project you've already built. Each graft changes what the machine <em>is</em>, not just what it runs.</p>
 
-  <div class="blend"><span class="tag n">NUANCE</span><h4>Small unfair edges</h4>
-    <p>A residential IP node (automation that browses like a human lives there). Malayalam-first pipelines in a data-scarce language where big players underinvest. NHS-insider vocabulary and workflow literacy. A dual UK–Kerala footprint: one operator, two markets, two time zones covering each other's nights.</p></div>
+  <div class="rung"><div class="lv">G1</div><div><h4>The NVMe spine — M.2 HAT+</h4><p>Swap USB storage for a real NVMe drive on the PCIe lane and force Gen 3 speeds. Databases, vector stores and model files stop being the bottleneck; the Pi starts behaving like a small server instead of a big SD card. This is the graft every other graft assumes.</p></div></div>
+  <div class="rung"><div class="lv">G2</div><div><h4>The silicon retina — AI HAT+ (Hailo, 26 TOPS)</h4><p>A neural accelerator that sits on the same PCIe lane and does vision the CPU never could: object detection, pose, tracking at real-time frame rates for ~2 watts. Know its honest shape — it accelerates camera brains (CNNs), not chat models. Pair it with a Camera Module 3 and the node gains an eye that never blinks while the CPU stays free to think.</p></div></div>
+  <div class="rung"><div class="lv">G3</div><div><h4>New senses — ears, radio, skin</h4><p>A mic array (ReSpeaker) plus Whisper gives it ears that work in the dark. An RTL-SDR dongle (~£30) lets it hear aircraft transponders, weather satellites and the radio weather of your street. A LoRa/Meshtastic radio gives it a voice that carries miles with no internet and no SIM. A mmWave presence sensor (LD2410) lets it feel breathing through darkness; a BME688 lets it smell the air. Each sense is a cheap dongle; together they turn a computer into an organism.</p></div></div>
+  <div class="rung"><div class="lv">G4</div><div><h4>The borrowed brain — distributed inference</h4><p>The deepest synthesis: stop treating machines as separate. llama.cpp's RPC mode — and projects like exo — let one model's layers spread across the Pi, an old laptop and a mini PC over the LAN, pooling their RAM into a single larger mind. A model too big for any one device in the house runs on the <em>house</em>. The Pi, always on, is the natural conductor.</p></div></div>
+  <div class="rung"><div class="lv">G5</div><div><h4>Brainstem + cortex</h4><p>Buy no bigger Pi — pair this one with big iron instead. A used mini PC or Jetson-class board sleeps beside it; the Pi holds the schedule, the memory and the senses, and fires Wake-on-LAN only when heavy inference is needed, putting the cortex back to sleep after. Anatomy nailed the design: a tiny always-on brainstem, an expensive cortex that only wakes for hard thoughts. Ten watts idle, real power on demand.</p></div></div>
+  <div class="rung"><div class="lv">G6</div><div><h4>The forbidden graft — an external GPU</h4><p>Expedition-grade, warranty-void territory: the PCIe lane broken out to an M.2-to-Oculink adapter and a desktop AMD GPU, on patched kernels. People have made it work; nobody has made it polite. Worth knowing because it proves the point of this whole layer — the Pi 5 is not a sealed appliance, it is a socket.</p></div></div>
 
-  <div class="blend"><span class="tag a">AMALGAM</span><h4>Fusions with no duplicate</h4>
-    <p><b>Clinical-safety thinking × agent operations</b> — you're pivoting into NHS digital clinical safety while running real agents; applying hazard-log discipline (what can this agent harm, how is it mitigated, who signs off) to agent governance is a genuinely rare, employable fusion. <b>Heritage storytelling × own-voice synthesis</b> — Thiri's research pipeline plus a cloned Malayalam voice. <b>Document concierge × portal automation</b> — Sorted's paperwork empathy plus GPSP-style headless tooling. Each fusion exists because <em>you</em> stand in both fields at once.</p></div>
+  <div class="note"><b>Survival organs, cheap:</b> a UPS HAT so a power cut is an event in the journal instead of amnesia, and the RTC battery (pennies) so the node keeps true time even offline. Boring grafts, first to matter.</div>
 
-  <div class="blend"><span class="tag s">SYNERGY</span><h4>Flywheels between the parts</h4>
-    <p>Watcher catches shifts → income funds hardware and credits → node runs more watchers. Content pipeline builds audience → audience feeds Bennyz and Sorted leads → businesses fund the pipeline. The Layer-08 update agent teaches <em>you</em> → you build better agents → the agents run the study system. Every loop, once closed, spins without you pushing.</p></div>
+  <h3>The unbuilt — ideas that exist in no repo yet</h3>
+  <p class="lede" style="margin-top:-6px">Nothing here recaps what you've shipped. These are blueprints for things that don't exist yet — chosen because each one starts on this desk and can outgrow it.</p>
+
+  <div class="blend"><span class="tag n">UNBUILT 01</span><h4>The neuron — intelligence as traffic, not boxes</h4>
+    <p>Stop calling the Pi a computer; demote it to a <em>neuron</em>. Every device you own — Pi, laptop, old phone in a drawer — runs the same tiny daemon: local memory, a small local model, and a synapse bus (MQTT or NATS) they all publish to. A "thought" is a message any neuron may pick up, enrich, and re-emit; answers are whatever the traffic converges on. Score the routes — when a device's contribution proves useful, its weight rises — and the mesh literally learns which neuron is good at what, the way brains strengthen paths that fire well. The intelligence lives in the wiring, not in any box, so the brain grows by grafting on another £30 neuron — never by replacing anything.</p></div>
+
+  <div class="blend"><span class="tag a">UNBUILT 02</span><h4>The repo organism — projects that feed each other</h4>
+    <p>Right now every project lives in its own repo like organs in separate jars. Wire them into one body: each repo emits its events — commits, failures, TODOs, open questions — onto the node's bus, and a conductor agent on the Pi reads the whole organism nightly. A utility written in one repo gets proposed, as a pull request, to the others that need it. A bug pattern found in one becomes a test in all. An idea parked in one repo's notes surfaces when another repo grows the hands to build it. The shared vector memory on the SSD is the corpus callosum. No product on earth does cross-repo <em>cross-pollination</em>; your repos would stop being archives and start being tissue.</p></div>
+
+  <div class="blend"><span class="tag s">UNBUILT 03</span><h4>The house that dreams</h4>
+    <p>Real brains don't learn while awake — they consolidate at night, replaying the day. Give the node the same trick: at 2 a.m. it replays everything it sensed and logged since sunrise — events, transcripts, sensor traces — and runs slow, free, local inference over the batch: what was anomalous, what repeated, what almost happened, what should be remembered forever versus forgotten. It writes the survivors into long-term memory and leaves a five-line dream journal for breakfast. Dreaming is just offline replay plus compression — and a 10-watt box with nothing to do at night is the perfect dreamer.</p></div>
+
+  <div class="blend"><span class="tag n">UNBUILT 04</span><h4>The seed vault — a civilisation backup on 10 watts</h4>
+    <p>If the internet vanished tomorrow, the node could still hold: all of Wikipedia (Kiwix, offline), street-level maps of Kerala and Yorkshire, a capable small model, Whisper for speech, and the family archive — queryable, in the dark, from a solar panel and a LoRa radio. A box that answers questions when nothing else on the street can. Nobody builds this because everyone assumes the network; the whole idea is refusing that assumption.</p></div>
+
+  <div class="blend"><span class="tag a">UNBUILT 05</span><h4>The hundred-year machine</h4>
+    <p>Design one service on the node for a reader who isn't born yet: it records, transcribes and embeds the household's voices and stories as ordinary life happens, and keeps them in formats chosen to survive decades, not quarters. In 2080 someone asks it a question and it answers from the primary sources. The engineering is trivial; the discipline — plain text, open formats, yearly migration ritual — is the invention. Almost nothing in computing is designed on a hundred-year axis, which is exactly why it's worth doing.</p></div>
 
   <h3>Continuous innovation intake</h3>
   <details class="card"><summary><b>The 2-day scan</b><span>what the node checks so you don't have to</span></summary>
@@ -533,9 +551,10 @@ You maintain operators-codex.html. Today is {date}.
 </pre>
   </details>
 
-  <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.2, dated 11 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
+  <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.5, dated 12 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
   <h3>Changelog</h3>
   <div class="gloss"><!-- CHANGELOG:START -->
+    <p><b>2026-08-12</b> — v1.5 · Layer 07 rebuilt facing forward: the Blend (a recap of shipped projects) replaced by the synthesis bench — six hardware grafts that multiply the Pi 5 (NVMe spine, Hailo retina, new senses, distributed inference, brainstem+cortex pairing, eGPU) — and the Unbuilt: five blueprints that exist in no repo yet (the neuron mesh, the repo organism, the house that dreams, the seed vault, the hundred-year machine). · action for Joe: pick one graft and one unbuilt; start both this week.</p>
     <p><b>2026-08-11</b> — v1.4 · The Deep Field appendix (JA3/JA4, RASP/Frida, HTTP/2 Rapid Reset, proxy reputation, model internals) condensed into two-voice cards; <code>brain/</code> shipped — a runnable offline RAG (Ollama + ChromaDB) making Layer 14's memory real. · action for Joe: pull the two Ollama models on the Pi, then <code>python ingest.py</code>.</p>
     <p><b>2026-08-11</b> — v1.3 · four new layers grafted on: The Wire (config/keys/injection), The Swarm &amp; the Shield (devices/recon/defence), The Forge (training/LoRA/RAG), The Deployment &amp; Four Pillars (edge/JA4/proxies). Security topics written as defence; the abuse line drawn in the open. · action for Joe: build Pillars 3 &amp; 4, study Pillars 1 &amp; 2.</p>
     <p><b>2026-08-11</b> — v1.2 · Codex becomes a living site: node log wired, caretaker armed, publish kit assembled.</p>
@@ -995,7 +1014,7 @@ await b.close();</pre></div>
 </section>
 
 <footer>
-  THE OPERATOR'S CODEX · v1.4 · built 11 Aug 2026<br>
+  THE OPERATOR'S CODEX · v1.5 · built 12 Aug 2026<br>
   fifteen layers · one deep-field appendix · a brain that runs<br>
   Sheffield ⇄ Kottayam · committed is saved, pushed is safe
 </footer>
