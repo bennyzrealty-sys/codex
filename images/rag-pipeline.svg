@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="460" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">RAG — FILING MEMORIES BY MEANING</text>
+
+  <!-- ingest row -->
+  <text x="30" y="76" fill="#dfa32b" font-size="12" font-family="ui-monospace,monospace">INGEST (once, ahead of time)</text>
+  <rect x="30" y="90" width="110" height="64" rx="10" fill="#151c26" stroke="#dfa32b" stroke-opacity=".5"/>
+  <text x="55" y="118" fill="#e7e2d4" font-size="14">your</text><text x="55" y="136" fill="#e7e2d4" font-size="14">documents</text>
+  <path d="M140 122 H170" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="174" y="90" width="90" height="64" rx="10" fill="#151c26" stroke="#dfa32b" stroke-opacity=".5"/>
+  <text x="196" y="118" fill="#e7e2d4" font-size="14">chunk</text><text x="196" y="136" fill="#aab5c1" font-size="11">small pieces</text>
+  <path d="M264 122 H294" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="298" y="90" width="160" height="64" rx="10" fill="#151c26" stroke="#dfa32b" stroke-opacity=".5"/>
+  <text x="316" y="114" fill="#e7e2d4" font-size="14">embed each piece</text>
+  <text x="316" y="136" fill="#57b39c" font-size="12" font-family="ui-monospace,monospace">[0.12, −0.87, …]</text>
+  <path d="M458 122 H488" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- vector store -->
+  <rect x="492" y="76" width="238" height="180" rx="12" fill="#151c26" stroke="#57b39c" stroke-opacity=".6"/>
+  <text x="510" y="102" fill="#57b39c" font-size="12" font-family="ui-monospace,monospace" letter-spacing="2">VECTOR STORE</text>
+  <text x="510" y="118" fill="#aab5c1" font-size="11">a map where similar meanings sit close</text>
+  <g fill="#57b39c"><circle cx="560" cy="160" r="5"/><circle cx="576" cy="148" r="5"/><circle cx="551" cy="177" r="5"/><circle cx="572" cy="172" r="5"/></g>
+  <g fill="#dfa32b"><circle cx="666" cy="196" r="5"/><circle cx="681" cy="210" r="5"/><circle cx="659" cy="215" r="5"/></g>
+  <g fill="#aab5c1" opacity=".7"><circle cx="620" cy="132" r="4"/><circle cx="700" cy="150" r="4"/><circle cx="540" cy="222" r="4"/></g>
+  <circle cx="566" cy="164" r="26" fill="none" stroke="#e7e2d4" stroke-dasharray="4 4"/>
+  <text x="510" y="244" fill="#aab5c1" font-size="11">shift notes · recipes · bills — each a cluster</text>
+
+  <!-- query row -->
+  <text x="30" y="298" fill="#57b39c" font-size="12" font-family="ui-monospace,monospace">QUERY (every question)</text>
+  <rect x="30" y="312" width="150" height="56" rx="10" fill="#151c26" stroke="#57b39c" stroke-opacity=".6"/>
+  <text x="48" y="336" fill="#e7e2d4" font-size="14">"what did Meera</text><text x="48" y="354" fill="#e7e2d4" font-size="14">note last Tuesday?"</text>
+  <path d="M180 340 H210" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="214" y="312" width="86" height="56" rx="10" fill="#151c26" stroke="#57b39c" stroke-opacity=".6"/>
+  <text x="232" y="345" fill="#e7e2d4" font-size="14">embed</text>
+  <path d="M300 340 C360 340, 420 300, 500 262" stroke="#57b39c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#b)"/>
+  <text x="330" y="322" fill="#57b39c" font-size="12">find nearest neighbours (top-k)</text>
+  <path d="M560 262 C540 330, 460 352, 400 352" stroke="#57b39c" stroke-width="2" fill="none" marker-end="url(#b)"/>
+  <rect x="310" y="384" width="240" height="52" rx="10" fill="#151c26" stroke="#dfa32b" stroke-opacity=".6"/>
+  <text x="328" y="406" fill="#e7e2d4" font-size="14">fetched chunks go into the</text>
+  <text x="328" y="424" fill="#e7e2d4" font-size="14">context window, with citations</text>
+  <path d="M550 410 H590" stroke="#aab5c1" stroke-width="2" marker-end="url(#a)"/>
+  <text x="598" y="408" fill="#dfa32b" font-size="15" font-weight="600">grounded answer</text>
+  <text x="598" y="428" fill="#aab5c1" font-size="12">not a guess — a lookup</text>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#aab5c1"/></marker>
+    <marker id="b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#57b39c"/></marker>
+  </defs>
+</svg>

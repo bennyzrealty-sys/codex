@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="460" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">EVERY AI ANSWER RESTS ON FIVE FLOORS</text>
+
+  <!-- floors, top to bottom -->
+  <rect x="120" y="66" width="520" height="56" rx="10" fill="#151c26" stroke="#dfa32b" stroke-width="2"/>
+  <text x="380" y="90" fill="#dfa32b" font-size="15" text-anchor="middle" font-weight="600">5 · apps &amp; operators — YOU</text>
+  <text x="380" y="110" fill="#aab5c1" font-size="11" text-anchor="middle">agents, watchers, pipelines, Homeberry</text>
+
+  <rect x="100" y="134" width="560" height="56" rx="10" fill="#151c26" stroke="#57b39c" stroke-opacity=".6"/>
+  <text x="380" y="158" fill="#e7e2d4" font-size="15" text-anchor="middle" font-weight="600">4 · model labs</text>
+  <text x="380" y="178" fill="#aab5c1" font-size="11" text-anchor="middle">Anthropic · OpenAI · Google · Meta · DeepSeek…</text>
+
+  <rect x="80" y="202" width="600" height="56" rx="10" fill="#151c26" stroke="#aab5c1" stroke-opacity=".5"/>
+  <text x="380" y="226" fill="#e7e2d4" font-size="15" text-anchor="middle" font-weight="600">3 · clouds</text>
+  <text x="380" y="246" fill="#aab5c1" font-size="11" text-anchor="middle">AWS · Azure · GCP — the buildings the labs rent</text>
+
+  <rect x="60" y="270" width="640" height="56" rx="10" fill="#151c26" stroke="#aab5c1" stroke-opacity=".5"/>
+  <text x="380" y="294" fill="#e7e2d4" font-size="15" text-anchor="middle" font-weight="600">2 · power &amp; datacentres</text>
+  <text x="380" y="314" fill="#aab5c1" font-size="11" text-anchor="middle">gigawatts, cooling, land — the new oil politics</text>
+
+  <rect x="40" y="338" width="680" height="56" rx="10" fill="#151c26" stroke="#cf6f57" stroke-width="2"/>
+  <text x="380" y="362" fill="#cf6f57" font-size="15" text-anchor="middle" font-weight="600">1 · chips — the narrowest point</text>
+  <text x="380" y="382" fill="#aab5c1" font-size="11" text-anchor="middle">ASML (one company's machines) → TSMC (one island's fabs) → NVIDIA</text>
+
+  <!-- side arrows -->
+  <path d="M710 94 C750 180, 750 300, 726 360" stroke="#dfa32b" stroke-width="2" fill="none" stroke-dasharray="6 5" marker-end="url(#g)"/>
+  <text x="30" y="424" fill="#e7e2d4" font-size="14">Every token you buy travels down this tower and back up.</text>
+  <text x="30" y="446" fill="#cf6f57" font-size="14">Squeeze any floor, and every floor above it feels it.</text>
+
+  <defs><marker id="g" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#dfa32b"/></marker></defs>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="400" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">LoRA — CAN'T OUT-TRAIN THEM; OUT-FOCUS THEM</text>
+
+  <!-- base model -->
+  <rect x="30" y="80" width="420" height="220" rx="14" fill="#151c26" stroke="#aab5c1" stroke-opacity=".5"/>
+  <text x="50" y="112" fill="#e7e2d4" font-size="17" font-weight="600">base model — billions of weights</text>
+  <text x="50" y="136" fill="#57b39c" font-size="14">❄ FROZEN — you never touch these</text>
+  <g fill="#aab5c1" fill-opacity=".25">
+    <g id="wrow"><rect x="50" y="156" width="30" height="16" rx="3"/><rect x="86" y="156" width="30" height="16" rx="3"/><rect x="122" y="156" width="30" height="16" rx="3"/><rect x="158" y="156" width="30" height="16" rx="3"/><rect x="194" y="156" width="30" height="16" rx="3"/><rect x="230" y="156" width="30" height="16" rx="3"/><rect x="266" y="156" width="30" height="16" rx="3"/><rect x="302" y="156" width="30" height="16" rx="3"/><rect x="338" y="156" width="30" height="16" rx="3"/><rect x="374" y="156" width="30" height="16" rx="3"/></g>
+    <use href="#wrow" y="22"/><use href="#wrow" y="44"/><use href="#wrow" y="66"/><use href="#wrow" y="88"/><use href="#wrow" y="110"/>
+  </g>
+  <text x="50" y="288" fill="#aab5c1" font-size="12">all the general intelligence stays as-is</text>
+
+  <!-- adapter -->
+  <rect x="510" y="118" width="90" height="60" rx="10" fill="#1a2330" stroke="#dfa32b" stroke-width="2"/>
+  <text x="555" y="144" fill="#dfa32b" font-size="15" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+  <text x="555" y="164" fill="#aab5c1" font-size="10" text-anchor="middle">low-rank matrix</text>
+  <rect x="510" y="200" width="90" height="60" rx="10" fill="#1a2330" stroke="#dfa32b" stroke-width="2"/>
+  <text x="555" y="226" fill="#dfa32b" font-size="15" text-anchor="middle" font-family="ui-monospace,monospace">B</text>
+  <text x="555" y="246" fill="#aab5c1" font-size="10" text-anchor="middle">low-rank matrix</text>
+  <line x1="555" y1="178" x2="555" y2="200" stroke="#dfa32b" stroke-width="2"/>
+  <text x="614" y="196" fill="#e7e2d4" font-size="13">the adapter —</text>
+  <text x="614" y="216" fill="#dfa32b" font-size="13" font-weight="600">~0.5% of the size</text>
+
+  <path d="M450 190 H505" stroke="#dfa32b" stroke-width="2.5" marker-end="url(#g)"/>
+  <text x="458" y="178" fill="#aab5c1" font-size="11">bolted on</text>
+
+  <!-- training arrow -->
+  <path d="M555 60 V112" stroke="#57b39c" stroke-width="3" marker-end="url(#t)"/>
+  <text x="575" y="70" fill="#57b39c" font-size="13" font-weight="600">train ONLY this,</text>
+  <text x="575" y="88" fill="#57b39c" font-size="13" font-weight="600">on YOUR examples</text>
+
+  <rect x="30" y="330" width="700" height="52" rx="10" fill="#151c26" stroke="#dfa32b" stroke-opacity=".5"/>
+  <text x="48" y="352" fill="#e7e2d4" font-size="14">Hours on one rented GPU, not months on thousands — a <tspan fill="#dfa32b">vertical model</tspan> that knows your niche:</text>
+  <text x="48" y="372" fill="#aab5c1" font-size="13">care-rota language, Malayalam voice, Homeberry's tone. The giants stay general; you go deep.</text>
+
+  <defs>
+    <marker id="g" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#dfa32b"/></marker>
+    <marker id="t" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#57b39c"/></marker>
+  </defs>
+</svg>

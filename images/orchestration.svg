@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">MULTI-AGENT ORCHESTRATION — THE CONDUCTOR AND THE SECTIONS</text>
+
+  <!-- conductor -->
+  <rect x="290" y="66" width="180" height="60" rx="12" fill="#151c26" stroke="#dfa32b" stroke-width="2"/>
+  <text x="380" y="92" fill="#e7e2d4" font-size="16" text-anchor="middle" font-weight="600">orchestrator</text>
+  <text x="380" y="112" fill="#aab5c1" font-size="11" text-anchor="middle">breaks the job down, assigns</text>
+
+  <!-- workers -->
+  <g stroke="#dfa32b" stroke-width="2" fill="none">
+    <path d="M330 126 C280 150, 220 160, 165 184" marker-end="url(#g)"/>
+    <path d="M380 126 V184" marker-end="url(#g)"/>
+    <path d="M430 126 C480 150, 540 160, 595 184" marker-end="url(#g)"/>
+  </g>
+  <g fill="#151c26" stroke="#57b39c" stroke-opacity=".7">
+    <rect x="60" y="190" width="200" height="76" rx="10"/>
+    <rect x="280" y="190" width="200" height="76" rx="10"/>
+    <rect x="500" y="190" width="200" height="76" rx="10"/>
+  </g>
+  <g fill="#e7e2d4" font-size="14" text-anchor="middle" font-weight="600">
+    <text x="160" y="216">worker A</text><text x="380" y="216">worker B</text><text x="600" y="216">worker C</text>
+  </g>
+  <g fill="#aab5c1" font-size="11" text-anchor="middle">
+    <text x="160" y="236">writes the scenes</text><text x="380" y="236">builds the site</text><text x="600" y="236">renders the clips</text>
+    <text x="160" y="252">own context, own tools</text><text x="380" y="252">own context, own tools</text><text x="600" y="252">own context, own tools</text>
+  </g>
+
+  <!-- critic -->
+  <g stroke="#57b39c" stroke-width="2" fill="none">
+    <path d="M160 266 C200 300, 280 314, 330 318" marker-end="url(#t)"/>
+    <path d="M380 266 V310" marker-end="url(#t)"/>
+    <path d="M600 266 C560 300, 480 314, 430 318" marker-end="url(#t)"/>
+  </g>
+  <rect x="290" y="316" width="180" height="60" rx="12" fill="#151c26" stroke="#cf6f57" stroke-width="1.5"/>
+  <text x="380" y="342" fill="#e7e2d4" font-size="15" text-anchor="middle" font-weight="600">critic / verifier</text>
+  <text x="380" y="362" fill="#aab5c1" font-size="11" text-anchor="middle">checks work before it merges</text>
+
+  <!-- hazard note -->
+  <rect x="530" y="300" width="200" height="92" rx="10" fill="#151c26" stroke="#cf6f57" stroke-opacity=".5"/>
+  <text x="546" y="324" fill="#cf6f57" font-size="12" font-weight="600">the hard parts</text>
+  <text x="546" y="344" fill="#aab5c1" font-size="11">two agents, one repo →</text>
+  <text x="546" y="360" fill="#aab5c1" font-size="11">races (your PR #93 rebase!),</text>
+  <text x="546" y="376" fill="#aab5c1" font-size="11">cost fan-out, error spread</text>
+
+  <defs>
+    <marker id="g" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#dfa32b"/></marker>
+    <marker id="t" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#57b39c"/></marker>
+  </defs>
+</svg>

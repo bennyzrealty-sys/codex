@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">MCP — THE USB PORT OF THE AGENT WORLD</text>
+
+  <!-- BEFORE -->
+  <text x="30" y="78" fill="#cf6f57" font-size="14" font-weight="600">before: every wire custom</text>
+  <g fill="#151c26" stroke="#aab5c1" stroke-opacity=".5">
+    <rect x="30" y="100" width="96" height="40" rx="8"/><rect x="30" y="170" width="96" height="40" rx="8"/><rect x="30" y="240" width="96" height="40" rx="8"/>
+    <rect x="230" y="90" width="110" height="38" rx="8"/><rect x="230" y="152" width="110" height="38" rx="8"/><rect x="230" y="214" width="110" height="38" rx="8"/><rect x="230" y="276" width="110" height="38" rx="8"/>
+  </g>
+  <g fill="#e7e2d4" font-size="13" text-anchor="middle">
+    <text x="78" y="125">Claude</text><text x="78" y="195">IDE agent</text><text x="78" y="265">your bot</text>
+    <text x="285" y="114">GitHub</text><text x="285" y="176">Higgsfield</text><text x="285" y="238">calendar</text><text x="285" y="300">Airtable</text>
+  </g>
+  <g stroke="#cf6f57" stroke-opacity=".55" stroke-width="1.5">
+    <line x1="126" y1="120" x2="230" y2="109"/><line x1="126" y1="120" x2="230" y2="171"/><line x1="126" y1="120" x2="230" y2="233"/><line x1="126" y1="120" x2="230" y2="295"/>
+    <line x1="126" y1="190" x2="230" y2="109"/><line x1="126" y1="190" x2="230" y2="171"/><line x1="126" y1="190" x2="230" y2="233"/><line x1="126" y1="190" x2="230" y2="295"/>
+    <line x1="126" y1="260" x2="230" y2="109"/><line x1="126" y1="260" x2="230" y2="171"/><line x1="126" y1="260" x2="230" y2="233"/><line x1="126" y1="260" x2="230" y2="295"/>
+  </g>
+  <text x="140" y="345" fill="#cf6f57" font-size="13" font-family="ui-monospace,monospace">3 × 4 = 12 bespoke builds</text>
+
+  <!-- AFTER -->
+  <text x="420" y="78" fill="#57b39c" font-size="14" font-weight="600">after: one standard plug</text>
+  <g fill="#151c26" stroke="#aab5c1" stroke-opacity=".5">
+    <rect x="410" y="100" width="96" height="40" rx="8"/><rect x="410" y="170" width="96" height="40" rx="8"/><rect x="410" y="240" width="96" height="40" rx="8"/>
+    <rect x="624" y="90" width="106" height="38" rx="8"/><rect x="624" y="152" width="106" height="38" rx="8"/><rect x="624" y="214" width="106" height="38" rx="8"/><rect x="624" y="276" width="106" height="38" rx="8"/>
+  </g>
+  <g fill="#e7e2d4" font-size="13" text-anchor="middle">
+    <text x="458" y="125">Claude</text><text x="458" y="195">IDE agent</text><text x="458" y="265">your bot</text>
+    <text x="677" y="114">GitHub</text><text x="677" y="176">Higgsfield</text><text x="677" y="238">calendar</text><text x="677" y="300">Airtable</text>
+  </g>
+  <rect x="552" y="86" width="36" height="236" rx="10" fill="#1a2330" stroke="#57b39c" stroke-width="2"/>
+  <text x="570" y="215" fill="#57b39c" font-size="13" text-anchor="middle" font-family="ui-monospace,monospace" transform="rotate(-90 570 205)">M C P</text>
+  <g stroke="#57b39c" stroke-width="2">
+    <line x1="506" y1="120" x2="552" y2="120"/><line x1="506" y1="190" x2="552" y2="190"/><line x1="506" y1="260" x2="552" y2="260"/>
+    <line x1="588" y1="109" x2="624" y2="109"/><line x1="588" y1="171" x2="624" y2="171"/><line x1="588" y1="233" x2="624" y2="233"/><line x1="588" y1="295" x2="624" y2="295"/>
+  </g>
+  <text x="520" y="345" fill="#57b39c" font-size="13" font-family="ui-monospace,monospace">3 + 4 = 7 plugs, built once</text>
+
+  <text x="30" y="392" fill="#e7e2d4" font-size="13">A server exposes tools once; any MCP-speaking AI can use them. <tspan fill="#aab5c1">Your "creative Joe" is one.</tspan></text>
+</svg>

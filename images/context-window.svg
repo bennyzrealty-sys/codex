@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="440" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">THE MODEL'S WHOLE WORLD IS ONE DESK</text>
+
+  <!-- the desk -->
+  <rect x="30" y="64" width="430" height="320" rx="14" fill="#151c26" stroke="#dfa32b" stroke-width="1.5" stroke-opacity=".7"/>
+  <text x="50" y="92" fill="#dfa32b" font-size="13" font-family="ui-monospace,monospace" letter-spacing="2">CONTEXT WINDOW</text>
+  <text x="50" y="110" fill="#aab5c1" font-size="12">everything the model can see — measured in tokens</text>
+
+  <g font-size="14" fill="#e7e2d4">
+    <rect x="50" y="124" width="390" height="38" rx="7" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".5"/>
+    <text x="64" y="148">system prompt — who to be, what the rules are</text>
+    <rect x="50" y="170" width="390" height="38" rx="7" fill="#1a2330" stroke="#57b39c" stroke-opacity=".5"/>
+    <text x="64" y="194">tool schemas — the hands it's been given</text>
+    <rect x="50" y="216" width="390" height="38" rx="7" fill="#1a2330" stroke="#aab5c1" stroke-opacity=".35"/>
+    <text x="64" y="240" fill="#aab5c1">retrieved documents · conversation so far</text>
+    <rect x="50" y="262" width="390" height="38" rx="7" fill="#1a2330" stroke="#57b39c" stroke-opacity=".5"/>
+    <text x="64" y="286">tool results fed back in</text>
+    <rect x="50" y="308" width="390" height="38" rx="7" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".7"/>
+    <text x="64" y="332">your message</text>
+  </g>
+  <text x="50" y="372" fill="#cf6f57" font-size="12">⚠ "lost in the middle" — material buried mid-window gets ignored</text>
+
+  <!-- outside the desk -->
+  <g opacity=".55">
+    <rect x="500" y="124" width="230" height="44" rx="8" fill="none" stroke="#aab5c1" stroke-dasharray="5 5"/>
+    <text x="516" y="151" fill="#aab5c1" font-size="14">yesterday's conversation</text>
+    <rect x="500" y="180" width="230" height="44" rx="8" fill="none" stroke="#aab5c1" stroke-dasharray="5 5"/>
+    <text x="516" y="207" fill="#aab5c1" font-size="14">your other files</text>
+    <rect x="500" y="236" width="230" height="44" rx="8" fill="none" stroke="#aab5c1" stroke-dasharray="5 5"/>
+    <text x="516" y="263" fill="#aab5c1" font-size="14">who you are</text>
+  </g>
+  <text x="500" y="312" fill="#cf6f57" font-size="14">✕ outside the window,</text>
+  <text x="500" y="332" fill="#cf6f57" font-size="14">none of this exists to it</text>
+
+  <text x="30" y="416" fill="#e7e2d4" font-size="14">Every session starts with total amnesia — <tspan fill="#dfa32b">"memory" is someone re-showing it notes.</tspan></text>
+</svg>

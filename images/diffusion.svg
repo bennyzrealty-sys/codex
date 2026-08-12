@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="400" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">TWO WAYS TO GENERATE</text>
+
+  <!-- next token -->
+  <text x="30" y="82" fill="#dfa32b" font-size="15" font-weight="600">text: finish the sentence</text>
+  <g font-family="ui-monospace,monospace" font-size="15">
+    <rect x="30" y="98" width="58" height="34" rx="7" fill="#151c26" stroke="#dfa32b" stroke-opacity=".6"/><text x="59" y="120" fill="#e7e2d4" text-anchor="middle">The</text>
+    <rect x="96" y="98" width="52" height="34" rx="7" fill="#151c26" stroke="#dfa32b" stroke-opacity=".6"/><text x="122" y="120" fill="#e7e2d4" text-anchor="middle">Pi</text>
+    <rect x="156" y="98" width="80" height="34" rx="7" fill="#151c26" stroke="#dfa32b" stroke-opacity=".6"/><text x="196" y="120" fill="#e7e2d4" text-anchor="middle">never</text>
+    <rect x="244" y="98" width="86" height="34" rx="7" fill="#1a2330" stroke="#57b39c" stroke-width="1.5"/><text x="287" y="120" fill="#57b39c" text-anchor="middle">sleeps</text>
+    <rect x="338" y="98" width="40" height="34" rx="7" fill="none" stroke="#aab5c1" stroke-dasharray="4 3"/><text x="358" y="120" fill="#aab5c1" text-anchor="middle">…</text>
+  </g>
+  <text x="30" y="160" fill="#aab5c1" font-size="12">one word-piece at a time, left to right — LLMs, code, chat</text>
+
+  <!-- diffusion -->
+  <text x="30" y="216" fill="#57b39c" font-size="15" font-weight="600">images &amp; video: clear the fog</text>
+  <g>
+    <rect x="30" y="232" width="120" height="90" rx="8" fill="#151c26" stroke="#aab5c1" stroke-opacity=".4"/>
+    <g fill="#aab5c1" opacity=".8">
+      <circle cx="52" cy="254" r="3"/><circle cx="88" cy="246" r="3"/><circle cx="122" cy="260" r="3"/><circle cx="66" cy="280" r="3"/><circle cx="104" cy="292" r="3"/><circle cx="44" cy="304" r="3"/><circle cx="132" cy="286" r="3"/><circle cx="80" cy="266" r="3"/><circle cx="116" cy="310" r="3"/><circle cx="58" cy="294" r="3"/><circle cx="98" cy="272" r="3"/><circle cx="136" cy="246" r="3"/>
+    </g>
+    <text x="90" y="342" fill="#aab5c1" font-size="11" text-anchor="middle">pure noise</text>
+  </g>
+  <path d="M158 277 H186" stroke="#57b39c" stroke-width="2" marker-end="url(#t)"/>
+  <g>
+    <rect x="190" y="232" width="120" height="90" rx="8" fill="#151c26" stroke="#aab5c1" stroke-opacity=".4"/>
+    <path d="M210 310 Q250 240 290 300" stroke="#57b39c" stroke-opacity=".4" stroke-width="8" fill="none"/>
+    <g fill="#aab5c1" opacity=".5"><circle cx="220" cy="252" r="3"/><circle cx="272" cy="262" r="3"/><circle cx="240" cy="296" r="3"/><circle cx="292" cy="246" r="3"/></g>
+    <text x="250" y="342" fill="#aab5c1" font-size="11" text-anchor="middle">a shape emerges</text>
+  </g>
+  <path d="M318 277 H346" stroke="#57b39c" stroke-width="2" marker-end="url(#t)"/>
+  <g>
+    <rect x="350" y="232" width="120" height="90" rx="8" fill="#151c26" stroke="#57b39c" stroke-width="1.5"/>
+    <path d="M368 312 Q400 236 452 302" stroke="#57b39c" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <circle cx="434" cy="254" r="12" fill="#dfa32b"/>
+    <text x="410" y="342" fill="#57b39c" font-size="11" text-anchor="middle">the image you asked for</text>
+  </g>
+  <text x="490" y="262" fill="#e7e2d4" font-size="13">sculpted step by step</text>
+  <text x="490" y="282" fill="#e7e2d4" font-size="13">toward your words —</text>
+  <text x="490" y="302" fill="#aab5c1" font-size="12">your restyle portraits and</text>
+  <text x="490" y="318" fill="#aab5c1" font-size="12">Seedance clips work this way</text>
+
+  <text x="30" y="378" fill="#e7e2d4" font-size="14">Video = doing this across time with consistency — <tspan fill="#dfa32b">the hardest trick in AI right now</tspan> (DiT models).</text>
+
+  <defs><marker id="t" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#57b39c"/></marker></defs>
+</svg>

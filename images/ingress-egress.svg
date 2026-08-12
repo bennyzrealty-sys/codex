@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="400" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">INGRESS IN · EGRESS OUT — AND THE DOORMAN AT THE GATE</text>
+
+  <!-- your box -->
+  <rect x="230" y="80" width="220" height="240" rx="14" fill="#151c26" stroke="#dfa32b" stroke-opacity=".7" stroke-width="1.5"/>
+  <text x="340" y="112" fill="#e7e2d4" font-size="16" text-anchor="middle" font-weight="600">your sandbox / Pi</text>
+  <text x="340" y="134" fill="#aab5c1" font-size="12" text-anchor="middle">agent · secrets · code</text>
+  <g fill="#1a2330" stroke="#dfa32b" stroke-opacity=".4">
+    <rect x="260" y="150" width="160" height="30" rx="6"/>
+    <rect x="260" y="188" width="160" height="30" rx="6"/>
+  </g>
+  <text x="270" y="170" fill="#aab5c1" font-size="12" font-family="ui-monospace,monospace">ANTHROPIC_API_KEY</text>
+  <text x="270" y="208" fill="#aab5c1" font-size="12">the working agent</text>
+
+  <!-- ingress -->
+  <path d="M60 160 H225" stroke="#57b39c" stroke-width="3" marker-end="url(#t)"/>
+  <text x="60" y="140" fill="#57b39c" font-size="15" font-weight="600">INGRESS</text>
+  <text x="60" y="188" fill="#aab5c1" font-size="12">traffic coming in —</text>
+  <text x="60" y="204" fill="#aab5c1" font-size="12">requests, webhooks</text>
+
+  <!-- doorman -->
+  <rect x="480" y="120" width="86" height="180" rx="10" fill="#1a2330" stroke="#cf6f57" stroke-width="1.5"/>
+  <text x="523" y="222" fill="#cf6f57" font-size="12" text-anchor="middle" font-family="ui-monospace,monospace" transform="rotate(-90 523 210)">PROXY · DOORMAN</text>
+
+  <!-- egress attempts -->
+  <g stroke-width="2.5" fill="none">
+    <path d="M450 150 H480 M566 150 H640" stroke="#57b39c" marker-end="url(#t)"/>
+    <path d="M450 210 H480 M566 210 H640" stroke="#57b39c" marker-end="url(#t)"/>
+    <path d="M450 270 H480" stroke="#cf6f57"/>
+  </g>
+  <g font-size="12" font-family="ui-monospace,monospace">
+    <text x="644" y="155" fill="#57b39c">github.com ✓</text>
+    <text x="644" y="215" fill="#57b39c">npmjs.org ✓</text>
+    <text x="596" y="275" fill="#cf6f57">homeberry.ai ✗ 403</text>
+  </g>
+  <text x="452" y="100" fill="#dfa32b" font-size="15" font-weight="600">EGRESS — traffic going out</text>
+
+  <rect x="30" y="336" width="700" height="52" rx="10" fill="#151c26" stroke="#cf6f57" stroke-opacity=".5"/>
+  <text x="48" y="358" fill="#e7e2d4" font-size="13">Out is the dangerous direction — how secrets escape and hijacked agents phone home.</text>
+  <text x="48" y="378" fill="#cf6f57" font-size="13">Default-deny everything, allowlist the few — and a 403 gets reported, never routed around.</text>
+
+  <defs><marker id="t" markerWidth="9" markerHeight="9" refX="6" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 z" fill="#57b39c"/></marker></defs>
+</svg>
