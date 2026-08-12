@@ -242,14 +242,35 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
 /* ---------- §C · organs ------------------------------------ */
 
 /* the field — a living neural background */
+/* the atmosphere — the six stages of the path, rendered as light.
+   codex.js writes these three properties from one scroll fraction;
+   the whole ground drifts turmeric → teal → ice → ember → bone →
+   brass as you descend, a fraction of a shade per screen. The alphas
+   stay under .09 so nothing here ever costs the text its contrast. */
+:root{
+  --atmo-a:rgba(223,163,43,.085);
+  --atmo-b:rgba(87,179,156,.05);
+  --atmo-ink:#0f141b;
+  --stage-line:rgba(223,163,43,.42);
+  --stage-glow:rgba(223,163,43,.5);
+  --atmo-veil0:rgba(15,20,27,0);
+  --atmo-veil:rgba(15,20,27,.82);
+}
+#atmos{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(90% 62% at 12% 0%, var(--atmo-a), transparent 64%),
+    radial-gradient(85% 58% at 88% 100%, var(--atmo-b), transparent 62%),
+    var(--atmo-ink);
+}
 #field{
   position:fixed; inset:0; z-index:0; pointer-events:none;
   opacity:.55; transition:opacity 1.2s ease;
 }
 body > .wrap{position:relative; z-index:1}
-body::after{  /* vignette so text always wins over the field */
+body::after{  /* vignette so text always wins over the field — in the stage's own ground */
   content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
-  background:radial-gradient(120% 80% at 50% 0%,rgba(15,20,27,0) 20%,rgba(15,20,27,.86) 78%);
+  background:radial-gradient(120% 80% at 50% 0%,var(--atmo-veil0) 20%,var(--atmo-veil) 78%);
 }
 
 /* the rail */
@@ -257,13 +278,13 @@ body::after{  /* vignette so text always wins over the field */
   position:fixed; top:0; left:0; height:2px; width:100%; z-index:40; pointer-events:none;
   background:linear-gradient(90deg,var(--turmeric),var(--teal) 55%,var(--ember));
   transform:scaleX(0); transform-origin:0 50%;
-  box-shadow:0 0 14px rgba(223,163,43,.5);
+  box-shadow:0 0 14px var(--stage-glow);
 }
 #here{
   position:fixed; top:12px; right:12px; z-index:40; pointer-events:none;
   font-family:'Spline Sans Mono',monospace; font-size:.6rem; letter-spacing:.2em;
   text-transform:uppercase; color:var(--dim);
-  background:rgba(13,18,25,.95); border:1px solid var(--line); border-radius:99px;
+  background:rgba(13,18,25,.95); border:1px solid var(--stage-line); border-radius:99px;
   padding:5px 12px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
   box-shadow:var(--lift1);
   opacity:0; transform:translateY(-6px); transition:opacity .4s var(--ease),transform .4s var(--ease);
