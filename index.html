@@ -136,7 +136,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
   <div class="kicker">Field manual · two voices · eleven layers</div>
   <h1>The Operator's <em>Codex</em></h1>
   <p class="sub">Everything Joe runs — the machine, the models, the agents, the pipes — explained from zero to the frontier. Every idea speaks twice: once plainly, once in the language of the trade.</p>
-  <div class="stamp"><span>v1.5 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>refresh cycle: <b>every 2 days</b> (Layer 08)</span></div>
+  <div class="stamp"><span>v1.6 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>refresh cycle: <b>every 2 days</b> (Layer 08)</span></div>
   <div class="legend">
     <p><span class="dotg"></span><b>Plain voice</b> — how you'd say it across the kitchen table, or to a five-year-old.</p>
     <p><span class="dott"></span><b>Technical voice</b> — the exact jargon the industry uses, so you can read docs, job specs, and error logs without flinching.</p>
@@ -480,10 +480,12 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
   <p class="lede" style="margin-top:-6px">Nothing here recaps what you've shipped. These are blueprints for things that don't exist yet — chosen because each one starts on this desk and can outgrow it.</p>
 
   <div class="blend"><span class="tag n">UNBUILT 01</span><h4>The neuron — intelligence as traffic, not boxes</h4>
-    <p>Stop calling the Pi a computer; demote it to a <em>neuron</em>. Every device you own — Pi, laptop, old phone in a drawer — runs the same tiny daemon: local memory, a small local model, and a synapse bus (MQTT or NATS) they all publish to. A "thought" is a message any neuron may pick up, enrich, and re-emit; answers are whatever the traffic converges on. Score the routes — when a device's contribution proves useful, its weight rises — and the mesh literally learns which neuron is good at what, the way brains strengthen paths that fire well. The intelligence lives in the wiring, not in any box, so the brain grows by grafting on another £30 neuron — never by replacing anything.</p></div>
+    <p>Stop calling the Pi a computer; demote it to a <em>neuron</em>. Every device you own — Pi, laptop, old phone in a drawer — runs the same tiny daemon: local memory, a small local model, and a synapse bus (MQTT or NATS) they all publish to. A "thought" is a message any neuron may pick up, enrich, and re-emit; answers are whatever the traffic converges on. Score the routes — when a device's contribution proves useful, its weight rises — and the mesh literally learns which neuron is good at what, the way brains strengthen paths that fire well. The intelligence lives in the wiring, not in any box, so the brain grows by grafting on another £30 neuron — never by replacing anything.</p>
+    <p><b>Status: blueprint shipped.</b> <code>neuron/</code> in this repo — the Thought protocol, MQTT synapse, pluggable minds (rule → Ollama → Claude), Hebbian weights, per-body memory, and a Pi install kit. Two bodies can trade their first thought the day the Pi boots.</p></div>
 
   <div class="blend"><span class="tag a">UNBUILT 02</span><h4>The repo organism — projects that feed each other</h4>
-    <p>Right now every project lives in its own repo like organs in separate jars. Wire them into one body: each repo emits its events — commits, failures, TODOs, open questions — onto the node's bus, and a conductor agent on the Pi reads the whole organism nightly. A utility written in one repo gets proposed, as a pull request, to the others that need it. A bug pattern found in one becomes a test in all. An idea parked in one repo's notes surfaces when another repo grows the hands to build it. The shared vector memory on the SSD is the corpus callosum. No product on earth does cross-repo <em>cross-pollination</em>; your repos would stop being archives and start being tissue.</p></div>
+    <p>Right now every project lives in its own repo like organs in separate jars. Wire them into one body: each repo emits its events — commits, failures, TODOs, open questions — onto the node's bus, and a conductor agent on the Pi reads the whole organism nightly. A utility written in one repo gets proposed, as a pull request, to the others that need it. A bug pattern found in one becomes a test in all. An idea parked in one repo's notes surfaces when another repo grows the hands to build it. The shared vector memory on the SSD is the corpus callosum. No product on earth does cross-repo <em>cross-pollination</em>; your repos would stop being archives and start being tissue.</p>
+    <p><b>Status: skeleton shipped.</b> The conductor rides the neuron mesh as its first organ — <code>neuron/organs/conductor.py</code>: collect → think → emit/PR, dry-run by default, etiquette enforced in code.</p></div>
 
   <div class="blend"><span class="tag s">UNBUILT 03</span><h4>The house that dreams</h4>
     <p>Real brains don't learn while awake — they consolidate at night, replaying the day. Give the node the same trick: at 2 a.m. it replays everything it sensed and logged since sunrise — events, transcripts, sensor traces — and runs slow, free, local inference over the batch: what was anomalous, what repeated, what almost happened, what should be remembered forever versus forgotten. It writes the survivors into long-term memory and leaves a five-line dream journal for breakfast. Dreaming is just offline replay plus compression — and a 10-watt box with nothing to do at night is the perfect dreamer.</p></div>
@@ -551,9 +553,10 @@ You maintain operators-codex.html. Today is {date}.
 </pre>
   </details>
 
-  <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.5, dated 12 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
+  <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.6, dated 12 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
   <h3>Changelog</h3>
   <div class="gloss"><!-- CHANGELOG:START -->
+    <p><b>2026-08-12</b> — v1.6 · UNBUILT 01 and 02 become buildable: <code>neuron/</code> shipped — the household mesh (Thought protocol, MQTT synapse, rule/Ollama/Claude minds, Hebbian route-weights, per-body SQLite memory, Pi install kit) with the repo-organism conductor as its first organ. Smoke-tested; two-body quickstart in the README. · action for Joe: run <code>neuron/install.sh</code> on the Pi at rung L0, then <code>say ping</code> from the laptop.</p>
     <p><b>2026-08-12</b> — v1.5 · Layer 07 rebuilt facing forward: the Blend (a recap of shipped projects) replaced by the synthesis bench — six hardware grafts that multiply the Pi 5 (NVMe spine, Hailo retina, new senses, distributed inference, brainstem+cortex pairing, eGPU) — and the Unbuilt: five blueprints that exist in no repo yet (the neuron mesh, the repo organism, the house that dreams, the seed vault, the hundred-year machine). · action for Joe: pick one graft and one unbuilt; start both this week.</p>
     <p><b>2026-08-11</b> — v1.4 · The Deep Field appendix (JA3/JA4, RASP/Frida, HTTP/2 Rapid Reset, proxy reputation, model internals) condensed into two-voice cards; <code>brain/</code> shipped — a runnable offline RAG (Ollama + ChromaDB) making Layer 14's memory real. · action for Joe: pull the two Ollama models on the Pi, then <code>python ingest.py</code>.</p>
     <p><b>2026-08-11</b> — v1.3 · four new layers grafted on: The Wire (config/keys/injection), The Swarm &amp; the Shield (devices/recon/defence), The Forge (training/LoRA/RAG), The Deployment &amp; Four Pillars (edge/JA4/proxies). Security topics written as defence; the abuse line drawn in the open. · action for Joe: build Pillars 3 &amp; 4, study Pillars 1 &amp; 2.</p>
@@ -1014,7 +1017,7 @@ await b.close();</pre></div>
 </section>
 
 <footer>
-  THE OPERATOR'S CODEX · v1.5 · built 12 Aug 2026<br>
+  THE OPERATOR'S CODEX · v1.6 · built 12 Aug 2026<br>
   fifteen layers · one deep-field appendix · a brain that runs<br>
   Sheffield ⇄ Kottayam · committed is saved, pushed is safe
 </footer>
