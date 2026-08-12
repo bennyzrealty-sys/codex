@@ -65,15 +65,90 @@ header h1 em{font-style:italic;font-weight:400;color:var(--turmeric)}
 .dotg,.dott{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px}
 .dotg{background:var(--turmeric)} .dott{background:var(--teal)}
 
-/* toc */
-nav{margin:34px 0 0}
-nav a{display:flex;gap:14px;align-items:baseline;padding:11px 4px;border-bottom:1px solid var(--line);color:var(--bone);
-  transition:padding-left .3s var(--ease),color .3s var(--ease)}
-nav a:hover{padding-left:12px;color:var(--turmeric)}
-nav a:hover .n{color:var(--bone)}
-nav .n{font-family:'Spline Sans Mono',monospace;color:var(--turmeric);font-size:.75rem;min-width:62px}
-nav .t{font-family:'Fraunces',serif;font-size:1.06rem}
-nav .d{margin-left:auto;color:var(--dim);font-size:.78rem;text-align:right}
+/* the hero — a cinematic opening over the field */
+.hero{min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding:56px 0 34px}
+.hero .kicker{animation:kick 1.6s var(--ease) .15s both}
+.hero h1,.hero .sub,.hero .stamp,.hero .gestures,.hero .begin{animation:heroin 1s var(--ease) both}
+.hero h1{animation-delay:.05s}
+.hero .sub{animation-delay:.2s}
+.hero .stamp{animation-delay:.35s}
+.hero .gestures{animation-delay:.5s}
+.hero .begin{animation-delay:.65s}
+@keyframes kick{from{opacity:0;letter-spacing:.5em;filter:blur(4px)}to{opacity:1}}
+@keyframes heroin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero .stamp{gap:8px}
+.hero .stamp span{border:1px solid var(--glass-line);background:var(--glass);border-radius:99px;
+  padding:6px 12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.gestures{display:grid;gap:10px;margin-top:32px}
+.gesture{border:1px solid var(--glass-line);background:var(--glass);border-radius:var(--r2);
+  padding:13px 15px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.gesture .gk{font-family:'Spline Sans Mono',monospace;font-size:.64rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--turmeric);display:block;margin-bottom:6px}
+.gesture p{margin:0;font-size:.88rem;color:var(--dim);line-height:1.6}
+.legend .study{color:var(--dim);font-size:.85rem;margin-top:10px}
+.begin{display:inline-flex;align-items:center;gap:12px;margin-top:34px;align-self:flex-start;
+  font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--turmeric);border:1px solid rgba(223,163,43,.4);border-radius:99px;padding:12px 22px;
+  background:rgba(223,163,43,.06);transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.begin b{font-weight:400;animation:dip 2.2s var(--ease) infinite}
+@keyframes dip{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+.begin:hover{background:var(--turmeric);color:var(--ink);transform:translateY(-2px)}
+
+/* the atlas — the constellation of layers */
+.atlas{margin:44px 0 0;scroll-margin-top:24px}
+.atlashead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 14px}
+.ah-t{font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem}
+.ah-d{color:var(--dim);font-size:.9rem;max-width:52ch;flex:1;min-width:220px}
+.ah-ring{margin-left:auto;display:flex;align-items:center;gap:9px;
+  font-family:'Spline Sans Mono',monospace;font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim)}
+.ah-ring svg{display:block}
+.stagekey{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
+.sk{font-family:'Spline Sans Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;border:1px solid var(--line);color:var(--sc,var(--dim))}
+/* the six stage hues — kept inside the diagram palette family */
+[data-stage="1"]{--sc:var(--turmeric)}
+[data-stage="2"]{--sc:var(--teal)}
+[data-stage="3"]{--sc:var(--ice)}
+[data-stage="4"]{--sc:var(--ember)}
+[data-stage="5"]{--sc:var(--bone)}
+[data-stage="6"]{--sc:#b7ab63}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;grid-auto-flow:dense}
+.tile{position:relative;display:flex;flex-direction:column;overflow:hidden;color:var(--bone);
+  border:1px solid var(--line);border-radius:var(--r2);background:var(--panel);
+  transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease)}
+.tile::before{ /* stage seam along the top edge */
+  content:"";position:absolute;inset:0 0 auto 0;height:2px;z-index:2;
+  background:linear-gradient(90deg,transparent,var(--sc,var(--turmeric)),transparent);opacity:.55}
+.tile:hover{transform:translateY(-3px);border-color:var(--sc,var(--turmeric));box-shadow:var(--lift2)}
+.tile.big{grid-column:span 2;grid-row:span 2}
+.tile.wide{grid-column:span 2}
+.tile.wide .thumbwrap{aspect-ratio:4.6/1}
+.tile .thumbwrap{display:block;aspect-ratio:2.4/1;overflow:hidden;position:relative;
+  border-bottom:1px solid var(--line);background:#0a0e13}
+.tile.big .thumbwrap{aspect-ratio:auto;flex:1;min-height:120px}
+.tile .thumbwrap::after{ /* legibility wash so tile titles always win */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,14,19,0) 55%,rgba(10,14,19,.55))}
+.tile .thumb{width:100%;height:100%;object-fit:cover;display:block;opacity:.8;
+  transform:scale(1.02);transition:transform .6s var(--ease),opacity .6s var(--ease)}
+.tile:hover .thumb{transform:scale(1.08);opacity:1}
+.tile .glyphslot svg{width:100%;height:100%;display:block}
+.tile .n{font-family:'Spline Sans Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  color:var(--sc,var(--turmeric));padding:10px 12px 0}
+.tile .t{font-family:'Fraunces',serif;font-size:1.02rem;font-weight:600;padding:2px 12px 0;line-height:1.25}
+.tile .d{color:var(--dim);font-size:.78rem;padding:4px 12px 12px;margin-top:auto}
+.tile .tcount{position:absolute;top:8px;right:8px;z-index:2;
+  font-family:'Spline Sans Mono',monospace;font-size:.56rem;letter-spacing:.12em;color:var(--bone);
+  background:rgba(10,14,19,.72);border:1px solid var(--line);border-radius:99px;padding:3px 8px}
+.tile.seen{border-color:rgba(87,179,156,.45)}
+.tile.seen .n::after{content:" ✓";color:var(--teal);letter-spacing:0}
+.thumbwrap.live,.thumbwrap.gloss{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:radial-gradient(80% 120% at 50% 0%,rgba(207,111,87,.14),#0a0e13 70%)}
+.thumbwrap.gloss{background:radial-gradient(80% 120% at 50% 0%,rgba(223,163,43,.14),#0a0e13 70%)}
+.livecast{font-family:'Spline Sans Mono',monospace;font-size:.6rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);text-align:center;padding:0 12px}
+.glossmark{font-size:1.8rem;color:var(--turmeric);line-height:1}
 
 /* layers */
 section{padding-top:64px}
@@ -660,6 +735,13 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
   #door .word h3{font-size:1.3rem}
 }
 
+@media (min-width:768px){
+  .wrap{max-width:860px}
+  .gestures{grid-template-columns:repeat(3,1fr)}
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .hero{padding-top:64px}
+}
+
 /* ---------- §E · the still setting -------------------------- */
 @media (prefers-reduced-motion:reduce){
   #field{display:none}
@@ -672,5 +754,9 @@ figure.fig:hover::after,figure.fig:focus-within::after{opacity:.92}
   details.card[open] > *{animation:none !important}
   #door .leaf{display:none}
   #lens .hint{animation:none}
+  .hero .kicker,.hero h1,.hero .sub,.hero .stamp,.hero .gestures,.hero .begin,.begin b{animation:none}
+  .tile,.tile .thumb,.begin{transition:none}
+  .tile:hover{transform:none}
+  .tile:hover .thumb{transform:none}
   *{scroll-behavior:auto !important}
 }

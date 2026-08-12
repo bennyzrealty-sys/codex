@@ -614,6 +614,120 @@
      7 · THE DOOR — double-click a word, the wall opens
      ========================================================== */
 
+  /* ---- a procedural illustration, seeded by the word itself ----
+     Shared by the door (a room with no art still gets a picture)
+     and the atlas (a layer with no diagram still gets a tile). */
+  function glyph(term, W, H, label) {
+    W = W || 720; H = H || 300;
+    var seed = 0;
+    for (var i = 0; i < term.length; i++) seed = (seed * 31 + term.charCodeAt(i)) >>> 0;
+    function rnd() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+    var cx = W / 2, cy = H / 2;
+    var cols = ['#dfa32b', '#57b39c', '#cf6f57'];
+    var pts = [], rings = 3, k = 0;
+    var scale = Math.min(W / 720, 1);
+    for (var r = 1; r <= rings; r++) {
+      var n = 3 + r * 2 + Math.floor(rnd() * 3);
+      var rad = (34 + r * 42) * (H / 300);
+      var off = rnd() * 6.28;
+      for (var j = 0; j < n; j++) {
+        var a = off + (j / n) * 6.283 + (rnd() - .5) * .3;
+        pts.push({
+          x: cx + Math.cos(a) * rad * 1.85, y: cy + Math.sin(a) * rad * .82,
+          r: (2 + rnd() * 3.2) * Math.max(scale, .7), c: cols[(k++) % 3], d: (rnd() * 3).toFixed(2)
+        });
+      }
+    }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" ' +
+      'aria-label="Abstract constellation for ' + esc(term) + '" preserveAspectRatio="xMidYMid slice">' +
+      '<rect width="' + W + '" height="' + H + '" fill="#0a0e13"/>';
+    s += '<g stroke="#e7e2d4" stroke-opacity=".10" stroke-width="1">';
+    for (var p = 0; p < pts.length; p++) {
+      var q = pts[(p + 1 + Math.floor(rnd() * 3)) % pts.length];
+      s += '<line x1="' + pts[p].x.toFixed(1) + '" y1="' + pts[p].y.toFixed(1) +
+           '" x2="' + q.x.toFixed(1) + '" y2="' + q.y.toFixed(1) + '"/>';
+    }
+    s += '</g>';
+    s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (26 * (H / 300)).toFixed(1) +
+         '" fill="none" stroke="#dfa32b" stroke-opacity=".5"/>';
+    s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (7 * (H / 300)).toFixed(1) + '" fill="#dfa32b"/>';
+    pts.forEach(function (p) {
+      s += '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + p.r.toFixed(1) +
+           '" fill="' + p.c + '" fill-opacity=".8">' +
+           (STILL ? '' : '<animate attributeName="fill-opacity" values="0.8;0.25;0.8" dur="' +
+            (2.6 + parseFloat(p.d)).toFixed(1) + 's" repeatCount="indefinite"/>') +
+           '</circle>';
+    });
+    if (label !== false) {
+      s += '<text x="' + cx + '" y="' + (H - 18) + '" text-anchor="middle" fill="#aab5c1" ' +
+           'font-family="ui-monospace,monospace" font-size="12" letter-spacing="3">' +
+           esc(term.toUpperCase()) + '</text>';
+    }
+    return s + '</svg>';
+  }
+
+  /* ==========================================================
+     6b · THE ATLAS — the constellation of layers up top
+     ========================================================== */
+  function atlas() {
+    var host = $('#atlas'); if (!host) return;
+    var tiles = $$('.tile[data-layer]', host);
+
+    /* imageless layers get a seeded constellation tile */
+    $$('.glyphslot', host).forEach(function (slot) {
+      slot.innerHTML = glyph(slot.getAttribute('data-glyph') || 'codex', 480, 200, false);
+    });
+
+    /* card counts are computed from the live DOM, so a caretaker
+       sweep that adds cards can never leave a stale number here */
+    tiles.forEach(function (t) {
+      var id = t.getAttribute('data-layer');
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      var n = $$('details.card', sec).length;
+      if (!n) return;
+      var chip = document.createElement('span');
+      chip.className = 'tcount';
+      chip.textContent = n + (n === 1 ? ' card' : ' cards');
+      t.appendChild(chip);
+    });
+
+    /* seen state + the header ring — read-only reuse of the trail's keys */
+    var ring = $('#atlasring');
+    function paint() {
+      var done = 0;
+      tiles.forEach(function (t) {
+        var ok = store.get('codex.seen.' + t.getAttribute('data-layer')) === '1';
+        t.classList.toggle('seen', ok);
+        if (ok) done += 1;
+      });
+      if (ring) {
+        var R = 15, C = 2 * Math.PI * R, frac = tiles.length ? done / tiles.length : 0;
+        ring.innerHTML =
+          '<svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true">' +
+          '<circle cx="19" cy="19" r="' + R + '" fill="none" stroke="rgba(231,226,212,.14)" stroke-width="3"/>' +
+          '<circle cx="19" cy="19" r="' + R + '" fill="none" stroke="#57b39c" stroke-width="3" ' +
+          'stroke-linecap="round" stroke-dasharray="' + C.toFixed(1) + '" ' +
+          'stroke-dashoffset="' + (C * (1 - frac)).toFixed(1) + '" ' +
+          'transform="rotate(-90 19 19)"/></svg>' +
+          '<span>' + done + ' of ' + tiles.length + ' read</span>';
+      }
+    }
+    paint();
+    /* the trail writes its keys on a settle; a slow poll keeps the
+       tiles honest without wiring the two modules together */
+    setInterval(paint, 2500);
+
+    /* at a desk, the reading path stands open as a route stepper */
+    var path = $('#path');
+    if (path && window.matchMedia) {
+      var mq = window.matchMedia('(min-width:1024px)');
+      function fit() { if (mq.matches) path.setAttribute('open', ''); }
+      if (mq.addEventListener) mq.addEventListener('change', fit);
+      fit();
+    }
+  }
+
   /* Hand-written entries carry both voices. Everything else is
      assembled at runtime from the glossary and the layers, so the
      door never goes stale when the caretaker rewrites a card. */
@@ -839,51 +953,6 @@
           layer: sec ? ($('.lnum', sec) ? $('.lnum', sec).textContent.trim() : '') : ''
         };
       });
-    }
-
-    /* ---- a procedural illustration, so every door has a picture ---- */
-    function glyph(term) {
-      var seed = 0;
-      for (var i = 0; i < term.length; i++) seed = (seed * 31 + term.charCodeAt(i)) >>> 0;
-      function rnd() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
-      var W = 720, H = 300, cx = W / 2, cy = H / 2;
-      var cols = ['#dfa32b', '#57b39c', '#cf6f57'];
-      var pts = [], rings = 3, k = 0;
-      for (var r = 1; r <= rings; r++) {
-        var n = 3 + r * 2 + Math.floor(rnd() * 3);
-        var rad = 34 + r * 42;
-        var off = rnd() * 6.28;
-        for (var j = 0; j < n; j++) {
-          var a = off + (j / n) * 6.283 + (rnd() - .5) * .3;
-          pts.push({
-            x: cx + Math.cos(a) * rad * 1.85, y: cy + Math.sin(a) * rad * .82,
-            r: 2 + rnd() * 3.2, c: cols[(k++) % 3], d: (rnd() * 3).toFixed(2)
-          });
-        }
-      }
-      var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" ' +
-        'aria-label="Abstract constellation for ' + esc(term) + '">' +
-        '<rect width="' + W + '" height="' + H + '" fill="#0a0e13"/>';
-      s += '<g stroke="#e7e2d4" stroke-opacity=".10" stroke-width="1">';
-      for (var p = 0; p < pts.length; p++) {
-        var q = pts[(p + 1 + Math.floor(rnd() * 3)) % pts.length];
-        s += '<line x1="' + pts[p].x.toFixed(1) + '" y1="' + pts[p].y.toFixed(1) +
-             '" x2="' + q.x.toFixed(1) + '" y2="' + q.y.toFixed(1) + '"/>';
-      }
-      s += '</g>';
-      s += '<circle cx="' + cx + '" cy="' + cy + '" r="26" fill="none" stroke="#dfa32b" stroke-opacity=".5"/>';
-      s += '<circle cx="' + cx + '" cy="' + cy + '" r="7" fill="#dfa32b"/>';
-      pts.forEach(function (p) {
-        s += '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + p.r.toFixed(1) +
-             '" fill="' + p.c + '" fill-opacity=".8">' +
-             (STILL ? '' : '<animate attributeName="fill-opacity" values="0.8;0.25;0.8" dur="' +
-              (2.6 + parseFloat(p.d)).toFixed(1) + 's" repeatCount="indefinite"/>') +
-             '</circle>';
-      });
-      s += '<text x="' + cx + '" y="' + (H - 18) + '" text-anchor="middle" fill="#aab5c1" ' +
-           'font-family="ui-monospace,monospace" font-size="12" letter-spacing="3">' +
-           esc(term.toUpperCase()) + '</text>';
-      return s + '</svg>';
     }
 
     function make() {
@@ -1201,7 +1270,7 @@
      9 · boot
      ========================================================== */
   function boot() {
-    field(); rail(); trail(); reveal(); wireLens(); marks(); pulse(); wireDoor(); seek();
+    field(); rail(); trail(); reveal(); wireLens(); marks(); pulse(); atlas(); wireDoor(); seek();
 
     /* the door count, printed where the header promises it */
     var dc = $('#doorcount');

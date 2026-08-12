@@ -28,45 +28,68 @@ body{margin:0;background:var(--ink);color:var(--bone);
 <body><div class="wrap">
 
 <header>
-  <div class="kicker">Field manual · two voices · twenty-six layers · live</div>
-  <h1>The Operator's <em>Codex</em></h1>
-  <p class="sub">Everything Joe runs — the machine, the models, the agents, the pipes — explained from zero to the frontier. Every idea speaks twice: once plainly, once in the language of the trade.</p>
-  <div class="stamp"><span>v2.2 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>live feed: <b>every 2 days</b></span><span><b>26 layers</b> · 40 field diagrams · 6 photographs</span><span><b id="doorcount">…</b> doors behind the words</span></div>
+  <div class="hero">
+    <div class="kicker">Field manual · two voices · twenty-six layers · live</div>
+    <h1>The Operator's <em>Codex</em></h1>
+    <p class="sub">Everything Joe runs — the machine, the models, the agents, the pipes — explained from zero to the frontier. Every idea speaks twice: once plainly, once in the language of the trade.</p>
+    <div class="stamp"><span>v2.2 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>live feed: <b>every 2 days</b></span><span><b>26 layers</b> · 40 field diagrams · 6 photographs</span><span><b id="doorcount">…</b> doors behind the words</span></div>
+    <div class="gestures" aria-label="Three things this page does that a page should not">
+      <div class="gesture"><span class="gk">⟐ double-click any word</span><p>and the wall opens on it — both voices, an illustration, and the way back into the layer it came from.</p></div>
+      <div class="gesture"><span class="gk">⤢ tap any diagram</span><p>to throw it full screen and pinch it as far as you like — or press <code>f</code> for the browser's own.</p></div>
+      <div class="gesture"><span class="gk">/ press slash</span><p>to jump to any layer, card, or word by name. <code>⌘K</code> works too.</p></div>
+    </div>
+    <a class="begin" href="#atlas"><span>descend into the atlas</span><b>↓</b></a>
+  </div>
   <div class="legend">
     <p><span class="dotg"></span><b>Plain voice</b> — how you'd say it across the kitchen table, or to a five-year-old.</p>
     <p><span class="dott"></span><b>Technical voice</b> — the exact jargon the industry uses, so you can read docs, job specs, and error logs without flinching.</p>
-    <p style="color:var(--dim);font-size:.85rem;margin-top:10px">Study loop: read plain → say it out loud in your own words → read technical → use the term for real the same day. Tap any card to open it.</p>
-    <p style="color:var(--dim);font-size:.85rem;margin-top:10px"><b style="color:var(--turmeric)">Three things this page does that a page should not.</b> <b>Double-click any word</b> and the wall opens on it — both voices, an illustration, and the way back into the layer it came from. <b>Tap any diagram</b> to throw it full screen and pinch it as far as you like. <b>Press <code>/</code></b> to jump anywhere by name.</p>
+    <p class="study">Study loop: read plain → say it out loud in your own words → read technical → use the term for real the same day. Tap any card to open it.</p>
   </div>
-  <nav>
-    <a href="#live"><span class="n">LIVE</span><span class="t">The Latest</span><span class="d">every 2 days · IT · AI · hardware · cyber</span></a>
-    <a href="#l1"><span class="n">LAYER 01</span><span class="t">The Machine</span><span class="d">silicon &amp; memory</span></a>
-    <a href="#l2"><span class="n">LAYER 02</span><span class="t">The Model</span><span class="d">how LLMs work</span></a>
-    <a href="#l3"><span class="n">LAYER 03</span><span class="t">The Agent</span><span class="d">AI that acts</span></a>
-    <a href="#l4"><span class="n">LAYER 04</span><span class="t">The Frontier</span><span class="d">Aug 2026 snapshot</span></a>
-    <a href="#l5"><span class="n">LAYER 05</span><span class="t">The Builder's World</span><span class="d">Git · Vercel · APIs · egress</span></a>
-    <a href="#l6"><span class="n">LAYER 06</span><span class="t">The Decoder</span><span class="d">your screenshots, annotated</span></a>
-    <a href="#l7"><span class="n">LAYER 07</span><span class="t">The Sovereign Node</span><span class="d">Pi 5 evolution, grafts &amp; the unbuilt</span></a>
-    <a href="#l8"><span class="n">LAYER 08</span><span class="t">The Living Guide</span><span class="d">how this updates itself</span></a>
-    <a href="#l9"><span class="n">LAYER 09</span><span class="t">The Map &amp; the Chokepoints</span><span class="d">companies · restrictions</span></a>
-    <a href="#l10"><span class="n">LAYER 10</span><span class="t">The Graveyard &amp; the Pivots</span><span class="d">dead ends · shifts</span></a>
-    <a href="#l11"><span class="n">LAYER 11</span><span class="t">Gaps, Leaks &amp; the Nervous System</span><span class="d">unsolved · CLI/cloud · repo-neurons</span></a>
-    <a href="#l12"><span class="n">LAYER 12</span><span class="t">The Wire</span><span class="d">config · keys · injection</span></a>
-    <a href="#l13"><span class="n">LAYER 13</span><span class="t">The Swarm &amp; the Shield</span><span class="d">devices · recon · defence</span></a>
-    <a href="#l14"><span class="n">LAYER 14</span><span class="t">The Forge</span><span class="d">training · LoRA · RAG</span></a>
-    <a href="#l15"><span class="n">LAYER 15</span><span class="t">The Deployment &amp; Four Pillars</span><span class="d">edge · JA4 · proxies</span></a>
-    <a href="#l16"><span class="n">LAYER 16</span><span class="t">The Wire Beneath</span><span class="d">DNS · TCP · TLS · NAT</span></a>
-    <a href="#l17"><span class="n">LAYER 17</span><span class="t">The Operating System</span><span class="d">Linux · systemd · SSH</span></a>
-    <a href="#l18"><span class="n">LAYER 18</span><span class="t">The Store</span><span class="d">databases · backups · queues</span></a>
-    <a href="#l19"><span class="n">LAYER 19</span><span class="t">The Ground Floor</span><span class="d">security fundamentals</span></a>
-    <a href="#l20"><span class="n">LAYER 20</span><span class="t">The Law &amp; the Leash</span><span class="d">GDPR · AI Act · NHS</span></a>
-    <a href="#l21"><span class="n">LAYER 21</span><span class="t">The Craft</span><span class="d">context · schemas · evals</span></a>
-    <a href="#l22"><span class="n">LAYER 22</span><span class="t">The Senses</span><span class="d">vision · speech · robots</span></a>
-    <a href="#l23"><span class="n">LAYER 23</span><span class="t">The Economics &amp; the Physics</span><span class="d">cost · energy · silicon</span></a>
-    <a href="#l24"><span class="n">LAYER 24</span><span class="t">The Surface</span><span class="d">HTML · CSS · JS · access</span></a>
-    <a href="#l25"><span class="n">LAYER 25</span><span class="t">The Proof</span><span class="d">tests · types · statistics</span></a>
-    <a href="#l26"><span class="n">LAYER 26</span><span class="t">The Rented Estate</span><span class="d">IaaS · IAM · the bill</span></a>
-    <a href="#deep"><span class="n">APPENDIX</span><span class="t">The Deep Field</span><span class="d">mechanism-level notes</span></a>
+  <nav id="atlas" class="atlas" aria-label="Atlas of layers">
+    <div class="atlashead">
+      <span class="ah-t">The Atlas</span>
+      <span class="ah-d">Twenty-six layers in six stages. Tap a tile to descend; a tile turns teal once you have genuinely sat in that layer.</span>
+      <span class="ah-ring" id="atlasring"></span>
+    </div>
+    <div class="stagekey" aria-hidden="true">
+      <span class="sk" data-stage="1">1 · the ground</span>
+      <span class="sk" data-stage="2">2 · the mind</span>
+      <span class="sk" data-stage="3">3 · the workshop</span>
+      <span class="sk" data-stage="4">4 · the shield</span>
+      <span class="sk" data-stage="5">5 · the world</span>
+      <span class="sk" data-stage="6">6 · the build</span>
+    </div>
+    <div class="tiles">
+    <a class="tile wide" href="#live" data-layer="live" data-stage="6"><span class="thumbwrap live"><span class="livedot"></span><span class="livecast">swept every two days · nothing ever deleted</span></span><span class="n">LIVE</span><span class="t">The Latest</span><span class="d">IT · AI · hardware · cyber</span></a>
+    <a class="tile" href="#l1" data-layer="l1" data-stage="1"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/machine-anatomy.svg" width="760" height="480"></span><span class="n">01</span><span class="t">The Machine</span><span class="d">silicon &amp; memory</span></a>
+    <a class="tile big" href="#l2" data-layer="l2" data-stage="2"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/next-token-loop.svg" width="760" height="420"></span><span class="n">02</span><span class="t">The Model</span><span class="d">how LLMs work</span></a>
+    <a class="tile" href="#l3" data-layer="l3" data-stage="2"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/agent-loop.svg" width="760" height="440"></span><span class="n">03</span><span class="t">The Agent</span><span class="d">AI that acts</span></a>
+    <a class="tile" href="#l4" data-layer="l4" data-stage="6"><span class="thumbwrap glyphslot" data-glyph="the frontier"></span><span class="n">04</span><span class="t">The Frontier</span><span class="d">Aug 2026 snapshot</span></a>
+    <a class="tile" href="#l5" data-layer="l5" data-stage="3"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/git-graph.svg" width="760" height="440"></span><span class="n">05</span><span class="t">The Builder's World</span><span class="d">Git · Vercel · APIs · egress</span></a>
+    <a class="tile" href="#l6" data-layer="l6" data-stage="3"><span class="thumbwrap glyphslot" data-glyph="the decoder"></span><span class="n">06</span><span class="t">The Decoder</span><span class="d">your screenshots, annotated</span></a>
+    <a class="tile big" href="#l7" data-layer="l7" data-stage="6"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/pi5-photo.jpg" width="1280" height="960"></span><span class="n">07</span><span class="t">The Sovereign Node</span><span class="d">Pi 5 evolution, grafts &amp; the unbuilt</span></a>
+    <a class="tile" href="#l8" data-layer="l8" data-stage="6"><span class="thumbwrap glyphslot" data-glyph="the living guide"></span><span class="n">08</span><span class="t">The Living Guide</span><span class="d">how this updates itself</span></a>
+    <a class="tile" href="#l9" data-layer="l9" data-stage="5"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/tower-of-dependence.svg" width="760" height="460"></span><span class="n">09</span><span class="t">The Map &amp; the Chokepoints</span><span class="d">companies · restrictions</span></a>
+    <a class="tile" href="#l10" data-layer="l10" data-stage="5"><span class="thumbwrap glyphslot" data-glyph="the graveyard"></span><span class="n">10</span><span class="t">The Graveyard &amp; the Pivots</span><span class="d">dead ends · shifts</span></a>
+    <a class="tile" href="#l11" data-layer="l11" data-stage="5"><span class="thumbwrap glyphslot" data-glyph="the nervous system"></span><span class="n">11</span><span class="t">Gaps, Leaks &amp; the Nervous System</span><span class="d">unsolved · CLI/cloud · repo-neurons</span></a>
+    <a class="tile" href="#l12" data-layer="l12" data-stage="4"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/webhook-vs-polling.svg" width="760" height="400"></span><span class="n">12</span><span class="t">The Wire</span><span class="d">config · keys · injection</span></a>
+    <a class="tile" href="#l13" data-layer="l13" data-stage="4"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/sandbox-vs-room.svg" width="760" height="400"></span><span class="n">13</span><span class="t">The Swarm &amp; the Shield</span><span class="d">devices · recon · defence</span></a>
+    <a class="tile" href="#l14" data-layer="l14" data-stage="6"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/summit-photo.jpg" width="1280" height="720"></span><span class="n">14</span><span class="t">The Forge</span><span class="d">training · LoRA · RAG</span></a>
+    <a class="tile" href="#l15" data-layer="l15" data-stage="3"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/runtimes.svg" width="760" height="440"></span><span class="n">15</span><span class="t">The Deployment &amp; Four Pillars</span><span class="d">edge · JA4 · proxies</span></a>
+    <a class="tile" href="#l16" data-layer="l16" data-stage="1"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/packet-journey.svg" width="760" height="420"></span><span class="n">16</span><span class="t">The Wire Beneath</span><span class="d">DNS · TCP · TLS · NAT</span></a>
+    <a class="tile" href="#l17" data-layer="l17" data-stage="1"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/linux-anatomy.svg" width="760" height="420"></span><span class="n">17</span><span class="t">The Operating System</span><span class="d">Linux · systemd · SSH</span></a>
+    <a class="tile" href="#l18" data-layer="l18" data-stage="1"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/store-shapes.svg" width="760" height="420"></span><span class="n">18</span><span class="t">The Store</span><span class="d">databases · backups · queues</span></a>
+    <a class="tile big" href="#l19" data-layer="l19" data-stage="4"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/cia-triad.svg" width="760" height="420"></span><span class="n">19</span><span class="t">The Ground Floor</span><span class="d">security fundamentals</span></a>
+    <a class="tile" href="#l20" data-layer="l20" data-stage="5"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/risk-tiers.svg" width="760" height="420"></span><span class="n">20</span><span class="t">The Law &amp; the Leash</span><span class="d">GDPR · AI Act · NHS</span></a>
+    <a class="tile" href="#l21" data-layer="l21" data-stage="2"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/context-engineering.svg" width="760" height="420"></span><span class="n">21</span><span class="t">The Craft</span><span class="d">context · schemas · evals</span></a>
+    <a class="tile" href="#l22" data-layer="l22" data-stage="2"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/modalities.svg" width="760" height="420"></span><span class="n">22</span><span class="t">The Senses</span><span class="d">vision · speech · robots</span></a>
+    <a class="tile" href="#l23" data-layer="l23" data-stage="5"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/cost-shape.svg" width="760" height="420"></span><span class="n">23</span><span class="t">The Economics &amp; the Physics</span><span class="d">cost · energy · silicon</span></a>
+    <a class="tile" href="#l24" data-layer="l24" data-stage="3"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/render-path.svg" width="760" height="420"></span><span class="n">24</span><span class="t">The Surface</span><span class="d">HTML · CSS · JS · access</span></a>
+    <a class="tile" href="#l25" data-layer="l25" data-stage="3"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/test-shape.svg" width="760" height="420"></span><span class="n">25</span><span class="t">The Proof</span><span class="d">tests · types · statistics</span></a>
+    <a class="tile" href="#l26" data-layer="l26" data-stage="3"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/cloud-shapes.svg" width="760" height="420"></span><span class="n">26</span><span class="t">The Rented Estate</span><span class="d">IaaS · IAM · the bill</span></a>
+    <a class="tile" href="#deep" data-layer="deep" data-stage="4"><span class="thumbwrap glyphslot" data-glyph="the deep field"></span><span class="n">APPENDIX</span><span class="t">The Deep Field</span><span class="d">mechanism-level notes</span></a>
+    <a class="tile" href="#gloss" data-layer="gloss" data-stage="6"><span class="thumbwrap gloss"><span class="glossmark">⟐</span><span class="livecast">every term here is a door</span></span><span class="n">APPENDIX</span><span class="t">The Glossary</span><span class="d">sixty seconds a word</span></a>
+    </div>
   </nav>
 
   <details class="path" id="path">
