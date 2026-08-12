@@ -144,6 +144,79 @@
   }
 
   /* ==========================================================
+     2b · THE TRAIL — which layers you have actually sat in
+     The numbering is the order these layers were written; the path
+     panel is the order to read them, and ticks itself as you go.
+     ========================================================== */
+  var DWELL = 5000;   // ms in a section before it counts as read
+  function trail() {
+    var panel = $('#path');
+    if (!panel) return;
+    var links = $$('.plink', panel);
+    var secs = $$('section[id]');
+    var cur = null, since = 0;
+
+    function key(id) { return 'codex.seen.' + id; }
+    function seen(id) { return store.get(key(id)) === '1'; }
+
+    function paint() {
+      var done = 0;
+      links.forEach(function (a) {
+        var ok = seen(a.getAttribute('data-layer'));
+        a.classList.toggle('seen', ok);
+        if (ok) done += 1;
+      });
+      var slot = $('#pathcount');
+      if (slot) {
+        slot.textContent = done
+          ? done + ' of ' + links.length + ' stops read on this device'
+          : 'six stages · ' + links.length + ' stops · nothing read yet on this device';
+      }
+    }
+
+    function settle() {
+      if (cur && Date.now() - since >= DWELL && !seen(cur)) {
+        store.set(key(cur), '1');
+        paint();
+      }
+    }
+
+    function where() {
+      var found = null, mid = window.innerHeight * 0.45;
+      for (var i = 0; i < secs.length; i++) {
+        var r = secs[i].getBoundingClientRect();
+        if (r.top <= mid && r.bottom > mid) { found = secs[i].id; break; }
+      }
+      if (found !== cur) { settle(); cur = found; since = Date.now(); }
+    }
+
+    var tick = false;
+    window.addEventListener('scroll', function () {
+      if (!tick) { tick = true; requestAnimationFrame(function () { tick = false; where(); }); }
+    }, { passive: true });
+    /* poll as well as listen — a jump from the path panel, a hash link or a
+       restored scroll position can land you in a section without a scroll
+       event ever reaching here */
+    setInterval(function () { where(); settle(); }, 1500);
+    window.addEventListener('beforeunload', settle);
+    document.addEventListener('visibilitychange', function () { if (document.hidden) settle(); });
+
+    var reset = $('#pathreset');
+    if (reset) {
+      reset.addEventListener('click', function () {
+        links.forEach(function (a) {
+          try { localStorage.removeItem(key(a.getAttribute('data-layer'))); } catch (e) {}
+        });
+        cur = null; since = Date.now();
+        paint();
+      });
+    }
+
+    where();
+    paint();
+  }
+
+  /* ==========================================================
      3 · REVEAL — things arrive
      ========================================================== */
   function reveal() {
@@ -480,9 +553,13 @@
       var dom = (e.domain || 'it').toLowerCase();
       var isNew = daysAgo(e.date) <= 2;
       var fresh = isNew;
+      /* width/height reserve the space before the image loads, so the feed
+         does not shove the rest of the page down as you read it */
+      var dim = (e.artw && e.arth) ? ' width="' + e.artw + '" height="' + e.arth + '"' : '';
       var art = e.art
         ? '<figure class="fig"><img src="' + esc(e.art) + '" alt="' + esc(e.artalt || e.title || '') +
-          '" loading="lazy"><figcaption>' + esc(e.artcap || e.title || '') + '</figcaption></figure>'
+          '" loading="lazy"' + dim + '><figcaption>' + esc(e.artcap || e.title || '') +
+          '</figcaption></figure>'
         : '';
       var tools = (e.tools && e.tools.length)
         ? '<p class="kit">' + e.tools.map(function (t) { return '<code>' + esc(t) + '</code>'; }).join(' ') +
@@ -1124,7 +1201,7 @@
      9 · boot
      ========================================================== */
   function boot() {
-    field(); rail(); reveal(); wireLens(); marks(); pulse(); wireDoor(); seek();
+    field(); rail(); trail(); reveal(); wireLens(); marks(); pulse(); wireDoor(); seek();
 
     /* the door count, printed where the header promises it */
     var dc = $('#doorcount');

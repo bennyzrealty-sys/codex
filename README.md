@@ -12,6 +12,10 @@ Your link: **https://bennyzrealty-sys.github.io/codex/**
 ## What the page does
 
 - **23 layers**, every idea in two voices — plain, then technical.
+- **The suggested path** — the layer numbers are the order they were *written*;
+  the path panel in the header is the order to *read* them, in six stages. It
+  ticks each stop once you have genuinely spent time in it (kept on-device only,
+  with a reset button).
 - **The Latest** — a live feed across IT, AI, hardware and cyber security,
   swept **every 2 days**, each item in both voices with an illustration,
   where it lands on your setup, and the tools to reach for.
@@ -57,11 +61,17 @@ every open loads the live, freshly-swept page.
 ## Maintenance tools
 
     python scripts/tag_cards.py      # give new cards stable ids (idempotent)
+    python scripts/size_figures.py   # stamp every figure with its intrinsic size
     python scripts/make_figures.py   # redraw every generated field diagram
 
-`tag_cards.py` runs in CI after each sweep, because Layer 04 is rewritten
-without ids. Ids are never reassigned, so the read-counters in your browser
-survive every refresh.
+`tag_cards.py` and `size_figures.py` both run in CI after each sweep — Layer 04
+is rewritten without ids, and any new feed image needs its dimensions recorded.
+Ids are never reassigned, so the read-counters in your browser survive every
+refresh.
+
+`size_figures.py` is not cosmetic: without width/height the browser reserves no
+space for a lazy image, the page reflows as it loads, and a jump to a deep
+anchor lands you in the wrong layer.
 
 ## Teach the Pi to report (from day L0)
 
