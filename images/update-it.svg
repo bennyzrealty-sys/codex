@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="200" fill="#0d1219"/>
+  <circle cx="712.0" cy="100.0" r="2" fill="#9fb4d8" fill-opacity="0.25"/>
+  <circle cx="692.9" cy="129.9" r="3" fill="#9fb4d8" fill-opacity="0.38"/>
+  <line x1="712.0" y1="100.0" x2="692.9" y2="129.9" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="643.4" cy="152.8" r="4" fill="#9fb4d8" fill-opacity="0.51"/>
+  <line x1="692.9" y1="129.9" x2="643.4" y2="152.8" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="584.2" cy="163.6" r="5" fill="#9fb4d8" fill-opacity="0.64"/>
+  <line x1="643.4" y1="152.8" x2="584.2" y2="163.6" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="539.9" cy="159.6" r="2" fill="#9fb4d8" fill-opacity="0.77"/>
+  <line x1="584.2" y1="163.6" x2="539.9" y2="159.6" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="528.9" cy="141.9" r="3" fill="#9fb4d8" fill-opacity="0.25"/>
+  <line x1="539.9" y1="159.6" x2="528.9" y2="141.9" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="555.9" cy="114.5" r="4" fill="#9fb4d8" fill-opacity="0.38"/>
+  <line x1="528.9" y1="141.9" x2="555.9" y2="114.5" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="609.5" cy="83.7" r="5" fill="#9fb4d8" fill-opacity="0.51"/>
+  <line x1="555.9" y1="114.5" x2="609.5" y2="83.7" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="667.5" cy="56.7" r="2" fill="#9fb4d8" fill-opacity="0.64"/>
+  <line x1="609.5" y1="83.7" x2="667.5" y2="56.7" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="705.7" cy="39.7" r="3" fill="#9fb4d8" fill-opacity="0.77"/>
+  <line x1="667.5" y1="56.7" x2="705.7" y2="39.7" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="708.3" cy="36.7" r="4" fill="#9fb4d8" fill-opacity="0.25"/>
+  <line x1="705.7" y1="39.7" x2="708.3" y2="36.7" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="674.1" cy="48.2" r="5" fill="#9fb4d8" fill-opacity="0.38"/>
+  <line x1="708.3" y1="36.7" x2="674.1" y2="48.2" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="617.4" cy="71.8" r="2" fill="#9fb4d8" fill-opacity="0.51"/>
+  <line x1="674.1" y1="48.2" x2="617.4" y2="71.8" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="561.8" cy="101.8" r="3" fill="#9fb4d8" fill-opacity="0.64"/>
+  <line x1="617.4" y1="71.8" x2="561.8" y2="101.8" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="530.4" cy="131.5" r="4" fill="#9fb4d8" fill-opacity="0.77"/>
+  <line x1="561.8" y1="101.8" x2="530.4" y2="131.5" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="536.3" cy="153.8" r="5" fill="#9fb4d8" fill-opacity="0.25"/>
+  <line x1="530.4" y1="131.5" x2="536.3" y2="153.8" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="577.0" cy="163.8" r="2" fill="#9fb4d8" fill-opacity="0.38"/>
+  <line x1="536.3" y1="153.8" x2="577.0" y2="163.8" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="635.7" cy="159.0" r="3" fill="#9fb4d8" fill-opacity="0.51"/>
+  <line x1="577.0" y1="163.8" x2="635.7" y2="159.0" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="687.8" cy="140.5" r="4" fill="#9fb4d8" fill-opacity="0.64"/>
+  <line x1="635.7" y1="159.0" x2="687.8" y2="140.5" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="711.7" cy="112.7" r="5" fill="#9fb4d8" fill-opacity="0.77"/>
+  <line x1="687.8" y1="140.5" x2="711.7" y2="112.7" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="697.4" cy="82.0" r="2" fill="#9fb4d8" fill-opacity="0.25"/>
+  <line x1="711.7" y1="112.7" x2="697.4" y2="82.0" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <circle cx="651.0" cy="55.4" r="3" fill="#9fb4d8" fill-opacity="0.38"/>
+  <line x1="697.4" y1="82.0" x2="651.0" y2="55.4" stroke="#9fb4d8" stroke-opacity=".16"/>
+  <rect x="0" y="0" width="6" height="200" fill="#9fb4d8"/>
+  <text x="38" y="62" fill="#9fb4d8" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">INFORMATION TECHNOLOGY</text>
+  <text x="38" y="106" fill="#e7e2d4" font-size="30" font-weight="600" font-family="Fraunces,Georgia,serif">IT</text>
+  <text x="38" y="140" fill="#aab5c1" fill-opacity="1" font-size="14" text-anchor="start" font-weight="400">the plumbing everything else stands on</text>
+  <text x="38" y="172" fill="#aab5c1" fill-opacity=".7" font-size="11" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">the operator's codex · live feed · refreshed every two days</text>
+</svg>

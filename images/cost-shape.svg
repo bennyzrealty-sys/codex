@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">WHERE THE MONEY ACTUALLY GOES — AND WHICH WAY IT MOVES</text>
+  <rect x="30" y="76" width="340" height="150" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="48" y="104" fill="#dfa32b" fill-opacity="1" font-size="14" text-anchor="start" font-weight="600">training — capex</text>
+  <text x="48" y="130" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">paid once, enormous, rare</text>
+  <text x="48" y="152" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">tens of thousands of GPUs</text>
+  <text x="48" y="172" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">communication-bound, not FLOP-bound</text>
+  <text x="48" y="200" fill="#cf6f57" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">you will never do this</text>
+  <rect x="390" y="76" width="340" height="150" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="408" y="104" fill="#57b39c" fill-opacity="1" font-size="14" text-anchor="start" font-weight="600">inference — opex</text>
+  <text x="408" y="130" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">paid per token, forever</text>
+  <text x="408" y="152" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">memory-bandwidth-bound</text>
+  <text x="408" y="172" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">falls ~10× a year at equal quality</text>
+  <text x="408" y="200" fill="#57b39c" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">this is your entire bill</text>
+  <rect x="30" y="244" width="700" height="76" rx="9" fill="#1a2330" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="48" y="270" fill="#9fb4d8" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">the three levers a solo operator actually pulls</text>
+  <text x="48" y="294" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">route cheap models to easy work · cache the prompt prefix · run the boring</text>
+  <text x="48" y="312" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">volume locally, where the marginal cost of a token is electricity.</text>
+  <rect x="30" y="336" width="700" height="62" rx="9" fill="#151c26" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="48" y="362" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">and the trap: reasoning models spend output tokens to think. A 3× better answer</text>
+  <text x="48" y="381" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">can cost 30× — which is fine for a decision and ruinous for a loop.</text>
+</svg>

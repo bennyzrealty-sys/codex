@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">SIX SHAPES OF MEMORY — PICK BY THE QUESTION YOU WILL ASK</text>
+  <rect x="30" y="76" width="216" height="108" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="46" y="106" fill="#57b39c" fill-opacity="1" font-size="14" text-anchor="start" font-weight="600">relational</text>
+  <text x="46" y="130" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">postgres · sqlite</text>
+  <text x="46" y="154" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">rows, joins, transactions</text>
+  <rect x="266" y="76" width="216" height="108" rx="9" fill="#151c26" stroke="#9fb4d8" stroke-opacity=".55"/>
+  <text x="282" y="106" fill="#9fb4d8" fill-opacity="1" font-size="14" text-anchor="start" font-weight="600">document</text>
+  <text x="282" y="130" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">mongo · json fields</text>
+  <text x="282" y="154" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">one blob per thing</text>
+  <rect x="502" y="76" width="216" height="108" rx="9" fill="#151c26" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="518" y="106" fill="#dfa32b" fill-opacity="1" font-size="14" text-anchor="start" font-weight="600">key–value</text>
+  <text x="518" y="130" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">redis · kv</text>
+  <text x="518" y="154" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">one lookup, no thinking</text>
+  <rect x="30" y="204" width="216" height="108" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="46" y="234" fill="#57b39c" fill-opacity="1" font-size="14" text-anchor="start" font-weight="600">vector</text>
+  <text x="46" y="258" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">chroma · pgvector</text>
+  <text x="46" y="282" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">nearest by meaning</text>
+  <rect x="266" y="204" width="216" height="108" rx="9" fill="#151c26" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="282" y="234" fill="#cf6f57" fill-opacity="1" font-size="14" text-anchor="start" font-weight="600">queue</text>
+  <text x="282" y="258" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">nats · sqs</text>
+  <text x="282" y="282" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">work waiting its turn</text>
+  <rect x="502" y="204" width="216" height="108" rx="9" fill="#151c26" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="518" y="234" fill="#aab5c1" fill-opacity="1" font-size="14" text-anchor="start" font-weight="600">object</text>
+  <text x="518" y="258" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">s3 · disk</text>
+  <text x="518" y="282" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">big files, cheap, slow</text>
+  <rect x="30" y="336" width="700" height="62" rx="9" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="48" y="362" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">on one 10-watt node: postgres with pgvector is five of these six at once —</text>
+  <text x="48" y="381" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">rows, JSON, key–value, vectors and a queue. Reach for a second store when it hurts.</text>
+</svg>

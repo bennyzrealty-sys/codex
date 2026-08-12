@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="200" fill="#0d1219"/>
+  <circle cx="712.0" cy="100.0" r="2" fill="#dfa32b" fill-opacity="0.25"/>
+  <circle cx="695.8" cy="127.6" r="3" fill="#dfa32b" fill-opacity="0.38"/>
+  <line x1="712.0" y1="100.0" x2="695.8" y2="127.6" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="653.0" cy="149.7" r="4" fill="#dfa32b" fill-opacity="0.51"/>
+  <line x1="695.8" y1="127.6" x2="653.0" y2="149.7" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="598.5" cy="162.2" r="5" fill="#dfa32b" fill-opacity="0.64"/>
+  <line x1="653.0" y1="149.7" x2="598.5" y2="162.2" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="551.6" cy="162.6" r="2" fill="#dfa32b" fill-opacity="0.77"/>
+  <line x1="598.5" y1="162.2" x2="551.6" y2="162.6" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="528.8" cy="150.8" r="3" fill="#dfa32b" fill-opacity="0.25"/>
+  <line x1="551.6" y1="162.6" x2="528.8" y2="150.8" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="538.0" cy="129.1" r="4" fill="#dfa32b" fill-opacity="0.38"/>
+  <line x1="528.8" y1="150.8" x2="538.0" y2="129.1" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="576.1" cy="101.7" r="5" fill="#dfa32b" fill-opacity="0.51"/>
+  <line x1="538.0" y1="129.1" x2="576.1" y2="101.7" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="629.6" cy="74.0" r="2" fill="#dfa32b" fill-opacity="0.64"/>
+  <line x1="576.1" y1="101.7" x2="629.6" y2="74.0" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="679.7" cy="51.3" r="3" fill="#dfa32b" fill-opacity="0.77"/>
+  <line x1="629.6" y1="74.0" x2="679.7" y2="51.3" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="708.9" cy="38.2" r="4" fill="#dfa32b" fill-opacity="0.25"/>
+  <line x1="679.7" y1="51.3" x2="708.9" y2="38.2" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="706.7" cy="37.1" r="5" fill="#dfa32b" fill-opacity="0.38"/>
+  <line x1="708.9" y1="38.2" x2="706.7" y2="37.1" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="674.1" cy="48.2" r="2" fill="#dfa32b" fill-opacity="0.51"/>
+  <line x1="706.7" y1="37.1" x2="674.1" y2="48.2" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="622.4" cy="69.5" r="3" fill="#dfa32b" fill-opacity="0.64"/>
+  <line x1="674.1" y1="48.2" x2="622.4" y2="69.5" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="569.9" cy="96.6" r="4" fill="#dfa32b" fill-opacity="0.77"/>
+  <line x1="622.4" y1="69.5" x2="569.9" y2="96.6" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="535.0" cy="124.5" r="5" fill="#dfa32b" fill-opacity="0.25"/>
+  <line x1="569.9" y1="96.6" x2="535.0" y2="124.5" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="530.0" cy="147.6" r="2" fill="#dfa32b" fill-opacity="0.38"/>
+  <line x1="535.0" y1="124.5" x2="530.0" y2="147.6" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="556.7" cy="161.4" r="3" fill="#dfa32b" fill-opacity="0.51"/>
+  <line x1="530.0" y1="147.6" x2="556.7" y2="161.4" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="605.6" cy="163.2" r="4" fill="#dfa32b" fill-opacity="0.64"/>
+  <line x1="556.7" y1="161.4" x2="605.6" y2="163.2" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="659.6" cy="152.8" r="5" fill="#dfa32b" fill-opacity="0.77"/>
+  <line x1="605.6" y1="163.2" x2="659.6" y2="152.8" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="699.7" cy="132.0" r="2" fill="#dfa32b" fill-opacity="0.25"/>
+  <line x1="659.6" y1="152.8" x2="699.7" y2="132.0" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="711.7" cy="105.0" r="3" fill="#dfa32b" fill-opacity="0.38"/>
+  <line x1="699.7" y1="132.0" x2="711.7" y2="105.0" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="691.5" cy="77.1" r="4" fill="#dfa32b" fill-opacity="0.51"/>
+  <line x1="711.7" y1="105.0" x2="691.5" y2="77.1" stroke="#dfa32b" stroke-opacity=".16"/>
+  <circle cx="646.2" cy="53.6" r="5" fill="#dfa32b" fill-opacity="0.64"/>
+  <line x1="691.5" y1="77.1" x2="646.2" y2="53.6" stroke="#dfa32b" stroke-opacity=".16"/>
+  <rect x="0" y="0" width="6" height="200" fill="#dfa32b"/>
+  <text x="38" y="62" fill="#dfa32b" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">HARDWARE &amp; SILICON</text>
+  <text x="38" y="106" fill="#e7e2d4" font-size="30" font-weight="600" font-family="Fraunces,Georgia,serif">Hardware</text>
+  <text x="38" y="140" fill="#aab5c1" fill-opacity="1" font-size="14" text-anchor="start" font-weight="400">chips, boards, memory and the machines that print them</text>
+  <text x="38" y="172" fill="#aab5c1" fill-opacity=".7" font-size="11" text-anchor="start" font-weight="400" font-family="ui-monospace,monospace">the operator's codex · live feed · refreshed every two days</text>
+</svg>

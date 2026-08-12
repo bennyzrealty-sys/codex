@@ -1,0 +1,189 @@
+{
+  "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
+  "cadence_days": 2,
+  "policy": "append-only · newest first · nothing is ever deleted",
+  "generated": "2026-08-12",
+  "next_scan": "2026-08-14 06:00 UTC",
+  "entries": [
+    {
+      "id": "2026-08-12-npm-worm",
+      "date": "2026-08-12",
+      "domain": "cyber",
+      "title": "A worm published 2,234 poisoned packages in a single day",
+      "oneline": "The npm registry, not the network, is now the front door",
+      "plain": "On 4 August a self-spreading piece of malware got into the npm package registry — the shared cupboard almost every JavaScript project takes its ingredients from. It used stolen credentials from twelve organisations to publish over two thousand tampered versions across 444 package names, and each infected project it reached handed it more credentials to spread further. Nobody was hacked in the film sense. People simply ran the install command they run every day.",
+      "tech": "The keyv/cacheable compromise (tracked as the \"Shai-Hulud\" worm) published 2,234 malicious versions across 444 package names using credentials harvested from twelve orgs; downstream reach is reported at roughly 2bn monthly downloads. Vector: preinstall lifecycle scripts plus IDE hooks, self-propagating via exfiltrated publish tokens. It follows the axios hijack, the @redhat-cloud-services namespace push, and the TanStack pull_request_target/OIDC compromise earlier in the year.",
+      "lands": "Directly on anyone whose agent runs `npm install`, and on every Claude Code or CI session that installs dependencies in a fresh container — a stolen token in that container is a stolen token. The defences are unglamorous and total: commit a lockfile with integrity hashes, pin GitHub Actions by commit SHA rather than tag, set `npm config set ignore-scripts true` where you can live without lifecycle scripts, and require provenance for anything you publish yourself. On the node, this is the argument for building images from pinned digests instead of `latest`.",
+      "tools": ["npm ci", "ignore-scripts", "socket.dev", "osv-scanner", "sigstore / npm provenance"],
+      "toolnote": "osv-scanner runs offline against your lockfile in seconds and is the cheapest thing on this list.",
+      "art": "images/update-cyber.svg",
+      "artcap": "supply chain — the attack nobody has to break in for",
+      "sources": [
+        { "label": "CSA Singapore advisory AD-2026-009", "url": "https://www.csa.gov.sg/alerts-and-advisories/advisories/ad-2026-009/" },
+        { "label": "Snyk — inside the keyv compromise", "url": "https://snyk.io/blog/inside-keyv-npm-compromise-preinstall-malware-trusted-provenance-ide-hooks/" },
+        { "label": "Unit 42 — npm threat landscape", "url": "https://unit42.paloaltonetworks.com/monitoring-npm-supply-chain-attacks/" }
+      ],
+      "touches": ["l5-containers-ephemeral-environments", "l11-leaks"]
+    },
+    {
+      "id": "2026-08-11-kev-three",
+      "date": "2026-08-11",
+      "domain": "cyber",
+      "title": "Three more flaws confirmed as actively exploited",
+      "oneline": "CISA's KEV list is the only patch queue that matters tonight",
+      "plain": "A government body keeps a public list of security holes that criminals are provably using right now — not might use, are using. Three more went on it: one in a Cisco firewall, one in Windows, one in a data tool called Metabase. That list is the difference between a patching backlog of thousands and a to-do list of three.",
+      "tech": "Added 11 Aug 2026: CVE-2026-20349 (Cisco Secure Firewall), CVE-2026-68820 (Microsoft Windows), CVE-2026-72898 (Metabase SQL injection). KEV membership is evidence of exploitation, not severity — which is why it, not CVSS, should drive the queue. Pair it with EPSS for what is likely to be exploited next.",
+      "lands": "On how you decide what to fix first, forever. Severity scores produce a queue you will never finish; KEV produces one you can finish tonight. On the node this collapses to one habit — `unattended-upgrades` enabled on day one, so the boring 90% patches itself while you sleep, and you only make decisions about the rest.",
+      "tools": ["unattended-upgrades", "CISA KEV feed", "EPSS", "osv-scanner"],
+      "art": "images/patch-priority.svg",
+      "artcap": "three numbers, one decision",
+      "sources": [
+        { "label": "CISA — KEV additions, 11 Aug 2026", "url": "https://www.cisa.gov/news-events/alerts/2026/08/11/cisa-adds-three-known-exploited-vulnerabilities-catalog" },
+        { "label": "CISA — the KEV catalog", "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog" }
+      ],
+      "touches": []
+    },
+    {
+      "id": "2026-08-10-ncentral-kev",
+      "date": "2026-08-10",
+      "domain": "cyber",
+      "title": "An incomplete patch became an authentication bypass",
+      "oneline": "The remote-management tool as the perfect pivot",
+      "plain": "A tool that IT companies use to manage thousands of their customers' computers had a hole that let attackers walk in without a password. Worse, it had been patched before — badly — so the fix was fixed and the hole stayed open. Because the tool's whole job is reaching into other people's machines, one break-in reaches everywhere it manages.",
+      "tech": "CVE-2026-18577 in N-able N-central: authentication bypass and account takeover from an incomplete prior patch (CVSS 8.2), added to KEV after confirmed customer compromise. Post-exploitation abuses the built-in Take Control feature to pivot into managed endpoints and plant persistence — the classic RMM blast-radius pattern.",
+      "lands": "On the mental model of trust, more than on your kit. Anything that manages other machines is a machine that owns them: RMM tools, your CI runner, an agent with a broad token, the SSH key that reaches every box. Inventory what has reach, give each thing the narrowest credential that still works, and treat an incomplete patch as an unpatched system until you have verified the version yourself.",
+      "tools": ["least-privilege service accounts", "scoped API tokens", "asset inventory"],
+      "art": "images/attack-path.svg",
+      "artcap": "one foothold, then everything it manages",
+      "sources": [
+        { "label": "The Hacker News — N-able N-central in KEV", "url": "https://thehackernews.com/2026/08/cisa-adds-exploited-n-able-n-central.html" }
+      ],
+      "touches": ["l12-unlimited-egress-is-whole-ballgame"]
+    },
+    {
+      "id": "2026-08-08-mcp-spec",
+      "date": "2026-08-08",
+      "domain": "ai",
+      "title": "MCP went stateless — and that changes where agents can live",
+      "oneline": "The 2026-07-28 spec: request/response, real OAuth, versioned extensions",
+      "plain": "The universal plug between AI and other software got its biggest revision yet. The important part sounds boring: it no longer needs to hold a permanent open line. That means a tool server can now live on cheap, sleep-when-idle hosting instead of a machine that stays awake. It also grew proper sign-in, so a tool can finally know which human it is acting for.",
+      "tech": "MCP 2026-07-28 moves from a bidirectional stateful protocol to request/response, unblocking serverless and edge deployment; adds OAuth 2.1 / OIDC authorization, and puts Apps (embedded UI) and Tasks (long-running work) behind a versioned extensions framework. Reported ~400M monthly SDK downloads, roughly 4× year-on-year.",
+      "lands": "On the shape of anything you build to be called by an agent. A stateless server can be a serverless function that costs nothing when idle — but it also means your server must carry its own state and idempotency, because the protocol no longer holds the thread for you. For the node: MCP servers are now cheap enough to run one per project, and the OAuth work is what lets an agent act as you without holding your password.",
+      "tools": ["MCP SDK", "OAuth 2.1", "serverless / edge runtimes", "mcp registry"],
+      "art": "images/mcp.svg",
+      "artcap": "one socket, every tool — now without a permanent wire",
+      "sources": [
+        { "label": "Anthropic release notes (Aug 2026)", "url": "https://releasebot.io/updates/anthropic" },
+        { "label": "State of MCP 2026", "url": "https://truthifi.com/education/state-of-mcp-2026-ai-agents-custom-connectors" }
+      ],
+      "touches": ["l3-mcp"]
+    },
+    {
+      "id": "2026-08-07-pqc-default",
+      "date": "2026-08-07",
+      "domain": "cyber",
+      "title": "Between a third and a half of the web is already quantum-safe",
+      "oneline": "Hybrid X25519 + ML-KEM is now the quiet default",
+      "plain": "Encryption that would survive a computer that does not exist yet is already switched on for a large slice of the internet, and nobody had to do anything. Browsers and the big networks agreed a new handshake that mixes today's maths with quantum-resistant maths, so if either one breaks the other still holds. It matters now because anything recorded today can be unlocked later.",
+      "tech": "Hybrid key agreement (X25519 + ML-KEM, FIPS 203) is on by default across Chrome, Edge, Firefox and Safari and supported by the major CDNs; reported 30–50% of browser-initiated TLS 1.3 handshakes now negotiate a hybrid group. Signatures (ML-DSA, FIPS 204) lag far behind key exchange — certificate chains are the slow half of the migration.",
+      "lands": "On long-lived secrets more than on live traffic. Harvest-now-decrypt-later means anything you encrypt today that must still be secret in 2035 — archives, health records, family material on the seed vault — should be inventoried now. Practically: keep TLS libraries current and let the hybrid default do its work; the actual project is knowing which of your data has a long secrecy lifetime.",
+      "tools": ["OpenSSL 3.5+", "TLS 1.3 hybrid groups", "crypto inventory"],
+      "art": "images/packet-journey.svg",
+      "artcap": "the handshake — where the change actually landed",
+      "sources": [
+        { "label": "Hybrid TLS with post-quantum KEMs", "url": "https://quantumoutpost.com/tutorials/51-hybrid-tls-pqc/" },
+        { "label": "The Quantum Insider — migration timelines", "url": "https://thequantuminsider.com/2026/08/07/post-quantum-cryptography-timelines/" }
+      ],
+      "touches": ["deep-handshake-fingerprint"]
+    },
+    {
+      "id": "2026-08-04-small-open-weights",
+      "date": "2026-08-04",
+      "domain": "ai",
+      "title": "Open weights caught up, and the small end got serious",
+      "oneline": "LFM2.5-2.6B lands; MiniMax M3 and Nemotron 3 Nano Omni top the open rankings",
+      "plain": "Models you can download and keep are now genuinely competitive with the ones you rent — and the tiny end of the range got good enough to matter. A 2.6-billion-dial model released this month is aimed squarely at running on small devices and doing the modest, high-volume jobs that make up most real work.",
+      "tech": "LiquidAI LFM2.5-2.6B (4 Aug) targets edge and lightweight-agent deployment; MiniMax M3, Grok 4.5 and NVIDIA Nemotron 3 Nano Omni lead current open-weight benchmark rankings. The pattern to note is efficiency-per-parameter improving faster than raw scale — quality at a given size roughly doubling year on year, which is what pulls capable inference down onto 8–16GB boards.",
+      "lands": "On the Pi, directly. A 2–3B model at Q4 quantisation fits comfortably in 16GB of RAM and runs on CPU at a usable few tokens a second — enough for tagging, classifying, extracting and drafting, which is the honest majority of the work you would otherwise pay per token for. Keep the rented frontier model for judgement; move the volume home.",
+      "tools": ["ollama", "llama.cpp", "GGUF Q4_K_M", "LFM2.5-2.6B"],
+      "art": "images/quantization.svg",
+      "artcap": "rounding the dials until the model fits the board",
+      "sources": [
+        { "label": "Open-weight benchmarks, August 2026", "url": "https://www.gmicloud.ai/en/blog/ai-model-benchmarks-august-2026-open-weight-models-catch-the-frontier" },
+        { "label": "LLM release tracker", "url": "https://llm-stats.com/ai-news" }
+      ],
+      "touches": ["l2-small-models-quantization", "l2-open-weights-api-models"]
+    },
+    {
+      "id": "2026-08-02-ai-act-live",
+      "date": "2026-08-02",
+      "domain": "it",
+      "title": "The EU AI Act's transparency duties went live — the hard part slipped",
+      "oneline": "Article 50 applies now; Annex III high-risk pushed to Dec 2027 and Aug 2028",
+      "plain": "Europe's AI law reached its next milestone. The part that took effect is the honest-labelling part: if people are talking to a machine, they must be told, and synthetic images and video must be marked as such. The heavy paperwork for genuinely high-stakes uses — hiring, credit, health — was postponed by more than a year after a late amendment.",
+      "tech": "Article 50 transparency obligations (chatbot disclosure, AI-content marking, deepfake labelling) applied from 2 Aug 2026, as did the Commission's GPAI enforcement powers. The June 2026 Digital Omnibus amendments moved stand-alone Annex III high-risk obligations to 2 Dec 2027 and Annex I embedded systems to 2 Aug 2028. Extraterritorial where the output is used in the EU.",
+      "lands": "On anything you ship that talks to people. Labelling is now a build requirement, not a courtesy: say plainly that a bot is a bot, and mark generated media. The delay is breathing room, not a reprieve — if a project of yours ever touches recruitment, credit or clinical decisions, the compliance work is the product, and starting it in 2027 will be starting it late.",
+      "tools": ["C2PA content credentials", "model cards", "ISO/IEC 42001", "NIST AI RMF"],
+      "art": "images/risk-tiers.svg",
+      "artcap": "sorted by harm, not by cleverness",
+      "sources": [
+        { "label": "Gibson Dunn — Digital Omnibus agreement", "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/" },
+        { "label": "Data Protection Report — when is it enforceable now?", "url": "https://www.dataprotectionreport.com/2026/07/the-eu-ai-act-when-does-it-become-enforceable-now/" }
+      ],
+      "touches": []
+    },
+    {
+      "id": "2026-08-01-cowos-bottleneck",
+      "date": "2026-08-01",
+      "domain": "hardware",
+      "title": "The AI shortage is a packaging shortage",
+      "oneline": "CoWoS fully booked for 2026; HBM3E sold out, HBM4 ramping",
+      "plain": "Everyone assumes the scarce thing in AI is the chip. It is not — it is the step where the chip and its memory are glued together onto one slab. That capacity is sold out for the year despite being roughly quadrupled since 2024, and a handful of companies have booked almost all of it. This is the physical reason your model costs what it costs.",
+      "tech": "TSMC CoWoS is reported fully booked (both -S and -L) against ~1.0M wafers of 2026 demand, up from ~370k in 2024, with monthly capacity ramping from ~75–80k toward 120–130k WPM by year end; NVIDIA holds roughly 60% and the top three over 85%. HBM3E is sold out for 2026 with HBM4 ramping. Advanced packaging, not lithography or logic dies, was the binding constraint through 2025 and is projected to stay tight.",
+      "lands": "On price and availability, which is to say on every decision you make about renting versus owning. It explains why inference prices fall in steps rather than smoothly, why GPU rental queues exist, and why export controls target packaging and HBM rather than just the chips. It is also the strongest argument for the local-first habit: a model that runs on your own board is immune to somebody else's allocation meeting.",
+      "tools": ["local inference", "model routing", "spot GPU rental"],
+      "art": "images/chip-chokepoint.svg",
+      "artcap": "the funnel every frontier model passes through",
+      "sources": [
+        { "label": "Epoch AI — AI chip supply chain constraints", "url": "https://epoch.ai/data-insights/ai-chip-supply-chain-constraints" },
+        { "label": "Foundry allocation status", "url": "https://siliconanalysts.com/analysis/foundry-allocation-status-q1-2026" }
+      ],
+      "touches": ["l9-tower-dependence", "l9-restrictions-their-strange-effects"]
+    },
+    {
+      "id": "2026-07-28-pi6-timeline",
+      "date": "2026-07-28",
+      "domain": "hardware",
+      "title": "No Pi 6 before 2028 — your board is the flagship for years",
+      "oneline": "Engineers confirm the timeline; Pi 5 stays the platform",
+      "plain": "The people who build the Raspberry Pi have said the next generation is unlikely before early 2028, and that when it comes it will be a faster version of the same idea rather than a different machine. For anyone buying now, that is the best possible news: the board on your desk is not about to be superseded, and everything you learn on it keeps paying out.",
+      "tech": "Raspberry Pi engineers confirmed in an AMA that Pi 6 is unlikely before early 2028, citing development timelines and component supply; improvements are expected to be CPU and IO performance rather than new capability classes such as an on-board AI accelerator. The Pi 500+ shipped in the current generation. Pi 5 plus CM4/CM5 remain the platform: quad-core 64-bit, PCIe, NVMe boot.",
+      "lands": "On whether to invest in this board or wait for the next. Wait for nothing — an 18-month-plus runway means the NVMe spine, the Hailo accelerator and every graft on the synthesis bench stay current for the whole time you would take to build them anyway. It also confirms the honest limit: no built-in AI accelerator is coming, so LLM work on the Pi stays CPU-and-RAM-bound by design.",
+      "tools": ["Pi 5 · 16GB", "M.2 HAT+", "NVMe boot", "Pi OS trixie"],
+      "art": "images/pi5-photo.jpg",
+      "artcap": "the node itself — the flagship until 2028 · photo: SimonWaldherr · CC BY 4.0 · Wikimedia Commons",
+      "sources": [
+        { "label": "Jeff Geerling — Pi 6 and microcontroller news", "url": "https://www.jeffgeerling.com/blog/2026/news-about-raspberry-pi-6-and-microcontroller-development/" },
+        { "label": "Raspberry Pi news", "url": "https://www.raspberrypi.com/news/" }
+      ],
+      "touches": ["l1-gpu-npu"]
+    },
+    {
+      "id": "2026-07-26-stateless-hosting",
+      "date": "2026-07-26",
+      "domain": "it",
+      "title": "Sleep-when-idle hosting stops being a compromise",
+      "oneline": "Stateless protocols let the cheap runtime carry real work",
+      "plain": "For years the rule was simple: anything that had to hold a conversation open needed a machine that never sleeps, and that costs money every hour whether or not anyone calls. As the protocols around agents drop that requirement, the cheap option — code that wakes on a request and vanishes after — becomes viable for work it previously could not touch.",
+      "tech": "The move to request/response semantics (as in the MCP 2026-07-28 spec) removes the long-lived-connection requirement that forced tool servers onto persistent hosts. Consequence: serverless functions and edge isolates become valid targets, at the cost of pushing state, idempotency and replay handling into your own design. The 10-second and CPU-time walls still apply, so long jobs still need a queue plus a worker.",
+      "lands": "On where each piece of your estate should live, and it is not one answer. Bursty, short, public-facing work belongs on serverless or the edge, where idle costs nothing. Long jobs, schedules, watchers and anything holding state belong on the node, where a wall-clock hour is free. The skill is drawing that line deliberately instead of defaulting to whatever the tutorial used.",
+      "tools": ["serverless functions", "edge runtimes", "queue + worker", "the node"],
+      "art": "images/runtimes.svg",
+      "artcap": "three places to run a script, and the wall that bites",
+      "sources": [
+        { "label": "State of MCP 2026", "url": "https://truthifi.com/education/state-of-mcp-2026-ai-agents-custom-connectors" }
+      ],
+      "touches": ["l15-three-places-run-script-timeout"]
+    }
+  ]
+}

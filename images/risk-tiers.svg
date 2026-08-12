@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="760" height="420" fill="#0d1219"/>
+  <text x="30" y="40" fill="#dfa32b" font-size="13" letter-spacing="3" font-family="ui-monospace,monospace">THE EU AI ACT — SORTED BY HARM, NOT BY CLEVERNESS</text>
+  <rect x="332" y="78" width="120" height="44" rx="9" fill="#1a2330" stroke="#cf6f57" stroke-opacity=".55"/>
+  <text x="392" y="99" fill="#cf6f57" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="600">unacceptable</text>
+  <text x="392" y="115" fill="#aab5c1" fill-opacity="1" font-size="10.5" text-anchor="middle" font-weight="400">banned outright — social scoring, manipulation</text>
+  <rect x="242" y="128" width="300" height="44" rx="9" fill="#1a2330" stroke="#dfa32b" stroke-opacity=".55"/>
+  <text x="392" y="149" fill="#dfa32b" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="600">high risk</text>
+  <text x="392" y="165" fill="#aab5c1" fill-opacity="1" font-size="10.5" text-anchor="middle" font-weight="400">employment · credit · essential services · health</text>
+  <rect x="152" y="178" width="480" height="44" rx="9" fill="#1a2330" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="392" y="199" fill="#57b39c" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="600">limited risk</text>
+  <text x="392" y="215" fill="#aab5c1" fill-opacity="1" font-size="10.5" text-anchor="middle" font-weight="400">chatbots, deepfakes — you must say what it is</text>
+  <rect x="62" y="228" width="660" height="44" rx="9" fill="#151c26" stroke="#aab5c1" stroke-opacity=".55"/>
+  <text x="392" y="249" fill="#aab5c1" fill-opacity="1" font-size="13" text-anchor="middle" font-weight="600">minimal risk</text>
+  <text x="392" y="265" fill="#aab5c1" fill-opacity="1" font-size="10.5" text-anchor="middle" font-weight="400">everything else — no new duty</text>
+  <text x="392" y="296" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="middle" font-weight="400">plus separate duties for general-purpose models themselves</text>
+  <rect x="30" y="318" width="700" height="80" rx="9" fill="#151c26" stroke="#57b39c" stroke-opacity=".55"/>
+  <text x="48" y="344" fill="#57b39c" fill-opacity="1" font-size="13" text-anchor="start" font-weight="600">what it means for a solo operator</text>
+  <text x="48" y="368" fill="#e7e2d4" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">Almost everything you build lands in the bottom two tiers. The moment an agent</text>
+  <text x="48" y="386" fill="#aab5c1" fill-opacity="1" font-size="12" text-anchor="start" font-weight="400">touches hiring, credit or clinical care, the paperwork is the product.</text>
+</svg>

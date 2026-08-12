@@ -17,6 +17,8 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/update_codex.py
+      - name: Re-tag any new cards       # Layer 04 is rewritten without ids
+        run: python scripts/tag_cards.py
       - name: Commit if changed
         id: commit
         run: |
