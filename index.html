@@ -289,7 +289,7 @@ body{margin:0;background:var(--ink);color:var(--bone);
     <p class="tech">Vision-language models fuse image encoders with LLMs; generation uses diffusion/flow-matching (and DiT — diffusion transformers — for video). Costs are compute-heavy and credit-metered (your 44.21-credit saga). Speech: ASR (Whisper-class, runnable on-Pi for overnight batches) and TTS/voice-cloning — the tech path for your Malayalam voice model.</p>
   </details>
 
-  <details class="card" id="l2-open-weights-api-models" data-card="l2-open-weights-api-models">
+  <details class="card" id="l2-open-weights-api-models" data-card="l2-open-weights-api-models" data-updated="2026-08-13" data-updnote="Meta released Muse Glimmer, a new 30B Apache-2.0 open-weight agent model, on 10 Aug 2026.">
     <summary><b>Open-weights vs API models</b><span>own a small brain, rent a giant one</span></summary>
     <p class="plain">Open-weights models are ones you can download and run on your own metal — private, free per-use, but small at your budget. API models live in a company's datacentre — frontier-smart, paid per token, and they never touch your electricity bill. The winning pattern is both: own the small, rent the large.</p>
     <p class="tech">Open-weights (Llama/Qwen/Gemma/Mistral families) give data locality, no egress of sensitive text, and zero marginal cost — bounded by your hardware. Hosted APIs (Anthropic, OpenAI, Google) give frontier capability, tools, and long context under a per-token meter. Hybrid routing — cheap local for classify/extract, frontier for reason/write — is the standard cost architecture in 2026.</p>
@@ -316,7 +316,7 @@ body{margin:0;background:var(--ink);color:var(--bone);
     <figure class="fig"><img alt="Tool use contract: the model writes a JSON request, the harness checks permissions and executes it, the result returns as text" loading="lazy" src="images/tool-call.svg" width="760" height="400"><figcaption>Fig 3.2 · the model never touches the world itself</figcaption></figure>
   </details>
 
-  <details class="card" id="l3-mcp" data-card="l3-mcp">
+  <details class="card" id="l3-mcp" data-card="l3-mcp" data-updated="2026-08-13" data-updnote="MCP's fifth spec (2026-07-28) moved to a stateless core — now live in Claude and OpenAI's tooling.">
     <summary><b>MCP</b><span>the universal plug</span></summary>
     <p class="plain">Before MCP, every AI-to-app connection was custom wiring. MCP (Model Context Protocol) is the standard plug: build a connector once, and any MCP-speaking AI can use it. Your Higgsfield "creative Joe" connection is an MCP server. It's becoming the USB port of the agent world.</p>
     <p class="tech">An open protocol (Anthropic, 2024; now industry-wide) where servers expose tools/resources/prompts over a standard transport, and clients (Claude, IDEs, agents) consume them. It turned integrations from N×M bespoke builds into N+M. Enterprise MCP runtimes now handle auth, permissions, and audit — because access control, not intelligence, is the bottleneck.</p>
@@ -369,8 +369,7 @@ body{margin:0;background:var(--ink);color:var(--bone);
   <p class="lede">Where the field stands as of August 2026, where it's moving, and what still breaks. This layer is the one your update agent rewrites every two days.</p>
   <figure class="fig wide"><img alt="79 percent of organisations say they use AI agents; 11 percent run them in production, with integration, permissions and evals as the cited blockers" loading="lazy" src="images/adoption-gap.svg" width="760" height="420"><figcaption>Fig 4.1 · everyone adopted; almost nobody shipped</figcaption></figure>
 <!-- L4:START -->
-
-  <h3>The state of play</h3>
+<h3>The state of play</h3>
   <details class="card" id="l4-everyone-adopted-few-shipped" data-card="l4-everyone-adopted-few-shipped">
     <summary><b>Everyone adopted; few shipped</b><span>the pilot-to-production gap</span></summary>
     <p class="plain">Nearly every company now "uses AI agents" — but only a small fraction run them in real production doing real work. The gap isn't intelligence; it's plumbing: connecting agents safely to the messy systems businesses actually run on. Translation for you: a solo operator with working plumbing is ahead of most enterprises.</p>
@@ -385,8 +384,8 @@ body{margin:0;background:var(--ink);color:var(--bone);
 
   <details class="card" id="l4-2026-trendlines" data-card="l4-2026-trendlines">
     <summary><b>The 2026 trendlines</b><span>what's compounding right now</span></summary>
-    <p class="plain">Five currents: agents working in teams; agents writing most routine code; "guardian" agents supervising other agents; agents starting to shop and transact; and agent-building itself getting easy enough for non-engineers — which is the door you walked through. Underneath all of it: reasoning models that think longer on hard problems, and small models good enough to live on devices.</p>
-    <p class="tech">Consensus 2026 themes: multi-agent orchestration, agentic coding, guardian/oversight agents, agentic commerce, and low-code agent democratisation; plus longer-horizon autonomy and cross-vendor agent-to-agent protocols on the near roadmap. Model side: test-time compute scaling (reasoning), aggressive small-model efficiency, and maturing video/world models.</p>
+    <p class="plain">Five currents: agents working in teams; agents writing most routine code; "guardian" agents supervising other agents; agents starting to shop and transact; and agent-building itself getting easy enough for non-engineers — which is the door you walked through. Underneath all of it: reasoning models that think longer on hard problems, and small models good enough to live on devices. This week's proof of both: Meta gave away a 30-billion-parameter agent model that runs on one gaming graphics card, and the protocol connecting agents to tools (MCP) just got simpler to deploy everywhere from Claude to WordPress.</p>
+    <p class="tech">Consensus 2026 themes: multi-agent orchestration, agentic coding, guardian/oversight agents, agentic commerce, and low-code agent democratisation; plus longer-horizon autonomy and cross-vendor agent-to-agent protocols on the near roadmap. Model side: test-time compute scaling (reasoning), aggressive small-model efficiency, and maturing video/world models. Confirmed this sweep: Meta's Muse Glimmer (30B, Apache 2.0, ~17GB at 4-bit, Ollama/llama.cpp/MLX support) and the MCP 2026-07-28 stateless-core spec now shipping across Claude, OpenAI's tooling and WordPress's Abilities API.</p>
   </details>
 
   <details class="card" id="l4-open-problems" data-card="l4-open-problems">
@@ -394,8 +393,7 @@ body{margin:0;background:var(--ink);color:var(--bone);
     <p class="plain">Reliability over long tasks; memory that stays true; security against manipulation; costs that surprise you; and proving an agent actually helped. Every one of these is unsolved enough that a careful practitioner — someone who checks live balances and distrusts stale notes — has an edge over people with bigger budgets and worse habits.</p>
     <p class="tech">Open fronts: compounding error over long horizons, state/memory divergence, prompt-injection defence in depth, cost observability and routing, eval validity, and governance (two-thirds of executives suspect they've already leaked data through unapproved AI). Each is a moat for operators who instrument their systems.</p>
   </details>
-
-  <!-- L4:END -->
+<!-- L4:END -->
   <div class="note">Everything in this layer is a snapshot dated 11 Aug 2026. Numbers rot. The refresh loop in Layer 08 exists precisely because this page must never quietly become a museum.</div>
 </section>
 
@@ -654,6 +652,7 @@ You maintain operators-codex.html. Today is {date}.
   <div class="warn"><b>Until the caretaker is wired:</b> treat this file as v1.7, dated 12 Aug 2026. Layers 01–03, 05–06 and 11 age slowly (years). Layers 09–10 age in months. Layer 04 ages in weeks. The date stamp at the top is your freshness gauge.</div>
   <h3>Changelog</h3>
   <div class="gloss"><!-- CHANGELOG:START -->
+    <p><b>2026-08-13</b> — Meta shipped Muse Glimmer (30B, Apache 2.0, Ollama-ready); MCP's stateless 2026-07-28 spec went live across Claude, OpenAI and WordPress; DRAM prices still rising but slower (TrendForce, +13-18% QoQ Q3); CISA added a Metabase SQL injection (CVE-2026-72898) plus Cisco and Windows CVEs to KEV · sources: CNBC, Anthropic, iTechGuides, CISA · action for Joe: patch any self-hosted Metabase today (do); consider testing Muse Glimmer on a bigger machine before shrinking for the Pi (consider); none needed on MCP or DRAM beyond awareness.</p>
     <p><b>2026-08-12</b> — v2.4 · <b>The descent has weather.</b> The six stages of the reading path already owned six hues; now they own the light as well. The ground under the page drifts turmeric → teal → ice → ember → bone → brass as you descend — a fraction of a shade per screen, so you never catch it moving, you just notice three layers later that the room has changed colour. The neural mesh in the background tints to the same stage, the progress rail's glow follows it, and the position pill in the corner wears its border. All of it is one scroll fraction and a handful of custom properties, every tint under 9% opacity so no line of text ever pays for it, and the colour still works with motion turned off. · action for Joe: scroll from Layer 01 to the glossary in one go and watch the room change around you.</p>
     <p><b>2026-08-12</b> — v2.3 · <b>The eye gets somewhere to land.</b> Six layers carried no illustration at all and read as walls of text; every one of them now opens on a diagram, and the six placeholder tiles in the Atlas carry real thumbnails instead of generated glyphs. Fourteen new field diagrams: the adoption gap (04), committed-vs-pushed (06), the evolution ladder and the graft socket (07), the caretaker's sweep and its fence (08), the graveyard test and the four pivots (10), the five leak routes and the neural estate (11), where a key lives (12), the IDOR request (13), the four pillars (15), the 72-hour clock (20), and the floors beneath an edited header (Deep Field). · action for Joe: Layer 06's figure is the one to look at first — it is the lost-commit lesson in a single picture.</p>
     <p><b>2026-08-12</b> — v2.2 · The audit closes itself. The four thin spots the coverage-audit card had listed as open are now filled: <b>Layer 24 · The Surface</b> (HTML, CSS, the render path, events, frameworks, accessibility), <b>Layer 25 · The Proof</b> (what to test, CI gates, types, review, precision/recall and the base-rate trap, sample size, Goodhart), and <b>Layer 26 · The Rented Estate</b> (IaaS/PaaS/SaaS, regions and residency, IAM as the perimeter, managed services, the three bills nobody predicts, owning vs renting). Four new field diagrams. The audit card now names what is still genuinely missing — drills and exercises, which is a different artifact from a manual. · action for Joe: Layer 25's base-rate card, then Layer 26's bill card. Both are twenty minutes and both save money.</p>

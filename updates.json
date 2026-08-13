@@ -2,9 +2,143 @@
   "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
   "cadence_days": 2,
   "policy": "append-only · newest first · nothing is ever deleted",
-  "generated": "2026-08-12",
-  "next_scan": "2026-08-14 06:00 UTC",
+  "generated": "2026-08-13",
+  "next_scan": "2026-08-15 06:00 UTC",
   "entries": [
+    {
+      "id": "2026-08-11-mcp-stateless-goes-mainstream",
+      "date": "2026-08-11",
+      "domain": "it",
+      "title": "MCP's stateless spec is now live across Claude, OpenAI and WordPress",
+      "oneline": "The plug that connects agents to tools got simpler to host, this week",
+      "plain": "MCP is the standard that lets an AI agent plug into outside tools — think of it as a universal socket. <cite index=\"20-1,20-2\">The fifth spec release, MCP 2026-07-28, moves MCP to a stateless core while hardening authorization.</cite> That sounds technical, but it means the little servers that expose your tools to an agent no longer need to hold an open connection the whole time — they can just answer one request and forget about you, like a normal website. This week that change actually started showing up inside Claude, OpenAI's tools, and even WordPress.",
+      "tech": "<cite index=\"20-13,20-14,20-15\">MCP 2026-07-28 moves MCP from a bidirectional stateful protocol to a request/response model, so servers can now deploy on serverless and edge infrastructure.</cite> <cite index=\"72-1\">OpenAI's tooling now supports the opt-in MCP 2026-07-28 protocol, including paginated discovery and non-blocking server startup.</cite> <cite index=\"70-3\">AAIF separately shipped MCP 728, a stateless version of the protocol that no longer needs a session handshake.</cite>",
+      "lands": "If you're running your own MCP server off the Pi to expose a tool to Claude, the stateless model means you can drop the always-open WebSocket-style connection and serve it as a plain HTTP endpoint behind a Cloudflare Tunnel — simpler, cheaper, and easier to keep alive on a board that reboots. It's also the moment to move any exposed MCP auth over to proper OAuth 2.0/OIDC rather than a bearer token you rolled yourself.",
+      "tools": [
+        "MCP SDK",
+        "Claude Code",
+        "Cloudflare Tunnel",
+        "FastAPI"
+      ],
+      "toolnote": "",
+      "art": "images/mcp.svg",
+      "artcap": "The universal plug just got a simpler socket.",
+      "sources": [
+        {
+          "label": "Claude by Anthropic",
+          "url": "https://claude.com/blog/bringing-mcp-2026-07-28-to-claude"
+        },
+        {
+          "label": "Linux Foundation Newsletter",
+          "url": "https://www.linuxfoundation.org/blog/linux-foundation-newsletter-august-2026"
+        },
+        {
+          "label": "Releasebot (OpenAI)",
+          "url": "https://releasebot.io/updates/openai"
+        }
+      ],
+      "touches": [
+        "l3-mcp",
+        "l2-open-weights-api-models"
+      ],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-08-11-kev-metabase-cisco-windows",
+      "date": "2026-08-11",
+      "domain": "cyber",
+      "title": "CISA adds a Metabase SQL injection to its must-patch list",
+      "oneline": "Three actively-exploited CVEs landed in KEV this week — one hits self-hosted dashboards",
+      "plain": "CISA keeps a list of security holes that criminals are already using in real attacks, and anything on that list needs fixing fast. <cite index=\"14-1\">This week CISA added three new vulnerabilities: a Cisco firewall flaw, a Windows networking driver flaw, and a Metabase SQL injection vulnerability.</cite> Metabase is a free tool a lot of small teams and solo builders use to make dashboards from their own database — <cite index=\"18-1\">it lets an attacker with no login inject database commands and take over the whole instance as an administrator.</cite> If you or anyone you work with runs one, patch now.",
+      "tech": "<cite index=\"14-1\">CISA added CVE-2026-20349 (Cisco Secure Firewall ASA/FTD heap inspection), CVE-2026-68820 (Windows Ancillary Function Driver for WinSock use-after-free), and CVE-2026-72898 (Metabase SQL injection) to the KEV catalog based on confirmed exploitation.</cite> <cite index=\"18-1\">CVE-2026-72898 is rated CRITICAL with an action-due date of Aug 14, 2026, allowing an unauthenticated remote attacker to inject arbitrary SQL and gain administrator access to the instance.</cite> FCEB agencies must remediate per BOD 26-04.",
+      "lands": "If any narrow-agent project of yours pipes data into a self-hosted Metabase dashboard reachable from the internet, this is a today-not-this-week patch — unauthenticated SQL injection to admin takeover is about as bad as it gets for a tool sitting in front of a real database. More broadly, it's a reminder to run every self-hosted admin panel behind Tailscale rather than exposed on a port, so a KEV entry like this one is a non-event for you.",
+      "tools": [
+        "Metabase",
+        "CISA KEV feed",
+        "Tailscale",
+        "nmap"
+      ],
+      "toolnote": "",
+      "art": "images/patch-priority.svg",
+      "artcap": "One unauthenticated request, full admin — the queue you patch first.",
+      "sources": [
+        {
+          "label": "CISA",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/08/11/cisa-adds-three-known-exploited-vulnerabilities-catalog"
+        },
+        {
+          "label": "CVEFeed",
+          "url": "https://cvefeed.io/cisakev/cisa-known-exploited-vulnerability-catalog"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-08-10-meta-muse-glimmer",
+      "date": "2026-08-10",
+      "domain": "ai",
+      "title": "Meta gives away a 30B open agent model that fits one GPU",
+      "oneline": "Muse Glimmer is Apache-2.0, runs locally, and ships with Ollama support",
+      "plain": "Meta released a new AI brain called Muse Glimmer that anyone can download for free and run on their own computer, no monthly bill required. <cite index=\"51-1\">Meta's Superintelligence Labs released Muse Glimmer on Aug. 10, a 30-billion-parameter model tuned for agent work, coding and evaluation, under the permissive Apache 2.0 license.</cite> <cite index=\"54-5\">Meta used quantization techniques to compress the model to approximately 17 gigabytes, down from the more than 55 gigabytes a full-precision version would require.</cite> It's built to run agents — programs that plan, use tools, and finish multi-step jobs — on your own hardware instead of a company's servers.",
+      "tech": "<cite index=\"54-4\">Muse Glimmer has 30 billion parameters and is optimized for agentic tasks that run locally on a device, such as schedule management, file organization, and coding.</cite> Distilled from the closed Muse Spark model via logit distillation plus SFT/RL post-training. <cite index=\"58-11\">It is available now through Hugging Face, with support for Ollama, LM Studio, llama.cpp, MLX, ExecuTorch, vLLM, and SGLang.</cite>",
+      "lands": "A Pi 5 can't run this directly — 30B at 4-bit still wants ~17-20GB on a real GPU. But it's a free, high-quality reference agent you can pull on a spare PC or a rented GPU box to test tool-calling and multi-step task patterns before you hand-carve a much smaller model for the Pi itself. Watch for distilled/quantized child models appearing on Ollama in the coming weeks — those are the ones that will actually land on your board.",
+      "tools": [
+        "ollama",
+        "llama.cpp",
+        "MLX",
+        "Hugging Face"
+      ],
+      "toolnote": "Test agent behaviour on a bigger machine first, then shrink the winning design down to what the Pi can hold.",
+      "art": "images/quantization.svg",
+      "artcap": "A 55GB brain squeezed to 17GB — the trade every local model makes.",
+      "sources": [
+        {
+          "label": "Forbes",
+          "url": "https://www.forbes.com/sites/jonmarkman/2026/08/11/meta-unveils-muse-glimmer-a-30b-parameter-ai-model-that-runs-locally/"
+        },
+        {
+          "label": "Neowin",
+          "url": "https://www.neowin.net/news/meta-releases-muse-glimmer-a-30b-open-agentic-ai-model-that-runs-locally-on-pcs/"
+        },
+        {
+          "label": "Quartz",
+          "url": "https://qz.com/meta-muse-glimmer-open-source-ai-model-laptop-081026"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 380
+    },
+    {
+      "id": "2026-08-09-dram-shortage-q3-update",
+      "date": "2026-08-09",
+      "domain": "hardware",
+      "title": "RAM prices keep climbing, but the rate of increase finally slows",
+      "oneline": "TrendForce's Q3 forecast is still up double digits, just less brutally",
+      "plain": "Memory chips (RAM) are still expensive and getting more so, because factories are busy making the pricier memory that big AI data centres need instead of the ordinary kind that goes in a laptop or a small board. <cite index=\"32-2,32-3\">The RAM shortage is still active, with suppliers reporting extremely tight conditions and retail prices for ordinary DDR4 and DDR5 kits still far above 2025 lows.</cite> The one bit of good news: <cite index=\"32-8\">TrendForce now forecasts prices to rise 13-18% quarter over quarter in Q3 2026, slower than the extraordinary jumps earlier in the year.</cite>",
+      "tech": "<cite index=\"32-3\">DRAM suppliers report extremely tight conditions in Q3 2026, with retail DDR4/DDR5 kit prices remaining far above 2025 lows.</cite> <cite index=\"32-8\">TrendForce forecasts DRAM contract prices to rise 13-18% quarter-over-quarter in Q3 2026 — a slowdown in the rate of increase, not a reversal.</cite> CXMT's growing share (~8-9% of global DRAM) is easing supply at the margin but not restoring pre-2025 pricing.",
+      "lands": "This is not a Pi 5 board-price story yet, but it is an accessories story: NVMe SSD hats, extra SD/microSD stock, and any second board you're planning will keep costing more into 2027, not less. If you're budgeting a second node or a bigger SSD for the current one, buy sooner rather than waiting for a price drop that isn't coming this cycle.",
+      "tools": [
+        "NVMe HAT",
+        "microSD (A2-rated)",
+        "PiSCSI/SSD boot"
+      ],
+      "toolnote": "",
+      "art": "images/chip-chokepoint.svg",
+      "artcap": "The same fabs, split between your board and someone's data centre.",
+      "sources": [
+        {
+          "label": "iTechGuides",
+          "url": "https://www.itechguides.com/ram-price-crisis-live-all-the-latest-updates-on-price-surges-global-memory-shortage-expert-advice-and-more/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
     {
       "id": "2026-08-12-npm-worm",
       "date": "2026-08-12",
