@@ -29,10 +29,10 @@ body{margin:0;background:var(--ink);color:var(--bone);
 
 <header>
   <div class="hero">
-    <div class="kicker">Field manual · two voices · twenty-six layers · live</div>
+    <div class="kicker">Field manual · two voices · twenty-seven layers · live</div>
     <h1>The Operator's <em>Codex</em></h1>
     <p class="sub">Everything Joe runs — the machine, the models, the agents, the pipes — explained from zero to the frontier. Every idea speaks twice: once plainly, once in the language of the trade.</p>
-    <div class="stamp"><span>v2.4 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>live feed: <b>every 2 days</b></span><span><b>26 layers</b> · 54 field diagrams · 6 photographs</span><span><b id="doorcount">…</b> doors behind the words</span></div>
+    <div class="stamp"><span>v2.4 · <b>12 Aug 2026</b></span><span>Sheffield ⇄ Kottayam</span><span>live feed: <b>every 2 days</b></span><span><b>27 layers</b> · 54 field diagrams · 6 photographs</span><span><b id="doorcount">…</b> doors behind the words</span></div>
     <div class="gestures" aria-label="Three things this page does that a page should not">
       <div class="gesture"><span class="gk">⟐ double-click any word</span><p>and the wall opens on it — both voices, an illustration, and the way back into the layer it came from.</p></div>
       <div class="gesture"><span class="gk">⤢ tap any diagram</span><p>to throw it full screen and pinch it as far as you like — or press <code>f</code> for the browser's own.</p></div>
@@ -48,7 +48,7 @@ body{margin:0;background:var(--ink);color:var(--bone);
   <nav id="atlas" class="atlas" aria-label="Atlas of layers">
     <div class="atlashead">
       <span class="ah-t">The Atlas</span>
-      <span class="ah-d">Twenty-six layers in six stages. Tap a tile to descend; a tile turns teal once you have genuinely sat in that layer.</span>
+      <span class="ah-d">Twenty-seven layers in six stages. Tap a tile to descend; a tile turns teal once you have genuinely sat in that layer.</span>
       <span class="ah-ring" id="atlasring"></span>
     </div>
     <div class="stagekey" aria-hidden="true">
@@ -87,6 +87,7 @@ body{margin:0;background:var(--ink);color:var(--bone);
     <a class="tile" href="#l24" data-layer="l24" data-stage="3"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/render-path.svg" width="760" height="420"></span><span class="n">24</span><span class="t">The Surface</span><span class="d">HTML · CSS · JS · access</span></a>
     <a class="tile" href="#l25" data-layer="l25" data-stage="3"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/test-shape.svg" width="760" height="420"></span><span class="n">25</span><span class="t">The Proof</span><span class="d">tests · types · statistics</span></a>
     <a class="tile" href="#l26" data-layer="l26" data-stage="3"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/cloud-shapes.svg" width="760" height="420"></span><span class="n">26</span><span class="t">The Rented Estate</span><span class="d">IaaS · IAM · the bill</span></a>
+    <a class="tile big" href="#l27" data-layer="l27" data-stage="6"><span class="thumbwrap"><img class="thumb" alt="" loading="lazy" src="images/training-pipeline.svg" width="760" height="400"></span><span class="n">27</span><span class="t">From Zero to Your Own AI</span><span class="d">build it · rent it · sell it</span></a>
     <a class="tile" href="#deep" data-layer="deep" data-stage="4"><span class="thumbwrap"><img class="thumb" alt="Diagram: the four floors of a request, only the top one editable" loading="lazy" src="images/coherence-stack.svg" width="760" height="420"></span><span class="n">APPENDIX</span><span class="t">The Deep Field</span><span class="d">mechanism-level notes</span></a>
     <a class="tile" href="#gloss" data-layer="gloss" data-stage="6"><span class="thumbwrap gloss"><span class="glossmark">⟐</span><span class="livecast">every term here is a door</span></span><span class="n">APPENDIX</span><span class="t">The Glossary</span><span class="d">sixty seconds a word</span></a>
     </div>
@@ -149,6 +150,7 @@ body{margin:0;background:var(--ink);color:var(--bone);
         <a class="plink" href="#l14" data-layer="l14">14 · The Forge</a>
         <a class="plink" href="#l8" data-layer="l8">08 · The Living Guide</a>
         <a class="plink" href="#l4" data-layer="l4">04 · The Frontier</a>
+        <a class="plink" href="#l27" data-layer="l27">27 · From Zero to Your Own AI</a>
         <a class="plink" href="#live" data-layer="live">Live · The Latest</a>
         <a class="plink" href="#gloss" data-layer="gloss">Appendix · Glossary</a>
       </div>
@@ -1701,6 +1703,200 @@ await b.close();</pre></div>
   </details>
 </section>
 
+<!-- ============ LAYER 27 ============ -->
+<section id="l27">
+  <div class="lnum">LAYER 27</div>
+  <h2>From Zero to Your Own AI</h2>
+  <p class="lede">You own a Pi and a phone. That is already a workshop — the trick is knowing what to build on the bench, what to rent by the hour, and what to just phone up. This layer turns "I want my own AI" into a shopping list, a wiring diagram, and a business, with the plain truth about every cost. It is the practical capstone of Layer 07 (the node), Layer 14 (the forge), Layer 23 (the economics) and Layer 26 (the rented estate) — nothing new to learn, everything pointed at your desk.</p>
+
+  <h3>First, the map — what lives where</h3>
+  <details class="card" id="l27-three-homes-local-rented-api" data-card="l27-three-homes-local-rented-api">
+    <summary><b>Local, rented, or phoned-up</b><span>the Pi, a GPU by the hour, and an API</span></summary>
+    <p class="plain">Every AI job you will ever run has three possible homes. It lives on <b>your Pi</b> — yours forever, free every time you use it, but small. It lives on a computer you <b>rent by the hour</b> when you need real muscle for an afternoon. Or it lives in a giant company's datacentre that you simply <b>phone up</b> and pay per sentence — an <b>API</b>. The whole art of spending less is putting each job in the cheapest home that can actually do it: small chores on the Pi, heavy training on a rented machine, the hardest thinking on an API. Almost every beginner mistake is putting a job in the wrong home.</p>
+    <p class="tech">Three deployment loci, and a router between them. (1) <b>Edge/local inference</b> on the Pi 5 via Ollama — zero marginal cost for volume work like tagging, classifying and RAG. (2) <b>Rented GPU (IaaS)</b> — an hourly instance for the few hours a month you fine-tune or generate media that needs 16–80&nbsp;GB of VRAM. (3) <b>Hosted frontier API (SaaS)</b> — per-token calls for reasoning and judgement. The standard 2026 cost architecture is hybrid: own the small, rent the large, call the frontier — the same "owning versus renting" line Layer 26 drew, now at the model layer.</p>
+    <figure class="fig"><img alt="Three homes for an AI job: the always-on Pi for small work, a rented GPU by the hour for heavy work, and a frontier API phoned up for the hardest thinking" loading="lazy" src="images/runtimes.svg" width="760" height="440"><figcaption>Fig 27.1 · own the small, rent the large, call the frontier</figcaption></figure>
+  </details>
+  <div class="note"><b>The one-line rule for every job.</b> Ask "how big, how often, how private?" — Pi for <em>small, constant, private</em> (classify listings, tag documents, RAG over your files, overnight Whisper); rent for <em>heavy, occasional</em> (fine-tuning, voice cloning, video); API for <em>hard, spiky, non-secret</em> (reasoning, drafting, judging). Route by that sentence and the bill mostly takes care of itself.</div>
+
+  <details class="card" id="l27-what-a-gpu-actually-does" data-card="l27-what-a-gpu-actually-does">
+    <summary><b>What a GPU actually does</b><span>thousands of tiny clerks doing one sum at once</span></summary>
+    <p class="plain">A normal processor — a <b>CPU</b> — is a few very clever workers who do tasks one after another. A <b>GPU</b> is thousands of simple clerks who all do the <em>same</em> sum at the same time. AI is almost entirely one operation — multiply enormous grids of numbers — so those thousands of clerks are exactly what it needs. That is the only reason a GPU trains and runs models hundreds of times faster than your Pi's processor, and the only reason people bother renting them. The number that matters is not speed but <b>how much memory the card has</b>, because that decides how big a model will fit.</p>
+    <p class="tech">A GPU is a massively-parallel SIMT processor built for dense matrix multiply (GEMM), the core of every transformer forward and backward pass. What matters is not clock speed but <b>VRAM</b> (whether the weights fit at all) and <b>memory bandwidth</b> (how fast they stream during decode — Layer 23's "inference is bandwidth-bound"). NVIDIA's moat is <b>CUDA</b>, the software layer PyTorch, vLLM and bitsandbytes are all written against. Know the honest limit of your own board: the Pi's Hailo AI HAT (Layer 07, graft G2) accelerates vision CNNs, <em>not</em> LLM matmuls — a distinction beginners routinely get wrong.</p>
+    <figure class="fig"><img alt="A CPU as a few clever workers doing tasks in sequence, versus a GPU as thousands of simple clerks doing the same multiplication in parallel" loading="lazy" src="images/cpu-vs-gpu.svg" width="760" height="400"><figcaption>Fig 27.2 · few clever workers vs a thousand clerks</figcaption></figure>
+  </details>
+
+  <details class="card" id="l27-llm-languages-frameworks" data-card="l27-llm-languages-frameworks">
+    <summary><b>The "AI languages", demystified</b><span>Python is the steering wheel, not the engine</span></summary>
+    <p class="plain">People say "you need to learn the AI languages" and panic. There is essentially one — <b>Python</b> — and you write very little of it. Python is the steering wheel; the heavy engine parts are pre-built toolkits you call by name. You do not build a model from scratch any more than you forge your own spanner: you glue existing tools together, and increasingly an AI writes even that glue for you (see "Let the robot do the grunt work" below). Knowing <em>which</em> tool owns a job is far more valuable than being able to code it.</p>
+    <p class="tech">Python is the lingua franca; the real work is done by libraries on top of it. <b>PyTorch</b> is the tensor/autograd engine; above it sit <b>Hugging Face Transformers/Datasets</b> (models and data), <b>PEFT</b> (LoRA/QLoRA), <b>TRL</b> (fine-tune loops), <b>vLLM</b> / <b>llama.cpp</b> / <b>Ollama</b> (serving), and <b>ComfyUI</b> (a node graph for diffusion media). You mostly write config and orchestration; the CUDA/C++ kernels underneath are somebody else's problem. This is the working vocabulary of Layer 14's forge and Layer 21's craft — the map, not the territory.</p>
+  </details>
+
+  <details class="card" id="l27-myths-that-cost-money" data-card="l27-myths-that-cost-money">
+    <summary><b>Seven beliefs that cost beginners money</b><span>what everyone believes, and what is actually true</span></summary>
+    <p class="plain">Most beginners burn months and money on the same handful of wrong beliefs. The biggest one is that "training my own AI" means building a brainy model from zero. It almost never does — and believing it will bankrupt you before you ever ship a thing. The warning below is the single most valuable paragraph in this layer; read it twice.</p>
+    <p class="tech">Each is a real, expensive trap in the wild: they are the counterweights to Layer 04's frontier hype and Layer 14's forge. Believe the plain-voice truth, not the belief.</p>
+  </details>
+  <div class="warn"><b>The seven beliefs that cost money — belief, then truth.</b>
+  <b>1. "I'll train my own LLM from scratch."</b> → Pretraining a frontier model is thousands of GPUs for months and millions of pounds; you <em>fine-tune</em> or <em>RAG</em> an existing open model instead (Layer 14).
+  <b>2. "I need to own a big GPU."</b> → You rent one for the few hours a month you actually train, then switch it off.
+  <b>3. "Bigger model = better product."</b> → A fine-tuned 4B model beats a giant generalist on your one narrow task (Layer 04's narrow-beats-general).
+  <b>4. "Local is always cheaper."</b> → Not for spiky, heavy jobs; renting or an API often wins on total cost (Layer 23).
+  <b>5. "The Pi can run everything."</b> → It cannot do video generation or a 70B model — know its lane and rent for the rest.
+  <b>6. "Fake browser headers hide my bot."</b> → The JA4 handshake and behaviour betray it instantly (Layer 15, Deep Field) — which, read the other way, is exactly why the detector below is buildable.
+  <b>7. "More data is better data."</b> → Dirty or self-generated data causes <em>model collapse</em> (Layer 14); clean and owned beats big and scraped every time.</div>
+
+  <h3>The four builds</h3>
+  <details class="card" id="l27-private-llm-run-teach-grow" data-card="l27-private-llm-run-teach-grow">
+    <summary><b>Your private LLM</b><span>run it · teach it · (almost never) grow it</span></summary>
+    <p class="plain">"A personal LLM" means one of three very different jobs, cheapest first. <b>Run</b> an existing open model privately on your Pi — free, today, no training at all. <b>Teach</b> an open model your style or your knowledge by fine-tuning it on a rented GPU for a few pounds. <b>Grow</b> a brand-new brain from nothing — the thing you almost certainly should never do, because it costs a fortune and a perfectly good model already exists. Ninety percent of "I want my own AI" is just the first two, and you can start the first one this afternoon.</p>
+    <p class="tech">(1) <b>Inference</b> of open weights locally — pull a small chat model into Ollama on the Pi (the <code>brain/</code> kit ships with <code>llama3.2:3b</code>; newer small models from the Qwen, Gemma, Llama and Mistral families swap in with one <code>ollama pull</code>), then pair it with the repo's RAG so it answers over <em>your</em> files with zero egress. (2) <b>Fine-tune</b> — <b>QLoRA</b> on a rented 24&nbsp;GB card adapts a 7–8B base to your domain in one to four GPU-hours (a pound or two). (3) <b>Pretraining</b> — genuinely out of scope for a solo operator; named here only so you never chase it. The winning private stack is a small open base + a LoRA "voice" + RAG "facts" — the exact loophole Layer 14 and <code>brain/README.md</code> point at.</p>
+    <figure class="fig"><img alt="A small open base model plus a LoRA voice adapter plus a RAG memory of your own files, combining into a private vertical model" loading="lazy" src="images/training-pipeline.svg" width="760" height="400"><figcaption>Fig 27.3 · run today, teach cheaply, never grow from zero</figcaption></figure>
+  </details>
+  <div class="note"><b>Snippet — a private model that knows your files, tonight (this repo's <code>brain/</code>).</b> Everything runs locally through Ollama; no API key, no egress.
+  <pre class="mono">ollama pull llama3.2:3b        # the local mind (swap for any small model)
+ollama pull nomic-embed-text   # turns your files into points on a map of meaning
+cd brain &amp;&amp; pip install -r requirements.txt
+
+python ingest.py ~/notes ~/second-brain   # index your own stuff, once
+python ask.py "what did I decide about the shift watcher?"
+# the answer is grounded in YOUR documents, cited, and never left the Pi.</pre></div>
+
+  <details class="card" id="l27-voice-model-where-it-lives" data-card="l27-voice-model-where-it-lives">
+    <summary><b>Your own voice model</b><span>clone a voice, then wire it into everything</span></summary>
+    <p class="plain">You can build a voice that reads any text aloud in a chosen voice — for narration, dubbing, an assistant that talks back. You pick an open voice tool, give it a clean sample, and it generates speech. The important lesson hiding here is <em>where the finished thing lives and how you use it</em>: a trained model is just a file, and the "product" is a small program with an on-switch — an <b>endpoint</b> — that your Pi, your phone, or a website can call whenever it needs a voice. Learn this pattern once and it is the same for every model you ever build.</p>
+    <p class="tech">Open options in 2026, and the licence truth that decides whether you can <em>sell</em> the output: <b>Kokoro-82M</b> (permissive, under a gigabyte, <em>runs on the Pi's CPU</em>, commercial-safe, but no cloning) for a shippable narration voice; <b>Fish Speech</b> (permissive, the practical commercial <em>cloning</em> pick, reference-audio workflow); <b>XTTS&nbsp;v2</b> and <b>F5-TTS</b> are higher-fidelity multilingual clones but ship under <em>non-commercial</em> licences — fine to learn on, not to sell. Deployment is the reusable part: wrap the model behind a small <b>FastAPI</b> endpoint, host it on the Pi if it is light (Kokoro) and call it over your private overlay (Layer 16). The checkpoint is the model; the endpoint is the product. Consent and law: only clone a voice you own or have written permission for (Layer 20).</p>
+  </details>
+  <div class="note"><b>Snippet — a voice becomes an on-switch anything can call (Python / FastAPI).</b> Train or clone on a rented GPU once; then the finished voice serves from the Pi's CPU.
+  <pre class="mono">from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from my_tts import synthesize          # your chosen open TTS model, loaded once
+
+app = FastAPI()
+
+@app.post("/say")                       # POST {"text": "..."} -> a wav file
+def say(text: str):
+    wav_path = synthesize(text, voice="house")   # runs local, no egress
+    return FileResponse(wav_path, media_type="audio/wav")
+# run: uvicorn voice:app --host 0.0.0.0 --port 8080
+# now the Pi, the phone, a website, or the neuron mesh all just call POST /say.</pre></div>
+
+  <details class="card" id="l27-video-model-rent-only" data-card="l27-video-model-rent-only">
+    <summary><b>Your own video generator</b><span>the one build the Pi cannot host</span></summary>
+    <p class="plain">You can generate short video clips from a text prompt — but be honest with yourself: this is the one build your Pi cannot do, and the one where renting is not optional. You spin up a rented GPU for an hour, generate your clips, save them, and switch it off. Trying to buy a big graphics card <em>first</em>, before you have made a single clip anyone paid for, is the classic money-burning mistake this whole layer exists to stop.</p>
+    <p class="tech">Open text-to-video in 2026 is real but VRAM-hungry: families like <b>LTX-2</b> (synced audio and video, runs quantised from roughly 6–8&nbsp;GB), <b>Wan&nbsp;2.2</b> (a 5B variant fits ~8&nbsp;GB; larger variants want 16&nbsp;GB+) and <b>HunyuanVideo</b> (comfortable around 24&nbsp;GB, less with offload) — treat exact numbers as a dated snapshot (Layer 04) and let the caretaker refresh them. The realistic path: rent a 24&nbsp;GB card (an RTX 4090 or 3090) by the hour, drive it through <b>ComfyUI</b>, render, pull the MP4s down, terminate. Marginal cost is pennies-to-a-pound per session versus £1,500+ to own the card. For finished, client-grade polish, hosted media APIs (Layer 02) still beat local on quality-per-hour — rent the open model to <em>learn and own</em>, call the API to <em>ship fast</em>.</p>
+    <figure class="fig"><img alt="The heaviest media build — generating video from a prompt — living on a rented GPU rather than the Pi, with clips pulled home afterwards" loading="lazy" src="images/modalities.svg" width="760" height="420"><figcaption>Fig 27.4 · rent the muscle, keep the output</figcaption></figure>
+  </details>
+
+  <details class="card" id="l27-anti-bot-detector-you-sell" data-card="l27-anti-bot-detector-you-sell">
+    <summary><b>An efficient anti-bot detector</b><span>build the shield, sell the shield</span></summary>
+    <p class="plain">There is real, legal money in a small model that tells a website "this visitor is a bot" so it can block fraud and abuse. This is the <em>defensive</em> side — the detector companies actually buy — and it is the easiest of the four builds to make cheaply, because it is a <b>small, fast</b> model, not a giant one. You are building and selling the burglar alarm, never the crowbar. It runs happily on your Pi, scores a visitor in milliseconds, and is the most defensible product on this page.</p>
+    <p class="tech">This is a <b>tabular classification / anomaly</b> problem, not a huge neural net — which is exactly why it is "efficient". A <b>gradient-boosted-tree</b> model (XGBoost/LightGBM) or a lightweight anomaly detector, trained on labelled traffic, scores each request in milliseconds on a CPU. The signal comes from features you already met in the shield layers: <b>device/browser fingerprint</b> (fonts, WebGL, audio), the <b>JA3/JA4 TLS handshake fingerprint</b> (Layer 15, Deep Field — "spoofed headers fool nobody"), <b>behavioural biometrics</b> (mouse, keystroke and scroll cadence), IP reputation, and request-velocity / impossible-travel checks. You retrain on your own labelled data; the product is a scoring <b>API</b> a site calls at login, signup and checkout. Judge it honestly with precision and recall (Layer 25), because a detector that flatters itself is worse than none.</p>
+  </details>
+  <div class="warn"><b>The line, restated for this build.</b> Anti-bot here means <em>detection and anti-abuse only</em> — the product you build and <b>sell</b>. Deliberately absent under any framing, exactly as the Deep Field states: TLS-impersonation kits, ban-evasion or proxy-rotation orchestrators, CAPTCHA-solving-for-abuse, and scraping a site against its terms. The mechanism is taught so you can build the <em>detector</em>, not defeat one — and as the Deep Field puts it, the durable, saleable skill was always on the detection side.</div>
+
+  <h3>Renting a brain by the hour</h3>
+  <details class="card" id="l27-renting-gpu-demystified" data-card="l27-renting-gpu-demystified">
+    <summary><b>Renting a GPU, demystified</b><span>what you're really doing, and how not to bleed money</span></summary>
+    <p class="plain">When you "rent a GPU" you are renting a whole computer in a warehouse for a few pounds an hour. You get the keys, you log in from your Pi or laptop, you do your job — and <b>you must switch it off</b>, or the meter runs all night. Your files do not live on it by default: when the machine is destroyed, anything you did not copy out is gone. The number-one beginner disaster is leaving one running and waking to a huge bill; the number-two is losing a finished model because it was never saved off the box.</p>
+    <p class="tech">You are provisioning an hourly cloud instance (RunPod, Vast.ai, Lambda). You connect over <b>SSH</b> or a browser <b>Jupyter</b> notebook, <code>pip install</code>, pull a base model plus your dataset, and run the fine-tune. Storage discipline is the whole game: the instance's local disk is <b>ephemeral</b>, so persist <b>checkpoints</b> and datasets to attached <em>network/volume storage</em> or push them to a hub / object store <em>before you terminate</em> (mind Layer 26's egress fees on the way out). <b>Spot / community</b> instances are cheapest but can be reclaimed with about fifteen seconds' notice — checkpoint often. Then <b>stop or terminate</b>, and know the difference: "stopped" can still bill for retained storage. Rough mid-2026 rates (a dated snapshot): a 24&nbsp;GB RTX 4090 is often well under £0.60/hr, an A100 around £1/hr, an H100 a few pounds — so a whole QLoRA run is frequently under £2.</p>
+    <figure class="fig"><img alt="Renting an hourly GPU instance: connect over SSH, save checkpoints to persistent storage, then terminate so the meter stops" loading="lazy" src="images/cloud-shapes.svg" width="760" height="420"><figcaption>Fig 27.5 · the disk is ephemeral; save before you switch off</figcaption></figure>
+  </details>
+  <div class="note"><b>A rental session, start to shutdown — the seven literal steps.</b> Tape this above the desk.
+  <pre class="mono">1. Pick the instance   : a 24 GB RTX 4090, template with PyTorch + CUDA ready.
+2. Connect            : ssh root@&lt;ip&gt;   (or open the browser Jupyter tab).
+3. Attach + fetch     : mount a PERSISTENT volume; git clone code; pull dataset.
+4. Train              : python train_qlora.py   # writes checkpoints/ to the volume
+5. Rescue the result  : huggingface-cli upload ...   (or rsync the adapter to the Pi)
+6. Verify             : confirm the file actually downloaded and opens.
+7. TERMINATE          : destroy the instance; check the dashboard shows $0.
+# Skip step 7 and the machine bills all night. Skip step 5 and the work is gone.</pre></div>
+
+  <details class="card" id="l27-bringing-the-model-home" data-card="l27-bringing-the-model-home">
+    <summary><b>Bringing the model home</b><span>from a rented run to a thing your workflow calls</span></summary>
+    <p class="plain">After you train something on a rented machine, the result is a small file — a few dozen megabytes for a fine-tuned "voice", more for a full model. You copy that file down to your Pi. From then on it lives at home: you load it once and expose an on-switch other programs can pull, so your phone, a website, or an automation can all use it without ever knowing it was trained in a warehouse. A one-off rental becomes a permanent part of your setup instead of a demo you lose.</p>
+    <p class="tech">A LoRA <b>adapter</b> is tiny (often under 100&nbsp;MB) and merges onto the frozen base at load time; a merged and quantised model is a <b>GGUF</b> you serve with Ollama or llama.cpp. Home for it is the Pi's <b>NVMe</b> (the graft in the shopping ladder below). Expose it as a localhost or overlay <b>API</b> — FastAPI, or simply <code>ollama serve</code> — and your other repos, the <code>neuron/</code> mesh, and phone shortcuts all call that one endpoint. This is how a single training run becomes a durable <em>organ</em> in the pipeline (the capstone below) rather than a notebook you never open again. It is Layer 14's "memory it can keep", made operational.</p>
+  </details>
+
+  <h3>What to buy, and in what order</h3>
+  <details class="card" id="l27-spending-ladder" data-card="l27-spending-ladder">
+    <summary><b>The urgency-ordered shopping list</b><span>what £0 to £1,500 each actually unlocks</span></summary>
+    <p class="plain">Spend nothing until you have hit a wall the free stuff cannot clear — you already own the two most important things in the whole setup. Then climb one rung at a time, buying only the thing that removes your <em>current</em> bottleneck, not the exciting thing two rungs up. Here is exactly what each amount buys, cheapest and most urgent first. Most people never need to climb past the middle.</p>
+    <p class="tech">Bottleneck-ordered, not wishlist-ordered. Prices are a UK mid-2026 snapshot (Layer 04 — expect drift; note the 2026 NAND price spike has kept SSDs dearer than usual). The through-line is Layer 23: turn a variable rental cost into a fixed owned one only once the rental bill for a job clears the price of owning it.</p>
+  </details>
+  <div class="note"><b>The ladder — buy the rung that clears your current wall.</b> (UK £, snapshot 2026-08-14.)
+  <pre class="mono">£0      Already owned: Pi 5 16GB + Pixel 7 Pro. Install Ollama + the brain/ RAG;
+        use free Colab / Kaggle GPU hours; Claude Code / Codex; pay-as-you-go API
+        (pennies).            UNLOCKS: local inference, private RAG, first fine-tunes,
+                              agentic coding. Do everything here before spending a penny.
+
+£50     Pimoroni NVMe Base (~£14) + a 256-512GB NVMe SSD (~£35-45).
+        UNLOCKS: stop killing SD cards (Layer 01/07), fast boot, a real vector store —
+        the graft every other graft assumes (Layer 07, G1).
+
+£200    ~£100 rental credit (≈ 150-300 hrs of a 4090) + a Hailo AI HAT+ (~£70)
+        OR a UPS HAT for power-cut survival.
+        UNLOCKS: on-demand fine-tuning + video muscle; a vision organ or an always-on
+        node that survives a blackout.
+
+£500    A used 24GB RTX 3090 in a cheap desktop, OR a Jetson Orin Nano Super (~£210)
+        plus a bigger rental budget.
+        UNLOCKS: your own CUDA card — unlimited local fine-tuning and media generation.
+
+£1,500  The laptop decision (next card): a refurb Apple-Silicon Mac with 36-48GB
+        unified memory, OR a mini-PC + a 16GB+ NVIDIA card.
+        UNLOCKS: run a ~70B model locally, comfortable fine-tuning, a portable studio.</pre></div>
+
+  <details class="card" id="l27-best-laptop-buy-build-rent" data-card="l27-best-laptop-buy-build-rent">
+    <summary><b>The best laptop to buy or build</b><span>what matters (memory) vs what doesn't (badges)</span></summary>
+    <p class="plain">For AI, the one thing that decides everything is <em>how big a model fits in fast memory</em> — not the brand, the screen, or the clock speed. Apple's newer laptops share one big pool of memory between the chip and the graphics, so a well-specced Mac can hold models that choke a flashy "gaming" laptop whose graphics memory is tiny. But be honest about the job: for the heavy lifting you will still rent, so a laptop's real purpose is to be a comfortable cockpit you drive everything else from, not a training rig you carry.</p>
+    <p class="tech">The metric is <b>VRAM / unified-memory capacity</b>, then <b>memory bandwidth</b>, then <b>thermals</b> (laptops throttle under sustained load). A gaming laptop's mobile RTX 4090 carries only ~16&nbsp;GB of VRAM; the moment a model spills to system RAM over PCIe, throughput collapses. <b>Apple unified memory</b> (36–128&nbsp;GB) lets the GPU address one big pool, so a 48&nbsp;GB Mac runs a Q4 70B that no single sub-£2k desktop card fits — at full bandwidth. The trade: CUDA-only tooling (bitsandbytes, some kernels) prefers NVIDIA, so Macs are superb for <em>inference and light fine-tuning</em>, weaker for the CUDA <em>training</em> ecosystem. Verdict: <b>rent for training, buy for the cockpit.</b> Build a desktop if you want a cheap 24&nbsp;GB CUDA card living at home; buy a Mac if you want one portable box that runs big models; rent if the need is occasional. UK anchors (snapshot): a refurb M-series Mac with 36–48&nbsp;GB ≈ £1.5–2k+, a desktop + used RTX 3090 24&nbsp;GB ≈ £600–900, an eGPU enclosure ≈ £280–350 plus a card (Layer 07's "forbidden graft" for the Pi).</p>
+    <figure class="fig"><img alt="What decides an AI laptop — memory capacity and bandwidth — versus the badges that don't, comparing a unified-memory Mac to a GPU laptop with small VRAM" loading="lazy" src="images/cost-shape.svg" width="760" height="420"><figcaption>Fig 27.6 · rent for training, buy for the cockpit</figcaption></figure>
+  </details>
+
+  <h3>The operator's edge</h3>
+  <details class="card" id="l27-best-fuel-quality-data" data-card="l27-best-fuel-quality-data">
+    <summary><b>The best fuel, gotten right</b><span>out-of-the-ordinary data that stays legal</span></summary>
+    <p class="plain">A model is only as good as what you feed it, and the winners are not the ones with the <em>most</em> data — they are the ones with the <em>cleanest, most owned</em> data. The out-of-the-ordinary move for a solo operator is to build a private data flywheel from things you genuinely own or that are openly licensed, so nobody can ever pull the rug from under you. Scraping someone else's site against its terms is not clever — it is a lawsuit and a poisoned dataset in one.</p>
+    <p class="tech">Legal, high-quality sources, in order of leverage: <b>open-licence corpora and datasets</b> (the Hugging Face Hub, Common Corpus, anything permissive / CC / Apache), <b>public-domain</b> archives, <b>your own exhaust</b> (notes, transcripts, past work — piped straight through the <code>brain/</code> ingest path), <b>consented capture</b> (record your own voice for a clone; get signed releases from collaborators — Layer 20), <b>synthetic-but-verified</b> data (generate with a frontier model, then <em>human- or verifier-filter</em> it to dodge the model collapse of Layer 14), and <b>data you are paid to be given</b> (a client hands you their labelled traffic to train the anti-bot detector). Quality beats volume: dedup, clean, and check every licence. For any personal data, a lawful basis under UK GDPR is not optional (Layer 20).</p>
+  </details>
+  <div class="warn"><b>Owned, licensed, or consented — never "borrowed".</b> Three failure modes sink beginners here, and all three are avoidable: scraping against a site's terms of service (a legal and reputational risk, not a growth hack); using personal data with no lawful basis (Layer 20's GDPR / AI Act); and recursively training on a model's own output until it blurs into mush (Layer 14's model collapse). The flywheel that compounds is the one built on data you can prove you were allowed to use.</div>
+
+  <details class="card" id="l27-use-cases-and-money" data-card="l27-use-cases-and-money">
+    <summary><b>What to do with it — and get paid</b><span>from bench toys to invoices</span></summary>
+    <p class="plain">Owning these tools is worthless until they solve a problem someone pays for. The pattern that works for one person is to pick one narrow, boring, valuable job and be the best in the world at <em>that</em> — not "an AI company", just "the person who does this one thing". Here is a concrete money shape for each of the four builds, so the bench becomes an invoice.</p>
+    <p class="tech">Mapped to the builds: (a) <b>private LLM + RAG</b> → a "your-documents assistant" sold to small firms — a legal, estate or clinic office where the data legally cannot leave the premises; the Pi's residential, private-by-design story <em>is</em> the pitch (Layer 07, Layer 20). (b) <b>voice model</b> → narration, dubbing, audiobooks or phone-line prompts, billed per minute (Layer 22). (c) <b>video model</b> → short-form content and ads on demand, into a creator workflow. (d) <b>anti-bot detector</b> → a scoring API sold per thousand requests to any site with a fraud or abuse problem — the highest-margin, most defensible, most B2B of the four. The cross-cutting rule is Layer 04's: a narrow vertical model beats a generic tool where it counts, and Layer 23's unit economics decide which to build next.</p>
+  </details>
+
+  <details class="card" id="l27-leverage-claude-code-codex" data-card="l27-leverage-claude-code-codex">
+    <summary><b>Let the robot do the grunt work</b><span>Claude Code / Codex as a one-person night shift</span></summary>
+    <p class="plain">The reason one person can now do all of this is that an agentic coder does the tedious ninety percent — writing the training script, the API wrapper, the deploy plumbing — while you make the decisions. You do not need to memorise the toolkits from "the AI languages" above; you need to know <em>what you want</em> and be able to read what the agent produced. This is the single biggest multiplier available to you, and it is mostly free. It is also how the seventeen cards in this layer are one person's evening instead of a team's quarter.</p>
+    <p class="tech">Use Claude Code / Codex as the <b>implementation layer</b> over everything above: hand it this repo plus a plain instruction — "wire up this QLoRA run", "wrap the TTS model in a FastAPI endpoint", "write the systemd unit so the voice API restarts on boot", "add an egress allowlist" — the same pattern Layer 07's node uses ("bring it to a Claude Code session and say 'wire this up'"). It scaffolds the training loops, the ComfyUI graphs, the Dockerfiles, the CI. You stay the <b>architect and reviewer</b>: read the diff, run the evals (Layer 21, Layer 25), and keep the lethal trifecta in mind (Layer 03, Layer 12) before you let an agent touch anything with both secrets and reach.</p>
+  </details>
+
+  <details class="card" id="l27-one-pipeline-capstone" data-card="l27-one-pipeline-capstone">
+    <summary><b>Wiring it into one system</b><span>Pi as brainstem, phone as remote, GPU on demand</span></summary>
+    <p class="plain">The final move is to stop thinking in separate gadgets and see one organism. The Pi never sleeps — it is the brainstem that holds your memory, runs the small models, and conducts everything. Your phone is the remote control you carry in your pocket. The rented GPU is a muscle the brainstem hires for an hour when there is heavy lifting to do, then lets go. Every model you built in this layer — the private LLM, the voice, the detector — becomes a new organ plugged into that one body, reachable from anywhere.</p>
+    <p class="tech">The capstone architecture, reusing this repo's own parts: the <b>Pi 5</b> is the always-on conductor running Ollama + the <code>brain/</code> RAG + the <code>neuron/</code> mesh (an MQTT synapse, pluggable minds that escalate rule&nbsp;→&nbsp;Ollama&nbsp;→&nbsp;Claude, and a nightly <code>dreamer.py</code> that consolidates the day). The <b>Pixel 7 Pro</b> is the mobile client over a <b>Tailscale / WireGuard</b> overlay (Layer 16) — SSH in, trigger jobs, receive the morning brief. The <b>rented GPU</b> is summoned by a Pi-issued job for a fine-tune or a render, its checkpoints pulled home, then terminated. New models join as endpoints the mesh calls; the frontier <b>API</b> is reserved for the hardest reasoning. This is Layer 07's evolution ladder + Layer 11's neural estate + Layer 26's rented estate, fused into a single loop you own end to end.</p>
+  </details>
+  <div class="note"><b>The whole pipeline, on one line.</b> Everything you built, reachable from your pocket.
+  <pre class="mono">  Pixel 7 Pro                                   rented GPU (by the hour)
+      │  trigger / ask                                 ▲   fine-tune · render
+      ▼  (Tailscale overlay, Layer 16)                 │   checkpoints pulled home
+  ┌─────────────────────────  PI 5  ─────────────────────────┐
+  │  neuron/ mesh  ·  brain/ RAG  ·  Ollama small model      │
+  │  conductor + nightly dreamer  ·  your voice/detector API │
+  └───────────────┬───────────────────────────┬─────────────┘
+                  │ hard reasoning             │ result
+                  ▼                            ▼
+            frontier API                  back to the phone</pre></div>
+
+  <details class="card" id="l27-people-and-homework" data-card="l27-people-and-homework">
+    <summary><b>Your people, and your homework</b><span>where to ask, and what to know cold</span></summary>
+    <p class="plain">You are not doing this alone, and you do not need to know everything — you need to know the <em>right</em> things deeply and know <em>who</em> to ask for the rest. Find the handful of communities where this exact work happens and lurk before you post. Then get genuinely good at a short list of foundations; everything else you can look up, or hand to the agent.</p>
+    <p class="tech"><b>People and communities:</b> r/LocalLLaMA and r/StableDiffusion; the Hugging Face forums and Discord; the Ollama and ComfyUI Discords; the Raspberry Pi forums; the RunPod / Vast community channels; and, for the detector, the defensive-security world — OWASP and the anti-fraud engineering blogs (stay on the detection side, as the build card says). <b>Deep-knowledge areas, in priority order</b> (this is your syllabus, and each is a layer of this Codex): (1) <b>Linux / systemd / SSH</b> (Layer 17) — you cannot operate a node without it; (2) <b>networking</b> — DNS, TCP, TLS, overlays, JA4 (Layer 16, Layer 15); (3) the <b>ML essentials</b> — tokens, inference, fine-tuning, RAG, quantization (Layer 02, Layer 14); (4) <b>statistics and evals</b> — precision and recall, so your detector and your models cannot lie to you (Layer 25, Layer 21); (5) <b>security and data law</b> — the lethal trifecta and UK GDPR / the AI Act (Layer 03, Layer 12, Layer 19, Layer 20); (6) <b>unit economics</b> — pricing per token and per request (Layer 23). Breadth you can outsource to the agent; these six you own yourself.</p>
+  </details>
+</section>
+
 <!-- ============ APPENDIX · THE DEEP FIELD ============ -->
 <section id="deep">
   <div class="lnum">APPENDIX · DEEP FIELD</div>
@@ -1865,12 +2061,26 @@ await b.close();</pre></div>
     <p><b>semantic HTML</b> — using the tag that describes the thing; free accessibility.</p>
     <p><b>shared responsibility</b> — the provider secures the platform; configuration and data stay yours.</p>
     <p><b>static typing</b> — declaring the shape of data so a tool catches the mistake before it runs.</p>
+    <p><b>VRAM</b> — a GPU's fast on-board memory; it decides how big a model fits at all.</p>
+    <p><b>unified memory</b> — one shared memory pool for chip and graphics; how a Mac holds giant models.</p>
+    <p><b>CUDA</b> — NVIDIA's software layer that nearly all AI tooling is written against.</p>
+    <p><b>eGPU</b> — a desktop graphics card in an external box, plugged into a laptop or a Pi.</p>
+    <p><b>PyTorch</b> — the engine every model-training toolkit is built on; you steer, it computes.</p>
+    <p><b>Ollama</b> — the easy way to run open models locally, including on the Pi.</p>
+    <p><b>vLLM</b> — a fast server for open models when you outgrow Ollama.</p>
+    <p><b>QLoRA</b> — LoRA on a compressed model; fine-tune a 7B on one rented card for pennies.</p>
+    <p><b>checkpoint</b> — a saved snapshot of a model mid- or post-training; rescue it before you terminate.</p>
+    <p><b>GGUF</b> — the file format for a quantized model you run locally.</p>
+    <p><b>spot instance</b> — a cheap rented machine that can be reclaimed with seconds' notice.</p>
+    <p><b>text-to-video</b> — generating moving pictures from a prompt; the heaviest media build, rent-only.</p>
+    <p><b>voice cloning</b> — making a model speak in a chosen voice from a short, consented sample.</p>
+    <p><b>bot management</b> — detecting and blocking automated abuse; the detector you build and sell.</p>
   </div>
 </section>
 
 <footer>
   THE OPERATOR'S CODEX · v2.2 · built 12 Aug 2026<br>
-  twenty-six layers · a live feed swept every two days · one deep-field appendix<br>
+  twenty-seven layers · a live feed swept every two days · one deep-field appendix<br>
   double-click any word · tap any figure · press / to jump<br>
   Sheffield ⇄ Kottayam · committed is saved, pushed is safe
 </footer>

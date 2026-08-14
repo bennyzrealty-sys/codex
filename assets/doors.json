@@ -125,5 +125,19 @@
   "cpu": { "world": "silicon", "art": "images/cpu-vs-gpu.svg", "why": "Four brilliant workers — unbeatable at winding roads, outnumbered on the flat.", "kin": ["gpu", "arm", "kernel"] },
   "ram": { "world": "silicon", "art": "images/machine-anatomy.svg", "why": "The desk everything must fit on — the ceiling for every model your node can hold.", "kin": ["hbm", "quantization", "cpu"] },
   "packet": { "world": "wire", "art": "images/packet-journey.svg", "why": "Everything you send is diced into these — reassembled, retried, and routed without ceremony.", "kin": ["tcp", "udp", "dns"] },
-  "tool": { "world": "mind", "art": "images/tool-call.svg", "why": "The hinge of the agentic era — the moment a model stops describing and starts doing.", "kin": ["agent", "mcp", "orchestration"] }
+  "tool": { "world": "mind", "art": "images/tool-call.svg", "why": "The hinge of the agentic era — the moment a model stops describing and starts doing.", "kin": ["agent", "mcp", "orchestration"] },
+  "vram": { "world": "silicon", "art": "images/cpu-vs-gpu.svg", "why": "The one number that decides whether a model runs at all — capacity beats clock speed every time.", "kin": ["gpu", "unified memory", "quantization", "cuda"] },
+  "unified memory": { "world": "silicon", "art": "images/machine-anatomy.svg", "why": "Why a well-specced Mac holds models a flashy gaming laptop chokes on — one pool, shared.", "kin": ["vram", "ram", "gpu"] },
+  "cuda": { "world": "silicon", "art": "images/cpu-vs-gpu.svg", "why": "NVIDIA's real moat — the software layer your whole toolchain quietly depends on.", "kin": ["gpu", "vram", "pytorch"] },
+  "egpu": { "world": "silicon", "art": "images/pi-grafts.svg", "why": "A desktop graphics card on a leash — the cheapest route to real VRAM for a laptop or a Pi.", "kin": ["gpu", "vram", "cuda"] },
+  "pytorch": { "world": "craft", "why": "The engine under every training toolkit — you steer in Python, it does the maths.", "kin": ["cuda", "ollama", "vllm", "training"] },
+  "ollama": { "world": "craft", "art": "images/runtimes.svg", "why": "The one command that puts a real model on your Pi — local, private, free per use.", "kin": ["gguf", "vllm", "quantization", "rag"] },
+  "vllm": { "world": "craft", "art": "images/runtimes.svg", "why": "When Ollama is not fast enough — the server you graduate to for real throughput.", "kin": ["ollama", "gguf", "inference"] },
+  "qlora": { "world": "craft", "art": "images/lora.svg", "why": "Fine-tune a 7B on one rented card for the price of a coffee — the loophole made cheaper.", "kin": ["lora", "checkpoint", "quantization", "training"] },
+  "checkpoint": { "world": "craft", "art": "images/training-pipeline.svg", "why": "The saved snapshot you must rescue off a rented box before you switch it off, or the work is gone.", "kin": ["qlora", "gguf", "spot instance", "training"] },
+  "gguf": { "world": "craft", "art": "images/quantization.svg", "why": "The file format that lets a trained model live on your Pi and serve from a single command.", "kin": ["ollama", "quantization", "checkpoint"] },
+  "spot instance": { "world": "world", "art": "images/cloud-shapes.svg", "why": "The cheapest rented muscle — as long as you checkpoint, because it can vanish with seconds' notice.", "kin": ["checkpoint", "iaas/paas/saas", "egress fee"] },
+  "text-to-video": { "world": "mind", "art": "images/modalities.svg", "why": "The heaviest build on the bench — the one job the Pi cannot do, so you rent by the hour.", "kin": ["diffusion", "modalities", "spot instance"] },
+  "voice cloning": { "world": "mind", "art": "images/modalities.svg", "why": "A model that speaks in a chosen voice — powerful, sellable, and only ever from a consented sample.", "kin": ["modalities", "checkpoint", "gdpr"] },
+  "bot management": { "world": "shield", "art": "images/four-pillars.svg", "why": "The detector companies pay for — build and sell the shield, never the crowbar.", "kin": ["fingerprint (device)", "ja3/ja4", "precision", "recall"] }
 }
