@@ -2,9 +2,139 @@
   "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
   "cadence_days": 2,
   "policy": "append-only · newest first · nothing is ever deleted",
-  "generated": "2026-08-13",
-  "next_scan": "2026-08-15 06:00 UTC",
+  "generated": "2026-08-15",
+  "next_scan": "2026-08-17 06:00 UTC",
   "entries": [
+    {
+      "id": "2026-08-13-hbm4-yield-memory-pricing",
+      "date": "2026-08-13",
+      "domain": "hardware",
+      "title": "Samsung's HBM4 yield hits 80% — but ordinary RAM stays scarce",
+      "oneline": "the fastest memory chip gets easier to make; the kind in your Pi doesn't",
+      "plain": "Samsung just announced its newest memory chip — the super-fast kind used inside AI data centres — is now working properly about 80% of the time it's made, up from under 60% in February. That sounds like good news for everyone, but mostly isn't for you: this chip type is different from the ordinary memory that goes in your Raspberry Pi or laptop, and factories are still pouring their best capacity into it instead of ordinary memory. So the shortage pushing up Pi and laptop prices all year keeps going, even as this specific bottleneck eases somewhere else entirely.",
+      "tech": "Samsung's HBM4 yield reportedly reached ~80% ('golden yield') by August 2026, up from under 60% at February's mass-production start, driven by 1c DRAM base-die improvements and TC-NCF packaging progress. TrendForce (13 Aug) expects HBM to retain pricing power through 2027 as bit-shipment growth (50-60% YoY in 2027) still lags demand, while ordinary DRAM contract-price growth moderates but does not reverse — meaning LPDDR4 costs feeding Raspberry Pi's bill-of-materials stay elevated.",
+      "lands": "Don't wait for a Pi price cut: this yield jump is about HBM going into AI accelerators, not the LPDDR4 in your Pi 5's bill of materials, and fabs are still prioritising the higher-margin chip. If you're speccing a new node or a GPU-hour rental this quarter, budget for continued elevated memory pricing rather than a correction — TrendForce's own forecast has HBM keeping pricing power through 2027. Practically: buy RAM-heavier boards now if you genuinely need them, and lean harder on quantised models that fit in less memory rather than waiting for prices to fall.",
+      "tools": [
+        "GGUF quantization",
+        "zram-swap",
+        "ollama ps",
+        "Pi Imager"
+      ],
+      "toolnote": "If 16GB/8GB boards are the plan, price them this month — nothing here suggests the DRAM squeeze easing soon.",
+      "art": "images/chip-chokepoint.svg",
+      "artcap": "HBM gets easier to make; ordinary DRAM stays the scarce resource.",
+      "sources": [
+        {
+          "label": "TrendForce",
+          "url": "https://www.trendforce.com/news/2026/08/13/news-samsung-sk-hynixs-hbm4-push-puts-hbm-general-memory-pricing-in-the-spotlight-for-2h-earnings/"
+        },
+        {
+          "label": "Seoul Economic Daily",
+          "url": "https://en.sedaily.com/finance/2026/08/10/samsung-cracks-hbm4-yields-set-to-overtake-sk-hynix-next"
+        }
+      ],
+      "touches": [
+        "l3-mcp",
+        "l19-patching-cve-cvss-epss-kev",
+        "l23-funnel"
+      ],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-08-11-nemotron-3-5-lightning",
+      "date": "2026-08-11",
+      "domain": "ai",
+      "title": "NVIDIA gives away a 30B model built for agents that never stop",
+      "oneline": "3B-active MoE tuned for the tool-calling grind, not the hard thinking",
+      "plain": "NVIDIA gave away Nemotron 3.5 Lightning, a free 30-billion-parameter model built specifically for agents that need to keep working for hours: reading files, calling tools, checking results, and trying again when something fails. Only about 3 billion of those parameters switch on for each word it produces, which is why it runs fast even though it's officially a 30B model. It's designed to be the tireless worker inside a bigger agent system — not the smartest brain, but the one that never gets tired of doing the boring repetitive steps quickly and correctly.",
+      "tech": "NVIDIA Nemotron 3.5 Lightning: 30B-parameter hybrid Mamba-2/Attention MoE with ~3B active parameters per token, native 1M-token context, NVFP4 and BF16 checkpoints, released via Ollama, llama.cpp, LM Studio, Exo and Unsloth. Optimised for the agent execution layer — tool calls, result validation, subagent delegation — with NVIDIA's benchmarks claiming 4x throughput and 30% lower task-completion time versus similarly-sized open models. Harness support includes OpenClaw, Hermes Agent, Cline, LangChain and Claude Code.",
+      "lands": "This isn't a model to replace your reasoning model — it's a second, cheaper brain to sit underneath one, handling the high-volume grunt work an agent loop generates (parsing a tool result, retrying a failed call, routing a subagent) without burning tokens on a frontier model for trivial steps. At 30B/3B-active it needs a real GPU, not your Pi directly, but pairing a rented GPU-hour Nemotron instance with a Claude or local reasoning model for the hard calls is the cheapest way yet to run an always-on agent that doesn't need supervision for every step.",
+      "tools": [
+        "Ollama",
+        "OpenClaw",
+        "Hermes Agent",
+        "llama.cpp",
+        "Claude Code"
+      ],
+      "toolnote": "ollama pull nemotron-3.5-lightning:30b-a3b gets the quantised build; pair it with a reasoning model for the calls that need judgement.",
+      "art": "images/agent-loop.svg",
+      "artcap": "The execution layer: a fast, narrow model doing the loop's repetitive steps.",
+      "sources": [
+        {
+          "label": "Ollama Blog",
+          "url": "https://ollama.com/blog/nemotron-3-5-lightning"
+        },
+        {
+          "label": "NVIDIA Technical Blog",
+          "url": "https://developer.nvidia.com/blog/nvidia-nemotron-3-5-lightning-delivers-fast-accurate-specialized-task-execution-for-long-running-agents/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 440
+    },
+    {
+      "id": "2026-08-11-metabase-sqli-kev",
+      "date": "2026-08-11",
+      "domain": "cyber",
+      "title": "CISA flags Metabase's SQL-injection zero-day as actively exploited",
+      "oneline": "one unauthenticated request handed attackers admin over every connected database",
+      "plain": "Metabase is a popular tool companies use to look at their data — and it just had a very bad bug. A single web request, needing no password at all, let an attacker become the administrator of the whole tool — including every database password Metabase had stored to connect to other systems. Attackers used this before anyone knew about it, and companies including n8n, Framework and Kilo Code have already confirmed customer data was accessed. The US government's list of vulnerabilities being actively exploited added this one on 11 August, meaning: if you or a client runs Metabase, patch today, not this week.",
+      "tech": "CVE-2026-72898: an unauthenticated SQL injection in Metabase's /api/session/reset_password endpoint (CVSS 3.1: 10.0), affecting self-hosted 0.58.x through 0.63.4 and Enterprise 1.58-1.63.4, grants full admin access and exposes every connected database's stored credentials. Exploited as a zero-day from ~3 August, disclosed 6 August, added to CISA's KEV catalogue 11 August alongside Cisco ASA/FTD (CVE-2026-20349). Confirmed victims: n8n, Framework, Kilo Code, Anaconda. Fix: upgrade to 0.63.5/0.62.9/0.61.11/0.60.17/0.59.21 or later; rotate every credential the instance held.",
+      "lands": "If you or any future NHS-adjacent client ever stands up a BI/analytics dashboard (Metabase, Superset, similar) in front of real databases, this is the lesson: that tool holds the keys to everything it connects to, so it needs the same access controls as the databases themselves — never internet-facing without an authenticating proxy in front of it. Concretely: audit anything you've deployed that stores connection strings, put it behind Tailscale rather than a public IP, and add 'does this tool hold other systems' credentials' to your own threat-modelling checklist before connecting it to anything real.",
+      "tools": [
+        "Metabase upgrade",
+        "Tailscale",
+        "CISA KEV feed",
+        "credential rotation"
+      ],
+      "toolnote": "Treat any BI/analytics tool holding DB credentials as tier-1 attack surface, not an internal convenience.",
+      "art": "images/attack-path.svg",
+      "artcap": "One unauthenticated request, admin access, every connected credential.",
+      "sources": [
+        {
+          "label": "CISA",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/08/11/cisa-adds-three-known-exploited-vulnerabilities-catalog"
+        },
+        {
+          "label": "The Hacker News",
+          "url": "https://thehackernews.com/2026/08/metabase-zero-day-exploited-in-wild.html"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-08-06-agent-plugins-1-0",
+      "date": "2026-08-06",
+      "domain": "it",
+      "title": "GitHub, Microsoft, OpenAI, AWS and Vercel agree one agent-plugin format",
+      "oneline": "package a skill and its MCP server once, run it in any compatible agent",
+      "plain": "For the last year, if you built a useful add-on for one AI coding assistant, you had to rebuild it from scratch for every other assistant — one for GitHub's tool, a different one for Claude, another for OpenAI's. On 6 August, GitHub, Microsoft, OpenAI, Amazon, Vercel and the company behind the Cursor editor agreed on one shared format instead, with Google joining days later. Now a plugin — a bundle of instructions plus its tool connections — can be built once and installed into any of these tools, the way a phone charger now works in any phone.",
+      "tech": "Agent Plugins 1.0, published 6 August 2026 by GitHub, AWS, Anysphere, Microsoft, OpenAI and Vercel (Google joined as core maintainer the same day), is an open, vendor-independent packaging format bundling an agent skill with its MCP server into one installable unit, now generally available across VS Code, GitHub Copilot CLI, the Copilot SDK and the Copilot app. It sits on top of MCP 2026-07-28's stateless core, cutting duplicated integration work for anyone shipping a tool across multiple agent harnesses.",
+      "lands": "If you've built even one MCP server for your own agents, this is worth ten minutes: package it as a plugin once and it becomes usable inside GitHub Copilot, Claude Code, Codex and whatever comes next, instead of you maintaining parallel wiring for each. For an operator with a Pi node and a handful of narrow agents, it lowers the cost of eventually offering a tool commercially — write the integration once and it works everywhere clients already have installed, including inside Copilot- or Claude Code-based NHS tooling.",
+      "tools": [
+        "MCP",
+        "GitHub Copilot CLI",
+        "Claude Code",
+        "VS Code",
+        "Codex"
+      ],
+      "toolnote": "Check whether your existing MCP servers already qualify for Plugin packaging before rebuilding anything.",
+      "art": "images/mcp.svg",
+      "artcap": "One plugin format, many agent clients — the universal plug gets a universal case.",
+      "sources": [
+        {
+          "label": "GitHub Changelog",
+          "url": "https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
     {
       "id": "2026-08-11-mcp-stateless-goes-mainstream",
       "date": "2026-08-11",
