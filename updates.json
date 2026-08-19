@@ -2,9 +2,141 @@
   "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
   "cadence_days": 2,
   "policy": "append-only · newest first · nothing is ever deleted",
-  "generated": "2026-08-15",
-  "next_scan": "2026-08-17 06:00 UTC",
+  "generated": "2026-08-19",
+  "next_scan": "2026-08-21 06:00 UTC",
   "entries": [
+    {
+      "id": "2026-08-18-kev-sharepoint-vcenter",
+      "date": "2026-08-18",
+      "domain": "cyber",
+      "title": "CISA lists four more bugs already being attacked in the wild",
+      "oneline": "SharePoint, VMware vCenter, Windows IKE and macOS all added to the KEV catalog the same day",
+      "plain": "CISA — the US government's cyber-defence agency — keeps a list called the Known Exploited Vulnerabilities catalog: software flaws that aren't just theoretical, they're already being used by real attackers right now. On 18 August 2026 it added four more: a way to trick Microsoft SharePoint into thinking you're an admin without a password, a path-traversal bug in VMware's vCenter server manager, a flaw in Windows' VPN-negotiation service, and an authentication bug in Apple's macOS. Government agencies now have a strict deadline to patch each one — and everyone else should treat that deadline as their own.",
+      "tech": "CISA KEV additions, 18 Aug 2026: CVE-2026-33824 (Microsoft IKE Extensions double-free), CVE-2026-55040 (SharePoint JWT auth bypass, CVSS 9.1, patched July Patch Tuesday, PoC-to-honeypot-hit within a day per Rapid7/Defused), CVE-2026-59310 (Broadcom VMware vCenter path traversal), CVE-2026-65400 (Apple macOS improper authentication). SharePoint's flaw forges a JWT to impersonate any user, including admins; Shadowserver counts 8,500+ exposed on-prem servers.",
+      "lands": "None of these sit on your Pi stack directly, but the pattern matters: CVE-2026-55040 went from patch to public PoC to real attacker traffic in under 24 hours. If you ever stand up SharePoint-adjacent tooling for an NHS-facing project, or manage any internet-facing admin panel, the lesson is that your patch window is now measured in hours, not weeks. Check your own exposed services against the KEV feed this week rather than 'when you get to it' — expect this exact vulnerability class to show up in NHS trust environments eventually.",
+      "tools": [
+        "CISA KEV feed",
+        "Nessus",
+        "Shadowserver",
+        "Rapid7 advisories"
+      ],
+      "toolnote": "Subscribe to the KEV JSON feed and diff it against your own exposed services weekly.",
+      "art": "images/patch-priority.svg",
+      "artcap": "Four fresh entries, one shared deadline: patch now, not later.",
+      "sources": [
+        {
+          "label": "CISA",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/08/18/cisa-adds-four-known-exploited-vulnerabilities-catalog"
+        },
+        {
+          "label": "TechTimes",
+          "url": "https://www.techtimes.com/articles/324475/20260814/sharepoint-cve-2026-55040-actively-exploited-attackers-forge-admin-credentials-no-password.htm"
+        }
+      ],
+      "touches": [
+        "l3-mcp",
+        "l19-patching-cve-cvss-epss-kev"
+      ],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-08-17-github-outage-cursor-origin",
+      "date": "2026-08-17",
+      "domain": "it",
+      "title": "GitHub broke for 6+ hours the same day a rival launched",
+      "oneline": "A global GitHub degradation and Cursor's new Origin code-host landed on the same afternoon",
+      "plain": "GitHub, the website almost every programmer uses to store and share code, broke for about six and a half hours on 17 August 2026. Logins failed, file downloads failed nearly half the time, and even the sign-in systems companies use to control who can access their code went down. On the very same day, a rival AI coding tool called Cursor switched on its own code-hosting service, Origin, as an alternative. It's a reminder that even giant, trusted platforms can go dark all at once — and that betting everything on one company's uptime is a real risk, not a theoretical one.",
+      "tech": "GitHub suffered a ~6h42m global degradation on 17 August 2026: ~20% error rates on pull requests, issues and the API, ~50% on archive/raw file downloads, plus failures in SAML, OIDC, SCIM provisioning, Team Sync and Copilot — its seventh status-page incident in fifteen days. Hours earlier, Cursor began rolling out Origin, a GitHub-style code-hosting platform (repos, PRs, code browsing, two-way GitHub sync) to paid plans, with day-one integrations for Vercel, Depot and Buildkite.",
+      "lands": "You run one Pi, a handful of agents and a private repo you treat as ground truth. This is the argument for a local-first git habit: your repo already lives on your Pi's disk before it ever touches a host, so an outage costs you a delayed push, not a lost afternoon. It's also a nudge to check whether your CI/CD, webhooks or deploy triggers have a single point of failure — if GitHub Actions is down, does anything on your node quietly stop updating? Worth a five-minute audit, not a platform migration.",
+      "tools": [
+        "git",
+        "GitHub Actions",
+        "Cursor",
+        "Vercel",
+        "rsync/local backup"
+      ],
+      "toolnote": "Keep a local clone and a cron'd backup so a platform outage never touches your only copy.",
+      "art": "images/cloud-shapes.svg",
+      "artcap": "One company's outage, felt across a fifth of the web's front doors.",
+      "sources": [
+        {
+          "label": "VentureBeat",
+          "url": "https://venturebeat.com/infrastructure/cursor-launches-origin-code-hosting-platform-as-github-outage-exposes-opening-in-ai-coding-race"
+        },
+        {
+          "label": "Cryptonomist",
+          "url": "https://en.cryptonomist.ch/2026/08/19/cursor-launches-code-hosting/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-08-16-ollama-muse-glimmer-qwen38",
+      "date": "2026-08-16",
+      "domain": "ai",
+      "title": "Ollama can now run Meta's multimodal Muse Glimmer locally",
+      "oneline": "A 30B image-capable model and a 27B coding model join the local-model lineup this week",
+      "plain": "Ollama is the free tool that lets you run AI models directly on your own computer instead of paying a company to run them for you. This week it added support for two new open models: Meta's 'Muse Glimmer', a 30-billion-parameter model that can look at images as well as text, and Qwen3.8, a 27-billion-parameter model tuned for coding and long research tasks. Both are built the same clever way as recent efficient models: they only 'wake up' a small slice of their brain per word, so they run faster than their full size suggests — good news for anyone without a giant GPU.",
+      "tech": "Ollama shipped local support for Meta's Muse Glimmer (30B multimodal, MLX-optimized on Apple Silicon with DFlash and image input) and Qwen3.8 27B (improved instruction-following for coding, research and long-horizon agentic tasks), alongside DeepSeek Harness and Muse Code agent-harness support, across releases dated 10-16 August 2026 (Ollama v0.32.8-v0.32.13). Both target the same execution-layer niche as NVIDIA's Nemotron 3.5 Lightning: small-active-parameter MoE models built for always-on agent loops rather than one-shot chat.",
+      "lands": "A 30B or 27B model at full precision won't run comfortably on a Pi 5's 8-16GB — but a quantised (Q4) version might, and this is exactly the kind of model worth testing on a rented GPU hour before deciding whether to bring it home. If you're building narrow agents that need to read a screenshot or a scanned form as well as text, Muse Glimmer's image input is the more interesting of the two for you; Qwen3.8 is the safer pick if you just want a better local coding assistant.",
+      "tools": [
+        "ollama pull",
+        "llama.cpp",
+        "LM Studio",
+        "runpod/vast.ai"
+      ],
+      "toolnote": "Test the full-size model on a rented GPU hour before committing a Pi to a quantised copy.",
+      "art": "images/runtimes.svg",
+      "artcap": "Same trick, new names: small active parameters, big claimed capability.",
+      "sources": [
+        {
+          "label": "Releasebot (Ollama)",
+          "url": "https://releasebot.io/updates/ollama"
+        },
+        {
+          "label": "Freedom.Tech",
+          "url": "https://freedom.tech/project/ollama/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 440
+    },
+    {
+      "id": "2026-08-16-dram-shortage-deepens",
+      "date": "2026-08-16",
+      "domain": "hardware",
+      "title": "A 32GB RAM kit that cost $100 now costs $400+",
+      "oneline": "The AI-driven memory shortage keeps deepening, with no reversal projected before 2027-2028",
+      "plain": "Computer memory chips (RAM) keep getting more expensive, and it's not slowing down. A 32-gigabyte DDR5 memory kit that cost about $100 a year ago now costs well over $400, because the same factories that make ordinary RAM have been switching to make the special high-speed memory that AI data centres need instead. Analysts now expect this squeeze to last into 2027 or 2028, not months. It's part of why Raspberry Pi's own engineers have said a Pi 6 isn't coming before early 2028 — there's little point launching a new board when the memory to put in it costs twice what it used to.",
+      "tech": "TrendForce-reported consumer DRAM contract prices rose ~95% in Q1 2026 and a further ~63% in Q2; a 32GB DDR5-6000 kit rose from ~$100 (Sept 2025) to $400+ by August 2026 per Tom's Hardware. Citi projects enterprise 64GB DDR5 RDIMM pricing climbing from $873 (Q1 2026) to ~$1,586 by Q4 2026. Root cause: Samsung, SK Hynix and Micron (>95% of DRAM output) reallocating wafer capacity to HBM for AI accelerators; SK Hynix's CEO has said the shortage could persist beyond 2030.",
+      "lands": "Your Pi 5's RAM is already fixed at whatever you bought, so this doesn't touch your existing node — but it changes the maths on every future purchase: a bigger Pi, a used GPU, or a laptop upgrade for local training will all cost noticeably more than a year ago, and that gap isn't closing soon. If you've been putting off buying a 16GB Pi 5 or a memory-heavy secondhand GPU for LoRA work, this is the argument for doing it now rather than waiting for prices to 'come back down' — they aren't projected to.",
+      "tools": [
+        "Pi 5 16GB",
+        "used market (eBay/CEX)",
+        "DDR5 kit trackers",
+        "Tom's Hardware RAM index"
+      ],
+      "toolnote": "Price-check any RAM-heavy purchase against TrendForce/Tom's Hardware trend data before waiting for a discount that isn't coming.",
+      "art": "images/chip-chokepoint.svg",
+      "artcap": "Same wafers, redirected: your RAM lost the bidding war to a GPU rack.",
+      "sources": [
+        {
+          "label": "Tech Insider",
+          "url": "https://tech-insider.org/dram-ram-price-crisis-2026/"
+        },
+        {
+          "label": "Jeff Geerling",
+          "url": "https://www.jeffgeerling.com/blog/2026/news-about-raspberry-pi-6-and-microcontroller-development/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
     {
       "id": "2026-08-13-hbm4-yield-memory-pricing",
       "date": "2026-08-13",
