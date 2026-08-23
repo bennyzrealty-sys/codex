@@ -2,9 +2,157 @@
   "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
   "cadence_days": 2,
   "policy": "append-only · newest first · nothing is ever deleted",
-  "generated": "2026-08-19",
-  "next_scan": "2026-08-21 06:00 UTC",
+  "generated": "2026-08-23",
+  "next_scan": "2026-08-25 06:00 UTC",
   "entries": [
+    {
+      "id": "2026-08-21-claude-code-mcp-plugin-hardening",
+      "date": "2026-08-21",
+      "domain": "it",
+      "title": "Claude Code locks down MCP and plugin loading after a rough patch",
+      "oneline": "New validation closes an OAuth redirect gap and a Windows path-traversal credential leak",
+      "plain": "Claude Code, the AI coding assistant many developers run in their terminal, tightened up how it loads plug-ins and connects to external tools (called MCP servers) after a run of bug reports. It now checks more carefully that a plug-in is genuinely trustworthy before running it, closes a Windows path trick that could leak login credentials, and makes the 'remote control' feature — running a coding session from your phone — recover properly if a connection drops. None of this changes what you can build; it changes how safely the tool behaves while you build it.",
+      "tech": "Claude Code shipped stronger gateway and plugin validation, closing an NTLM credential-leak vector via a Windows `\\\\?\\` device-prefix path bypass, and fixed MCP OAuth redirect-URI mismatches for pre-registered clients (e.g. Slack). Remote Control sessions now reattach to existing claude.ai sessions instead of duplicating, and recover conversation history after a bridge worker restart. Added GitLab merge-request support in `--worktree`, opt-in `forward_user_identity` for per-user spend attribution, and Linux cgroup memory limits for Bash tool commands.",
+      "lands": "If you run Claude Code against any MCP server you didn't write yourself, this closes a real credential-leak path — pull the update before your next session touching client work. The per-user spend attribution flag (forward_user_identity) is worth switching on now if you ever bill an NHS trust or client for agent time; it gives you a free audit trail instead of building one later. Do: update Claude Code, re-check any custom MCP server's OAuth client registration.",
+      "tools": [
+        "claude code",
+        "/mcp",
+        "claude --version"
+      ],
+      "toolnote": "",
+      "art": "images/mcp.svg",
+      "artcap": "Tighter checks on what a plugin or MCP server is allowed to touch.",
+      "sources": [
+        {
+          "label": "Claude Code Changelog",
+          "url": "https://www.gradually.ai/en/changelogs/claude-code/"
+        },
+        {
+          "label": "Releasebot — Anthropic",
+          "url": "https://releasebot.io/updates/anthropic"
+        }
+      ],
+      "touches": [
+        "l3-computer-browser-use",
+        "l3-mcp"
+      ],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-08-20-cisa-kev-trueconf",
+      "date": "2026-08-20",
+      "domain": "cyber",
+      "title": "CISA confirms two TrueConf Server bugs are being exploited now",
+      "oneline": "Missing-authentication and code-injection flaws land on the KEV list with an action-due date",
+      "plain": "The US government's official list of security holes that hackers are actually using right now — not just theoretical ones — added two new bugs in TrueConf Server, a video-conferencing platform. One lets an attacker skip the login screen entirely; the other lets them inject and run their own code on the server. If you or anyone you work with runs TrueConf for meetings, this is a today problem, not a someday one — the agencies that track this give a strict deadline to patch.",
+      "tech": "CISA added CVE-2026-72529 (TrueConf Server missing authentication for a critical function) and CVE-2026-72530 (code injection) to the KEV catalog on 20 August 2026, based on confirmed active exploitation. Under Binding Operational Directive 26-04, Federal Civilian Executive Branch agencies must remediate by the published due date; private-sector and NHS-adjacent operators should treat KEV inclusion as de facto proof of in-the-wild exploitation and patch on the same timeline regardless of directive scope.",
+      "lands": "You don't run TrueConf, but the pattern matters: an auth-bypass-plus-code-injection pair went from disclosed to actively-exploited fast enough that CISA flagged it within days. Add TrueConf to your mental list of 'software I check against KEV before ever exposing it to the internet' — and if you ever stand up a video or comms tool for client- or NHS-facing work, check the vendor against the KEV catalog before deployment, not after. Do: bookmark cisa.gov/kev and glance at it weekly, the way you already track CVEs for your own stack.",
+      "tools": [
+        "CISA KEV catalog",
+        "nmap",
+        "vulnerability scanner"
+      ],
+      "toolnote": "",
+      "art": "images/patch-priority.svg",
+      "artcap": "Two more entries on the queue you actually have to finish.",
+      "sources": [
+        {
+          "label": "CISA",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/08/20/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-08-19-muse-glimmer-all-platforms",
+      "date": "2026-08-19",
+      "domain": "ai",
+      "title": "Meta's first open model, Muse Glimmer, now runs everywhere in Ollama",
+      "oneline": "30B multimodal agent model moves from Apple-only preview to NVIDIA, AMD and CPU support",
+      "plain": "Meta just released its first ever open-weight AI model, called Muse Glimmer, built to run on your own computer instead of a company's cloud. It's sized so a decent Mac or gaming PC can run it, and it can look at images as well as read text — useful for an agent that needs to check a screenshot and decide what to click. This week Ollama, the tool you use to run local models, finished adding support for it on graphics cards from NVIDIA and AMD too, not just Apple laptops, so almost anyone can now pull it down and try it.",
+      "tech": "Meta Superintelligence Labs' first open release, Muse Glimmer, is a 30B-parameter causal LM with a dedicated 1.8B-parameter perception encoder for native image input, Apache 2.0 licensed, 128K+ context. The Aug 10 launch supported only Ollama's MLX engine on Apple Silicon; by Aug 19 Ollama ≥0.32.8 added NVIDIA/AMD backends (18GB VRAM at Q4_K_M) plus DFlash speculative decoding, giving 1.5–1.8x speedup on Apple Silicon. Distilled from the closed Muse Spark model, benchmarked on SWE-Bench, τ³-Bench and MCP-Atlas.",
+      "lands": "You now have a second credible small agent model to sit next to Nemotron 3.5 Lightning — pull it on a spare machine with a real GPU (the Pi itself lacks the VRAM), point a watcher script at it, and compare tool-calling reliability before committing a workflow to one vendor. Because it's Apache 2.0, you can fine-tune and redistribute it inside an NHS-adjacent pilot without a licence review. Do: `ollama pull muse-glimmer` on your dev laptop, run one real task from HANDOFF.md through it, log the result.",
+      "tools": [
+        "ollama pull muse-glimmer",
+        "ollama launch",
+        "llama.cpp",
+        "LM Studio"
+      ],
+      "toolnote": "Needs ~18GB VRAM or unified memory — a laptop or rented GPU, not the Pi itself.",
+      "art": "images/quantization.svg",
+      "artcap": "A 30B agent model, shrunk to fit a consumer GPU or a Mac.",
+      "sources": [
+        {
+          "label": "Ollama Blog",
+          "url": "https://ollama.com/blog/muse-glimmer"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 380
+    },
+    {
+      "id": "2026-08-19-claude-computer-use-ga",
+      "date": "2026-08-19",
+      "domain": "ai",
+      "title": "Claude's screen-control tool goes GA — no beta header needed",
+      "oneline": "Anthropic's computer use tool graduates from beta, adds batch actions and admin controls",
+      "plain": "Anthropic's tool that lets Claude look at a computer screen and click, type and scroll like a person has moved out of testing and is now a normal, permanent feature. It can now do several actions in one go instead of one at a time, which makes it faster for real tasks like filling in a form across multiple fields. Companies can also switch it on or off for specific staff. If you've been holding back on browser-automation agents because the tool felt experimental, that excuse is now gone.",
+      "tech": "The Claude API's computer use tool exits beta as computer_toolset_20260801: no beta header required, batch actions (multiple actions per turn), zoom enabled by default, and per-member configuration via the Enterprise Admin API. Existing integrations on computer_20251124 must migrate; request shape and tool handling change. Ships alongside GA Files API, Agent Skills, and a redesigned Console session viewer with sandboxed memory stores for managed agents.",
+      "lands": "If any of your agents drive a browser or desktop UI — checking a rota portal with no API, say — this removes the last reason to keep it in a side-project sandbox; GA means Anthropic supports it in production and won't yank it without notice. Before wiring it into anything touching NHS-adjacent systems, budget time to migrate off the old computer_20251124 shape and re-test batch-action behaviour, since a batched click sequence failing halfway through is a new failure mode your evals need to catch.",
+      "tools": [
+        "Claude Developer Platform",
+        "computer_toolset_20260801",
+        "Claude Console Playground"
+      ],
+      "toolnote": "",
+      "art": "images/tool-call.svg",
+      "artcap": "Batch actions: several clicks and keystrokes issued in one turn.",
+      "sources": [
+        {
+          "label": "Releasebot — Claude Developer Platform",
+          "url": "https://releasebot.io/updates/anthropic/claude-developer-platform"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 400
+    },
+    {
+      "id": "2026-08-19-pi-cm5-programming-jig",
+      "date": "2026-08-19",
+      "domain": "hardware",
+      "title": "Raspberry Pi ships a $600 jig to mass-provision Compute Module 5 boards",
+      "oneline": "Pogo-pin fixture flashes secure boot, disk encryption and an OS onto CM5 with one clamp",
+      "plain": "Raspberry Pi now sells an official $600 machine that clips onto a bare Compute Module 5 board — the tiny chip-on-a-stick version of the Pi — and automatically installs an operating system, sets up security, and encrypts the storage, all by clamping a lid shut. It's built for people or small companies who need to set up many identical Pi-based devices reliably, not just one hobby project. You probably don't need one for a single Pi on your desk, but it shows Raspberry Pi is now being treated as a real production platform, not just a hobbyist toy.",
+      "tech": "Raspberry Pi's Compute Module 5 Programming Jig ($600) is a single-head, pogo-pin provisioning fixture: no carrier board needed, dual Ethernet (JIG + DUT ports) plus Wi-Fi, automating secure boot, full-disk encryption and bare-OS installation via the open-source rpi-sb-provisioner and rpi-image-gen tooling. Configuration happens through a localhost-only web UI reached via Raspberry Pi Connect screen sharing. Higher-throughput users run multiple jigs in parallel; per-unit programming time scales with image size, not device count.",
+      "lands": "This isn't for your one Pi — it's a signal for later: if a narrow-agent build of yours ever needs to become ten or a hundred identical field devices (say, a ward shift-watcher on dedicated hardware), there's now an official, secure-by-default path to mass-provision Compute Module 5s instead of hand-flashing SD cards. Worth knowing rpi-sb-provisioner and rpi-image-gen exist and are open source — you can borrow their scripted-provisioning approach for a fleet of one, long before you'd ever buy the jig itself.",
+      "tools": [
+        "rpi-sb-provisioner",
+        "rpi-image-gen",
+        "Raspberry Pi Imager",
+        "Raspberry Pi Connect"
+      ],
+      "toolnote": "",
+      "art": "images/pi5-photo.jpg",
+      "artcap": "One clamp, one Compute Module 5, one production-ready board.",
+      "sources": [
+        {
+          "label": "Raspberry Pi",
+          "url": "https://www.raspberrypi.com/news/introducing-the-raspberry-pi-compute-module-5-programming-jig/"
+        },
+        {
+          "label": "Phoronix",
+          "url": "https://www.phoronix.com/news/Raspberry-Pi-CM5-Jig"
+        }
+      ],
+      "touches": [],
+      "artw": 1280,
+      "arth": 960
+    },
     {
       "id": "2026-08-18-kev-sharepoint-vcenter",
       "date": "2026-08-18",
