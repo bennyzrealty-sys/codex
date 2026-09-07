@@ -2,9 +2,131 @@
   "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
   "cadence_days": 2,
   "policy": "append-only · newest first · nothing is ever deleted",
-  "generated": "2026-08-23",
-  "next_scan": "2026-08-25 06:00 UTC",
+  "generated": "2026-09-07",
+  "next_scan": "2026-09-09 06:00 UTC",
   "entries": [
+    {
+      "id": "2026-09-03-ant-apply-agents-as-code",
+      "date": "2026-09-03",
+      "domain": "it",
+      "title": "Anthropic's CLI now applies agents from files, like Terraform for AI",
+      "oneline": "ant apply plus a lockfile brings commit-and-deploy discipline to agent configs",
+      "plain": "Anthropic's command-line tool for Claude got a new command, ant apply, that reads a description of an agent — its tools, its memory, its environment — from a file in your repo and creates or updates it to match, the same way infrastructure tools manage cloud servers. It writes a 'lockfile' that remembers what it already built, so running it again updates the same agent instead of quietly creating duplicates. This turns 'I configured an agent by clicking around' into 'I have a file that says exactly what this agent is,' which you can commit, diff, and roll back.",
+      "tech": "Claude Developer Platform's ant CLI v1.30.0 adds ant apply: it reads declarative resource files (agents, environments, skills, memory stores, deployments) from a repo, prints a plan, and applies it on approval. The command writes claude-lock.json, which must be committed so subsequent runs — local or CI — mutate existing resources rather than recreating them, giving agent configuration the same commit/diff/rollback discipline as container or IaC definitions.",
+      "lands": "This is the missing piece between 'I built an agent in a chat UI' and 'I have a repo that defines my agents.' For your node, it means an agent's tool list, memory store, and environment variables can live in the same git repo as the rest of your Pi's config — reviewable in a diff, restorable from a commit, reproducible on a fresh SD card. Adopt it gradually: describe one existing agent as a file, run ant apply against it, commit the lockfile, and only then start managing new agents this way.",
+      "tools": [
+        "ant CLI v1.30",
+        "claude-lock.json",
+        "git diff",
+        "CI pipeline"
+      ],
+      "toolnote": "",
+      "art": "images/git-graph.svg",
+      "artcap": "Agents as files now — commit, diff, and roll back like everything else.",
+      "sources": [
+        {
+          "label": "Releasebot — Claude Developer Platform Updates",
+          "url": "https://releasebot.io/updates/anthropic/claude-developer-platform"
+        }
+      ],
+      "touches": [
+        "l3-mcp"
+      ],
+      "artw": 760,
+      "arth": 440
+    },
+    {
+      "id": "2026-09-03-dram-record-highs-persist",
+      "date": "2026-09-03",
+      "domain": "hardware",
+      "title": "DRAM's record highs carried straight into September — no reversal in sight",
+      "oneline": "DDR4 chips at $42.50, DDR5 kits up ~485%, and relief pushed past 2027",
+      "plain": "Computer memory (RAM) has been getting more expensive all year because AI data centres are buying up the same factories that make ordinary chips, and that squeeze didn't ease as summer ended. A basic DDR4 memory chip hit a record $42.50, and a 64GB DDR5 kit that used to cost a couple of hundred dollars now costs over a thousand — roughly 485% more. Trackers watching the market in September say prices are simply staying at August's record highs, not climbing further but also not coming down, and industry voices don't expect real relief before 2027 or later.",
+      "tech": "TrendForce's DRAMeXchange spot pricing put the mainstream DDR4 1Gx8 3200 chip at a record $42.50 and a 64GB DDR5 kit up roughly 485% to about $1,118 in August 2026. Trackers watching September pricing report no reversal — the same supply dynamics (wafer capacity reallocated to HBM for AI accelerators at Samsung/SK Hynix/Micron) that produced August's records have carried directly into the new month, with most analysts still pointing to 2027–2028 before meaningful relief.",
+      "lands": "Any Pi 5 upgrade, spare board, or second-hand NVMe/SSD purchase you're weighing costs meaningfully more than a year ago, and waiting isn't a strategy — prices aren't falling. If you're speccing a new node or a laptop for local model work, buy the RAM/SSD capacity you'll actually need now rather than planning a 'cheap upgrade later'; check installed memory with dmidecode before assuming you need to buy anything at all. This also raises the value of a Pi you already own: it's a comparatively cheap, fixed-cost way to keep running local models while memory prices stay high.",
+      "tools": [
+        "dmidecode --type 17",
+        "sudo apt list --installed",
+        "used-market Pi/SBC listings",
+        "buy-vs-wait calculator"
+      ],
+      "toolnote": "",
+      "art": "images/chip-chokepoint.svg",
+      "artcap": "HBM for AI accelerators is eating the wafer capacity ordinary DDR4/DDR5 used to get.",
+      "sources": [
+        {
+          "label": "tech-insider.org — RAM Prices 2026: DRAM Crisis Hits Record $42/Chip",
+          "url": "https://tech-insider.org/dram-ram-price-crisis-2026/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-09-02-litellm-mcp-kev",
+      "date": "2026-09-02",
+      "domain": "cyber",
+      "title": "CISA lists a live MCP auth-bypass — first KEV batch built from AI plumbing",
+      "oneline": "A fake Bearer token was enough to reach tools behind LiteLLM's MCP gateway",
+      "plain": "On 2 September, the US government's list of vulnerabilities that criminals are actually using added seven new entries — and for the first time, three of them were AI infrastructure rather than classic servers. The worst for anyone running agents: a bug in LiteLLM, a popular gateway that routes requests to AI models and their tools. A made-up 'Bearer token' (normally proof you're allowed in) could trick it into letting a stranger use connected tools anyway. If you run any AI gateway that hands out tool access, this is the reminder that 'authenticated' can be a lie if nobody checks it properly.",
+      "tech": "CVE-2026-59822 (CVSS 8.8) is an improper-authentication flaw in LiteLLM's MCP Streamable HTTP endpoint prior to v1.84.0: a fabricated Authorization header triggers an OAuth2-passthrough fallback that swaps failed key validation for an empty UserAPIKeyAuth() object, letting unauthenticated requests list and call configured MCP tools. CISA added it to KEV on 2 Sept alongside Starlette's CVE-2026-48710 ('BadHost') and five others; three of the seven target AI/ML infrastructure specifically.",
+      "lands": "You almost certainly don't run LiteLLM, but the failure mode is one any home-grown MCP gateway can fall into: an auth check that fails 'open' when something upstream goes wrong. If any agent sits behind a proxy forwarding Bearer tokens to MCP servers, test what happens when the token is garbage — it should be refused, not waved through with empty credentials. Cheap, concrete fix: log every MCP tool-call with the identity it authenticated as, so a silent fallback shows up in your own logs before a stranger finds it first.",
+      "tools": [
+        "LiteLLM 1.84.0+",
+        "MCP auth logging",
+        "curl -H Authorization",
+        "CISA KEV feed"
+      ],
+      "toolnote": "",
+      "art": "images/patch-priority.svg",
+      "artcap": "Active exploitation, not theoretical risk — that's what KEV means.",
+      "sources": [
+        {
+          "label": "CISA — Adds Seven Known Exploited Vulnerabilities",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/09/02/cisa-adds-seven-known-exploited-vulnerabilities-catalog"
+        },
+        {
+          "label": "The Hacker News",
+          "url": "https://thehackernews.com/2026/09/cisa-adds-seven-exploited-flaws-as.html"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-09-01-claude-fable-mythos-5-1",
+      "date": "2026-09-01",
+      "domain": "ai",
+      "title": "Claude Fable 5.1 and Mythos 5.1 become Anthropic's new top tier",
+      "oneline": "Same headline price, a quarter of the cache cost, and a quiet anti-copying lock for new accounts",
+      "plain": "On 1 September, Anthropic released Claude Fable 5.1 and a restricted twin called Mythos 5.1 — its smartest models yet for coding and long research tasks. The sticker price didn't change, but re-using saved context ('cache') got four times cheaper, which matters if you run agents that re-read the same files over and over. There's also a quieter change: brand-new API accounts can no longer edit what Claude 'thought' earlier in a conversation while keeping the transcript — a trick people used to copy how Claude reasons into cheaper rival models.",
+      "tech": "Claude Fable 5.1 and Mythos 5.1 (same weights, different safeguards) launched with a 1M-token context window and 128K max output tokens, at unchanged pricing of $10/$50 per million input/output tokens, while prompt-cache reads fell 75% to $0.25/MTok. Fable 5.1 also hardens against distillation: new API accounts can no longer edit prior-turn context while preserving Claude's thinking transcript, closing a publicly documented extraction technique.",
+      "lands": "If you call the Claude API from any agent, the maths just improved: repeatedly-read system prompts and tool schemas now cost a quarter as much to reuse — exactly the workload shape of a Pi-hosted watcher that re-sends the same context every cycle. No action needed on local Ollama models; this only touches API-billed work. If you ever built a pipeline that edits Claude's prior 'thinking' to steer follow-up turns, check whether your account predates September — new accounts can no longer do this.",
+      "tools": [
+        "Claude API",
+        "prompt caching",
+        "ant CLI",
+        "Claude Code"
+      ],
+      "toolnote": "Prompt caching is the lever — confirm your agent's system prompt is cache-eligible before assuming the discount applies.",
+      "art": "images/cost-shape.svg",
+      "artcap": "Same sticker price, cheaper reuse — the cache line moved, not the input line.",
+      "sources": [
+        {
+          "label": "Anthropic — Introducing Claude Fable 5.1 and Mythos 5.1",
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+        },
+        {
+          "label": "Claude Platform Docs — What's new in Fable 5.1",
+          "url": "https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
     {
       "id": "2026-08-21-claude-code-mcp-plugin-hardening",
       "date": "2026-08-21",
