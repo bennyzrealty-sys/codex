@@ -2,9 +2,136 @@
   "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
   "cadence_days": 2,
   "policy": "append-only · newest first · nothing is ever deleted",
-  "generated": "2026-09-07",
-  "next_scan": "2026-09-09 06:00 UTC",
+  "generated": "2026-10-03",
+  "next_scan": "2026-10-05 06:00 UTC",
   "entries": [
+    {
+      "id": "2026-10-02-cloudflare-protected-quick-tunnels",
+      "date": "2026-10-02",
+      "domain": "it",
+      "title": "Cloudflare tunnels can now gate access behind an email check",
+      "oneline": "One flag on cloudflared adds accountless email verification to a dev tunnel URL",
+      "plain": "Cloudflare makes a free tool called a Tunnel that shows a website running on your own computer — like your Pi — to the internet without opening any ports on your router. From 2 October, you can add one flag to the command and force anyone who opens the link to prove their email address first, and neither you nor them need a Cloudflare account to do it. It's a quick way to share a work-in-progress page with exactly one other person, safely.",
+      "tech": "Cloudflare's cloudflared gained 'Protected Quick Tunnels' (2 Oct 2026): adding --allowed-mail to a tunnel run command gates the generated *.trycloudflare.com URL behind a one-time email code, restricted to listed addresses or domains, with no Cloudflare account required on either side. Shipped alongside Workers KV Instant (sub-2ms p99 reads, 250ms global replication) and Cloudflare K2, a serverless event-stream service built on R2.",
+      "lands": "This closes a real gap: quick tunnels were always fast but wide-open to anyone with the URL. Now a demo of an NHS-adjacent prototype, a webhook test, or a one-off dashboard for a client can be locked to their email address with one flag — no WireGuard setup, no login for them. Still not for anything persistent or sensitive; for that keep using a named tunnel behind Zero Trust or the Tailscale mesh you already run on the node.",
+      "tools": [
+        "cloudflared",
+        "--allowed-mail flag",
+        "Cloudflare Tunnel",
+        "Tailscale"
+      ],
+      "toolnote": "`cloudflared tunnel --url localhost:3000 --allowed-mail you@example.com` is the whole change.",
+      "art": "images/nat-tunnel.svg",
+      "artcap": "A quick tunnel that now checks ID at the door.",
+      "sources": [
+        {
+          "label": "Cloudflare Blog",
+          "url": "https://blog.cloudflare.com/"
+        }
+      ],
+      "touches": [
+        "l3-mcp",
+        "l19-patching-cve-cvss-epss-kev",
+        "l27-spending-ladder"
+      ],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-10-01-claude-sonnet-5-5-default",
+      "date": "2026-10-01",
+      "domain": "ai",
+      "title": "Claude Code now defaults to Claude Sonnet 5.5, not 5",
+      "oneline": "Anthropic's v2.1.287 update also adds a plugin layer and MCP sign-in prompts",
+      "plain": "Anthropic's command-line coding helper, Claude Code, updated on 1 October. It now defaults to a new mid-tier brain called Claude Sonnet 5.5 instead of the older Sonnet 5, at the same price. The update also added 'Claude Mods' — small plugins that change how Claude Code behaves — and fixed how it talks to MCP, the plug system that lets Claude connect to outside tools, so a connected tool can now pop up a sign-in link mid-task instead of silently failing.",
+      "tech": "Claude Code v2.1.287 (1 Oct 2026) ships claude-sonnet-5-5 as the default Sonnet alias on the Anthropic API (1M-token context, $2/$10 per MTok, $0.20/MTok cache reads) — Bedrock and Vertex still resolve 'sonnet' to 4.5/4.6. Adds Claude Mods (plugin-based behaviour extension), an n: filter for the background-agents view, and MCP's 2025-11-25-protocol elicitation capability, letting servers raise an in-session URL/sign-in prompt (set bareElicitationCapability:true if a server regresses).",
+      "lands": "If Claude Code drives work against your Pi's repos or your narrow agents, update it — the model under your fingers just changed at the default alias. Check any pinned ANTHROPIC_DEFAULT_SONNET_MODEL env vars before assuming you're still billed against Sonnet 5, and re-run one long agent session after upgrading before trusting it unattended overnight. The MCP sign-in prompt change also means a server you wired up for a watcher could now wait on a browser click it never needed before.",
+      "tools": [
+        "Claude Code",
+        "MCP",
+        "Claude Mods",
+        "ant CLI"
+      ],
+      "toolnote": "Run `claude --version` then check `/model` to confirm which Sonnet you're actually billed against.",
+      "art": "images/mcp.svg",
+      "artcap": "The universal plug gained a sign-in handshake.",
+      "sources": [
+        {
+          "label": "Claude Code Releases (GitHub)",
+          "url": "https://github.com/anthropics/claude-code/releases"
+        },
+        {
+          "label": "Claude Code 2.1.287 notes (ccleaks)",
+          "url": "https://ccleaks.com/news/claude-code-2-1-287-oct-2026"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-10-01-pi-2gb-price-hike",
+      "date": "2026-10-01",
+      "domain": "hardware",
+      "title": "2GB Raspberry Pi 4 and Pi 5 jump $12.50 on memory costs",
+      "oneline": "Third price rise of 2026, pushing the 2GB Pi 5 to $77.50",
+      "plain": "Raspberry Pi boards are getting more expensive again. From 1 October, the small 2GB versions of the Pi 4 and Pi 5 went up by $12.50 each, because the memory chips inside them keep costing more to buy. The 2GB Pi 5 now costs $77.50 — more than half as much again as when it first launched. Higher-memory boards like the 8GB and 16GB versions aren't moving this time, but they already jumped earlier in the year.",
+      "tech": "Raspberry Pi Holdings raised prices on the 2GB Raspberry Pi 4 (to $67.50, +23%) and 2GB Raspberry Pi 5 (to $77.50, +19%) effective 1 October 2026, citing continued LPDDR4/LPDDR5 cost increases — the third hike in 2026 after rises in February and April. The 2GB Pi 5 is now 55% above its original $50 MSRP. The 1GB variants and 2GB Compute Module 4/5 are unaffected for now.",
+      "lands": "If you were planning a second or third node, buy before the next round — the gap between the 2GB and 4GB/8GB Pi 5 has narrowed enough that paying up for more RAM at purchase is now the better move, especially since Raspberry Pi has also started blocking after-market RAM upgrades on newer boards. For a node running several watchers plus any local model, treat 2GB as a floor, not a target.",
+      "tools": [
+        "Raspberry Pi 5 (4GB/8GB)",
+        "Compute Module 5",
+        "used/refurb market"
+      ],
+      "toolnote": "",
+      "art": "images/pi5-photo.jpg",
+      "artcap": "Same board, pricier memory.",
+      "sources": [
+        {
+          "label": "Tom's Hardware",
+          "url": "https://tomshardware.com/raspberry-pi/component-shortages-drive-raspberry-pi-prices-up-by-up-to-23-percent-escalating-lpddr4-lpddr5-costs-trigger-the-third-price-hike-of-the-year"
+        },
+        {
+          "label": "OMG! Ubuntu",
+          "url": "https://www.omgubuntu.co.uk/2026/10/raspberry-pi-2gb-costs-how-much-now"
+        }
+      ],
+      "touches": [],
+      "artw": 1280,
+      "arth": 960
+    },
+    {
+      "id": "2026-10-01-fortimail-kev-zero-day",
+      "date": "2026-10-01",
+      "domain": "cyber",
+      "title": "Unpatched FortiMail zero-day lets anyone write files to the device",
+      "oneline": "CVE-2026-104286 (CVSS 9.8) hit CISA's exploited-vulnerability list the day it was disclosed",
+      "plain": "Fortinet makes FortiMail, a piece of equipment lots of organisations — including ones close to the NHS — use to scan their email for threats. On 1 October, Fortinet admitted it has a serious bug: anyone on the internet, without even logging in, can trick FortiMail into saving a file somewhere it shouldn't, which can then be used to take over the whole device. Attackers are already using this. There's no proper fix yet, only a workaround, and the US government's exploited-vulnerability list flagged it the same day.",
+      "tech": "CVE-2026-104286 (CVSSv3 9.8) is a path-traversal plus NULL-byte neutralisation flaw (CWE-22/CWE-158) in FortiMail's GUI/IBE component, enabling unauthenticated arbitrary file write that chains to code execution. Affects FortiMail 7.2.x through 8.0.1. Fortinet published advisory FG-IR-26-175 on 1 Oct 2026; CISA added it to KEV the same day (federal remediation due 4 Oct). No patched build exists yet — only workarounds (disable IBE, or remove internet access to the management interface).",
+      "lands": "You almost certainly don't run FortiMail on a Pi, but the pattern matters: an unauthenticated path-traversal bug in a security appliance that's internet-facing by design. Audit anything you've exposed the same way — any admin or management interface on your node reachable without a VPN hop is one disclosure away from this exact story. If a future NHS-adjacent client runs Fortinet gear, this is a concrete, dated talking point for a threat-model conversation, not a hypothetical one.",
+      "tools": [
+        "CISA KEV feed",
+        "Shodan/Censys",
+        "nmap",
+        "FortiGuard advisories"
+      ],
+      "toolnote": "",
+      "art": "images/patch-priority.svg",
+      "artcap": "No patch yet — only a workaround and a clock.",
+      "sources": [
+        {
+          "label": "Help Net Security",
+          "url": "https://www.helpnetsecurity.com/2026/10/02/fortinet-fortimail-vulnerability-cve-2026-104286/"
+        },
+        {
+          "label": "watchTowr Labs FAQ",
+          "url": "https://watchtowr.com/intelligence/fortinet-fortimail-cve-2026-104286-faq/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
     {
       "id": "2026-09-03-ant-apply-agents-as-code",
       "date": "2026-09-03",
