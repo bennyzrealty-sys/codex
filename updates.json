@@ -2,9 +2,140 @@
   "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
   "cadence_days": 2,
   "policy": "append-only · newest first · nothing is ever deleted",
-  "generated": "2026-10-03",
-  "next_scan": "2026-10-05 06:00 UTC",
+  "generated": "2026-10-05",
+  "next_scan": "2026-10-07 06:00 UTC",
   "entries": [
+    {
+      "id": "2026-10-04-citrix-netscaler-kev",
+      "date": "2026-10-04",
+      "domain": "cyber",
+      "title": "CISA flags a Citrix NetScaler zero-day exploited on already-patched boxes",
+      "oneline": "CVE-2026-88779 crashes SAML logins for VPN and SSO gateways; federal fix deadline 7 Oct.",
+      "plain": "Citrix NetScaler is a box that sits at the front door of many organisations' networks, handling VPN and single sign-on logins. A newly found flaw in how it checks SAML logins — a common way of proving who you are to a company's systems — lets an attacker crash that login service with no password needed, locking staff out of remote access. The alarming part: a well-known researcher saw it being used against boxes that were already fully patched from an earlier fix, meaning that first patch didn't fully close the door. The US cyber-security agency has told its own agencies to fix it by 7 October.",
+      "tech": "CVE-2026-88779 (CVSS 4.0: 8.7) is a CWE-119 memory-buffer overflow in Citrix NetScaler ADC/Gateway's SAML handler (samlAction/samlIdPProfile), triggerable pre-auth to cause denial of service against the appliance's authentication service. CISA added it to KEV on 4 Oct 2026 with a 7 Oct remediation deadline under BOD 26-04. Fixed builds: 14.1-73.41+, 13.1-64.28+, FIPS 14.1-73.41/13.1-37.282+. Researcher Kevin Beaumont reported exploitation on honeypots already running the prior patch batch, suggesting the fix was incomplete; Citrix confirms DoS impact while Norway's NSM initially reported possible RCE.",
+      "lands": "You don't run NetScaler, but any NHS trust or supplier you work with almost certainly has one at the edge handling VPN or SSO — worth asking about during a clinical-safety or supply-chain conversation, because 'we patched it in September' is not the same as 'we're safe' here. The real lesson for your own stack: treat a patch as a hypothesis, not a guarantee, and keep watching vendor advisories after you've applied a fix — your detection plan should include 're-check after patching' as its own explicit step.",
+      "tools": [
+        "CISA KEV feed",
+        "Nessus/OpenVAS",
+        "Citrix ADC admin console",
+        "Shodan"
+      ],
+      "toolnote": "If you ever manage a NetScaler for a client, check its build number against 14.1-73.41 / 13.1-64.28 today, not after the next advisory.",
+      "art": "images/patch-priority.svg",
+      "artcap": "A patch that didn't quite close the door — exploited again on 'fixed' boxes.",
+      "sources": [
+        {
+          "label": "CISA",
+          "url": "https://www.cisa.gov/news-events/alerts/2026/10/04/cisa-adds-one-known-exploited-vulnerability-catalog"
+        },
+        {
+          "label": "Infosecurity Magazine",
+          "url": "https://www.infosecurity-magazine.com/news/citrix-netscaler-zero-day/"
+        }
+      ],
+      "touches": [
+        "l3-mcp"
+      ],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-10-02-ph-sg-subsea-cable-cut",
+      "date": "2026-10-02",
+      "domain": "it",
+      "title": "A cut subsea cable forced Philippines–Singapore traffic to reroute",
+      "oneline": "A reminder that every cloud API ultimately rides on physical glass under the sea.",
+      "plain": "The internet isn't really a cloud — it's a web of physical fibre-optic cables laid along the sea floor, and one of the cables connecting the Philippines and Singapore was cut. Telecom companies had to reroute traffic around the damage, which meant slower and patchy connections for people in the Philippines trying to reach anything hosted overseas, for a couple of days before service normalised. It's a useful, concrete reminder that even the most polished API call eventually depends on something as physical and breakable as a wire at the bottom of the ocean.",
+      "tech": "A subsea fibre segment on the Philippines–Singapore route (with the Philippines–Hong Kong link also affected) went offline on 2 Oct 2026, prompting Globe, PLDT and Converge ICT to reroute traffic onto alternative submarine cable systems. Telcos reported degraded, intermittent connectivity for roughly two days; full physical repair is expected to take several weeks, with traffic running on redundant links meanwhile. No concurrent hyperscaler incident was logged — AWS, GCP and Azure showed operational throughout, isolating the disruption to the physical layer.",
+      "lands": "None of your current infrastructure sits in that corridor, but the lesson generalises: any agent or pipeline that calls an API hosted in or routed through Asia-Pacific should have a sane timeout and retry-with-backoff, not an indefinite hang, because the failure mode here is degraded latency, not a clean error. When you document egress rules for a client's agent, note which regions its dependencies physically sit in — it's exactly the kind of question an NHS information-governance reviewer will eventually ask about resilience.",
+      "tools": [
+        "mtr",
+        "traceroute",
+        "cloudflare radar",
+        "uptime kuma"
+      ],
+      "toolnote": "`mtr` to a dependency's hostname during a reported cable incident will show you the reroute in real time.",
+      "art": "images/packet-journey.svg",
+      "artcap": "Every API call still rides on glass under an ocean somewhere.",
+      "sources": [
+        {
+          "label": "Newsbytes.PH",
+          "url": "https://newsbytes.ph/2026/10/04/internet-services-normalize-after-ph-singapore-cable-cut/"
+        },
+        {
+          "label": "Archyde",
+          "url": "https://www.archyde.com/philippines-singapore-submarine-cable-cut-disrupts-internet-services/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-10-01-claude-plugins-mcp2",
+      "date": "2026-10-01",
+      "domain": "ai",
+      "title": "Claude Code gets a plugin marketplace and backs MCP's stateless core",
+      "oneline": "Anthropic formalises third-party extensions and adopts MCP 2.0 — directory, auto-validation, and zero-touch OAuth included.",
+      "plain": "Claude Code now has a proper system for add-ons, called Plugins — a directory where anyone can submit a bundle of tools, get it checked automatically, and publish it for others to install, much like an app store. Underneath, Claude has adopted the newest version of MCP, the shared language that lets an AI assistant plug into outside tools. The new version drops the need for a server to remember who's mid-conversation, so a plugin's backend can run on ordinary, cheap, scale-to-zero hosting instead of a server that has to stay switched on all the time.",
+      "tech": "From 1 Oct 2026, Claude ships Plugins as the primary third-party extension mechanism: a directory submission portal with auto-validation, review status, publishing controls and post-launch analytics. Plugins can bundle MCP servers, skills, LSPs, commands, hooks and agents. Claude now supports MCP 2.0's stateless core (removing transport sessions, so servers scale via ordinary HTTP patterns) plus two extensions: MCP Apps (in-chat interactive UI) and Enterprise Managed Auth (zero-touch OAuth for enterprise users).",
+      "lands": "If you've built an MCP server for one of your watchers, you can now package it as a Plugin, list it in a directory instead of hand-wiring it into every client, and drop the always-on process that held conversation state — a stateless MCP server can live as a Vercel function that scales to zero between calls, exactly the hosting pattern you already use. For an NHS-facing tool, Enterprise Managed Auth is the piece worth watching: it hints at how clinical-system connectors will eventually handle sign-in without you building custom OAuth plumbing.",
+      "tools": [
+        "claude code",
+        "mcp inspector",
+        "vercel",
+        "github"
+      ],
+      "toolnote": "Check whether your existing MCP servers already implement the stateless handshake before you package them as a Plugin.",
+      "art": "images/mcp.svg",
+      "artcap": "The universal plug gets a directory, a store, and a stateless backend.",
+      "sources": [
+        {
+          "label": "Claude product announcements",
+          "url": "https://claude.com/blog-category/announcements"
+        },
+        {
+          "label": "Releasebot — Claude updates",
+          "url": "https://releasebot.io/updates/anthropic/claude"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-09-29-ollama-decision-models",
+      "date": "2026-09-29",
+      "domain": "ai",
+      "title": "Ollama ships 'decision models' that answer, not write",
+      "oneline": "A new /v1/systemone endpoint returns a choice, a yes/no, or a score — no essay, no API bill.",
+      "plain": "Normally a local language model writes you a paragraph and you have to fish the answer out of it. Ollama just added a different kind of model — a 'decision model' — that skips the essay and hands back a straight answer: which category, yes or no, or a score, each with a confidence number attached. Two small open models, Nimble and Tev1, ship as the first examples. They run entirely on your own machine, answer in well under a tenth of a second, and cost nothing per request because nothing ever leaves your computer.",
+      "tech": "Ollama 0.35.0 (29 Sept 2026) adds a /v1/systemone endpoint built on TypeSafe's Jev API: send a state plus up to 64 typed questions (choice, noul, score) and get back probabilities and confidence per question. Launch models: Bespoke Labs' Nimble (9B, ~9.5GB at Q8_0) and Together AI's Tev1 (4B, ~4.5GB / 0.8B, ~812MB). On 13 public benchmarks (3,880 decisions), Nimble scored 75.7% accuracy, Tev1-4B 73.3%, Tev1-0.8B 63.5%, versus Jev 1.13's 76.0%; Nimble averaged 91ms/decision on an M5 Max.",
+      "lands": "Your watcher agents currently burn a full LLM call just to decide something like 'is this shift covered, yes or no' or 'route to billing or technical.' Tev1-0.8B is an 812MB download — small enough to sit happily alongside your other services on the Pi 5 — and answers exactly that kind of question locally, for free, with no network round-trip. Swap any agent step that's really a classification or routing decision onto `ollama pull tev1:0.8b` first, and save your paid API calls for the steps that genuinely need reasoning or prose.",
+      "tools": [
+        "ollama",
+        "nimble",
+        "tev1",
+        "curl",
+        "jq"
+      ],
+      "toolnote": "Pull the smallest Tev1 variant first and test it against a handful of your own labelled examples before trusting it in a pipeline.",
+      "art": "images/runtimes.svg",
+      "artcap": "A new lane in the local-model runtime: decisions instead of prose.",
+      "sources": [
+        {
+          "label": "Ollama Blog",
+          "url": "https://ollama.com/blog/ollama-now-supports-jev-style-decision-models"
+        },
+        {
+          "label": "Ollama v0.35.0 release",
+          "url": "https://github.com/ollama/ollama/releases/tag/v0.35.0"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 440
+    },
     {
       "id": "2026-10-02-cloudflare-protected-quick-tunnels",
       "date": "2026-10-02",
