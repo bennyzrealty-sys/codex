@@ -2,9 +2,136 @@
   "_readme": "The Codex's live feed. APPEND-ONLY: the caretaker adds to the front of `entries` every two days and never edits or removes what is already here. Old entries are the record; deleting one would be lying about the past.",
   "cadence_days": 2,
   "policy": "append-only · newest first · nothing is ever deleted",
-  "generated": "2026-10-05",
-  "next_scan": "2026-10-07 06:00 UTC",
+  "generated": "2026-10-19",
+  "next_scan": "2026-10-21 06:00 UTC",
   "entries": [
+    {
+      "id": "2026-10-17-claude-code-fork-subagents-default",
+      "date": "2026-10-17",
+      "domain": "ai",
+      "title": "Claude Code now splits big jobs into helpers by default",
+      "oneline": "fork subagents switched on everywhere, not just the terminal",
+      "plain": "Claude Code is the tool that lets a programmer tell an AI assistant to write and run code in a terminal window. Its latest update makes it automatically break a big task into several mini-helpers working at the same time, instead of one assistant doing everything step by step. This was already how it worked in the terminal; now it happens in the desktop app, in VS Code, and when other programs control it remotely too. There's still a switch to turn it off if you want the old, single-helper way back.",
+      "tech": "Claude Code 2.1.302 (17 Oct 2026) sets fork subagents (subagent_type: \"fork\") to on by default in claude -p, the Agent SDK, the desktop app and VS Code, matching the terminal's existing default; CLAUDE_CODE_FORK_SUBAGENT=0 disables it, and claude mcp serve never offers it. The same release adds client-side auto-mode model selection, idle compaction controls, faster startup with many plugins installed, and fixes for MCP servers that negotiate protocol version 2026-07-28 but omit resultType, ttlMs or cacheScope.",
+      "lands": "If you drive Claude Code from a Pi-hosted workflow or CI job, your token spend per call just went up by default because tasks now fan out into parallel subagents automatically — check your cost dial before your next overnight run. For reproducible evals, set CLAUDE_CODE_FORK_SUBAGENT=0 so a test suite runs single-threaded and comparable between runs; leave it on for messy exploratory work where parallel helpers genuinely save wall-clock time.",
+      "tools": [
+        "Claude Code",
+        "claude -p",
+        "Agent SDK",
+        "VS Code extension"
+      ],
+      "toolnote": "Check CLAUDE_CODE_FORK_SUBAGENT before trusting cost estimates from old runs.",
+      "art": "images/orchestration.svg",
+      "artcap": "One instruction, several hands — forking is now the default shape.",
+      "sources": [
+        {
+          "label": "Releasebot — Anthropic updates",
+          "url": "https://releasebot.io/updates/anthropic"
+        },
+        {
+          "label": "Releasebot — Claude Code updates",
+          "url": "https://releasebot.io/updates/anthropic/claude-code"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-10-16-beyondtrust-armory-castle-kev",
+      "date": "2026-10-16",
+      "domain": "cyber",
+      "title": "China-linked spies had root on remote-support boxes since August",
+      "oneline": "CVE-2026-102764 landed on CISA's exploited list with today's deadline",
+      "plain": "BeyondTrust Remote Support is a tool IT teams use to take control of a computer from far away to fix it. A China-linked spying group found a secret flaw in it and used it quietly from late August until it was caught and fixed in October, getting full control (\"root\") on affected machines, stealing passwords and keys, and deleting the evidence as they went. The US government's list of \"vulnerabilities being actively used by attackers\" added this flaw on 16 October, giving organisations a deadline of today, 19 October, to patch it.",
+      "tech": "CVE-2026-102764 (CVSS 4.0: 9.3) is improper origin validation in BeyondTrust Remote Support's internal messaging, enabling unauthenticated arbitrary file upload/pre-auth RCE. Mandiant/GTIG attribute exploitation since 29 Aug 2026 to ARMORY CASTLE (formerly UNC5221, aka WARP PANDA), a suspected PRC-nexus espionage actor that harvested credentials via the native /ns/sbin/bt-secrets CLI, granted the site service account passwordless root, and deleted system/web/application logs. BeyondTrust shipped patch BT26-05-RS (affects versions 24.3.1-26.2.3); CISA added it to KEV on 16 Oct with a 19 Oct remediation deadline.",
+      "lands": "You almost certainly don't run BeyondTrust, but the pattern generalises: remote-access and remote-support appliances (TeamViewer, AnyDesk, any VNC/RDP gateway you or a client uses) are now a top target class for state-linked actors because one box controls everything downstream. If you install remote-support software to help family or clients, patch it the day an advisory lands, rotate any credential that ever touched it, and add \"remote access tooling\" as a standing top-5 item in your own threat model rather than an afterthought.",
+      "tools": [
+        "CISA KEV catalog",
+        "BT26-05-RS patch",
+        "credential rotation",
+        "Shodan"
+      ],
+      "toolnote": "",
+      "art": "images/attack-path.svg",
+      "artcap": "Seven weeks quiet, then root — the appliance that holds every key.",
+      "sources": [
+        {
+          "label": "SecurityWeek",
+          "url": "https://www.securityweek.com/chinese-apt-exploited-beyondtrust-vulnerability-as-zero-day/"
+        },
+        {
+          "label": "Google Cloud Blog — Mandiant",
+          "url": "https://cloud.google.com/blog/topics/threat-intelligence/armory-castle-exploits-beyondtrust"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-10-14-ddr5-32gb-hits-450",
+      "date": "2026-10-14",
+      "domain": "hardware",
+      "title": "A 32GB memory kit now costs $450 — Pi prices follow it up",
+      "oneline": "AI datacentre demand keeps draining the DRAM that small boards also need",
+      "plain": "Computer memory chips (RAM) are getting dramatically more expensive because giant AI data centres are buying almost all of the world's supply. A standard 32-gigabyte memory kit that cost roughly $100 to $200 a year ago hit $450 this month. The same shortage is why Raspberry Pi has raised its prices twice in 2026, with the cheaper 2-gigabyte boards going up by as much as 23%, because they use the same kind of memory chips the big data centres are hoarding.",
+      "tech": "Tom's Hardware tracked a 32GB DDR5-6000 kit's lowest advertised US price at $449.97 on 14 Oct 2026, up from ~$400 in August and $100-200 a year earlier; Barclays reported DDR5 spot prices up a further 8% month-over-month in October, DDR4 contract prices up 24% over three months, and HBM production consuming roughly 3x the wafer capacity per gigabyte of standard DRAM. Raspberry Pi's October price list (2 Oct 2026) shows the Pi 5 2GB up 19% to $77.50 and Pi 4 2GB up 23% to $67.50 — the board's third 2026 price rise.",
+      "lands": "If you're planning to add RAM to your node or buy a higher-memory Pi 5 for local model work, every tracked index is still climbing monthly with no forecast reversal before 2027-2028 — buy sooner rather than later. For existing boards, treat your current RAM allocation as scarcer than it looks: budget quantized models to the memory you already have rather than assuming you'll casually upgrade later, and protect boards you already own since replacements are pricier than when you bought them.",
+      "tools": [
+        "free -h",
+        "lsmem",
+        "Raspberry Pi Imager"
+      ],
+      "toolnote": "Check what you already have before pricing an upgrade.",
+      "art": "images/chip-chokepoint.svg",
+      "artcap": "The same wafers, bid up by the datacentre — a Pi board feels it too.",
+      "sources": [
+        {
+          "label": "Tech Insider",
+          "url": "https://tech-insider.org/ddr5-ram-price-450-ai-shortage-2026/"
+        },
+        {
+          "label": "Tom's Hardware — Pi price hikes",
+          "url": "https://www.tomshardware.com/raspberry-pi/component-shortages-drive-raspberry-pi-prices-up-by-up-to-23-percent-escalating-lpddr4-lpddr5-costs-trigger-the-third-price-hike-of-the-year"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
+    {
+      "id": "2026-10-13-npm-trusted-publishing-flaw",
+      "date": "2026-10-13",
+      "domain": "it",
+      "title": "npm's trust badge could be forged without stealing a password",
+      "oneline": "over 1,500 packages exposed via an abandoned-repo reclaim trick",
+      "plain": "npm is the shop where JavaScript programmers get pre-built pieces of code for their projects. It has a feature called Trusted Publishing that's supposed to prove a new version of a package really came from the official source, without needing a password. Researchers found a way around it: if a project's linked GitHub home was ever deleted or renamed, an attacker could claim that name and then publish a fake, malicious update that npm treated as fully trusted. Over 1,500 packages were exposed. GitHub, which owns npm, says it has fixed the hole.",
+      "tech": "Bloom Security disclosed (13 Oct 2026) that npm's OIDC-based Trusted Publishing could be subverted by claiming a deleted or renamed GitHub repository referenced in a package's trusted-publisher config, satisfying the workflow-identity check without any npm token, GitHub credential, or maintainer compromise. More than 1,500 packages (10M+ combined downloads, 1M+/month) were exposed; GitHub has shipped mitigations. Researchers flagged the extra risk that AI coding agents increasingly select and install dependencies with minimal human review.",
+      "lands": "Any agent you run unattended — a cron job, a CI pipeline, Claude Code itself — pulls npm dependencies on your behalf, and this flaw means a \"trusted\" badge was not a reliable signal for weeks. Pin exact versions in lockfiles, don't let agents auto-upgrade dependencies without a diff review, and treat npm provenance attestations as one signal among several, not proof. If any of your tooling touches Node.js packages on the Pi, audit your lockfile now rather than after the next worm.",
+      "tools": [
+        "npm audit",
+        "npm provenance",
+        "Socket",
+        "Dependabot"
+      ],
+      "toolnote": "",
+      "art": "images/leak-paths.svg",
+      "artcap": "Trust badge, reclaimed name — the leak path nobody checked.",
+      "sources": [
+        {
+          "label": "CSO Online",
+          "url": "https://www.csoonline.com/article/4234229/over-1500-npm-packages-exposed-by-trusted-publishing-validation-flaw.html"
+        },
+        {
+          "label": "Help Net Security",
+          "url": "https://www.helpnetsecurity.com/2026/10/13/slugfest-npm-trusted-publishing-flaw/"
+        }
+      ],
+      "touches": [],
+      "artw": 760,
+      "arth": 420
+    },
     {
       "id": "2026-10-04-citrix-netscaler-kev",
       "date": "2026-10-04",
